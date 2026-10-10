@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact — Yardly</title>
+  <meta name="description" content="Book a 45-minute architecture review with a Yardly solution architect.">
+  <meta name="theme-color" content="#ffffff">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Contact — Yardly">
+  <meta property="og:description" content="Integration and process automation for organisations that run on many systems.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script src="assets/js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="logo" href="index.html" aria-label="Yardly home">
+        <svg class="logo__mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#0a0f1c"/><path d="M16 17.5V25.5" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round"/><path d="M16 17.5C16 12.5 9.5 12.5 9.5 6.5" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round"/><path d="M16 17.5C16 12.5 22.5 12.5 22.5 6.5" fill="none" stroke="#5b7cff" stroke-width="2.4" stroke-linecap="round"/></svg>
+        <span class="logo__word">Yardly</span>
+      </a>
+      <nav class="nav" aria-label="Main">
+        <ul class="nav__links">
+          <li><a href="solutions.html">Solutions</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html" aria-current="page">Contact</a></li>
+        </ul>
+        <a class="btn btn--primary btn--sm" href="#enquiry">Book a review</a>
+      </nav>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">
+        <span class="nav-toggle__lines" aria-hidden="true"></span>
+        <span class="visually-hidden">Menu</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-nav" id="mobile-nav">
+    <nav aria-label="Mobile">
+      <ul class="mobile-nav__links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="solutions.html">Solutions</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html" aria-current="page">Contact</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn--primary" href="#enquiry">Book an architecture review</a>
+  </div>
+
+  <main id="main">
+
+    <section class="contact-section" aria-labelledby="page-title">
+      <div class="container contact">
+        <div class="contact__intro">
+          <p class="eyebrow">Contact</p>
+          <h1 class="h1" id="page-title">Talk to a solution architect.</h1>
+          <p class="lead">Tell us which systems and processes you’re dealing with. We’ll come to the first call prepared, not with a generic demo.</p>
+        </div>
+
+        <div class="contact__aside">
+          <ol class="next-steps" aria-label="What happens next">
+            <li><b>We reply within one business day</b><span>A solution architect reviews your note and proposes times.</span></li>
+            <li><b>45-minute architecture review</b><span>We map your landscape together and find the process with the best value-to-risk ratio.</span></li>
+            <li><b>Written proposal</b><span>Scope, timeline and a fixed fee for the first process, usually within a week.</span></li>
+          </ol>
+
+          <dl class="direct">
+            <div><dt>New projects</dt><dd><a href="mailto:hello@yardly.com">hello@yardly.com</a></dd></div>
+            <div><dt>Existing customers</dt><dd><a href="mailto:support@yardly.com">support@yardly.com</a></dd></div>
+            <div><dt>Security &amp; compliance</dt><dd><a href="mailto:security@yardly.com">security@yardly.com</a></dd></div>
+            <div><dt>Press</dt><dd><a href="mailto:press@yardly.com">press@yardly.com</a></dd></div>
+          </dl>
+        </div>
+
+        <div class="form-card" id="enquiry">
+          <form id="enquiry-form" novalidate>
+            <div class="form-card__head">
+              <h2 class="h3-lg">Book an architecture review</h2>
+              <p>Takes about two minutes. Fields marked <span class="req" aria-hidden="true">*</span> are required.</p>
+            </div>
+            <div class="form-grid">
+              <div class="field">
+                <label for="f-name">Full name <span class="req" aria-hidden="true">*</span></label>
+                <input class="input" id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="e-name">
+                <span class="field__error" id="e-name">Please enter your name.</span>
+              </div>
+              <div class="field">
+                <label for="f-email">Work email <span class="req" aria-hidden="true">*</span></label>
+                <input class="input" id="f-email" name="email" type="email" autocomplete="email" required aria-describedby="e-email">
+                <span class="field__error" id="e-email">Please enter a valid email address.</span>
+              </div>
+              <div class="field">
+                <label for="f-company">Company <span class="req" aria-hidden="true">*</span></label>
+                <input class="input" id="f-company" name="company" type="text" autocomplete="organization" required aria-describedby="e-company">
+                <span class="field__error" id="e-company">Please enter your company.</span>
+              </div>
+              <div class="field">
+                <label for="f-role">Job title</label>
+                <input class="input" id="f-role" name="role" type="text" autocomplete="organization-title">
+              </div>
+              <div class="field field--full">
+                <label for="f-size">Company size <span class="req" aria-hidden="true">*</span></label>
+                <select class="input" id="f-size" name="size" required aria-describedby="e-size">
+                  <option value="">Select…</option>
+                  <option>Under 500 employees</option>
+                  <option>500–1,999 employees</option>
+                  <option>2,000–9,999 employees</option>
+                  <option>10,000–49,999 employees</option>
+                  <option>50,000+ employees</option>
+                </select>
+                <span class="field__error" id="e-size">Please choose a company size.</span>
+              </div>
+              <fieldset class="field field--full">
+                <legend>Which systems are involved? <span class="hint">Select all that apply</span></legend>
+                <div class="chips">
+                  <label class="chip"><input type="checkbox" name="systems" value="ERP"><span>ERP</span></label>
+                  <label class="chip"><input type="checkbox" name="systems" value="CRM"><span>CRM</span></label>
+                  <label class="chip"><input type="checkbox" name="systems" value="HR"><span>HR / HRIS</span></label>
+                  <label class="chip"><input type="checkbox" name="systems" value="WMS"><span>Warehouse</span></label>
+                  <label class="chip"><input type="checkbox" name="systems" value="Finance"><span>Finance &amp; banking</span></label>
+                  <label class="chip"><input type="checkbox" name="systems" value="ITSM"><span>Service desk</span></label>
+                  <label class="chip"><input type="checkbox" name="systems" value="EDI"><span>EDI / partners</span></label>
+                  <label class="chip"><input type="checkbox" name="systems" value="Legacy"><span>Legacy / on-premise</span></label>
+                </div>
+              </fieldset>
+              <div class="field field--full">
+                <label for="f-msg">Which process would you automate first?</label>
+                <textarea class="input" id="f-msg" name="message" rows="4" placeholder="For example: webshop orders are re-keyed into SAP and the warehouse system by hand."></textarea>
+              </div>
+              <div class="field field--full">
+                <label class="consent"><input type="checkbox" name="consent" required aria-describedby="e-consent"><span>I agree that Yardly may use these details to respond to my enquiry. We never share them with third parties.</span></label>
+                <span class="field__error" id="e-consent">Please confirm so we can reply to you.</span>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button class="btn btn--primary" type="submit">
+                Request a review
+                <svg class="btn__arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <span class="cta-note">We reply within one business day.</span>
+            </div>
+          </form>
+
+          <div class="form-success" id="enquiry-success" tabindex="-1" role="status" hidden>
+            <span class="form-success__mark" aria-hidden="true"></span>
+            <h2 class="h3-lg">Thank you. Your request is in.</h2>
+            <p>A solution architect will reply within one business day with proposed times for your architecture review.</p>
+            <a class="text-link" href="index.html">Back to the homepage</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__grid">
+        <div class="site-footer__brand">
+          <a class="logo" href="index.html" aria-label="Yardly home">
+            <svg class="logo__mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#0a0f1c"/><path d="M16 17.5V25.5" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round"/><path d="M16 17.5C16 12.5 9.5 12.5 9.5 6.5" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round"/><path d="M16 17.5C16 12.5 22.5 12.5 22.5 6.5" fill="none" stroke="#5b7cff" stroke-width="2.4" stroke-linecap="round"/></svg>
+            <span class="logo__word">Yardly</span>
+          </a>
+          <p>Integration and process automation for organisations that run on many systems.</p>
+        </div>
+        <div class="footer-col">
+          <h2>Solutions</h2>
+          <ul>
+            <li><a href="solutions.html#order-to-cash">Order to cash</a></li>
+            <li><a href="solutions.html#procure-to-pay">Procure to pay</a></li>
+            <li><a href="solutions.html#hire-to-retire">Hire to retire</a></li>
+            <li><a href="solutions.html#platform">Platform</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h2>Company</h2>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="about.html#principles">How we work</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h2>Trust</h2>
+          <ul>
+            <li><a href="solutions.html#deployment">Hosting &amp; data residency</a></li>
+            <li><a href="solutions.html#engagement">Engagement model</a></li>
+            <li><a href="index.html#faq">FAQ</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="site-footer__bottom">
+        <span>© 2026 Yardly. All rights reserved.</span>
+        <a href="#main">Back to top</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
