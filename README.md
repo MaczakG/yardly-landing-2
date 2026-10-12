@@ -49,6 +49,10 @@ aws/contact-form/   Lambda function that e-mails contact form submissions
 
 To change copy, edit `src/i18n/*.mjs` and rebuild. To add a blog post, add an entry at the top of `src/posts.mjs`.
 
+## Deploying to Cloudflare Workers
+
+The repository is connected to Cloudflare Workers Builds. `wrangler.jsonc` tells Wrangler to run `npm run build` and serve `dist/` as static assets, with trailing-slash URLs and `404.html` for unknown paths. The default deploy command (`npx wrangler deploy`) needs no other settings. To enable the contact form endpoint or analytics there, add `YARDLY_FORM_ENDPOINT` and `YARDLY_GA_ID` as build variables in the Worker's build settings.
+
 ## Deploying to AWS
 
 1. Build: `npm run build`.

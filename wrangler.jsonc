@@ -1,0 +1,14 @@
+// Cloudflare Workers deployment (Workers Builds runs `npx wrangler deploy`).
+// Wrangler builds the site first, then serves dist/ as static assets.
+{
+  "name": "yardly-landing-2",
+  "compatibility_date": "2026-10-01",
+  "build": {
+    "command": "npm run build"
+  },
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}
