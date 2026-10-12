@@ -60,7 +60,7 @@ export const home = (t) => {
       name: "Yardly",
       url: config.siteUrl,
       email: config.email,
-      logo: `${config.siteUrl}/assets/favicon.svg`,
+      logo: `${config.siteUrl}/icon-512px.png`,
       address: { "@type": "PostalAddress", addressLocality: "Budapest", addressCountry: "HU" },
     },
     body: `

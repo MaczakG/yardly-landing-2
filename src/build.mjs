@@ -1,5 +1,5 @@
 // Static site generator for yardly.hu. No dependencies: `node src/build.mjs`.
-// Renders every page in every language into dist/ and copies assets/.
+// Renders every page in every language into dist/ and copies assets/ and public/.
 import { mkdirSync, rmSync, writeFileSync, cpSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -25,6 +25,7 @@ const write = (path, html) => {
 rmSync(out, { recursive: true, force: true });
 mkdirSync(out, { recursive: true });
 cpSync(join(root, "assets"), join(out, "assets"), { recursive: true });
+cpSync(join(root, "public"), out, { recursive: true }); // favicons and web manifest, served from the root
 
 const sitemap = [];
 const addToSitemap = (alternates) => sitemap.push(alternates);

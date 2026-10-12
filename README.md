@@ -43,11 +43,30 @@ assets/
   css/styles.css    all styles; design tokens at the top
   js/main.js        menu, cookie consent, contact form
   img/app/          product screenshots (test environment, demo names)
-  fonts/            self-hosted Geist and Geist Mono (SIL OFL)
+  brand/            official logo and the social sharing image
+  fonts/            self-hosted Manrope and Geist Mono (SIL OFL)
+public/             favicons and web manifest, copied to the site root
 aws/contact-form/   Lambda function that e-mails contact form submissions
 ```
 
 To change copy, edit `src/i18n/*.mjs` and rebuild. To add a blog post, add an entry at the top of `src/posts.mjs`.
+
+## Brand
+
+The logo, icons and colours come from the Yardly logo package.
+
+| Colour | Hex | Use on the site |
+| --- | --- | --- |
+| Éjkék | `#0C1C3E` | text, primary buttons, dark sections |
+| Türkiz | `#22D3B8` | accent on dark sections, button on dark sections |
+| Türkiz mély | `#0FA28C` | accent shapes on light backgrounds (dots, lines, markers) |
+| Felhő | `#F1F4FA` | tinted section backgrounds |
+
+Small accent text on light backgrounds (links, numbers) uses `#0B7A69`, a darker shade of Türkiz mély, because `#0FA28C` on white is below the WCAG AA contrast ratio for body text. The tokens are at the top of `assets/css/styles.css`.
+
+Headings use Manrope Bold (700) and body text Manrope Medium (500), as the brand guide specifies. Labels and figures use Geist Mono.
+
+The header and footer show `assets/brand/yardly-vizszintes-szines.svg` (the horizontal logo for light backgrounds). Keep it at least 96 px wide, and use the `szines-sotet-hatterre` version from the package on dark backgrounds.
 
 ## Deploying to Cloudflare Workers
 

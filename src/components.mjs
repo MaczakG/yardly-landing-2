@@ -15,11 +15,9 @@ export const glue = (lang, text) => String(text).replace(GLUE[lang] || /$^/, "$1
 export const arrow = (cls = "btn__arrow") =>
   `<svg class="${cls}" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
-export const logoMark = () =>
-  `<svg class="logo__mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#0a0f1c"/><path d="M16 17.5V25.5" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round"/><path d="M16 17.5C16 12.5 9.5 12.5 9.5 6.5" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round"/><path d="M16 17.5C16 12.5 22.5 12.5 22.5 6.5" fill="none" stroke="#5b7cff" stroke-width="2.4" stroke-linecap="round"/></svg>`;
-
+// Official horizontal logo (brand package, colour version for light backgrounds).
 export const logo = (href, label) =>
-  `<a class="logo" href="${href}" aria-label="${esc(label)}">${logoMark()}<span class="logo__word">Yardly</span></a>`;
+  `<a class="logo" href="${href}" aria-label="${esc(label)}"><img src="/assets/brand/yardly-vizszintes-szines.svg" width="131" height="36" alt=""></a>`;
 
 // Circular flags, defined once per page as symbols and reused with <use>.
 export const flagSprite = () => `<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -71,8 +69,9 @@ const pillRow = (pills, startX, maxWidth) => {
 const packet = (path, dur, begin, keys = "0;0.08;0.9;1", r = 4) =>
   `<circle class="svg-packet" r="${r}"><animateMotion dur="${dur}s" begin="-${begin}s" repeatCount="indefinite"><mpath href="#${path}"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="${keys}" dur="${dur}s" begin="-${begin}s" repeatCount="indefinite"/></circle>`;
 
+// Simplified brand mark (Y and dot) for dark surfaces, drawn about 15px wide.
 const hubMark = (x, y) =>
-  `<g transform="translate(${x} ${y})" fill="none" stroke-width="2" stroke-linecap="round"><path d="M8 10V17" stroke="#eef1f7"/><path d="M8 10C8 6 3 6 3 1.5" stroke="#eef1f7"/><path d="M8 10C8 6 13 6 13 1.5" stroke="#5b7cff"/></g>`;
+  `<g transform="translate(${x - 2.5} ${y - 1}) scale(0.2)"><g stroke="#ffffff" stroke-width="12" stroke-linecap="round"><path d="M50 41L18.82 23M50 41L81.18 23M50 41V77"/></g><circle cx="50" cy="41" r="17" fill="#22d3b8"/></g>`;
 
 export const yardDiagram = (d) => {
   const ys = [26, 104, 182, 260, 338];
