@@ -155,7 +155,7 @@ ${ctaSection(t, h.cta)}`,
 };
 
 const result = (p, light = false) => `<div class="result${light ? " result--light" : ""}">
-  <div class="result__row">
+  <div class="result__row" style="--chars: ${String(p.before).length + String(p.after).length}">
     <div class="result__col"><span class="result__label">${p.beforeLabel}</span><span class="result__value is-before">${p.before}</span></div>
     <svg class="result__arrow" viewBox="0 0 48 16" aria-hidden="true"><path d="M2 8h42M37 2l7 6-7 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
     <div class="result__col"><span class="result__label">${p.afterLabel}</span><span class="result__value">${p.after}</span></div>
