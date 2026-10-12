@@ -20,9 +20,11 @@ const header = (t, pageKey, alternates) => {
     ${logo(route("home", t.lang), t.ui.homeLabel)}
     <nav class="nav" aria-label="${esc(t.ui.menu)}">
       <ul class="nav__links">${navItems.map(link).join("")}</ul>
+    </nav>
+    <div class="site-header__actions">
       ${langSwitcher(t, alternates)}
       <a class="btn btn--primary btn--sm" href="${contactHref}">${t.ui.cta}</a>
-    </nav>
+    </div>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">
       <span class="nav-toggle__lines" aria-hidden="true"></span>
       <span class="visually-hidden">${t.ui.menu}</span>

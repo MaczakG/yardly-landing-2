@@ -486,17 +486,18 @@ body.nav-open .site-header {
   border-bottom-color: var(--line);
 }
 
+/* Logo left, menu centred on the page, language switcher and CTA right. */
 .site-header__inner {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
   gap: 24px;
   height: var(--header-h);
 }
 
 .logo {
   display: inline-flex;
-  flex: none;
+  justify-self: start;
 }
 
 .logo img {
@@ -504,10 +505,15 @@ body.nav-open .site-header {
   height: 36px;
 }
 
-.nav {
+.site-header__actions {
   display: flex;
   align-items: center;
-  gap: 28px;
+  justify-self: end;
+  gap: 20px;
+}
+
+.site-header__actions .btn {
+  white-space: nowrap;
 }
 
 .nav__links {
@@ -592,12 +598,15 @@ body.nav-open .site-header {
 }
 
 @media (max-width: 1079px) {
-  .nav {
+  .nav,
+  .site-header__actions {
     display: none;
   }
 
   .nav-toggle {
     display: inline-flex;
+    grid-column: 3;
+    justify-self: end;
   }
 
   .mobile-nav {
@@ -1400,6 +1409,7 @@ body.nav-open .site-header {
 }
 
 .result {
+  container-type: inline-size;
   padding: clamp(24px, 4vw, 44px);
   background: var(--deep-2);
   border: 1px solid var(--deep-line);
@@ -1429,10 +1439,12 @@ body.nav-open .site-header {
 
 .result__value {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 1.5rem + 2.4vw, 3.75rem);
+  /* Sized to the card width and the length of the two figures (--chars, set
+     in the markup), so "8 hours → 10 minutes" fits as well as "8 óra → 10 perc". */
+  font-size: clamp(1.5rem, calc((100cqi - 100px) / (var(--chars, 17) * 0.5)), 3.75rem);
   font-weight: 600;
   line-height: 1;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.04em;
   white-space: nowrap;
   color: var(--on-deep);
 }
@@ -1545,6 +1557,10 @@ body.nav-open .site-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 14px;
+  }
+
+  .result__value {
+    font-size: clamp(2rem, 1.5rem + 2.4vw, 3.75rem);
   }
 
   .result__arrow {
@@ -2595,15 +2611,15 @@ fieldset.field legend {
 .lang-switch {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 2px;
 }
 
 .lang-switch a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 26px;
+  height: 26px;
   border: 1.5px solid transparent;
   border-radius: 50%;
   opacity: 0.6;
@@ -2620,8 +2636,8 @@ fieldset.field legend {
 }
 
 .flag {
-  width: 22px;
-  height: 22px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   box-shadow: 0 0 0 1px rgba(12, 28, 62, 0.12);
 }
