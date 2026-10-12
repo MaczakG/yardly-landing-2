@@ -68,6 +68,26 @@ Headings use Manrope Bold (700) and body text Manrope Medium (500), as the brand
 
 The header and footer show `assets/brand/yardly-vizszintes-szines.svg` (the horizontal logo for light backgrounds). Keep it at least 96 px wide, and use the `szines-sotet-hatterre` version from the package on dark backgrounds.
 
+## Live site (yardly.hu)
+
+`yardly.hu` is served by Caddy on the `flotta-app` EC2 instance, next to the Yardly app, which stays on `teszt.yardly.hu`. `www.yardly.hu` redirects to `yardly.hu`.
+
+- Each build is extracted to `/opt/flotta/landing/releases/<date>-<commit>/`, and `/opt/flotta/landing/current` is a symlink to the live one. Caddy sees it as `/srv/landing/current`, mounted read-only in `/opt/flotta/deploy/docker-compose.yml`.
+- The `yardly.hu` site block and its security headers (`landing_headers`) are in `/opt/flotta/deploy/Caddyfile`. The Content-Security-Policy allows scripts, fonts and connections from the site's own origin only. Before enabling Google Analytics or a contact form endpoint, add their origins to that policy, or the browser will block them.
+
+To publish a new version:
+
+1. Build and pack it: `npm run build && tar -czf yardly-landing.tgz -C dist .`
+2. Copy `yardly-landing.tgz` to the server (scp with the instance key, or through SSM).
+3. Extract it next to the current release and switch the symlink. No Caddy reload is needed:
+   ```sh
+   REL=/opt/flotta/landing/releases/$(date -u +%Y%m%d-%H%M%S)-<commit>
+   sudo mkdir -p "$REL" && sudo tar -xzf yardly-landing.tgz -C "$REL"
+   cd /opt/flotta/landing && sudo ln -sfn "releases/$(basename "$REL")" current.tmp && sudo mv -T current.tmp current
+   ```
+
+To roll back, point `current` at the previous release the same way.
+
 ## Deploying to Cloudflare Workers
 
 The repository is connected to Cloudflare Workers Builds. `wrangler.jsonc` tells Wrangler to run `npm run build` and serve `dist/` as static assets, with trailing-slash URLs and `404.html` for unknown paths. The default deploy command (`npx wrangler deploy`) needs no other settings. To enable the contact form endpoint or analytics there, add `YARDLY_FORM_ENDPOINT` and `YARDLY_GA_ID` as build variables in the Worker's build settings.
@@ -101,7 +121,7 @@ YARDLY_GA_ID="G-XXXXXXX" npm run build
 
 - **Company details.** The privacy notice and the imprint contain highlighted placeholders (company name, registered office, registration and tax numbers, representative, retention periods, e-mail provider) that must be filled in once the company is registered. Both texts are drafts and need legal review. Remove the "draft" notice in `src/pages.mjs` (`legal()`) afterwards.
 - **Mailbox.** Make sure `hello@yardly.hu` exists. The previous site used `info@yardly.hu`.
-- **App login.** The new site has no login link. If existing customers sign in at `yardly.hu/login.html`, move the app to its own address (for example `app.yardly.hu`) before switching domains.
+- **App login.** The site has no login link. The app is on `teszt.yardly.hu`; the old app pages that used to be on `yardly.hu` (such as `/login.html`) now return 404.
 - **Social profiles.** The LinkedIn, Instagram, Facebook and TikTok icons render without links until the URLs are set in `src/config.mjs`.
 - **Case study.** The case is anonymised. Get the client's written consent before naming them or quoting anyone.
 - **Screenshots.** Images in `assets/img/app/` come from the test environment. Personal and company names were replaced with demo names before capture.
