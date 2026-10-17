@@ -1,20 +1,20 @@
 // Static site generator for yardly.hu. No dependencies: `node src/build.mjs`.
-// Renders every page in every language into dist/ and copies assets/ and public/.
+// Renders every page into dist/ and copies assets/ and public/.
 import { mkdirSync, rmSync, writeFileSync, cpSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { config } from "./config.mjs";
-import { LANGS, ROUTES, postRoute } from "./routes.mjs";
-import { layout } from "./layout.mjs";
-import * as pages from "./pages.mjs";
-import hu from "./i18n/hu.mjs";
-import en from "./i18n/en.mjs";
-import de from "./i18n/de.mjs";
+import { ROUTES } from "./routes.mjs";
+import { layout } from "./ui.mjs";
+import { home } from "./pages/home.mjs";
+import { solutions, warehouse, transport, maintenance } from "./pages/solutions.mjs";
+import { services, consulting, delivery } from "./pages/services.mjs";
+import { method, references, company, contact, notFound } from "./pages/company.mjs";
+import { privacy, imprint } from "./pages/legal.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const out = join(root, "dist");
-const locales = { hu, en, de };
 
 const write = (path, html) => {
   const file = join(out, path.endsWith("/") ? `${path}index.html` : path);
@@ -25,62 +25,38 @@ const write = (path, html) => {
 rmSync(out, { recursive: true, force: true });
 mkdirSync(out, { recursive: true });
 cpSync(join(root, "assets"), join(out, "assets"), { recursive: true });
-cpSync(join(root, "public"), out, { recursive: true }); // favicons and web manifest, served from the root
+cpSync(join(root, "public"), out, { recursive: true }); // favicons, web manifest, _redirects
 
-const sitemap = [];
-const addToSitemap = (alternates) => sitemap.push(alternates);
-
-const renderers = {
-  home: pages.home,
-  solutions: pages.solutions,
-  cases: pages.cases,
-  blog: pages.blog,
-  about: pages.about,
-  contact: pages.contact,
-  privacy: pages.privacy,
-  imprint: pages.imprint,
+const pages = {
+  home,
+  solutions,
+  warehouse,
+  transport,
+  maintenance,
+  services,
+  consulting,
+  delivery,
+  method,
+  references,
+  company,
+  contact,
+  privacy,
+  imprint,
 };
 
-for (const [key, render] of Object.entries(renderers)) {
-  const alternates = { ...ROUTES[key] };
-  for (const lang of LANGS) {
-    const t = locales[lang];
-    pages.setLang(lang);
-    const page = render(t);
-    write(alternates[lang], layout(t, { key, alternates, ...page }));
-  }
-  addToSitemap(alternates);
+for (const [key, render] of Object.entries(pages)) {
+  const page = render();
+  const html = layout({ ...page, path: ROUTES[key] });
+  if (/[–—]/.test(html)) throw new Error(`${key}: use a hyphen instead of an en or em dash`);
+  write(ROUTES[key], html);
 }
+write("404.html", layout(notFound()));
 
-for (const post of pages.posts) {
-  const alternates = Object.fromEntries(LANGS.map((l) => [l, postRoute(post, l)]));
-  for (const lang of LANGS) {
-    const t = locales[lang];
-    pages.setLang(lang);
-    write(alternates[lang], layout(t, { key: "blog", alternates, ...pages.post(t, post) }));
-  }
-  addToSitemap(alternates);
-}
-
-// 404 (Hungarian, the default language)
-pages.setLang("hu");
-write("404.html", layout(hu, { key: "", alternates: { ...ROUTES.home }, ...pages.notFound(hu) }));
-
-const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-${sitemap
-  .flatMap((alt) =>
-    LANGS.map(
-      (lang) => `  <url>
-    <loc>${config.siteUrl}${alt[lang]}</loc>
-${LANGS.map((l) => `    <xhtml:link rel="alternate" hreflang="${l}" href="${config.siteUrl}${alt[l]}"/>`).join("\n")}
-  </url>`
-    )
-  )
-  .join("\n")}
-</urlset>
-`;
-writeFileSync(join(out, "sitemap.xml"), xml);
+const urls = Object.keys(pages).map((key) => `  <url><loc>${config.siteUrl}${ROUTES[key]}</loc></url>`);
+writeFileSync(
+  join(out, "sitemap.xml"),
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join("\n")}\n</urlset>\n`
+);
 writeFileSync(join(out, "robots.txt"), `User-agent: *\nAllow: /\n\nSitemap: ${config.siteUrl}/sitemap.xml\n`);
 
-console.log(`Built ${sitemap.length * LANGS.length + 1} pages into dist/`);
+console.log(`Built ${urls.length + 1} pages into dist/`);

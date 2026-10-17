@@ -1,23 +1,29 @@
 # yardly.hu
 
-Marketing site for Yardly: tailored maintenance and operations software for logistics companies. It extends the systems a company already uses rather than replacing them.
+Marketing site for Yardly: workflow automation for large logistics companies in Hungary, offered as two services, consultancy (Tanácsadás) and implementation (Kivitelezés).
 
-The site is static and comes in three languages: Hungarian (default, `/`), English (`/en/`) and German (`/de/`). The content is based on the completed content questionnaire.
+The site is static and in Hungarian.
 
 ## Pages
 
-| Page | HU | EN | DE |
-| --- | --- | --- | --- |
-| Home | `/` | `/en/` | `/de/` |
-| Solutions | `/megoldasok/` | `/en/solutions/` | `/de/loesungen/` |
-| Case studies | `/esettanulmanyok/` | `/en/case-studies/` | `/de/fallstudien/` |
-| Blog (3 posts) | `/blog/` | `/en/blog/` | `/de/blog/` |
-| About | `/rolunk/` | `/en/about/` | `/de/ueber-uns/` |
-| Contact | `/kapcsolat/` | `/en/contact/` | `/de/kontakt/` |
-| Privacy notice | `/adatkezeles/` | `/en/privacy/` | `/de/datenschutz/` |
-| Imprint | `/impresszum/` | `/en/imprint/` | `/de/impressum/` |
+| Page | Path |
+| --- | --- |
+| Home | `/` |
+| Solutions | `/megoldasok/` |
+| Warehouse processes | `/megoldasok/raktari-folyamatok/` |
+| Transport and fleet | `/megoldasok/fuvarozas-es-flotta/` |
+| Maintenance | `/megoldasok/karbantartas/` |
+| Services | `/szolgaltatasok/` |
+| Consultancy | `/szolgaltatasok/tanacsadas/` |
+| Implementation | `/szolgaltatasok/kivitelezes/` |
+| Method | `/modszertan/` |
+| References | `/referenciak/` |
+| Company | `/cegunk/` |
+| Contact | `/kapcsolat/` |
+| Privacy notice | `/adatkezeles/` |
+| Imprint | `/impresszum/` |
 
-The build also writes `sitemap.xml` (with hreflang alternates), `robots.txt` and `404.html`.
+The build also writes `sitemap.xml`, `robots.txt` and `404.html`. `public/_redirects` sends URLs of earlier site versions (English, German, blog, `/rolunk/`, `/esettanulmanyok/`) to the new pages.
 
 ## Build and preview
 
@@ -33,23 +39,22 @@ npm run serve    # serves dist/ on http://localhost:4173
 ```
 src/
   config.mjs        site URL, e-mail, GA4 ID, form endpoint, social links
-  i18n/hu|en|de.mjs all page copy, one file per language
-  posts.mjs         blog posts (all three languages)
-  pages.mjs         page templates
-  layout.mjs        <head>, header, language switcher, footer, cookie banner
-  components.mjs    hand-drawn SVG illustrations and shared blocks
+  routes.mjs        page paths
+  ui.mjs            <head>, header, footer, cookie banner and shared blocks
+  pages/*.mjs       page templates with their copy
   build.mjs         static site generator
 assets/
   css/styles.css    all styles; design tokens at the top
   js/main.js        menu, cookie consent, contact form
-  img/app/          product screenshots (test environment, demo names)
+  icons/            Phosphor icons (MIT) as downloaded SVG files
+  img/photos/       Unsplash photos, see CREDITS.md
   brand/            official logo and the social sharing image
   fonts/            self-hosted Manrope and Geist Mono (SIL OFL)
-public/             favicons and web manifest, copied to the site root
+public/             favicons, web manifest and _redirects, copied to the site root
 aws/contact-form/   Lambda function that e-mails contact form submissions
 ```
 
-To change copy, edit `src/i18n/*.mjs` and rebuild. To add a blog post, add an entry at the top of `src/posts.mjs`.
+To change copy, edit the page in `src/pages/` and rebuild. The build fails if a page contains an en or em dash.
 
 ## Brand
 
@@ -64,7 +69,7 @@ The logo, icons and colours come from the Yardly logo package.
 
 Small accent text on light backgrounds (links, numbers) uses `#0B7A69`, a darker shade of Türkiz mély, because `#0FA28C` on white is below the WCAG AA contrast ratio for body text. The tokens are at the top of `assets/css/styles.css`.
 
-Headings use Manrope Bold (700) and body text Manrope Medium (500), as the brand guide specifies. Labels and figures use Geist Mono.
+Headings use Manrope Bold (700) and body text Manrope Medium (500), as the brand guide specifies.
 
 The header and footer show `assets/brand/yardly-vizszintes-szines.svg` (the horizontal logo for light backgrounds). Keep it at least 96 px wide, and use the `szines-sotet-hatterre` version from the package on dark backgrounds.
 
@@ -75,7 +80,7 @@ The repository is connected to Cloudflare Workers Builds. `wrangler.jsonc` tells
 ## Deploying to AWS
 
 1. Build: `npm run build`.
-2. Upload `dist/` to an S3 bucket and serve it through CloudFront in front of the S3 **website** endpoint, which resolves `/megoldasok/` to `index.html`. If you use the S3 REST endpoint with origin access control instead, add a CloudFront Function that appends `index.html` to paths ending in `/`.
+2. Upload `dist/` to an S3 bucket and serve it through CloudFront in front of the S3 **website** endpoint, which resolves `/rolunk/` to `index.html`. If you use the S3 REST endpoint with origin access control instead, add a CloudFront Function that appends `index.html` to paths ending in `/`.
 3. Set `404.html` as the error document.
 
 ### Contact form
@@ -99,9 +104,10 @@ YARDLY_GA_ID="G-XXXXXXX" npm run build
 
 ## Before going live
 
-- **Company details.** The privacy notice and the imprint contain highlighted placeholders (company name, registered office, registration and tax numbers, representative, retention periods, e-mail provider) that must be filled in once the company is registered. Both texts are drafts and need legal review. Remove the "draft" notice in `src/pages.mjs` (`legal()`) afterwards.
+- **Company details.** The privacy notice and the imprint contain highlighted placeholders (company name, registered office, registration and tax numbers, representative, retention periods, e-mail provider) that must be filled in once the company is registered. Both texts are drafts and need legal review. Remove the "draft" notice in `src/pages/legal.mjs` afterwards.
 - **Mailbox.** Make sure `hello@yardly.hu` exists. The previous site used `info@yardly.hu`.
 - **App login.** The new site has no login link. If existing customers sign in at `yardly.hu/login.html`, move the app to its own address (for example `app.yardly.hu`) before switching domains.
 - **Social profiles.** The LinkedIn, Instagram, Facebook and TikTok icons render without links until the URLs are set in `src/config.mjs`.
 - **Case study.** The case is anonymised. Get the client's written consent before naming them or quoting anyone.
-- **Screenshots.** Images in `assets/img/app/` come from the test environment. Personal and company names were replaced with demo names before capture.
+- **Copy review.** The texts were written for this version of the site. Check the service descriptions and the FAQ answers against how you actually work before going live.
+- **Photos.** The photos are Unsplash stock images. Replace them with your own photos of clients' sites or of the team when you have them.
