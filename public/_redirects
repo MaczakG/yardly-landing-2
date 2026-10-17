@@ -1,6 +1,8 @@
-# Pages of the previous site structure (English, German, blog, solutions).
-/megoldasok/ /szolgaltatasok/kivitelezes/ 301
-/megoldasok /szolgaltatasok/kivitelezes/ 301
+# Pages of earlier site structures.
+/esettanulmanyok/ /referenciak/ 301
+/esettanulmanyok /referenciak/ 301
+/rolunk/ /cegunk/ 301
+/rolunk /cegunk/ 301
 /blog/* / 301
 /blog / 301
 /en/* / 301

@@ -1,4 +1,4 @@
-// Page shell (head, header, footer) and the small blocks shared between pages.
+// Page shell (head, header, footer) and the blocks shared between pages.
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -34,8 +34,8 @@ export const ctaButton = (variant = "primary") => button(CTA_LABEL, route("conta
 export const textLink = (label, href) =>
   `<a class="text-link" href="${href}"><span>${esc(label)}</span>${icon("arrow-right", "text-link__icon")}</a>`;
 
-export const logo = () =>
-  `<a class="logo" href="${route("home")}" aria-label="Yardly, kezdőlap"><img src="/assets/brand/yardly-vizszintes-szines.svg" width="131" height="36" alt=""></a>`;
+export const logo = (variant = "color") =>
+  `<a class="logo${variant === "light" ? " logo--light" : ""}" href="${route("home")}" aria-label="Yardly, kezdőlap"><img src="/assets/brand/yardly-vizszintes-szines.svg" width="131" height="36" alt=""></a>`;
 
 // Unsplash photos (see assets/img/photos/CREDITS.md), each in a large and a small size.
 const PHOTOS = {
@@ -44,86 +44,117 @@ const PHOTOS = {
   consult: { sizes: [2000, 1000], ratio: 1331 / 2000 },
   operations: { sizes: [2000, 1000], ratio: 1335 / 2000 },
   docks: { sizes: [2000, 1000], ratio: 1333 / 2000 },
+  fleet: { sizes: [2000, 1000], ratio: 1333 / 2000 },
+  meeting: { sizes: [2000, 1000], ratio: 1125 / 2000 },
+  workshop: { sizes: [2000, 1000], ratio: 1333 / 2000 },
   aisle: { sizes: [1400, 700], ratio: 1867 / 1400 },
   forklift: { sizes: [1400, 700], ratio: 2100 / 1400 },
 };
 
-export const photo = (name, alt, { eager = false, sizes = "100vw", cls = "" } = {}) => {
+export const photo = (name, alt, { eager = false, sizes = "100vw", cls = "", position = "" } = {}) => {
   const p = PHOTOS[name];
   const [big, small] = p.sizes;
   const src = (w) => `/assets/img/photos/${name}-${w}.webp`;
-  return `<img class="${cls}" src="${src(small)}" srcset="${src(small)} ${small}w, ${src(big)} ${big}w" sizes="${sizes}" width="${big}" height="${Math.round(big * p.ratio)}" alt="${esc(alt)}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
+  return `<img class="${cls}" src="${src(small)}" srcset="${src(small)} ${small}w, ${src(big)} ${big}w" sizes="${sizes}" width="${big}" height="${Math.round(big * p.ratio)}" alt="${esc(alt)}"${position ? ` style="object-position:${position}"` : ""} ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
 };
 
-// Closing call to action: photo band with one message and the one button.
-export const ctaBand = ({ title, text, image = "floor-team" }) => `<section class="cta-band" aria-labelledby="cta-title">
-  <div class="cta-band__frame">
-    ${photo(image, "", { cls: "cta-band__img" })}
-    <div class="container cta-band__inner reveal">
-      <h2 class="h2" id="cta-title">${glue(title)}</h2>
-      <p>${glue(text)}</p>
-      <div class="cta-band__actions">
-        ${ctaButton("light")}
-        <span class="cta-band__note">${icon("check", "icon icon--sm")}Az első konzultáció díjtalan</span>
-      </div>
-    </div>
+// Section heading: short accent rule, headline, optional paragraph.
+export const heading = ({ title, lead, id, light = false, cls = "", reveal = true }) => `<div class="heading${light ? " heading--light" : ""}${cls ? ` ${cls}` : ""}${reveal ? " reveal" : ""}">
+  <h2 class="h2"${id ? ` id="${id}"` : ""}>${glue(title)}</h2>
+  ${lead ? `<p class="lead">${glue(lead)}</p>` : ""}
+</div>`;
+
+// Inner-page hero: full-bleed photo with breadcrumb, label, headline and one paragraph.
+export const pageHero = ({ label, title, lead, crumbs = [], image, imageAlt = "", position = "" }) => `<section class="page-hero" aria-labelledby="page-title">
+  ${photo(image, imageAlt, { eager: true, cls: "page-hero__img", position })}
+  <div class="container page-hero__inner">
+    ${crumbs.length ? `<nav class="crumbs" aria-label="Morzsamenü"><ol>${crumbs.map((c) => `<li><a href="${c.href}">${esc(c.label)}</a></li>`).join("")}</ol></nav>` : ""}
+    ${label ? `<p class="kicker">${esc(label)}</p>` : ""}
+    <h1 class="h1" id="page-title">${glue(title)}</h1>
+    ${lead ? `<p class="page-hero__lead">${glue(lead)}</p>` : ""}
   </div>
 </section>`;
 
-// Inner-page intro: label, headline, one paragraph, optional wide photo below.
-export const pageHero = ({ label, title, lead, crumbs = [], image, imageAlt = "" }) => `<section class="intro" aria-labelledby="page-title">
-  <div class="container">
-    ${crumbs.length ? `<nav class="crumbs" aria-label="Morzsamenü"><ol>${crumbs.map((c) => `<li><a href="${c.href}">${esc(c.label)}</a></li>`).join("")}</ol></nav>` : ""}
-    <div class="intro__grid">
-      <div>
-        ${label ? `<p class="label">${esc(label)}</p>` : ""}
-        <h1 class="h1" id="page-title">${glue(title)}</h1>
-      </div>
-      ${lead ? `<p class="lead intro__lead">${glue(lead)}</p>` : ""}
+// Closing call to action, the same navy band on every page.
+export const ctaBand = ({ title, text }) => `<section class="cta-band" aria-labelledby="cta-title">
+  <div class="container cta-band__inner reveal">
+    <div class="cta-band__copy">
+      <h2 class="h2" id="cta-title">${glue(title)}</h2>
+      <p>${glue(text)}</p>
+    </div>
+    <div class="cta-band__action">
+      ${ctaButton("accent")}
+      <p>${icon("check", "icon icon--sm")}Az első konzultáció díjtalan</p>
     </div>
   </div>
-  ${image ? `<div class="intro__media">${photo(image, imageAlt, { eager: true, cls: "intro__img" })}</div>` : ""}
 </section>`;
 
 // ---------------------------------------------------------------------------
 
-const SERVICE_LINKS = [
-  { key: "consulting", label: "Tanácsadás", text: "Folyamatelemzés és automatizálási ütemterv", icon: "compass" },
-  { key: "delivery", label: "Kivitelezés", text: "Integráció, fejlesztés, üzemeltetés", icon: "wrench" },
+export const MENU = [
+  {
+    label: "Megoldások",
+    key: "solutions",
+    children: [
+      { key: "warehouse", label: "Raktári folyamatok", text: "Készlet, leltár, eszközök, raktári adminisztráció", icon: "stack" },
+      { key: "transport", label: "Fuvarozás és flotta", text: "Fuvarszervezés, járművek, okmányok, sofőrök", icon: "truck" },
+      { key: "maintenance", label: "Karbantartás", text: "Targoncák, gépek és járművek szervizei", icon: "wrench" },
+    ],
+  },
+  {
+    label: "Szolgáltatások",
+    key: "services",
+    children: [
+      { key: "consulting", label: "Tanácsadás", text: "Folyamatelemzés és automatizálási ütemterv", icon: "compass" },
+      { key: "delivery", label: "Kivitelezés", text: "Integráció, fejlesztés, üzemeltetés", icon: "plugs-connected" },
+    ],
+  },
+  { label: "Módszertan", key: "method" },
+  { label: "Referenciák", key: "references" },
+  { label: "Cégünk", key: "company" },
 ];
 
 const header = (pageKey) => {
-  const current = (keys) => (keys.includes(pageKey) ? ' aria-current="page"' : "");
-  const servicesActive = ["services", "consulting", "delivery"].includes(pageKey);
+  const isIn = (item) => item.key === pageKey || (item.children || []).some((c) => c.key === pageKey);
+  const cur = (key) => (key === pageKey ? ' aria-current="page"' : "");
   const contactHref = pageKey === "contact" ? "#urlap" : route("contact");
-  return `<header class="site-header" data-header>
+  const desktop = MENU.map((item, i) =>
+    item.children
+      ? `<li class="nav__item nav__item--has-menu" data-menu>
+          <a class="nav__link${isIn(item) ? " is-active" : ""}" href="${route(item.key)}"${cur(item.key)}>${item.label}</a>
+          <button class="nav__caret" type="button" aria-expanded="false" aria-controls="menu-${i}">${icon("caret-down", "icon icon--xs")}<span class="visually-hidden">${item.label} almenü</span></button>
+          <div class="nav__menu" id="menu-${i}">
+            <ul>${item.children
+              .map(
+                (c) => `<li><a class="menu-link" href="${route(c.key)}"${cur(c.key)}>
+                <span class="menu-link__icon">${icon(c.icon)}</span>
+                <span><strong>${c.label}</strong><span>${c.text}</span></span>
+              </a></li>`
+              )
+              .join("")}</ul>
+          </div>
+        </li>`
+      : `<li class="nav__item"><a class="nav__link${isIn(item) ? " is-active" : ""}" href="${route(item.key)}"${cur(item.key)}>${item.label}</a></li>`
+  ).join("");
+  const mobile = MENU.map(
+    (item) => `<li><a href="${route(item.key)}"${cur(item.key)}>${item.label}</a>${
+      item.children ? `<ul class="mobile-nav__sub">${item.children.map((c) => `<li><a href="${route(c.key)}"${cur(c.key)}>${c.label}</a></li>`).join("")}</ul>` : ""
+    }</li>`
+  ).join("");
+  return `<div class="topbar">
+  <div class="container topbar__inner">
+    <span class="topbar__claim">Folyamat-automatizálás logisztikai cégeknek</span>
+    <span class="topbar__links">
+      <a href="mailto:${config.email}">${icon("envelope-simple", "icon icon--xs")}${config.email}</a>
+      <span>${icon("map-pin", "icon icon--xs")}Budapest</span>
+    </span>
+  </div>
+</div>
+<header class="site-header" data-header>
   <div class="container site-header__inner">
     ${logo()}
-    <nav class="nav" aria-label="Fő menü">
-      <ul class="nav__list">
-        <li class="nav__item nav__item--has-menu" data-menu>
-          <a class="nav__link${servicesActive ? " is-active" : ""}" href="${route("services")}"${current(["services"])}>Szolgáltatások</a>
-          <button class="nav__caret" type="button" aria-expanded="false" aria-controls="services-menu">
-            ${icon("caret-down", "icon icon--xs")}<span class="visually-hidden">Szolgáltatások almenü</span>
-          </button>
-          <div class="nav__menu" id="services-menu">
-            <ul>
-              ${SERVICE_LINKS.map(
-                (s) => `<li><a class="menu-link" href="${route(s.key)}"${current([s.key])}>
-                <span class="menu-link__icon">${icon(s.icon)}</span>
-                <span><strong>${s.label}</strong><span>${s.text}</span></span>
-              </a></li>`
-              ).join("")}
-            </ul>
-          </div>
-        </li>
-        <li class="nav__item"><a class="nav__link" href="${route("cases")}"${current(["cases"])}>Esettanulmány</a></li>
-        <li class="nav__item"><a class="nav__link" href="${route("about")}"${current(["about"])}>Rólunk</a></li>
-      </ul>
-    </nav>
-    <div class="site-header__cta">
-      <a class="btn btn--primary btn--sm" href="${contactHref}"><span>${CTA_LABEL}</span>${icon("arrow-right", "btn__icon")}</a>
-    </div>
+    <nav class="nav" aria-label="Fő menü"><ul class="nav__list">${desktop}</ul></nav>
+    <a class="btn btn--primary btn--sm site-header__cta" href="${contactHref}"><span>${CTA_LABEL}</span>${icon("arrow-right", "btn__icon")}</a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">
       ${icon("list", "icon nav-toggle__open")}${icon("x", "icon nav-toggle__close")}
       <span class="visually-hidden">Menü</span>
@@ -131,16 +162,7 @@ const header = (pageKey) => {
   </div>
   <div class="mobile-nav" id="mobile-nav">
     <nav class="container" aria-label="Mobil menü">
-      <ul class="mobile-nav__list">
-        <li><a href="${route("services")}"${current(["services"])}>Szolgáltatások</a>
-          <ul class="mobile-nav__sub">
-            ${SERVICE_LINKS.map((s) => `<li><a href="${route(s.key)}"${current([s.key])}>${s.label}</a></li>`).join("")}
-          </ul>
-        </li>
-        <li><a href="${route("cases")}"${current(["cases"])}>Esettanulmány</a></li>
-        <li><a href="${route("about")}"${current(["about"])}>Rólunk</a></li>
-        <li><a href="${route("contact")}"${current(["contact"])}>Kapcsolat</a></li>
-      </ul>
+      <ul class="mobile-nav__list">${mobile}<li><a href="${route("contact")}"${cur("contact")}>Kapcsolat</a></li></ul>
       <a class="btn btn--primary btn--block" href="${contactHref}"><span>${CTA_LABEL}</span>${icon("arrow-right", "btn__icon")}</a>
     </nav>
   </div>
@@ -151,38 +173,35 @@ const footer = () => `<footer class="site-footer">
   <div class="container">
     <div class="site-footer__grid">
       <div class="site-footer__brand">
-        ${logo()}
-        <p>Folyamat-automatizálás nagy logisztikai cégeknek: tanácsadás és kivitelezés egy csapattól.</p>
+        ${logo("light")}
+        <p>Tanácsadás és kivitelezés nagy logisztikai cégeknek: összekötjük a rendszereiket, és automatizáljuk a kézi adminisztrációt.</p>
         <a class="site-footer__mail" href="mailto:${config.email}">${icon("envelope-simple", "icon icon--sm")}${config.email}</a>
       </div>
-      <div class="footer-col">
-        <h2>Szolgáltatások</h2>
-        <ul>
-          <li><a href="${route("consulting")}">Tanácsadás</a></li>
-          <li><a href="${route("delivery")}">Kivitelezés</a></li>
-          <li><a href="${route("services")}">Együttműködés</a></li>
-        </ul>
-      </div>
+      ${MENU.filter((m) => m.children)
+        .map(
+          (m) => `<div class="footer-col">
+        <h2>${m.label}</h2>
+        <ul>${m.children.map((c) => `<li><a href="${route(c.key)}">${c.label}</a></li>`).join("")}</ul>
+      </div>`
+        )
+        .join("")}
       <div class="footer-col">
         <h2>Cég</h2>
         <ul>
-          <li><a href="${route("cases")}">Esettanulmány</a></li>
-          <li><a href="${route("about")}">Rólunk</a></li>
+          <li><a href="${route("method")}">Módszertan</a></li>
+          <li><a href="${route("references")}">Referenciák</a></li>
+          <li><a href="${route("company")}">Cégünk</a></li>
           <li><a href="${route("contact")}">Kapcsolat</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h2>Jogi információk</h2>
-        <ul>
-          <li><a href="${route("privacy")}">Adatkezelési tájékoztató</a></li>
-          <li><a href="${route("imprint")}">Impresszum</a></li>
-          ${config.gaId ? `<li><button class="link-button" type="button" data-consent-open>Süti-beállítások</button></li>` : ""}
         </ul>
       </div>
     </div>
     <div class="site-footer__bottom">
       <span>© 2026 Yardly. Minden jog fenntartva.</span>
-      <span>Budapest, Magyarország</span>
+      <span class="site-footer__legal">
+        <a href="${route("privacy")}">Adatkezelési tájékoztató</a>
+        <a href="${route("imprint")}">Impresszum</a>
+        ${config.gaId ? `<button class="link-button" type="button" data-consent-open>Süti-beállítások</button>` : ""}
+      </span>
     </div>
   </div>
 </footer>`;
@@ -213,7 +232,7 @@ export const layout = (page) => {
   <title>${esc(page.title)}</title>
   <meta name="description" content="${esc(page.description)}">
   ${page.noindex ? '<meta name="robots" content="noindex">' : `<link rel="canonical" href="${canonical}">`}
-  <meta name="theme-color" content="#ffffff">
+  <meta name="theme-color" content="#0c1c3e">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Yardly">
   <meta property="og:locale" content="hu_HU">

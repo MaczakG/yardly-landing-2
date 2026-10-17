@@ -8,8 +8,9 @@ import { config } from "./config.mjs";
 import { ROUTES } from "./routes.mjs";
 import { layout } from "./ui.mjs";
 import { home } from "./pages/home.mjs";
+import { solutions, warehouse, transport, maintenance } from "./pages/solutions.mjs";
 import { services, consulting, delivery } from "./pages/services.mjs";
-import { cases, about, contact, notFound } from "./pages/company.mjs";
+import { method, references, company, contact, notFound } from "./pages/company.mjs";
 import { privacy, imprint } from "./pages/legal.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -26,7 +27,22 @@ mkdirSync(out, { recursive: true });
 cpSync(join(root, "assets"), join(out, "assets"), { recursive: true });
 cpSync(join(root, "public"), out, { recursive: true }); // favicons, web manifest, _redirects
 
-const pages = { home, services, consulting, delivery, cases, about, contact, privacy, imprint };
+const pages = {
+  home,
+  solutions,
+  warehouse,
+  transport,
+  maintenance,
+  services,
+  consulting,
+  delivery,
+  method,
+  references,
+  company,
+  contact,
+  privacy,
+  imprint,
+};
 
 for (const [key, render] of Object.entries(pages)) {
   const page = render();

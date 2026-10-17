@@ -1,22 +1,22 @@
 import { config } from "../config.mjs";
 import { route } from "../routes.mjs";
-import { esc, glue, icon, ctaButton, textLink, photo, ctaBand } from "../ui.mjs";
+import { esc, glue, icon, button, ctaButton, textLink, photo, heading, ctaBand, MENU } from "../ui.mjs";
 
 const BENEFITS = [
   {
-    icon: "flow-arrow",
-    title: "A rutinmunkát a rendszer végzi",
-    text: "Rendelésfeldolgozás, fuvarszervezés, karbantartás, határidők, riportok: ami ma e-mailben és táblázatban fut, az szabályok szerint, magától halad tovább.",
+    icon: "clock",
+    title: "Felszabaduló munkaórák",
+    text: "A rendelések átvezetése, a határidők figyelése és a riportok összeállítása magától fut. A csapat a kivételekkel foglalkozik, nem a rutinnal.",
   },
   {
-    icon: "plugs-connected",
-    title: "Egy adat, egyszer rögzítve",
-    text: "Összekötjük az ERP-t, a raktárkezelőt, a fuvarszervező rendszert és a táblázatokat. Mindenki ugyanabból a friss adatból dolgozik, átvezetés nélkül.",
+    icon: "database",
+    title: "Egy, mindig friss adat",
+    text: "Az ERP, a raktárkezelő, a fuvarszervező rendszer és a táblázatok összekötve. Senkinek nem kell kétszer rögzítenie ugyanazt.",
   },
   {
     icon: "shield-check",
-    title: "Kevesebb hiba, nyugodtabb műszakok",
-    text: "Beépített ellenőrzések és időben kiküldött értesítések. A lejáró határidő, a hiányzó irat vagy a késő szállítmány nem a hónap végén derül ki.",
+    title: "Kevesebb hiba és meglepetés",
+    text: "Beépített ellenőrzések és időben kiküldött értesítések. A lejáró okmány vagy a késő szerviz nem a hónap végén derül ki.",
   },
 ];
 
@@ -30,22 +30,21 @@ const FAQ = [
     a: "Elsősorban közepes és nagy logisztikai, raktározási és fuvarozó cégeknek, ahol több telephely, több rendszer és sok ismétlődő adminisztráció találkozik.",
   },
   {
-    q: "Mennyi idő alatt látszik az eredmény?",
+    q: "Mikor látszik az első eredmény?",
     a: "Nem egy nagy projekt végén. Azzal a folyamattal kezdünk, amely ma a legtöbb kézi munkát viszi el, azt élesítjük elsőként, és onnan lépésről lépésre haladunk.",
   },
   {
     q: "Hol futnak a rendszerek, és ki fér hozzá az adatokhoz?",
-    a: "Választhat: az Amazon Web Services frankfurti, EU-s adatközpontjában, dedikált környezetben, vagy a saját szerverén. A hozzáférést szerepkörök szerint állítjuk be, minden módosítás naplózva.",
-  },
-  {
-    q: "Mi történik az élesítés után?",
-    a: "Velünk marad a felelősség: üzemeltetjük, figyeljük és javítjuk a rendszert, és a működés változásával együtt fejlesztjük tovább.",
+    a: "Az Amazon Web Services frankfurti, EU-s adatközpontjában, dedikált környezetben, vagy a saját szerverükön. A hozzáférést szerepkörök szerint állítjuk be, minden módosítás naplózva.",
   },
   {
     q: "Hogyan áraznak?",
-    a: "Projektenként adunk ajánlatot, egy díjtalan első konzultáció és felmérés után. Az üzemeltetés és a támogatás havi fix, előre egyeztetett díjjal fut, rejtett tételek nélkül.",
+    a: "Projektenként adunk ajánlatot, egy díjtalan első konzultáció és felmérés után. Az üzemeltetés és a támogatás havi fix, előre egyeztetett díjjal fut.",
   },
 ];
+
+const solutions = MENU.find((m) => m.key === "solutions").children;
+const SOLUTION_PHOTOS = { warehouse: "aisle", transport: "fleet", maintenance: "forklift" };
 
 export const home = () => ({
   key: "home",
@@ -63,84 +62,106 @@ export const home = () => ({
   },
   body: `
 <section class="hero" aria-labelledby="hero-title">
-  <div class="hero__frame">
-    ${photo("aerial-hub", "Logisztikai központ felülnézetből, rakodó kamionokkal.", { eager: true, cls: "hero__img" })}
-    <div class="container hero__inner">
-      <div class="hero__copy">
-        <h1 class="display load-in" id="hero-title">${glue("Ami ma kézzel fut, holnap magától megy.")}</h1>
-        <p class="hero__lead load-in">${glue("Felmérjük a logisztikai munkafolyamatait, és automatizált rendszert építünk a meglévő szoftverei köré.")}</p>
-        <div class="hero__actions load-in">
-          ${ctaButton("light")}
-          <a class="hero__link" href="${route("services")}">Szolgáltatásaink${icon("arrow-right", "icon icon--sm")}</a>
+  ${photo("aerial-hub", "Logisztikai központ felülnézetből, rakodó kamionokkal.", { eager: true, cls: "hero__img" })}
+  <div class="container hero__inner">
+    <p class="kicker load-in">Tanácsadás és kivitelezés</p>
+    <h1 class="display load-in" id="hero-title">${glue("Automatizált logisztika, a meglévő rendszereire építve.")}</h1>
+    <p class="hero__lead load-in">${glue("Felmérjük, hol vész el ma a legtöbb idő, és megépítjük a rendszert, amely ezt a munkát átveszi.")}</p>
+    <div class="hero__actions load-in">
+      ${ctaButton("accent")}
+      ${button("Megoldásaink", route("solutions"), "outline-light")}
+    </div>
+  </div>
+</section>
+
+<nav class="solution-strip" aria-label="Megoldások területenként">
+  <div class="container"><div class="solution-strip__grid">
+    ${solutions
+      .map(
+        (s) => `<a class="solution-strip__item" href="${route(s.key)}">
+      <span class="solution-strip__icon">${icon(s.icon)}</span>
+      <span><strong>${s.label}</strong><span>${s.text}</span></span>
+      ${icon("arrow-right", "icon solution-strip__arrow")}
+    </a>`
+      )
+      .join("")}
+  </div></div>
+</nav>
+
+<section class="section" aria-labelledby="benefits-title">
+  <div class="container">
+    ${heading({ id: "benefits-title", title: "Amit egy automatizált folyamat ad a cégének", lead: "Nem egy újabb szoftvert vezetünk be, hanem a meglévők közti kézi munkát szüntetjük meg." })}
+    <div class="pillars">
+      ${BENEFITS.map(
+        (b) => `<article class="pillar reveal">
+        <span class="pillar__icon">${icon(b.icon)}</span>
+        <h3 class="h3">${b.title}</h3>
+        <p>${glue(b.text)}</p>
+      </article>`
+      ).join("")}
+    </div>
+  </div>
+</section>
+
+<section class="split split--navy" aria-labelledby="proof-title">
+  <div class="split__media">
+    ${photo("forklift", "Targonca egy magas raktári állványsor mellett.", { sizes: "(min-width: 960px) 50vw, 100vw", position: "50% 60%" })}
+  </div>
+  <div class="split__body">
+    <div class="split__content reveal">
+      <p class="kicker">Referencia</p>
+      <h2 class="h2" id="proof-title">${glue("Havi egy munkanapnyi adminisztráció helyett tíz perc.")}</h2>
+      <p>${glue("Egy gyógyszer-, növényvédőszer- és italáru-logisztikai szolgáltatónál négy rendszert kötöttünk össze, és automatizáltuk a targoncák és a gépjárműpark karbantartását.")}</p>
+      <dl class="figures">
+        <div><dt>Előtte</dt><dd class="figures__before">8 óra</dd></div>
+        <div><dt>Most</dt><dd class="figures__after">10 perc</dd></div>
+        <div><dt>Összekötött rendszer</dt><dd>4</dd></div>
+      </dl>
+      ${textLink("A teljes referencia", route("references"))}
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="areas-title">
+  <div class="container">
+    ${heading({ id: "areas-title", title: "Három terület, ahol a legtöbb kézi munka összegyűlik" })}
+    <div class="areas">
+      ${solutions
+        .map(
+          (s) => `<a class="area reveal" href="${route(s.key)}">
+        <div class="area__media">${photo(SOLUTION_PHOTOS[s.key], "", { sizes: "(min-width: 960px) 33vw, 100vw" })}</div>
+        <div class="area__body">
+          <h3 class="h3">${s.label}</h3>
+          <p>${glue(s.text)}.</p>
+          <span class="area__more">Részletek${icon("arrow-right", "icon icon--sm")}</span>
+        </div>
+      </a>`
+        )
+        .join("")}
+    </div>
+  </div>
+</section>
+
+<section class="section section--tint" aria-labelledby="faq-title">
+  <div class="container faq">
+    <div class="faq__aside reveal">
+      ${heading({ id: "faq-title", title: "Gyakori kérdések", reveal: false })}
+      <div class="faq__contact">
+        ${photo("meeting", "Üzleti megbeszélés egy világos irodában.", { sizes: "(min-width: 960px) 30vw, 100vw" })}
+        <div>
+          <p><strong>Más kérdése van?</strong></p>
+          <a href="mailto:${config.email}">${icon("envelope-simple", "icon icon--sm")}${config.email}</a>
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-<section class="section" aria-labelledby="benefits-title">
-  <div class="container benefits">
-    <figure class="benefits__media reveal">
-      ${photo("aisle", "Magas raktári állványsor raklapokkal egy elosztóközpontban.", { sizes: "(min-width: 960px) 40vw, 100vw" })}
-    </figure>
-    <div class="benefits__body">
-      <h2 class="h2 reveal" id="benefits-title">${glue("Három dolog, ami az első automatizált folyamat után megváltozik.")}</h2>
-      <ol class="benefit-list">
-        ${BENEFITS.map(
-          (b) => `<li class="benefit reveal">
-          <span class="benefit__icon">${icon(b.icon)}</span>
-          <div>
-            <h3 class="h3">${b.title}</h3>
-            <p>${glue(b.text)}</p>
-          </div>
-        </li>`
-        ).join("")}
-      </ol>
-    </div>
-  </div>
-</section>
-
-<section class="section section--navy" aria-labelledby="proof-title">
-  <div class="container proof">
-    <div class="proof__copy reveal">
-      <p class="label label--on-navy">Ügyféleredmény</p>
-      <h2 class="h2" id="proof-title">${glue("Egy teljes munkanap helyett tíz perc havonta.")}</h2>
-      <p>${glue("Egy gyógyszer-, növényvédőszer- és italáru-logisztikai szolgáltatónál a targoncák és a gépjárműpark karbantartását egy összetett táblázat tartotta össze. Négy rendszert kötöttünk össze, és a folyamat ma automatikusan fut.")}</p>
-      ${textLink("Az eset részletei", route("cases"))}
-    </div>
-    <div class="proof__figure reveal">
-      <dl class="metric">
-        <div class="metric__item">
-          <dt>Havi adminisztráció előtte</dt>
-          <dd>8 óra</dd>
-        </div>
-        <div class="metric__item metric__item--after">
-          <dt>Havi adminisztráció most</dt>
-          <dd>10 perc</dd>
-        </div>
-      </dl>
-      <ul class="proof__systems" aria-label="Összekötött rendszerek">
-        <li>GLPI</li><li>Therefore</li><li>DKV</li><li>MNB</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<section class="section" aria-labelledby="faq-title">
-  <div class="container faq">
-    <div class="faq__head reveal">
-      <h2 class="h2" id="faq-title">Gyakori kérdések</h2>
-      <p>${glue("Amit a döntéshozók az első egyeztetés előtt kérdezni szoktak.")}</p>
-    </div>
     <div class="faq__list reveal">
       ${FAQ.map(
-        (f) => `<details class="faq-item">
+        (f, i) => `<details class="faq-item"${i === 0 ? " open" : ""}>
         <summary><span>${esc(f.q)}</span><span class="faq-item__toggle">${icon("plus")}</span></summary>
         <p>${glue(f.a)}</p>
       </details>`
       ).join("")}
     </div>
-    <p class="faq__more reveal">${glue("Más kérdése van?")} <a href="mailto:${config.email}">${config.email}</a></p>
   </div>
 </section>
 

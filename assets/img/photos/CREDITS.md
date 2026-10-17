@@ -12,3 +12,6 @@ All photos are from Unsplash and used under the Unsplash License
 | operations | https://unsplash.com/photos/man-in-gray-shirt-standing-beside-brown-cardboard-boxes-qqtE2yX7POI |
 | docks | https://unsplash.com/photos/closeup-photo-of-parking-lot-nT4k2JDtwTQ |
 | forklift | https://unsplash.com/photos/a-yellow-forklift-in-a-large-warehouse-82ZiY5pzl1c |
+| fleet | https://unsplash.com/photos/3vlGNkDep4E |
+| meeting | https://unsplash.com/photos/diverse-business-team-collaborating-in-a-modern-office-_4tpElFQemQ |
+| workshop | https://unsplash.com/photos/people-sitting-on-chair-in-front-of-table-while-holding-pens-during-daytime-KdeqA3aTnBY |

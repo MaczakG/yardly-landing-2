@@ -1,93 +1,63 @@
 import { route } from "../routes.mjs";
-import { esc, glue, icon, photo, ctaBand, pageHero } from "../ui.mjs";
+import { esc, glue, icon, photo, heading, ctaBand, pageHero } from "../ui.mjs";
 
-const crumbsServices = [
+const crumbs = [
   { label: "Kezdőlap", href: route("home") },
   { label: "Szolgáltatások", href: route("services") },
 ];
 
 // ---------------------------------------------------------------------------
 
-const PHASES = [
-  { title: "Konzultáció", text: "Díjtalan első beszélgetés a céljairól, a csapatáról és a legnagyobb elakadásokról." },
-  { title: "Folyamatelemzés", text: "Feltérképezzük a munkafolyamatokat és a rendszereket, és kiszámoljuk, mi mennyi időt visz el." },
-  { title: "Fejlesztés és integráció", text: "Folyamatonként építünk és élesítünk, a meglévő rendszerek mellé." },
-  { title: "Üzemeltetés", text: "Figyeljük, javítjuk és továbbfejlesztjük a rendszert, havi fix díjjal." },
-];
-
 export const services = () => ({
   key: "services",
   title: "Szolgáltatások: tanácsadás és kivitelezés | Yardly",
   description:
-    "Logisztikai munkafolyamatok automatizálása két lépésben: tanácsadással feltérképezzük, mit érdemes automatizálni, kivitelezéssel meg is valósítjuk.",
+    "Két, egymásra épülő szolgáltatás: tanácsadással feltérképezzük, mit érdemes automatizálni, kivitelezéssel meg is valósítjuk és üzemeltetjük.",
   body: `
 ${pageHero({
   label: "Szolgáltatások",
   title: "Tanácsadás és kivitelezés, egy felelős partnertől.",
-  lead: "Megmutatjuk, hol vész el ma a legtöbb idő, majd meg is építjük azt a rendszert, amely ezt a munkát átveszi. A két szolgáltatás külön is kérhető.",
+  lead: "Megmutatjuk, hol vész el ma a legtöbb idő, majd meg is építjük a rendszert, amely ezt a munkát átveszi. A két szolgáltatás külön is kérhető.",
+  image: "meeting",
+  imageAlt: "Üzleti megbeszélés egy világos irodában.",
 })}
 
-<section class="section section--flush-top" aria-label="Szolgáltatásaink">
-  <div class="container duo">
-    ${[
-      {
-        key: "consulting",
-        img: "consult",
-        alt: "Két kolléga egyeztet egy raktári folyosón, az egyiknél jegyzettömb.",
-        title: "Tanácsadás",
-        text: "Folyamatelemzés, rendszertérkép és priorizált automatizálási ütemterv, megtérülési számítással.",
-      },
-      {
-        key: "delivery",
-        img: "operations",
-        alt: "Raktári munkatársak dolgoznak a kiszállításra váró dobozok között.",
-        title: "Kivitelezés",
-        text: "Integráció, egyedi automatizálás, adatátvitel és üzemeltetés, a meglévő rendszerei mellé építve.",
-      },
-    ]
-      .map(
-        (s) => `<a class="duo__card reveal" href="${route(s.key)}">
-      <div class="duo__media">${photo(s.img, s.alt, { sizes: "(min-width: 860px) 50vw, 100vw" })}</div>
-      <div class="duo__body">
+<section class="section" aria-label="Szolgáltatásaink">
+  <div class="container">
+    <div class="service-split">
+      ${[
+        {
+          key: "consulting",
+          icon: "compass",
+          title: "Tanácsadás",
+          text: "Feltérképezzük a munkafolyamatokat és a rendszereket, és priorizált, megtérülési becsléssel alátámasztott ütemtervet adunk.",
+          points: ["Folyamat- és rendszertérkép", "Megtérülési becslés", "Priorizált ütemterv"],
+        },
+        {
+          key: "delivery",
+          icon: "plugs-connected",
+          title: "Kivitelezés",
+          text: "Megépítjük az automatizálást a meglévő rendszerei mellé, folyamatonként élesítjük, és az átadás után is üzemeltetjük.",
+          points: ["Integráció és fejlesztés", "Adatátvitel és élesítés", "Üzemeltetés és támogatás"],
+        },
+      ]
+        .map(
+          (s) => `<a class="service reveal" href="${route(s.key)}">
+        <span class="service__icon">${icon(s.icon)}</span>
         <h2 class="h3-lg">${s.title}</h2>
         <p>${glue(s.text)}</p>
-        <span class="duo__more">Részletek${icon("arrow-right", "icon icon--sm")}</span>
-      </div>
-    </a>`
-      )
-      .join("")}
-  </div>
-</section>
-
-<section class="section section--soft" aria-labelledby="phases-title">
-  <div class="container">
-    <h2 class="h2 section-title reveal" id="phases-title">${glue("Így halad egy közös projekt")}</h2>
-    <ol class="phases reveal">
-      ${PHASES.map(
-        (p) => `<li class="phase">
-        <h3 class="h3">${p.title}</h3>
-        <p>${glue(p.text)}</p>
-      </li>`
-      ).join("")}
-    </ol>
-  </div>
-</section>
-
-<section class="section" aria-labelledby="terms-title">
-  <div class="container terms reveal">
-    <h2 class="h2" id="terms-title">${glue("Átlátható feltételek, már az elején.")}</h2>
-    <dl class="terms__list">
-      <div><dt>${icon("magnifying-glass")}Első konzultáció</dt><dd>Díjtalan, kötelezettség nélkül.</dd></div>
-      <div><dt>${icon("receipt")}Projekt</dt><dd>Egyedi ajánlat a felmérés alapján, rögzített tartalommal.</dd></div>
-      <div><dt>${icon("handshake")}Üzemeltetés</dt><dd>Havi fix, előre egyeztetett díj, támogatással együtt.</dd></div>
-    </dl>
+        <ul class="checks">${s.points.map((p) => `<li>${icon("check", "icon icon--sm")}${p}</li>`).join("")}</ul>
+        <span class="service__more">Részletek${icon("arrow-right", "icon icon--sm")}</span>
+      </a>`
+        )
+        .join("")}
+    </div>
   </div>
 </section>
 
 ${ctaBand({
   title: "Melyik folyamatuk viszi el ma a legtöbb időt?",
   text: "Mondja el egy rövid konzultáción, és megmutatjuk, hogyan nézne ki automatizálva.",
-  image: "docks",
 })}`,
 });
 
@@ -103,7 +73,7 @@ const QUESTIONS = [
 const OUTPUTS = [
   { icon: "flow-arrow", title: "Folyamattérkép", text: "A kiválasztott folyamatok valós lépései, felelősei és átadási pontjai." },
   { icon: "tree-structure", title: "Rendszer- és adattérkép", text: "Melyik rendszer milyen adatot tárol, és hogyan érhető el." },
-  { icon: "chart-line-up", title: "Megtérülési becslés", text: "Mennyi kézi munkát vált ki az egyes automatizálás, és mennyi idő alatt térül meg." },
+  { icon: "chart-line-up", title: "Megtérülési becslés", text: "Mennyi kézi munkát vált ki az egyes automatizálás." },
   { icon: "calendar-check", title: "Ütemterv", text: "Priorizált lépések, a leggyorsabb eredménnyel kezdve." },
 ];
 
@@ -114,92 +84,79 @@ export const consulting = () => ({
     "Feltérképezzük a logisztikai munkafolyamatait és rendszereit, és priorizált, megtérülési becsléssel alátámasztott automatizálási ütemtervet adunk.",
   body: `
 ${pageHero({
-  crumbs: crumbsServices,
+  crumbs,
   label: "Tanácsadás",
   title: "Először értsük meg, hol vész el az idő.",
   lead: "A tanácsadás végére pontosan tudni fogja, mely folyamatokat érdemes automatizálni, milyen sorrendben, és mekkora megtakarítással.",
-  image: "consult",
-  imageAlt: "Két kolléga egyeztet egy raktári folyosón, az egyiknél jegyzettömb.",
+  image: "workshop",
+  imageAlt: "Megbeszélés egy tárgyalóasztalnál, jegyzetekkel.",
 })}
 
 <section class="section" aria-labelledby="questions-title">
-  <div class="container questions">
-    <h2 class="h2 reveal" id="questions-title">${glue("A kérdések, amelyekre választ adunk")}</h2>
-    <ul class="questions__list reveal">
-      ${QUESTIONS.map((q) => `<li>${icon("magnifying-glass", "icon")}<span>${glue(q)}</span></li>`).join("")}
-    </ul>
+  <div class="container two-col">
+    ${heading({ id: "questions-title", title: "A kérdések, amelyekre választ adunk" })}
+    <ol class="numbered reveal">
+      ${QUESTIONS.map((q) => `<li>${glue(q)}</li>`).join("")}
+    </ol>
   </div>
 </section>
 
-<section class="section section--soft" aria-labelledby="outputs-title">
-  <div class="container">
-    <div class="section-title reveal">
+<section class="split split--navy split--reverse" aria-labelledby="outputs-title">
+  <div class="split__media">${photo("consult", "Két kolléga egyeztet egy raktári folyosón, az egyiknél jegyzettömb.", { sizes: "(min-width: 960px) 50vw, 100vw" })}</div>
+  <div class="split__body">
+    <div class="split__content reveal">
       <h2 class="h2" id="outputs-title">Amit kézbe kap</h2>
-      <p class="lead">${glue("Négy dokumentum, amelyre akkor is építhet, ha a megvalósítást házon belül végzi.")}</p>
-    </div>
-    <div class="outputs">
-      ${OUTPUTS.map(
-        (o) => `<article class="output reveal">
-        <span class="output__icon">${icon(o.icon)}</span>
-        <h3 class="h3">${o.title}</h3>
-        <p>${glue(o.text)}</p>
-      </article>`
-      ).join("")}
+      <p>${glue("Négy dokumentum, amelyre akkor is építhet, ha a megvalósítást házon belül végzi.")}</p>
+      <ul class="deliverables">
+        ${OUTPUTS.map((o) => `<li>${icon(o.icon)}<div><strong>${o.title}</strong><span>${glue(o.text)}</span></div></li>`).join("")}
+      </ul>
     </div>
   </div>
 </section>
 
 <section class="section" aria-labelledby="format-title">
-  <div class="container format">
-    <div class="format__copy reveal">
-      <h2 class="h2" id="format-title">${glue("Kevés időt kérünk a csapatától.")}</h2>
-      <p class="lead">${glue("A felmérést azokkal végezzük, akik a folyamatokat nap mint nap csinálják: diszpécserekkel, raktárvezetőkkel, karbantartási felelősökkel. Rövid interjúk és a helyszíni munka megfigyelése, nem hosszú workshopok.")}</p>
-    </div>
-    <ul class="format__facts reveal">
-      <li><strong>Helyszínen vagy online</strong><span>A telephelyein vagy videóhívásban, ahogy Önöknek kényelmes.</span></li>
-      <li><strong>Egy kapcsolattartó</strong><span>A felméréstől az átadásig ugyanaz az ember felel.</span></li>
-      <li><strong>Termékfüggetlen javaslat</strong><span>A javaslat a folyamatból indul ki, nem egy előre kiválasztott szoftverből.</span></li>
-    </ul>
-  </div>
-</section>
-
-<section class="section section--flush-top" aria-label="Kapcsolódó szolgáltatás">
   <div class="container">
-    <a class="next reveal" href="${route("delivery")}">
-      <span class="next__label">Következő lépés</span>
-      <span class="next__title">Kivitelezés${icon("arrow-right", "icon next__icon")}</span>
-    </a>
+    ${heading({ id: "format-title", title: "Kevés időt kérünk a csapatától", lead: "A felmérést azokkal végezzük, akik a folyamatokat nap mint nap csinálják: diszpécserekkel, raktárvezetőkkel, karbantartási felelősökkel." })}
+    <div class="facts-row reveal">
+      <div><strong>Helyszínen vagy online</strong><span>A telephelyein vagy videóhívásban, ahogy Önöknek kényelmes.</span></div>
+      <div><strong>Egy kapcsolattartó</strong><span>A felméréstől az átadásig ugyanaz az ember felel.</span></div>
+      <div><strong>Termékfüggetlen javaslat</strong><span>A javaslat a folyamatból indul ki, nem egy előre kiválasztott szoftverből.</span></div>
+    </div>
   </div>
 </section>
 
 ${ctaBand({
   title: "Kezdjük egy díjtalan konzultációval.",
   text: "Írja meg, mely folyamatokkal és rendszerekkel dolgoznak, és egyeztetünk egy időpontot.",
-  image: "docks",
 })}`,
 });
 
 // ---------------------------------------------------------------------------
 
-const BUILDS = [
-  { icon: "file-text", title: "Rendelés- és dokumentumfeldolgozás", text: "Beérkező rendelések, szállítólevelek és számlák adatai automatikusan a megfelelő rendszerbe." },
-  { icon: "truck", title: "Fuvar- és flottaszervezés", text: "Járművek, sofőrök, okmányok és szervizek határidőkkel, értesítésekkel." },
-  { icon: "stack", title: "Raktári folyamatok", text: "Készlet-, leltár- és eszközadatok egyeztetése a raktárkezelő és az ERP között." },
-  { icon: "wrench", title: "Karbantartás", text: "Targoncák, gépek és járművek szervizei km, üzemóra vagy dátum alapján ütemezve." },
-  { icon: "bell", title: "Riasztások és jóváhagyások", text: "Többlépcsős értesítés és jóváhagyási lánc, a saját szabályai szerint." },
-  { icon: "chart-line-up", title: "Riportok és vezetői kimutatások", text: "Költségek, teljesítmény és határidők naprakészen, PDF-ben és Excelben." },
+const SCOPE = [
+  { icon: "plugs-connected", title: "Integráció", text: "Kapcsolat az ERP, WMS, TMS, telematikai és egyéb rendszerekhez, egyedileg fejlesztve." },
+  { icon: "flow-arrow", title: "Automatizált folyamatok", text: "Üzleti szabályok, jóváhagyások, értesítések és ellenőrzések a saját működése szerint." },
+  { icon: "database", title: "Adatátvitel", text: "A meglévő táblázatok és nyilvántartások átvitele, tisztítása és egyeztetése." },
+  { icon: "chart-line-up", title: "Riportok", text: "Vezetői kimutatások és exportok, mindig a friss adatból." },
 ];
 
-const CONNECTS = ["ERP", "WMS", "TMS", "Telematika", "Üzemanyagkártya", "Dokumentumkezelő", "E-mail", "Excel"];
+const SECURITY = [
+  "Szerepkör-alapú jogosultságok",
+  "Teljes változásnapló",
+  "Titkosított kapcsolat",
+  "Kétlépcsős bejelentkezés",
+  "Cégenként elkülönített adatok",
+  "Behatolásos tesztelés",
+];
 
 export const delivery = () => ({
   key: "delivery",
   title: "Kivitelezés: integráció és folyamat-automatizálás | Yardly",
   description:
-    "Megépítjük és üzemeltetjük a logisztikai folyamatait automatizáló rendszert: integráció a meglévő ERP, WMS és TMS rendszerekhez, egyedi szabályok, EU-s üzemeltetés.",
+    "Megépítjük és üzemeltetjük a logisztikai folyamatait automatizáló rendszert: integráció a meglévő rendszerekhez, egyedi szabályok, EU-s vagy saját szerveres üzemeltetés.",
   body: `
 ${pageHero({
-  crumbs: crumbsServices,
+  crumbs,
   label: "Kivitelezés",
   title: "Megépítjük, élesítjük és üzemeltetjük.",
   lead: "A rendszert a meglévő szoftverei mellé építjük, folyamatonként élesítjük, és az átadás után is mi felelünk érte.",
@@ -207,51 +164,39 @@ ${pageHero({
   imageAlt: "Raktári munkatársak dolgoznak a kiszállításra váró dobozok között.",
 })}
 
-<section class="section" aria-labelledby="builds-title">
+<section class="section" aria-labelledby="scope-title">
   <div class="container">
-    <div class="section-title reveal">
-      <h2 class="h2" id="builds-title">Amit automatizálunk</h2>
-      <p class="lead">${glue("A leggyakoribb területek nagy logisztikai cégeknél. A sorrendet és a terjedelmet a tanácsadás eredménye határozza meg.")}</p>
-    </div>
-    <ul class="builds">
-      ${BUILDS.map(
-        (b) => `<li class="build reveal">
-        ${icon(b.icon)}
-        <div><h3 class="h3">${b.title}</h3><p>${glue(b.text)}</p></div>
-      </li>`
+    ${heading({ id: "scope-title", title: "A kivitelezés részei" })}
+    <div class="feature-grid">
+      ${SCOPE.map(
+        (b) => `<article class="feature reveal">
+        <span class="feature__icon">${icon(b.icon)}</span>
+        <h3 class="h3">${b.title}</h3>
+        <p>${glue(b.text)}</p>
+      </article>`
       ).join("")}
-    </ul>
-  </div>
-</section>
-
-<section class="section section--navy" aria-labelledby="connect-title">
-  <div class="container connect">
-    <div class="reveal">
-      <h2 class="h2" id="connect-title">${glue("A meglévő rendszerei maradnak, mi összekötjük őket.")}</h2>
-      <p class="connect__text">${glue("Minden kapcsolatot egyedileg fejlesztünk, ezért ahhoz igazodik, amit ma használnak: szabványos interfészhez, adatbázishoz, fájlexporthoz vagy e-mailhez.")}</p>
     </div>
-    <ul class="connect__chips reveal" aria-label="Tipikus kapcsolódási pontok">
-      ${CONNECTS.map((c) => `<li>${esc(c)}</li>`).join("")}
-    </ul>
   </div>
 </section>
 
-<section class="section" aria-labelledby="run-title">
-  <div class="container run">
-    <figure class="run__media reveal">
-      ${photo("forklift", "Targonca egy magas raktári állványsor mellett.", { sizes: "(min-width: 960px) 40vw, 100vw" })}
-    </figure>
-    <div class="run__body">
-      <h2 class="h2 reveal" id="run-title">${glue("Biztonságos üzemeltetés, EU-s adatközpontban vagy házon belül.")}</h2>
-      <div class="run__options reveal">
-        <div>${icon("cloud")}<h3 class="h3">AWS Frankfurt</h3><p>${glue("Dedikált környezet az Amazon Web Services EU-s adatközpontjában. A szervert és az alkalmazást is mi üzemeltetjük.")}</p></div>
-        <div>${icon("hard-drives")}<h3 class="h3">Saját szerver</h3><p>${glue("A rendszer az Önök hálózatán fut. A szervert az Önök informatikája, az alkalmazást mi üzemeltetjük.")}</p></div>
+<section class="section section--tint" aria-labelledby="hosting-title">
+  <div class="container">
+    ${heading({ id: "hosting-title", title: "Üzemeltetés az EU-ban vagy házon belül", lead: "Két üzemeltetési mód közül választhat. A biztonsági intézkedések mindkettőben ugyanazok." })}
+    <div class="hosting">
+      <article class="hosting__option reveal">
+        ${icon("cloud")}
+        <h3 class="h3">AWS Frankfurt</h3>
+        <p>${glue("Dedikált környezet az Amazon Web Services EU-s adatközpontjában. A szervert és az alkalmazást is mi üzemeltetjük.")}</p>
+      </article>
+      <article class="hosting__option reveal">
+        ${icon("hard-drives")}
+        <h3 class="h3">Saját szerver</h3>
+        <p>${glue("A rendszer az Önök hálózatán fut. A szervert az Önök informatikája, az alkalmazást mi üzemeltetjük.")}</p>
+      </article>
+      <div class="hosting__security reveal">
+        <h3 class="h3">${icon("lock-key", "icon icon--inline")}Biztonság</h3>
+        <ul class="checks">${SECURITY.map((s) => `<li>${icon("check", "icon icon--sm")}${esc(s)}</li>`).join("")}</ul>
       </div>
-      <ul class="run__security reveal">
-        ${["Szerepkör-alapú jogosultságok", "Teljes változásnapló", "Titkosított kapcsolat", "Kétlépcsős bejelentkezés", "Cégenként elkülönített adatok", "Behatolásos tesztelés"]
-          .map((s) => `<li>${icon("check", "icon icon--sm")}${s}</li>`)
-          .join("")}
-      </ul>
     </div>
   </div>
 </section>

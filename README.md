@@ -9,16 +9,21 @@ The site is static and in Hungarian.
 | Page | Path |
 | --- | --- |
 | Home | `/` |
+| Solutions | `/megoldasok/` |
+| Warehouse processes | `/megoldasok/raktari-folyamatok/` |
+| Transport and fleet | `/megoldasok/fuvarozas-es-flotta/` |
+| Maintenance | `/megoldasok/karbantartas/` |
 | Services | `/szolgaltatasok/` |
 | Consultancy | `/szolgaltatasok/tanacsadas/` |
 | Implementation | `/szolgaltatasok/kivitelezes/` |
-| Case study | `/esettanulmanyok/` |
-| About | `/rolunk/` |
+| Method | `/modszertan/` |
+| References | `/referenciak/` |
+| Company | `/cegunk/` |
 | Contact | `/kapcsolat/` |
 | Privacy notice | `/adatkezeles/` |
 | Imprint | `/impresszum/` |
 
-The build also writes `sitemap.xml`, `robots.txt` and `404.html`. `public/_redirects` sends the old English, German, blog and solutions URLs to the new pages.
+The build also writes `sitemap.xml`, `robots.txt` and `404.html`. `public/_redirects` sends URLs of earlier site versions (English, German, blog, `/rolunk/`, `/esettanulmanyok/`) to the new pages.
 
 ## Build and preview
 
