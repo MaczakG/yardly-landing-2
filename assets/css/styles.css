@@ -222,10 +222,23 @@ textarea {
 
 /* Icons ------------------------------------------------------------------ */
 
+/* Icons are SVG files from assets/icons/, painted in the current text colour
+   through a mask (see icon() in src/ui.mjs). Every icon class sets a size. */
+.icon,
+.btn__icon,
+.text-link__icon,
+.text-link__lead,
+.faq-item__icon {
+  display: inline-block;
+  flex: none;
+  background-color: currentColor;
+  -webkit-mask: var(--icon) center / contain no-repeat;
+  mask: var(--icon) center / contain no-repeat;
+}
+
 .icon {
   width: 24px;
   height: 24px;
-  flex: none;
 }
 
 .icon--sm {
@@ -375,13 +388,13 @@ p {
   font-weight: 650;
 }
 
-.text-link span {
+.text-link span:not([class]) {
   background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat;
   background-size: 0 1px;
   transition: background-size 0.35s var(--ease);
 }
 
-.text-link:hover span {
+.text-link:hover span:not([class]) {
   background-size: 100% 1px;
 }
 
@@ -692,7 +705,7 @@ p {
   font-weight: 700;
 }
 
-.menu-link span span {
+.menu-link span span:not(.icon) {
   display: block;
   color: var(--ink-3);
   font-size: 0.875rem;
@@ -944,7 +957,7 @@ p {
   font-weight: 750;
 }
 
-.solution-strip__item span span {
+.solution-strip__item span span:not(.icon) {
   display: block;
   color: var(--ink-3);
   font-size: 0.875rem;
@@ -1197,7 +1210,7 @@ p {
   margin-bottom: 2px;
 }
 
-.deliverables span {
+.deliverables span:not(.icon) {
   color: var(--on-deep-2);
   font-size: 0.96875rem;
 }
@@ -2285,7 +2298,7 @@ p {
   background: var(--tint);
 }
 
-.contact__card span {
+.contact__card span:not(.icon) {
   color: var(--ink-3);
   font-size: 0.9375rem;
 }
@@ -2399,7 +2412,7 @@ fieldset.field {
 .field select {
   appearance: none;
   padding-right: 40px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256' fill='%235a6680'%3E%3Cpath d='M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z'/%3E%3C/svg%3E");
+  background-image: url("../icons/caret-down-select.svg");
   background-repeat: no-repeat;
   background-position: right 14px center;
   background-size: 16px;

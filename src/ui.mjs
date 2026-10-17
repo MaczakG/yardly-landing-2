@@ -1,13 +1,12 @@
 // Page shell (head, header, footer) and the blocks shared between pages.
-import { readFileSync } from "node:fs";
+import { existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { config } from "./config.mjs";
 import { route } from "./routes.mjs";
 
-const ICON_DIR = join(dirname(fileURLToPath(import.meta.url)), "icons");
-const iconCache = new Map();
+const ICON_DIR = join(dirname(fileURLToPath(import.meta.url)), "..", "assets", "icons");
 
 export const esc = (s) =>
   String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -15,13 +14,11 @@ export const esc = (s) =>
 // Keep Hungarian articles and short conjunctions on the same line as the next word.
 export const glue = (text) => String(text).replace(/(^|\s)(a|az|e|s|és|is|egy|ha|de|nem)\s+/gi, "$1$2 ");
 
-// Phosphor icons (regular weight, MIT), inlined at build time from src/icons/.
+// Phosphor icons (regular weight, MIT) are downloaded SVG files in assets/icons/.
+// Each is used as a CSS mask, so it takes the text colour like the text around it.
 export const icon = (name, cls = "icon") => {
-  if (!iconCache.has(name)) {
-    const svg = readFileSync(join(ICON_DIR, `${name}.svg`), "utf8").trim();
-    iconCache.set(name, svg.replace(/^<svg /, '<svg aria-hidden="true" focusable="false" '));
-  }
-  return iconCache.get(name).replace("<svg ", `<svg class="${cls}" `);
+  if (!existsSync(join(ICON_DIR, `${name}.svg`))) throw new Error(`Missing icon: assets/icons/${name}.svg`);
+  return `<span class="${cls}" style="--icon:url(/assets/icons/${name}.svg)" aria-hidden="true"></span>`;
 };
 
 export const CTA_LABEL = "Kérjen konzultációt";

@@ -42,11 +42,11 @@ src/
   routes.mjs        page paths
   ui.mjs            <head>, header, footer, cookie banner and shared blocks
   pages/*.mjs       page templates with their copy
-  icons/            Phosphor icons (MIT), inlined at build time
   build.mjs         static site generator
 assets/
   css/styles.css    all styles; design tokens at the top
   js/main.js        menu, cookie consent, contact form
+  icons/            Phosphor icons (MIT) as downloaded SVG files
   img/photos/       Unsplash photos, see CREDITS.md
   brand/            official logo and the social sharing image
   fonts/            self-hosted Manrope and Geist Mono (SIL OFL)
