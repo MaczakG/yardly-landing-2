@@ -18,13 +18,58 @@
     return null;
   }
 
-  /* Header hairline once the page scrolls */
-  var header = document.querySelector(".site-header");
-  function onScroll() {
-    if (header) header.classList.toggle("is-scrolled", window.scrollY > 8);
+  /* Header hairline once the page leaves the top (no scroll listener) */
+  var header = document.querySelector("[data-header]");
+  var sentinel = document.querySelector("[data-scroll-sentinel]");
+  if (header && sentinel && "IntersectionObserver" in window) {
+    new IntersectionObserver(function (entries) {
+      header.classList.toggle("is-scrolled", !entries[0].isIntersecting);
+    }).observe(sentinel);
   }
-  onScroll();
-  window.addEventListener("scroll", onScroll, { passive: true });
+
+  /* Scroll reveal: sections fade in once, the first time they enter the viewport */
+  var revealItems = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window) {
+    var revealer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          revealer.unobserve(entry.target);
+        });
+      },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.08 }
+    );
+    revealItems.forEach(function (el) {
+      revealer.observe(el);
+    });
+  } else {
+    revealItems.forEach(function (el) {
+      el.classList.add("is-visible");
+    });
+  }
+
+  /* Services dropdown: opens on hover and focus via CSS; the caret toggles it for touch and keyboard */
+  document.querySelectorAll("[data-menu]").forEach(function (item) {
+    var caret = item.querySelector(".nav__caret");
+    if (!caret) return;
+    function setMenu(open) {
+      item.classList.toggle("is-open", open);
+      caret.setAttribute("aria-expanded", String(open));
+    }
+    caret.addEventListener("click", function () {
+      setMenu(!item.classList.contains("is-open"));
+    });
+    document.addEventListener("click", function (e) {
+      if (!item.contains(e.target)) setMenu(false);
+    });
+    item.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && item.classList.contains("is-open")) {
+        setMenu(false);
+        caret.focus();
+      }
+    });
+  });
 
   /* Mobile navigation */
   var toggle = document.querySelector(".nav-toggle");
@@ -51,22 +96,10 @@
         toggle.focus();
       }
     });
-    window.matchMedia("(min-width: 1080px)").addEventListener("change", function (mq) {
+    window.matchMedia("(min-width: 960px)").addEventListener("change", function (mq) {
       if (mq.matches) setNav(false);
     });
   }
-
-  /* Pause diagram animation for people who prefer reduced motion */
-  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  function applyMotionPreference() {
-    document.querySelectorAll(".yard__svg").forEach(function (svg) {
-      if (typeof svg.pauseAnimations !== "function") return;
-      if (reduceMotion.matches) svg.pauseAnimations();
-      else svg.unpauseAnimations();
-    });
-  }
-  applyMotionPreference();
-  reduceMotion.addEventListener("change", applyMotionPreference);
 
   /* Analytics: Google Analytics 4 loads only after explicit consent */
   var CONSENT_KEY = "yardly-consent";
