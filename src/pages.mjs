@@ -1,12 +1,20 @@
+// Page templates. Each returns { title, description, body, jsonLd? }; layout.mjs wraps them.
 import { config } from "./config.mjs";
-import { route, postRoute, LANGS } from "./routes.mjs";
-import { posts } from "./posts.mjs";
-import {
-  esc, glue, arrow, yardDiagram, meshFigure, trace, board, yardPlan, ctaCard, screenshot, SHOTS,
-} from "./components.mjs";
+import { route, solutionRoute, postRoute } from "./routes.mjs";
+import { esc, glue as g, arrow, icon, board, yardPlan, ctaCard, screenshot, phoneShot } from "./components.mjs";
+import { APP, ui } from "./content/site.mjs";
+import { home as h } from "./content/home.mjs";
+import { overview, groups, solutions, solutionBySlug } from "./content/solutions.mjs";
+import { pricing as pr, plans, comparison, limits, VAT_PERCENT, SELF_SERVICE_MAX_VEHICLES } from "./content/pricing.mjs";
+import { about as ab, contact as co, privacy as pv, imprint as im } from "./content/pages.mjs";
+import { blog as bl, categories, posts } from "./content/posts.mjs";
 
-let LANG = "hu";
-const g = (text) => glue(LANG, text);
+// "29 990 Ft": thousands grouped with a non-breaking space, so a price never wraps.
+export const huf = (n) => `${String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, " ")} Ft`;
+
+const withEmail = (html) => html.replaceAll("{email}", config.email);
+const contactHref = (topic, extra = "") => `${route("contact")}?tema=${topic}${extra}#enquiry`;
+const notifyHref = (name) => contactHref("notify", `&funkcio=${encodeURIComponent(name)}`);
 
 const sectionHead = (s, id) => `<div class="section-head">
   <div>
@@ -18,51 +26,117 @@ const sectionHead = (s, id) => `<div class="section-head">
 
 const ticks = (items) => `<ul class="ticks">${items.map((i) => `<li>${i}</li>`).join("")}</ul>`;
 
-const pageHero = (h, extra = "") => `<section class="page-hero" aria-labelledby="page-title">
+const ctaButtons = (note = ui.trialNote) => `<div class="cta-row">
+  <a class="btn btn--primary" href="${APP.register}">${ui.trial}${arrow()}</a>
+  <a class="btn btn--ghost" href="${contactHref("demo")}">${ui.demo}</a>
+</div>
+${note ? `<p class="cta-note cta-note--block">${note}</p>` : ""}`;
+
+const pageHero = (p, extra = "") => `<section class="page-hero" aria-labelledby="page-title">
   <div class="container">
     <div class="page-hero__grid">
       <div>
-        <p class="eyebrow">${h.eyebrow}</p>
-        <h1 class="h1" id="page-title">${g(h.title)}</h1>
+        <p class="eyebrow">${p.eyebrow}${p.badge ? ` <span class="badge">${p.badge}</span>` : ""}</p>
+        <h1 class="h1" id="page-title">${g(p.h1)}</h1>
       </div>
-      ${h.lead ? `<p class="lead">${h.lead}</p>` : ""}
+      ${p.lead ? `<p class="lead">${p.lead}</p>` : ""}
     </div>
     ${extra}
   </div>
 </section>`;
 
-const ctaSection = (t, c) => `<section class="section section--cta" aria-labelledby="cta-title">
+const ctaSection = (c) => `<section class="section section--cta" aria-labelledby="cta-title">
   <div class="container">
-    ${ctaCard({ ...c, title: g(c.title), button: t.ui.cta, href: route("contact", t.lang) })}
+    ${ctaCard({
+      eyebrow: c.eyebrow || "Kezdd el",
+      title: g(c.title),
+      lead: c.lead || ui.trialNote,
+      button: ui.trial,
+      href: APP.register,
+      secondary: { label: ui.demo, href: contactHref("demo") },
+    })}
   </div>
 </section>`;
 
-const shot = (t, key, alt) =>
-  screenshot({ ...SHOTS[key], alt, url: `${t.ui.shotUrl}`, caption: "" });
+const faqBlock = (f, id = "faq") => `<section class="section" id="${id}" aria-labelledby="${id}-title">
+  <div class="container faq">
+    <div class="faq__intro">
+      <p class="eyebrow">${f.eyebrow}</p>
+      <h2 class="h2" id="${id}-title">${g(f.title)}</h2>
+      ${f.lead ? `<p class="muted">${f.lead}</p>` : ""}
+      <a class="text-link" href="${route("contact")}">Kérdezz tőlünk${arrow("text-link__arrow")}</a>
+    </div>
+    <div class="faq__list">
+      ${f.items
+        .map(
+          (q, i) => `<details class="faq__item" name="${id}"${i === 0 ? " open" : ""}>
+        <summary>${q.q}<span class="faq__icon" aria-hidden="true"></span></summary>
+        <div class="faq__answer"><p>${q.a}</p></div>
+      </details>`
+        )
+        .join("")}
+    </div>
+  </div>
+</section>`;
 
-const fmtDate = (t, iso) =>
-  new Intl.DateTimeFormat(t.dateLocale, { year: "numeric", month: "long", day: "numeric" }).format(new Date(`${iso}T12:00:00Z`));
+const faqJsonLd = (items) => ({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: items.map((q) => ({ "@type": "Question", name: q.q, acceptedAnswer: { "@type": "Answer", text: q.a } })),
+});
 
-const withEmail = (html) => html.replaceAll("{email}", config.email);
+const softwareJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Yardly",
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Web",
+  url: config.siteUrl,
+  offers: {
+    "@type": "AggregateOffer",
+    priceCurrency: "HUF",
+    lowPrice: Math.min(...plans.map((p) => p.monthly)),
+    highPrice: Math.max(...plans.map((p) => p.monthly)),
+    offerCount: plans.length,
+  },
+};
+
+const shot = (s, eager = false) => (s.phone ? phoneShot({ ...s, eager }) : screenshot({ ...s, eager }));
+
+const soonTag = `<span class="soon-tag">${icon("clock")}${ui.soon}</span>`;
+
+const solutionCard = (s) => `<a class="sol-card" href="${solutionRoute(s.slug)}">
+  <span class="sol-card__icon">${icon(s.icon)}</span>
+  <span class="sol-card__text"><b>${s.menuTitle}</b><span>${s.menuDesc}</span></span>
+  ${arrow("sol-card__arrow")}
+</a>`;
 
 // ---------------------------------------------------------------------------
+// Főoldal
 
-export const home = (t) => {
-  const h = t.home;
-  const b = h.benefits;
-  const visuals = [trace(b.trace), board(b.board), meshFigure(b.mesh)];
+export const home = () => {
+  const a = h.alerts;
+  const boardData = {
+    head: a.board.title,
+    bad: a.board.items.filter((i) => i.tone === "bad").length + " lejárt",
+    warn: a.board.items.filter((i) => i.tone === "warn").length + " esedékes",
+    rows: a.board.items.map((i) => ({ name: i.name, sub: i.what, due: i.status, tone: i.tone })),
+  };
   return {
     title: h.title,
     description: h.description,
-    jsonLd: {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      name: "Yardly",
-      url: config.siteUrl,
-      email: config.email,
-      logo: `${config.siteUrl}/icon-512px.png`,
-      address: { "@type": "PostalAddress", addressLocality: "Budapest", addressCountry: "HU" },
-    },
+    jsonLd: [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        name: "Yardly",
+        url: config.siteUrl,
+        email: config.email,
+        logo: `${config.siteUrl}/icon-512px.png`,
+        address: { "@type": "PostalAddress", addressLocality: "Budapest", addressCountry: "HU" },
+      },
+      softwareJsonLd,
+    ],
     body: `
 <section class="hero" aria-labelledby="hero-title">
   <div class="container">
@@ -73,29 +147,49 @@ export const home = (t) => {
       </div>
       <div class="hero__aside">
         <p class="lead">${h.hero.lead}</p>
-        <div class="cta-row">
-          <a class="btn btn--primary" href="${route("contact", t.lang)}">${t.ui.cta}${arrow()}</a>
-          <span class="cta-note">${h.hero.note}</span>
-        </div>
+        ${ctaButtons()}
       </div>
     </div>
-    ${yardDiagram(h.diagram)}
+    <div class="hero-visual">
+      ${screenshot({ img: "dashboard", alt: h.hero.shotAlt, eager: true })}
+      ${phoneShot({ img: "allapotfelmeres-telefon", alt: h.hero.phoneAlt, eager: true })}
+    </div>
   </div>
 </section>
 
-<section class="section section--band" aria-labelledby="benefits-title">
+<section class="trust" aria-label="Röviden">
   <div class="container">
-    ${sectionHead(b, "benefits-title")}
-    <div class="benefits">
-      ${b.items
+    <ul class="trust__list">${h.trust.map((t) => `<li>${icon(t.icon)}<span>${t.text}</span></li>`).join("")}</ul>
+  </div>
+</section>
+
+<section class="section section--band" aria-labelledby="pain-title">
+  <div class="container">
+    <div class="section-head section-head--single">
+      <div>
+        <p class="eyebrow">Ismerős helyzetek</p>
+        <h2 class="h2" id="pain-title">${h.problems.title}</h2>
+      </div>
+    </div>
+    <div class="pains">
+      ${h.problems.items.map((p) => `<article class="pain"><p class="pain__quote">${p.quote}</p><p>${p.text}</p></article>`).join("")}
+    </div>
+    <p class="pains__close">${h.problems.close}</p>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="modules-title">
+  <div class="container">
+    ${sectionHead(h.modules, "modules-title")}
+    <div class="duo">
+      ${h.modules.items
         .map(
-          (item, i) => `<article class="benefit">
-        <div class="benefit__visual">${visuals[i]}</div>
-        <div class="benefit__body">
-          <span class="benefit__index">0${i + 1}</span>
-          <h3 class="h3">${item.title}</h3>
-          <p>${item.text}</p>
-          ${ticks(item.ticks)}
+          (m) => `<article class="duo__card">
+        <div class="duo__shot">${screenshot({ img: m.img, alt: m.alt })}</div>
+        <div class="duo__body">
+          <h3 class="h3-lg">${m.name}</h3>
+          <p>${m.text}</p>
+          <a class="text-link" href="${solutionRoute(m.slug)}">${m.link}${arrow("text-link__arrow")}</a>
         </div>
       </article>`
         )
@@ -104,359 +198,523 @@ export const home = (t) => {
   </div>
 </section>
 
-<section class="section" aria-labelledby="product-title">
-  <div class="container">
-    ${sectionHead(h.product, "product-title")}
-    ${screenshot({ ...SHOTS.dashboard, alt: h.product.alt, url: t.ui.shotUrl, caption: t.ui.shotNote })}
+<section class="section section--band" aria-labelledby="alerts-title">
+  <div class="container split">
+    <div class="split__text">
+      <p class="eyebrow">${a.eyebrow}</p>
+      <h2 class="h2" id="alerts-title">${g(a.title)}</h2>
+      <p class="lead">${a.text}</p>
+      ${ticks(a.points)}
+      <a class="text-link" href="${solutionRoute("riasztasok")}">${a.link}${arrow("text-link__arrow")}</a>
+    </div>
+    <div class="split__art">${board(boardData)}</div>
   </div>
 </section>
 
-<section class="section section--deep" aria-labelledby="proof-title">
+<section class="section" aria-labelledby="features-title">
   <div class="container">
-    <div class="proof">
-      <div class="proof__text">
-        <p class="eyebrow">${h.proof.eyebrow}</p>
-        <h2 class="h2" id="proof-title">${g(h.proof.title)}</h2>
-        <p class="lead">${h.proof.lead}</p>
-        <a class="text-link text-link--light" href="${route("cases", t.lang)}">${h.proof.link}${arrow("text-link__arrow")}</a>
-      </div>
-      ${result(h.proof)}
-    </div>
-    <div class="commits">
-      <h3 class="commits__title">${h.proof.commitTitle}</h3>
-      <ul class="commits__list">${h.proof.commits.map((c) => `<li><b>${c.title}</b><span>${c.text}</span></li>`).join("")}</ul>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="faq" aria-labelledby="faq-title">
-  <div class="container faq">
-    <div class="faq__intro">
-      <p class="eyebrow">${h.faq.eyebrow}</p>
-      <h2 class="h2" id="faq-title">${g(h.faq.title)}</h2>
-      <p class="muted">${h.faq.lead}</p>
-      <a class="text-link" href="${route("contact", t.lang)}">${t.ui.cta}${arrow("text-link__arrow")}</a>
-    </div>
-    <div class="faq__list">
-      ${h.faq.items
+    ${sectionHead(h.features, "features-title")}
+    <div class="feature-grid">
+      ${h.features.items
         .map(
-          (f, i) => `<details class="faq__item" name="faq"${i === 0 ? " open" : ""}>
-        <summary>${f.q}<span class="faq__icon" aria-hidden="true"></span></summary>
-        <div class="faq__answer"><p>${f.a}</p></div>
-      </details>`
+          (f) => `<a class="feature-card" href="${solutionRoute(f.slug)}">
+        <span class="feature-card__icon">${icon(solutionBySlug[f.slug].icon)}</span>
+        <h3 class="h3">${f.title}</h3>
+        <p>${f.text}</p>
+        <span class="feature-card__more" aria-hidden="true">${arrow("text-link__arrow")}</span>
+      </a>`
+        )
+        .join("")}
+    </div>
+    <p class="center"><a class="btn btn--ghost" href="${route("solutions")}">${h.features.all}${arrow()}</a></p>
+  </div>
+</section>
+
+<section class="section section--deep" aria-labelledby="steps-title">
+  <div class="container">
+    ${sectionHead(h.steps, "steps-title")}
+    <ol class="stations">
+      ${h.steps.items
+        .map(
+          (s, i) => `<li class="station">
+        <span class="station__when">0${i + 1}</span>
+        <h3 class="h3">${s.title}</h3>
+        <p>${s.text}</p>
+      </li>`
+        )
+        .join("")}
+    </ol>
+    <p class="steps__close">${h.steps.close}</p>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="personas-title">
+  <div class="container">
+    ${sectionHead(h.personas, "personas-title")}
+    <ul class="personas">
+      ${h.personas.items.map((p) => `<li class="persona"><h3 class="h3">${p.title}</h3><p>${p.text}</p></li>`).join("")}
+    </ul>
+  </div>
+</section>
+
+<section class="section section--band" aria-labelledby="mobile-title">
+  <div class="container split split--phone">
+    <div class="split__text">
+      <p class="eyebrow">${h.mobile.eyebrow}</p>
+      <h2 class="h2" id="mobile-title">${g(h.mobile.title)}</h2>
+      <p class="lead">${h.mobile.text}</p>
+      <a class="text-link" href="${solutionRoute("csapat-biztonsag")}#biztonsag">${h.mobile.link}${arrow("text-link__arrow")}</a>
+    </div>
+    <div class="split__art phones">
+      ${phoneShot({ img: "leltar-osszesites", alt: h.mobile.phoneAlt })}
+      ${phoneShot({ img: "mobil", alt: "A járműlista telefonon" })}
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="price-title">
+  <div class="container">
+    ${sectionHead(h.pricing, "price-title")}
+    <div class="mini-plans">
+      ${plans
+        .map(
+          (p) => `<a class="mini-plan${p.recommended ? " is-recommended" : ""}" href="${route("pricing")}">
+        <span class="mini-plan__name">${p.name}${p.recommended ? ` <span class="badge">${pr.recommended}</span>` : ""}</span>
+        <span class="mini-plan__price">${huf(p.monthly)}</span>
+        <span class="mini-plan__unit">${pr.perMonth}</span>
+        <span class="mini-plan__tag">${p.tagline}</span>
+      </a>`
+        )
+        .join("")}
+    </div>
+    <div class="mini-plans__foot">
+      <p class="muted">${h.pricing.note}</p>
+      <a class="btn btn--ghost" href="${route("pricing")}">${h.pricing.button}${arrow()}</a>
+    </div>
+  </div>
+</section>
+
+${faqBlock({ ...h.faq })}
+
+${ctaSection(h.cta)}`,
+  };
+};
+
+// ---------------------------------------------------------------------------
+// Megoldásaink: overview
+
+export const solutionsIndex = () => ({
+  title: overview.title,
+  description: overview.description,
+  body: `
+${pageHero(overview, ctaButtons(""))}
+
+<section class="section section--flush" aria-label="Megoldások csoportonként">
+  <div class="container">
+    <div class="sol-groups">
+      ${Object.entries(groups)
+        .map(
+          ([key, label]) => `<div class="sol-group">
+        <h2 class="sol-group__title">${label}</h2>
+        <div class="sol-group__list">${solutions.filter((s) => s.group === key).map(solutionCard).join("")}</div>
+      </div>`
         )
         .join("")}
     </div>
   </div>
 </section>
 
-${ctaSection(t, h.cta)}`,
-  };
-};
-
-const result = (p, light = false) => `<div class="result${light ? " result--light" : ""}">
-  <div class="result__row" style="--chars: ${String(p.before).length + String(p.after).length}">
-    <div class="result__col"><span class="result__label">${p.beforeLabel}</span><span class="result__value is-before">${p.before}</span></div>
-    <svg class="result__arrow" viewBox="0 0 48 16" aria-hidden="true"><path d="M2 8h42M37 2l7 6-7 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    <div class="result__col"><span class="result__label">${p.afterLabel}</span><span class="result__value">${p.after}</span></div>
+<section class="section section--band" aria-labelledby="basics-title">
+  <div class="container basics">
+    <div>
+      <p class="eyebrow">Alapok</p>
+      <h2 class="h2" id="basics-title">${overview.basicsTitle}</h2>
+    </div>
+    ${ticks(overview.basics)}
   </div>
-  <p class="result__unit">${p.unit}</p>
-</div>`;
+</section>
+
+<section class="section" aria-labelledby="soon-title">
+  <div class="container">
+    <div class="soon-band">
+      <div>
+        <p class="eyebrow">${overview.soon.title}</p>
+        <h2 class="h3-lg" id="soon-title">${overview.soon.text}</h2>
+        <p class="muted">Pontos dátumot nem ígérünk. Kérj értesítést, és szólunk, amint használható.</p>
+      </div>
+      <ul class="soon-list">
+        ${overview.soon.items.map((i) => `<li><span class="soon-list__name">${i.name} ${soonTag}</span><a class="btn btn--ghost btn--sm" href="${notifyHref(i.name)}">${ui.notify}</a></li>`).join("")}
+      </ul>
+    </div>
+  </div>
+</section>
+
+${ctaSection(overview.cta)}`,
+});
 
 // ---------------------------------------------------------------------------
+// Megoldásaink: one solution page
 
-export const solutions = (t) => {
-  const s = t.solutions;
-  const fit = `<dl class="fit"><dt>${s.hero.fitLabel}</dt><dd>${s.hero.fit.map((f) => `<span>${f}</span>`).join("")}</dd></dl>`;
+const featureList = (items) => `<div class="fgrid">
+  ${items.map((f) => `<div class="fgrid__item"><h3 class="h3">${f.title}</h3><p>${f.text}</p></div>`).join("")}
+</div>`;
+
+export const solution = (s) => {
+  const [first, ...rest] = s.shots;
+  const phones = rest.filter((x) => x.phone);
+  const desktops = rest.filter((x) => !x.phone);
+  const firstIsPhone = first.phone;
+  // A phone screenshot opens the page next to a desktop one, or next to a second phone.
+  const heroPair = firstIsPhone ? (desktops.length ? screenshot(desktops.shift()) : phones.length ? phoneShot(phones.shift()) : "") : "";
   return {
     title: s.title,
     description: s.description,
     body: `
-${pageHero(s.hero, fit)}
-
-<section class="section" id="automation" aria-labelledby="automation-title">
+<section class="page-hero page-hero--solution" aria-labelledby="page-title">
   <div class="container">
-    ${sectionHead(s.automation, "automation-title")}
-    <div class="capabilities">
-      ${s.automation.items
-        .map(
-          (c, i) => `<div class="capability">
-        <span class="capability__num">0${i + 1} · ${c.label.toUpperCase()}</span>
-        <h3 class="h3">${c.title}</h3>
-        <p>${c.text}</p>
-        ${ticks(c.ticks)}
-      </div>`
-        )
-        .join("")}
+    <p class="crumbs"><a href="${route("solutions")}">Megoldásaink</a><span aria-hidden="true">/</span>${groups[s.group]}</p>
+    <div class="page-hero__grid">
+      <div>
+        <p class="eyebrow"><span class="eyebrow__icon">${icon(s.icon)}</span>${s.eyebrow}${s.badge ? ` <span class="badge">${s.badge}</span>` : ""}</p>
+        <h1 class="h1" id="page-title">${g(s.h1)}</h1>
+      </div>
+      <div>
+        <p class="lead">${s.lead}</p>
+        ${ctaButtons("")}
+      </div>
+    </div>
+    <div class="sol-hero-shot${firstIsPhone ? " sol-hero-shot--phone" : ""}">
+      ${shot(first, true)}
+      ${heroPair}
     </div>
   </div>
 </section>
 
-<section class="section section--band" id="modules" aria-labelledby="modules-title">
+<section class="section section--band" aria-label="Előnyök">
   <div class="container">
-    ${sectionHead(s.modules, "modules-title")}
-    <ol class="modules">
-      ${s.modules.items
-        .map(
-          (m, i) => `<li class="module">
-        <span class="module__num">${String(i + 1).padStart(2, "0")}</span>
-        <h3 class="h3">${m.title}</h3>
-        <p>${m.text}</p>
-        ${ticks(m.ticks)}
-      </li>`
-        )
-        .join("")}
+    <ol class="benefit-row">
+      ${s.benefits.map((b, i) => `<li><span class="benefit-row__num">0${i + 1}</span><h2 class="h3">${b.title}</h2><p>${b.text}</p></li>`).join("")}
     </ol>
   </div>
 </section>
 
-<section class="section" aria-labelledby="tour-title">
+<section class="section" aria-labelledby="features-title">
   <div class="container">
-    ${sectionHead({ eyebrow: s.tour.eyebrow, title: s.tour.title, lead: t.ui.shotNote }, "tour-title")}
-    <div class="features">
-      ${s.tour.items
+    <div class="section-head section-head--single">
+      <div>
+        <p class="eyebrow">${s.menuTitle}</p>
+        <h2 class="h2" id="features-title">${s.featuresTitle || "Funkciók"}</h2>
+      </div>
+    </div>
+    ${
+      s.steps
+        ? `<ol class="howto">${s.steps.map((st, i) => `<li><span class="howto__num">${i + 1}</span><p>${st}</p></li>`).join("")}</ol>
+    ${s.note ? `<p class="note-card">${icon("check")}<span>${s.note}</span></p>` : ""}`
+        : featureList(s.features)
+    }
+    ${desktops.length || phones.length ? `<div class="sol-shots${phones.length ? " sol-shots--phones" : ""}">${[...desktops, ...phones].map((x) => shot(x)).join("")}</div>` : ""}
+  </div>
+</section>
+
+${(s.extra || [])
+  .map(
+    (e, i) => `<section class="section${i % 2 === 0 ? " section--band" : ""}" id="${e.id}" aria-labelledby="${e.id}-title">
+  <div class="container">
+    <div class="section-head section-head--single"><div><p class="eyebrow">${s.menuTitle}</p><h2 class="h2" id="${e.id}-title">${e.title}</h2></div></div>
+    ${featureList(e.items)}
+  </div>
+</section>`
+  )
+  .join("")}
+
+${
+  s.soon
+    ? `<section class="section" aria-labelledby="soon-title">
+  <div class="container">
+    <div class="soon-band">
+      <div>
+        <p class="eyebrow">${overview.soon.title}</p>
+        <h2 class="h3-lg" id="soon-title">${overview.soon.text}</h2>
+        <p class="muted">Az SSO az Üzleti csomagban kiegészítőként lesz elérhető: +19 990 Ft/hó + ÁFA.</p>
+      </div>
+      <ul class="soon-list">
+        ${overview.soon.items.map((i) => `<li><span class="soon-list__name">${i.name} ${soonTag}</span><a class="btn btn--ghost btn--sm" href="${notifyHref(i.name)}">${ui.notify}</a></li>`).join("")}
+      </ul>
+    </div>
+  </div>
+</section>`
+    : ""
+}
+
+<section class="section section--band" aria-labelledby="related-title">
+  <div class="container">
+    <div class="section-head section-head--single"><div><p class="eyebrow">Tovább</p><h2 class="h2" id="related-title">${ui.related}</h2></div></div>
+    <div class="sol-related">${s.related.map((slug) => solutionCard(solutionBySlug[slug])).join("")}</div>
+    <p class="center"><a class="text-link" href="${route("solutions")}">${ui.allSolutions}${arrow("text-link__arrow")}</a></p>
+  </div>
+</section>
+
+${ctaSection({ title: s.cta })}`,
+  };
+};
+
+// ---------------------------------------------------------------------------
+// Árak
+
+const cell = (v) =>
+  v === true
+    ? `<span class="cmp-yes">${icon("check")}<span class="visually-hidden">Benne van</span></span>`
+    : v === false
+      ? `<span class="cmp-no" aria-label="Nincs benne">—</span>`
+      : String(v).startsWith("Hamarosan")
+        ? `${soonTag}<span class="cmp-text">${String(v).replace(/^Hamarosan,?\s*/, "")}</span>`
+        : `<span class="cmp-text">${v}</span>`;
+
+// The calculator's answer for n active vehicles: the cheapest plan whose vehicle ceiling fits,
+// with overage for the vehicles above what the plan includes. assets/js/main.js does the same
+// in the browser; this renders the starting state so the page reads right without JavaScript.
+const calcQuote = (n, cycle = "monthly") => {
+  const options = plans
+    .filter((p) => n <= p.ceiling)
+    .map((p) => {
+      const base = cycle === "annual" ? p.annualMonthly : p.monthly;
+      const over = Math.max(0, n - p.included);
+      return { plan: p, base, over, total: base + over * p.extra };
+    });
+  return options.reduce((a, b) => (b.total < a.total ? b : a));
+};
+
+const calcLines = (q) => {
+  const c = pr.calc;
+  const lines = [[c.lineBase(q.plan.name, q.plan.included), huf(q.base)]];
+  if (q.over) lines.push([c.lineExtra(q.over, huf(q.plan.extra)), huf(q.over * q.plan.extra)]);
+  lines.push([c.lineGross, huf(q.total * (1 + VAT_PERCENT / 100))]);
+  return lines.map(([k, v]) => `<li><span>${k}</span><b>${v}</b></li>`).join("");
+};
+
+const calcPlans = (n, best) =>
+  plans
+    .map((p) =>
+      n > p.ceiling
+        ? `<li class="is-off"><b>${p.name}</b><span>${pr.calc.max(p.ceiling)}</span></li>`
+        : `<li${p === best.plan ? ' class="is-on"' : ""}><b>${p.name}</b><span>${huf(p.monthly + Math.max(0, n - p.included) * p.extra)} ${pr.perMonth}</span></li>`
+    )
+    .join("");
+
+export const pricing = () => {
+  const calcData = plans.map((p) => ({ name: p.name, monthly: p.monthly, annualMonthly: p.annualMonthly, included: p.included, extra: p.extra, ceiling: p.ceiling }));
+  const START = 30;
+  const q = calcQuote(START);
+  // Text templates for the browser: the copy functions called with {placeholders}.
+  const t = {
+    tier: pr.calc.resultTier("{plan}", "{n}"),
+    base: pr.calc.lineBase("{plan}", "{included}"),
+    extra: pr.calc.lineExtra("{n}", "{price}"),
+    gross: pr.calc.lineGross,
+    max: pr.calc.max("{n}"),
+    unit: pr.perMonth,
+  };
+  return {
+    title: pr.title,
+    description: pr.description,
+    jsonLd: [softwareJsonLd, faqJsonLd(pr.faq.items)],
+    body: `
+${pageHero(pr)}
+
+<section class="section section--flush" aria-label="Csomagok">
+  <div class="container">
+    <div class="cycle" role="group" aria-label="Fizetési gyakoriság">
+      <button type="button" class="cycle__btn is-on" data-cycle="monthly" aria-pressed="true">${pr.toggle.monthly}</button>
+      <button type="button" class="cycle__btn" data-cycle="annual" aria-pressed="false">${pr.toggle.annual} <span class="cycle__free">${pr.toggle.free}</span></button>
+    </div>
+    <div class="plans" data-cycle-root>
+      ${plans
         .map(
-          (f, i) => `<div class="feature${i % 2 ? " feature--flip" : ""}">
-        <div class="feature__text">
-          <span class="feature__num">0${i + 1}</span>
-          <h3 class="h3-lg">${f.title}</h3>
-          <p>${f.text}</p>
+          (p) => `<article class="plan-card${p.recommended ? " is-recommended" : ""}">
+        ${p.recommended ? `<span class="plan-card__tag">${pr.recommended}</span>` : ""}
+        <h2 class="plan-card__name">${p.name}</h2>
+        <p class="plan-card__tagline">${p.tagline}</p>
+        <p class="plan-card__price"><span data-monthly="${huf(p.monthly)}" data-annual="${huf(p.annualMonthly)}">${huf(p.monthly)}</span> <small>${pr.perMonth}</small></p>
+        <p class="plan-card__sub" data-monthly="${esc(pr.monthlyNote(huf(p.annualMonthly)))}" data-annual="${esc(pr.annualNote(huf(p.annualMonthly * 12)))}">${pr.monthlyNote(huf(p.annualMonthly))}</p>
+        <a class="btn ${p.recommended ? "btn--primary" : "btn--ghost"} plan-card__btn" href="${APP.register}">${ui.trial}</a>
+        <ul class="ticks">${p.highlights.map((x) => `<li>${x}</li>`).join("")}</ul>
+        ${p.soon ? `<ul class="plan-card__soon">${p.soon.map((x) => `<li>${soonTag}<span>${x}</span></li>`).join("")}</ul>` : ""}
+      </article>`
+        )
+        .join("")}
+    </div>
+    <p class="plans__note">${ui.trialNote} Minden ár nettó, + ${VAT_PERCENT}% ÁFA. ${SELF_SERVICE_MAX_VEHICLES} aktív jármű felett <a href="#ajanlat">egyedi ajánlatot</a> adunk.</p>
+  </div>
+</section>
+
+<section class="section section--band" id="kalkulator" aria-labelledby="calc-title">
+  <div class="container">
+    ${sectionHead({ eyebrow: pr.calc.eyebrow, title: pr.calc.title }, "calc-title")}
+    <div class="calc" data-calc data-plans="${esc(JSON.stringify(calcData))}" data-text="${esc(JSON.stringify(t))}" data-vat="${VAT_PERCENT}" data-max="${SELF_SERVICE_MAX_VEHICLES}"
+      data-note-monthly="${esc(pr.calc.noteMonthly)}" data-note-annual="${esc(pr.calc.noteAnnual)}">
+      <div class="calc__input">
+        <label class="calc__label" for="calc-n">${pr.calc.label}</label>
+        <div class="calc__row">
+          <input type="range" id="calc-range" min="1" max="${SELF_SERVICE_MAX_VEHICLES}" value="${START}" aria-label="${esc(pr.calc.label)}">
+          <input class="input calc__number" type="number" id="calc-n" min="1" max="${SELF_SERVICE_MAX_VEHICLES}" value="${START}" inputmode="numeric">
         </div>
-        ${shot(t, f.shot, f.alt)}
-      </div>`
-        )
-        .join("")}
+        <ul class="calc__plans" data-calc-plans>${calcPlans(START, q)}</ul>
+        <p class="calc__note muted" data-calc-note>${pr.calc.noteMonthly}</p>
+      </div>
+      <div class="calc__result" aria-live="polite">
+        <p class="calc__tier" data-calc-tier>${pr.calc.resultTier(q.plan.name, START)}</p>
+        <p class="calc__amount"><span data-calc-amount>${huf(q.total)}</span> <small>${pr.perMonth}</small></p>
+        <ul class="calc__lines" data-calc-lines>${calcLines(q)}</ul>
+        <a class="btn btn--teal" href="${APP.register}">${ui.trial}${arrow()}</a>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="section section--deep" id="process" aria-labelledby="process-title">
+<section class="section" aria-labelledby="limits-title">
   <div class="container">
-    ${sectionHead(s.process, "process-title")}
-    <ol class="stations">
-      ${s.process.steps
-        .map(
-          (st) => `<li class="station">
-        <span class="station__when">${st.label}</span>
-        <h3 class="h3">${st.title}</h3>
-        <p>${st.text}</p>
-      </li>`
-        )
-        .join("")}
-    </ol>
-  </div>
-</section>
-
-<section class="section" id="operations" aria-labelledby="operations-title">
-  <div class="container">
-    ${sectionHead(s.operations, "operations-title")}
-    <div class="ops">
-      <div class="options">
-        ${s.operations.options
+    ${sectionHead({ eyebrow: "Összehasonlítás", title: pr.limitsTitle }, "limits-title")}
+    <div class="table-wrap">
+      <table class="cmp">
+        <thead><tr><th scope="col"><span class="visually-hidden">Keret</span></th>${plans.map((p) => `<th scope="col"${p.recommended ? ' class="is-recommended"' : ""}>${p.name}</th>`).join("")}</tr></thead>
+        <tbody>${limits.map((r) => `<tr><th scope="row">${r.label}</th>${r.cells.map((c) => `<td>${cell(c)}</td>`).join("")}</tr>`).join("")}</tbody>
+      </table>
+    </div>
+    <h2 class="h3-lg cmp-title" id="cmp-title">${pr.comparisonTitle}</h2>
+    <div class="table-wrap">
+      <table class="cmp" aria-labelledby="cmp-title">
+        <thead><tr><th scope="col"><span class="visually-hidden">Funkció</span></th>${plans.map((p) => `<th scope="col"${p.recommended ? ' class="is-recommended"' : ""}>${p.name}</th>`).join("")}</tr></thead>
+        <tbody>${comparison
           .map(
-            (o) => `<div class="option">
-          <span class="option__tag">${o.tag}</span>
-          <h3 class="h3">${o.title}</h3>
-          <p>${o.text}</p>
-        </div>`
+            (r) => `<tr><th scope="row">${r.label}${r.soon ? `<a class="cmp-notify" href="${notifyHref(r.label)}">${ui.notify}</a>` : ""}</th>${r.cells.map((c) => `<td>${cell(c)}</td>`).join("")}</tr>`
           )
-          .join("")}
-      </div>
-      <div class="security">
-        <h3 class="security__title">${s.operations.securityTitle}</h3>
-        ${ticks(s.operations.security)}
-      </div>
+          .join("")}</tbody>
+      </table>
+    </div>
+    <p class="muted cmp-note">${pr.comparisonNote}</p>
+  </div>
+</section>
+
+${faqBlock(pr.faq, "gyik")}
+
+<section class="section section--deep" id="ajanlat" aria-labelledby="quote-title">
+  <div class="container quote">
+    <div>
+      <p class="eyebrow">${pr.quote.eyebrow}</p>
+      <h2 class="h2" id="quote-title">${g(pr.quote.title)}</h2>
+    </div>
+    <div>
+      <p class="lead">${pr.quote.text}</p>
+      <a class="btn btn--teal" href="${contactHref("quote")}">${pr.quote.button}${arrow()}</a>
     </div>
   </div>
 </section>
 
-<section class="section section--band" id="pricing" aria-labelledby="pricing-title">
-  <div class="container">
-    <div class="pricing">
-      <div class="pricing__text">
-        <p class="eyebrow">${s.pricing.eyebrow}</p>
-        <h2 class="h2" id="pricing-title">${g(s.pricing.title)}</h2>
-        <p class="lead">${s.pricing.text}</p>
-      </div>
-      <ol class="pricing__steps">${s.pricing.points.map((p, i) => `<li><span>0${i + 1}</span>${p}</li>`).join("")}</ol>
-    </div>
-  </div>
-</section>
-
-${ctaSection(t, s.cta)}`,
+${ctaSection({ title: "Próbáld ki 14 napig, kártya nélkül." })}`,
   };
 };
 
 // ---------------------------------------------------------------------------
+// Rólunk
 
-export const cases = (t) => {
-  const c = t.cases;
-  return {
-    title: c.title,
-    description: c.description,
-    body: `
-${pageHero(c.hero)}
-
-<section class="section section--flush" aria-label="${esc(c.hero.title)}">
-  <div class="container case-study">
-    <aside class="case-facts">
-      <h2 class="case-facts__title">${c.case.factsTitle}</h2>
-      <dl>${c.case.facts.map((f) => `<div><dt>${f.k}</dt><dd>${f.v}</dd></div>`).join("")}</dl>
-    </aside>
-    <div class="case-body">
-      ${c.case.sections.map((s) => `<h2 class="h3-lg">${s.title}</h2><p>${s.text}</p>`).join("")}
-      <h2 class="h3-lg">${c.case.resultTitle}</h2>
-      <p>${c.case.resultText}</p>
-      ${result(t.home.proof, true)}
-    </div>
-  </div>
-</section>
-
-${ctaSection(t, c.cta)}`,
-  };
-};
-
-// ---------------------------------------------------------------------------
-
-export const blog = (t) => {
-  const bl = t.blog;
-  return {
-    title: bl.title,
-    description: bl.description,
-    body: `
-${pageHero(bl.hero)}
-
-<section class="section section--flush" aria-labelledby="page-title">
-  <div class="container">
-    <ol class="posts">
-      ${posts
-        .map(
-          (p) => `<li class="post-card">
-        <p class="post-card__meta"><time datetime="${p.date}">${fmtDate(t, p.date)}</time><span>${t.ui.minutes(p.minutes)}</span></p>
-        <h2 class="h3-lg"><a href="${postRoute(p, t.lang)}">${p.title[t.lang]}</a></h2>
-        <p>${p.excerpt[t.lang]}</p>
-        <span class="post-card__more" aria-hidden="true">${t.ui.readMore}${arrow("text-link__arrow")}</span>
-      </li>`
-        )
-        .join("")}
-    </ol>
-  </div>
-</section>`,
-  };
-};
-
-export const post = (t, p) => {
-  const url = `${config.siteUrl}${postRoute(p, t.lang)}`;
-  return {
-    title: `${p.title[t.lang]} | Yardly`,
-    description: p.excerpt[t.lang],
-    type: "article",
-    jsonLd: {
-      "@context": "https://schema.org",
-      "@type": "BlogPosting",
-      headline: p.title[t.lang],
-      description: p.excerpt[t.lang],
-      datePublished: p.date,
-      inLanguage: t.lang,
-      url,
-      author: { "@type": "Organization", name: "Yardly" },
-      publisher: { "@type": "Organization", name: "Yardly" },
-    },
-    body: `
-<article class="article">
-  <div class="container container--narrow">
-    <a class="back-link" href="${route("blog", t.lang)}"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M14 8H3M7 4L3 8l4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>${t.ui.backToBlog}</a>
-    <p class="article__meta"><time datetime="${p.date}">${fmtDate(t, p.date)}</time><span>${t.ui.minutes(p.minutes)}</span></p>
-    <h1 class="h1 article__title" id="page-title">${g(p.title[t.lang])}</h1>
-    <p class="lead article__lead">${p.excerpt[t.lang]}</p>
-    <div class="prose">${p.body[t.lang]}</div>
-    <aside class="article-cta">
-      <h2 class="h3-lg">${t.blog.postCta.title}</h2>
-      <p>${t.blog.postCta.text}</p>
-      <a class="btn btn--primary" href="${route("contact", t.lang)}">${t.ui.cta}${arrow()}</a>
-    </aside>
-  </div>
-</article>`,
-  };
-};
-
-// ---------------------------------------------------------------------------
-
-export const about = (t) => {
-  const a = t.about;
-  return {
-    title: a.title,
-    description: a.description,
-    body: `
-${pageHero(a.hero)}
+export const about = () => ({
+  title: ab.title,
+  description: ab.description,
+  body: `
+${pageHero(ab)}
 
 <section class="section section--band" aria-labelledby="story-title">
   <div class="container story">
     <div class="story__text">
-      <p class="eyebrow">${a.story.eyebrow}</p>
-      <h2 class="h2" id="story-title">${g(a.story.title)}</h2>
-      ${a.story.paragraphs.map((p) => `<p>${p}</p>`).join("")}
+      <p class="eyebrow">${ab.story.eyebrow}</p>
+      <h2 class="h2" id="story-title">${g(ab.story.title)}</h2>
+      ${ab.story.paragraphs.map((p) => `<p>${p}</p>`).join("")}
     </div>
     <figure class="story__art">
-      ${yardPlan(a.story.plan)}
-      <figcaption>${a.story.caption}</figcaption>
+      ${yardPlan(ab.story.plan)}
+      <figcaption>${ab.story.caption}</figcaption>
     </figure>
   </div>
 </section>
 
-<section class="section" aria-labelledby="principles-title">
+<section class="section section--deep" aria-label="${esc(ab.mission.eyebrow)}">
+  <div class="container mission">
+    <p class="eyebrow">${ab.mission.eyebrow}</p>
+    <p class="mission__text">„${g(ab.mission.text)}”</p>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="values-title">
   <div class="container">
-    ${sectionHead(a.principles, "principles-title")}
+    ${sectionHead(ab.values, "values-title")}
     <ol class="principles">
-      ${a.principles.items
-        .map(
-          (p, i) => `<li class="principle">
-        <span class="principle__num">0${i + 1}</span>
-        <h3 class="h3">${p.title}</h3>
-        <p>${p.text}</p>
-      </li>`
-        )
-        .join("")}
+      ${ab.values.items.map((p, i) => `<li class="principle"><span class="principle__num">0${i + 1}</span><h3 class="h3">${p.title}</h3><p>${p.text}</p></li>`).join("")}
     </ol>
   </div>
 </section>
 
-${ctaSection(t, a.cta)}`,
-  };
-};
+<section class="section section--band" aria-labelledby="why-title">
+  <div class="container">
+    ${sectionHead(ab.why, "why-title")}
+    <ul class="personas">${ab.why.items.map((p) => `<li class="persona"><h3 class="h3">${p.title}</h3><p>${p.text}</p></li>`).join("")}</ul>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="team-title">
+  <div class="container team">
+    <div>
+      <p class="eyebrow">${ab.team.eyebrow}</p>
+      <h2 class="h2" id="team-title">${g(ab.team.title)}</h2>
+    </div>
+    <div>
+      <p class="lead">${ab.team.text}</p>
+      <a class="text-link" href="${route("imprint")}">Impresszum${arrow("text-link__arrow")}</a>
+    </div>
+  </div>
+</section>
+
+<section class="section section--cta" aria-labelledby="cta-title">
+  <div class="container">
+    ${ctaCard({ eyebrow: ab.cta.eyebrow, title: g(ab.cta.title), lead: ab.cta.lead, button: ui.demo, href: contactHref("demo"), secondary: { label: ui.trial, href: APP.register } })}
+  </div>
+</section>`,
+});
 
 // ---------------------------------------------------------------------------
+// Kapcsolat
 
-export const contact = (t) => {
-  const c = t.contact;
-  const f = c.form;
+export const contact = () => {
+  const f = co.form;
   const req = `<span class="req" aria-hidden="true">*</span>`;
-  const field = (id, label, input, error, full = false) => `<div class="field${full ? " field--full" : ""}">
-        <label for="f-${id}">${label}${error ? ` ${req}` : ""}</label>
+  const field = (id, label, input, { error = "", hint = "", full = false } = {}) => `<div class="field${full ? " field--full" : ""}">
+        <label for="f-${id}">${label}${error ? ` ${req}` : ""}${hint ? ` <span class="hint">${hint}</span>` : ""}</label>
         ${input}
         ${error ? `<span class="field__error" id="e-${id}">${error}</span>` : ""}
       </div>`;
-  const text = (id, type, auto, required) =>
-    `<input class="input" id="f-${id}" name="${id}" type="${type}" autocomplete="${auto}"${required ? ` required aria-describedby="e-${id}"` : ""}>`;
+  const text = (id, type, auto, required, extra = "") =>
+    `<input class="input" id="f-${id}" name="${id}" type="${type}" autocomplete="${auto}"${required ? ` required aria-describedby="e-${id}"` : ""}${extra}>`;
   return {
-    title: c.title,
-    description: c.description,
+    title: co.title,
+    description: co.description,
     body: `
 <section class="contact-section" aria-labelledby="page-title">
   <div class="container contact">
     <div class="contact__intro">
-      <p class="eyebrow">${c.hero.eyebrow}</p>
-      <h1 class="h1" id="page-title">${g(c.hero.title)}</h1>
-      <p class="lead">${c.hero.lead}</p>
+      <p class="eyebrow">${co.eyebrow}</p>
+      <h1 class="h1" id="page-title">${g(co.h1)}</h1>
+      <p class="lead">${co.lead}</p>
     </div>
 
     <div class="contact__aside">
-      <ol class="next-steps" aria-label="${esc(c.stepsLabel)}">
-        ${c.steps.map((s) => `<li><b>${s.title}</b><span>${s.text}</span></li>`).join("")}
-      </ol>
       <dl class="direct">
-        ${c.direct.map((d) => `<div><dt>${d.k}</dt><dd>${d.email ? `<a href="mailto:${config.email}">${config.email}</a>` : d.v}</dd></div>`).join("")}
+        ${co.direct.map((d) => `<div><dt>${d.k}</dt><dd>${d.email ? `<a href="mailto:${config.email}">${config.email}</a>` : d.v}</dd></div>`).join("")}
       </dl>
+      <p class="muted contact__customer">${co.customer}</p>
+      <a class="text-link" href="${APP.login}">${co.loginLink}${arrow("text-link__arrow")}</a>
+      <h2 class="contact__steps-title">${co.stepsTitle}</h2>
+      <ol class="next-steps">
+        ${co.steps.map((s) => `<li><span>${s}</span></li>`).join("")}
+      </ol>
     </div>
 
     <div class="form-card" id="enquiry">
@@ -465,29 +723,25 @@ export const contact = (t) => {
         data-sending="${esc(f.sending)}"
         data-mailto-title="${esc(f.mailtoTitle)}"
         data-mailto-text="${esc(f.mailtoText)}"
-        data-error-text="${esc(f.errorText)}">
+        data-error-text="${esc(f.errorText)}"
+        data-notify-prefix="${esc(f.notifyPrefix)}">
         <div class="form-card__head">
           <h2 class="h3-lg">${f.title}</h2>
           <p>${f.intro}</p>
         </div>
         <div class="form-grid">
-          ${field("name", f.name, text("name", "text", "name", true), f.errors.name)}
-          ${field("email", f.email, text("email", "email", "email", true), f.errors.email)}
-          ${field("company", f.company, text("company", "text", "organization", true), f.errors.company)}
-          ${field("role", f.role, text("role", "text", "organization-title", false), "")}
           ${field(
-            "size",
-            f.size,
-            `<select class="input" id="f-size" name="size" required aria-describedby="e-size"><option value="">${f.sizeSelect}</option>${f.sizes.map((s) => `<option>${s}</option>`).join("")}</select>`,
-            f.errors.size,
-            true
+            "topic",
+            f.topic,
+            `<select class="input" id="f-topic" name="topic" required aria-describedby="e-topic"><option value="">Válassz…</option>${f.topics.map((t) => `<option value="${t.value}">${t.label}</option>`).join("")}</select>`,
+            { error: f.errors.topic, full: true }
           )}
-          <fieldset class="field field--full">
-            <legend>${f.systems} <span class="hint">${f.systemsHint}</span></legend>
-            <div class="chips">
-              ${f.systemOptions.map((o) => `<label class="chip"><input type="checkbox" name="systems" value="${esc(o)}"><span>${o}</span></label>`).join("")}
-            </div>
-          </fieldset>
+          ${field("name", f.name, text("name", "text", "name", true), { error: f.errors.name })}
+          ${field("company", f.company, text("company", "text", "organization", true), { error: f.errors.company })}
+          ${field("email", f.email, text("email", "email", "email", true), { error: f.errors.email })}
+          ${field("phone", f.phone, text("phone", "tel", "tel", false), { hint: f.phoneHint })}
+          ${field("vehicles", f.vehicles, text("vehicles", "number", "off", false, ' min="0" inputmode="numeric"'), { hint: f.vehiclesHint })}
+          ${field("equipment", f.equipment, text("equipment", "number", "off", false, ' min="0" inputmode="numeric"'), { hint: f.equipmentHint })}
           <div class="field field--full">
             <label for="f-message">${f.message}</label>
             <textarea class="input" id="f-message" name="message" rows="4" placeholder="${esc(f.placeholder)}"></textarea>
@@ -497,7 +751,7 @@ export const contact = (t) => {
             <input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off">
           </div>
           <div class="field field--full">
-            <label class="consent-check"><input type="checkbox" name="consent" required aria-describedby="e-consent"><span>${f.consent} <a href="${route("privacy", t.lang)}">${f.consentLink}</a>.</span></label>
+            <label class="consent-check"><input type="checkbox" name="consent" required aria-describedby="e-consent"><span>${f.consent} <a href="${route("privacy")}">${f.consentLink}</a>.</span></label>
             <span class="field__error" id="e-consent">${f.errors.consent}</span>
           </div>
         </div>
@@ -512,17 +766,105 @@ export const contact = (t) => {
         <span class="form-success__mark" aria-hidden="true"></span>
         <h2 class="h3-lg" data-success-title>${f.successTitle}</h2>
         <p data-success-text>${f.successText}</p>
-        <a class="text-link" href="${route("home", t.lang)}">${f.back}</a>
+        <a class="btn btn--primary" href="${APP.register}">${ui.trialShort}${arrow()}</a>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="section section--band" aria-labelledby="contact-faq-title">
+  <div class="container">
+    <h2 class="h3-lg" id="contact-faq-title">Rövid GYIK</h2>
+    <dl class="mini-faq">${co.faq.map((q) => `<div><dt>${q.q}</dt><dd>${q.a}</dd></div>`).join("")}</dl>
   </div>
 </section>`,
   };
 };
 
 // ---------------------------------------------------------------------------
+// Blog
 
-const legal = (t, l) => ({
+const fmtDate = (iso) =>
+  new Intl.DateTimeFormat("hu-HU", { year: "numeric", month: "long", day: "numeric" }).format(new Date(`${iso}T12:00:00Z`));
+
+const postCard = (p) => `<li class="post-card" data-category="${p.category}">
+  <p class="post-card__meta"><span class="post-card__cat">${categories[p.category]}</span><time datetime="${p.date}">${fmtDate(p.date)}</time><span>${ui.minutes(p.minutes)}</span></p>
+  <h2 class="h3-lg"><a href="${postRoute(p)}">${p.title}</a></h2>
+  <p>${p.excerpt}</p>
+  <span class="post-card__more" aria-hidden="true">${ui.readMore}${arrow("text-link__arrow")}</span>
+</li>`;
+
+export const blog = () => ({
+  title: bl.title,
+  description: bl.description,
+  body: `
+${pageHero(bl)}
+
+<section class="section section--flush" aria-label="Cikkek">
+  <div class="container">
+    <div class="filters" role="group" aria-label="Kategóriák" data-filters>
+      <button type="button" class="filter is-on" data-filter="" aria-pressed="true">${bl.all}</button>
+      ${Object.entries(categories).map(([k, v]) => `<button type="button" class="filter" data-filter="${k}" aria-pressed="false">${v}</button>`).join("")}
+    </div>
+    <ol class="posts">${posts.map(postCard).join("")}</ol>
+  </div>
+</section>
+
+${ctaSection({ title: "Próbáld ki a saját flottáddal." })}`,
+});
+
+export const post = (p) => {
+  const url = `${config.siteUrl}${postRoute(p)}`;
+  const sol = solutionBySlug[p.solution];
+  const others = posts.filter((x) => x !== p);
+  const related = [...others.filter((x) => x.category === p.category), ...others.filter((x) => x.category !== p.category)].slice(0, 3);
+  return {
+    title: `${p.title} | Yardly`,
+    description: p.excerpt,
+    type: "article",
+    jsonLd: {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      headline: p.title,
+      description: p.excerpt,
+      datePublished: p.date,
+      inLanguage: "hu",
+      url,
+      author: { "@type": "Organization", name: "Yardly" },
+      publisher: { "@type": "Organization", name: "Yardly" },
+    },
+    body: `
+<article class="article">
+  <div class="container container--narrow">
+    <a class="back-link" href="${route("blog")}"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M14 8H3M7 4L3 8l4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>${ui.backToBlog}</a>
+    <p class="article__meta"><span class="post-card__cat">${categories[p.category]}</span><time datetime="${p.date}">${fmtDate(p.date)}</time><span>${ui.minutes(p.minutes)}</span></p>
+    <h1 class="h1 article__title" id="page-title">${g(p.title)}</h1>
+    <p class="lead article__lead">${p.excerpt}</p>
+    <div class="prose">${p.body}</div>
+    <aside class="article-cta">
+      <h2 class="h3-lg">${bl.postCta.title}</h2>
+      <p>${bl.postCta.text}</p>
+      <div class="cta-row">
+        <a class="btn btn--primary" href="${APP.register}">${ui.trialShort}${arrow()}</a>
+        <a class="text-link" href="${solutionRoute(sol.slug)}">${sol.menuTitle}${arrow("text-link__arrow")}</a>
+      </div>
+    </aside>
+  </div>
+</article>
+
+<section class="section section--band" aria-labelledby="related-posts">
+  <div class="container">
+    <h2 class="h2" id="related-posts">${bl.relatedTitle}</h2>
+    <ol class="posts posts--related">${related.map(postCard).join("")}</ol>
+  </div>
+</section>`,
+  };
+};
+
+// ---------------------------------------------------------------------------
+// Legal pages and 404
+
+const legal = (l) => ({
   title: l.title,
   description: l.description,
   body: `
@@ -530,33 +872,31 @@ const legal = (t, l) => ({
   <div class="container container--narrow">
     <h1 class="h1" id="page-title">${l.heading}</h1>
     <p class="lead">${l.intro}</p>
-    <p class="notice">${t.ui.draft}</p>
+    <p class="notice">${ui.draft}</p>
     <div class="prose">${withEmail(l.body)}</div>
   </div>
 </section>`,
 });
 
-export const privacy = (t) => legal(t, t.privacy);
-export const imprint = (t) => legal(t, t.imprint);
+export const privacy = () => legal(pv);
+export const imprint = () => legal(im);
 
-export const notFound = (t) => ({
-  title: t.notFound.title,
-  description: t.notFound.text,
+export const notFound = (nf) => ({
+  title: nf.title,
+  description: nf.text,
   noindex: true,
   body: `
 <section class="not-found">
   <div class="container container--narrow">
-    <p class="eyebrow">${t.notFound.eyebrow}</p>
-    <h1 class="h1">${t.notFound.heading}</h1>
-    <p class="lead">${t.notFound.text}</p>
-    <a class="btn btn--primary" href="${route("home", t.lang)}">${t.notFound.back}${arrow()}</a>
+    <p class="eyebrow">${nf.eyebrow}</p>
+    <h1 class="h1">${nf.heading}</h1>
+    <p class="lead">${nf.text}</p>
+    <div class="cta-row">
+      <a class="btn btn--primary" href="${route("home")}">${nf.back}${arrow()}</a>
+      <a class="btn btn--ghost" href="${route("solutions")}">Megoldásaink</a>
+    </div>
   </div>
 </section>`,
 });
 
-export { posts, LANGS };
-
-// The renderers above read the active language for typographic glue.
-export const setLang = (lang) => {
-  LANG = lang;
-};
+export { solutions, posts };

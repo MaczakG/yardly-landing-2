@@ -5,12 +5,8 @@ export const esc = (s) =>
   String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 // Keep short words (articles, conjunctions) on the same line as the next word.
-const GLUE = {
-  hu: /(^|\s)(a|az|e|s|és|is|egy|ha|de)\s+/gi,
-  en: /(^|\s)(a|an|to|of|in|on|by|we|is)\s+/gi,
-  de: /(^|\s)(an|am|im|in|zu|zum|um|ob|so|es|der|die|das)\s+/gi,
-};
-export const glue = (lang, text) => String(text).replace(GLUE[lang] || /$^/, "$1$2\u00a0");
+const GLUE = /(^|\s)(a|az|e|s|és|is|egy|ha|de)\s+/gi;
+export const glue = (text) => String(text).replace(GLUE, "$1$2\u00a0");
 
 export const arrow = (cls = "btn__arrow") =>
   `<svg class="${cls}" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
@@ -18,19 +14,6 @@ export const arrow = (cls = "btn__arrow") =>
 // Official horizontal logo (brand package, colour version for light backgrounds).
 export const logo = (href, label) =>
   `<a class="logo" href="${href}" aria-label="${esc(label)}"><img src="/assets/brand/yardly-vizszintes-szines.svg" width="131" height="36" alt=""></a>`;
-
-// Circular flags, defined once per page as symbols and reused with <use>.
-export const flagSprite = () => `<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-  <defs>
-    <clipPath id="flag-circle"><circle cx="15" cy="15" r="15"/></clipPath>
-    <clipPath id="uk-diag"><path d="M30 15h30v15zv15H0zH0V0zV0h30z"/></clipPath>
-  </defs>
-  <symbol id="flag-hu" viewBox="0 0 30 30"><g clip-path="url(#flag-circle)"><rect width="30" height="10" fill="#cd2a3e"/><rect y="10" width="30" height="10" fill="#ffffff"/><rect y="20" width="30" height="10" fill="#436f4d"/></g></symbol>
-  <symbol id="flag-de" viewBox="0 0 30 30"><g clip-path="url(#flag-circle)"><rect width="30" height="10" fill="#000000"/><rect y="10" width="30" height="10" fill="#dd0000"/><rect y="20" width="30" height="10" fill="#ffce00"/></g></symbol>
-  <symbol id="flag-en" viewBox="0 0 30 30"><g clip-path="url(#flag-circle)"><g transform="translate(-15 0)"><rect width="60" height="30" fill="#012169"/><path d="M0 0l60 30M60 0L0 30" stroke="#ffffff" stroke-width="6"/><path d="M0 0l60 30M60 0L0 30" clip-path="url(#uk-diag)" stroke="#c8102e" stroke-width="4"/><path d="M30 0v30M0 15h60" stroke="#ffffff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#c8102e" stroke-width="6"/></g></g></symbol>
-</svg>`;
-
-export const flag = (lang) => `<svg class="flag" viewBox="0 0 30 30" aria-hidden="true"><use href="#flag-${lang}"/></svg>`;
 
 const SOCIAL_ICONS = {
   linkedin: `<path d="M7 10v7M7 6.6v.2M11 17v-7M11 13.4c0-2 1.3-3.4 3-3.4s3 1.2 3 3.4V17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>`,
@@ -51,149 +34,49 @@ export const socialLinks = (social, soonLabel) =>
     .join("")}</ul>`;
 
 // ---------------------------------------------------------------------------
-// Hero diagram: existing systems → Yardly → automated processes
+// Icons: the same Lucide line icons as the Yardly app (ISC licence), inlined.
 
-const MONO_CHAR = 6.3; // Geist Mono advance at 10.5px
-const pillRow = (pills, startX, maxWidth) => {
-  let x = startX;
-  const out = pills.map((label) => {
-    const w = Math.round(label.length * MONO_CHAR + 18);
-    const g = `<g class="pill" transform="translate(${x} 0)"><rect width="${w}" height="24" rx="12" x="0.5" y="0.5"/><text x="${w / 2 + 0.5}" y="16.5" text-anchor="middle">${esc(label)}</text></g>`;
-    x += w + 6;
-    return g;
-  });
-  if (x - 6 - startX > maxWidth) throw new Error(`Diagram pills too wide: ${pills.join(", ")}`);
-  return out.join("");
+const ICONS = {
+  "bell": `<path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/>`,
+  "box": `<path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/>`,
+  "calendar": `<path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/>`,
+  "car": `<path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/>`,
+  "chart-column": `<path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/>`,
+  "chart-line": `<path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m19 9-5 5-4-4-3 3"/>`,
+  "check": `<path d="M20 6 9 17l-5-5"/>`,
+  "circle-dollar-sign": `<circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/>`,
+  "clock": `<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>`,
+  "download": `<path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/>`,
+  "eye": `<path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/>`,
+  "file-check": `<path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="m9 15 2 2 4-4"/>`,
+  "file-text": `<path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>`,
+  "flag": `<path d="M4 22V4a1 1 0 0 1 .4-.8A6 6 0 0 1 8 2c3 0 5 2 7.333 2q2 0 3.067-.8A1 1 0 0 1 20 4v10a1 1 0 0 1-.4.8A6 6 0 0 1 16 16c-3 0-5-2-8-2a6 6 0 0 0-4 1.528"/>`,
+  "fuel": `<path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 4 0v-6.998a2 2 0 0 0-.59-1.42L18 5"/><path d="M14 21V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v16"/><path d="M2 21h13"/><path d="M3 9h11"/>`,
+  "history": `<path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/>`,
+  "keyboard": `<path d="M10 8h.01"/><path d="M12 12h.01"/><path d="M14 8h.01"/><path d="M16 12h.01"/><path d="M18 8h.01"/><path d="M6 8h.01"/><path d="M7 16h10"/><path d="M8 12h.01"/><rect width="20" height="16" x="2" y="4" rx="2"/>`,
+  "layout-dashboard": `<rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/>`,
+  "list-checks": `<path d="M13 5h8"/><path d="M13 12h8"/><path d="M13 19h8"/><path d="m3 17 2 2 4-4"/><path d="m3 7 2 2 4-4"/>`,
+  "lock": `<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>`,
+  "map-pin": `<path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/>`,
+  "package": `<path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><polyline points="3.29 7 12 12 20.71 7"/><path d="m7.5 4.27 9 5.15"/>`,
+  "scan-barcode": `<path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M8 7v10"/><path d="M12 7v10"/><path d="M17 7v10"/>`,
+  "search": `<path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/>`,
+  "shield": `<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>`,
+  "square-check": `<rect width="18" height="18" x="3" y="3" rx="2"/><path d="m16 9-5.5 5.5L8 12"/>`,
+  "triangle-alert": `<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/>`,
+  "upload": `<path d="M12 3v12"/><path d="m17 8-5-5-5 5"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>`,
+  "user-check": `<path d="m16 11 2 2 4-4"/><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>`,
+  "users": `<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/>`,
+  "workflow": `<rect width="8" height="8" x="3" y="3" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect width="8" height="8" x="13" y="13" rx="2"/>`,
+  "wrench": `<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z"/>`,
+  "zap": `<path d="M15.914 4a1.5 1.5 0 00-2.474-1.561l-9 9A1.5 1.5 0 005.5 14h4.002a.5.5 0 01.471.666L8.086 20a1.5 1.5 0 002.475 1.56l9-9A1.5 1.5 0 0018.5 10h-3.997a.5.5 0 01-.472-.667z"/>`,
 };
 
-const packet = (path, dur, begin, keys = "0;0.08;0.9;1", r = 4) =>
-  `<circle class="svg-packet" r="${r}"><animateMotion dur="${dur}s" begin="-${begin}s" repeatCount="indefinite"><mpath href="#${path}"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="${keys}" dur="${dur}s" begin="-${begin}s" repeatCount="indefinite"/></circle>`;
-
-// Simplified brand mark (Y and dot) for dark surfaces, drawn about 15px wide.
-const hubMark = (x, y) =>
-  `<g transform="translate(${x - 2.5} ${y - 1}) scale(0.2)"><g stroke="#ffffff" stroke-width="12" stroke-linecap="round"><path d="M50 41L18.82 23M50 41L81.18 23M50 41V77"/></g><circle cx="50" cy="41" r="17" fill="#22d3b8"/></g>`;
-
-export const yardDiagram = (d) => {
-  const ys = [26, 104, 182, 260, 338];
-  const left = d.left
-    .map(
-      (n, i) =>
-        `<g class="svg-node" transform="translate(0 ${ys[i]})"><rect width="232" height="56" rx="10"/><text class="cat" x="18" y="22">${esc(n.cat)}</text><text class="name" x="18" y="43">${esc(n.name)}</text><circle class="svg-port" cx="232" cy="28" r="4"/></g>`
-    )
-    .join("");
-  const right = d.right
-    .map(
-      (n, i) =>
-        `<g class="svg-node" transform="translate(968 ${ys[i]})"><rect width="232" height="56" rx="10"/><text class="cat" x="22" y="22">${esc(n.cat)}</text><text class="name" x="22" y="43">${esc(n.name)}</text><circle class="svg-port" cx="0" cy="28" r="4"/></g>`
-    )
-    .join("");
-  const top = d.mobileTop
-    .map(
-      (n, i) =>
-        `<g class="svg-node" transform="translate(${i * 126} 0)"><rect x="0.5" y="0.5" width="107" height="47" rx="9"/><text class="cat" x="12" y="19">${esc(n.cat)}</text><text class="name" x="12" y="37">${esc(n.name)}</text><circle class="svg-port" cx="54" cy="48" r="3.5"/></g>`
-    )
-    .join("");
-  const bottom = d.mobileBottom
-    .map(
-      (n, i) =>
-        `<g class="svg-node" transform="translate(${i * 126} 392)"><rect x="0.5" y="0.5" width="107" height="47" rx="9"/><text class="cat" x="12" y="19">${esc(n.cat)}</text><text class="name" x="12" y="37">${esc(n.name)}</text><circle class="svg-port" cx="54" cy="0" r="3.5"/></g>`
-    )
-    .join("");
-  const use = (ids) => ids.map((id) => `<use href="#${id}"/>`).join("");
-  const wideIds = ["tl1", "tl2", "tl3", "tl4", "tl5", "tr1", "tr2", "tr3", "tr4", "tr5"];
-  const tallIds = ["ml1", "ml2", "ml3", "mr1", "mr2", "mr3"];
-
-  return `<figure class="yard">
-  <div class="yard__panel">
-    <div class="yard__bar">
-      <span class="yard__bar-group"><span class="dot dot--ok" aria-hidden="true"></span>${esc(d.bar)}</span>
-      <span class="yard__legend"><span class="dot" aria-hidden="true"></span>${esc(d.legend)}</span>
-    </div>
-    <div class="yard__stage">
-      <svg class="yard__svg yard__svg--wide" viewBox="0 0 1200 420" role="img" aria-labelledby="yard-w-title yard-w-desc">
-        <title id="yard-w-title">${esc(d.title)}</title>
-        <desc id="yard-w-desc">${esc(d.desc)}</desc>
-        <defs>
-          <path id="tl1" d="M232 54H280C365 54 365 170 450 170"/><path id="tl2" d="M232 132H280C365 132 365 190 450 190"/><path id="tl3" d="M232 210H450"/><path id="tl4" d="M232 288H280C365 288 365 230 450 230"/><path id="tl5" d="M232 366H280C365 366 365 250 450 250"/>
-          <path id="tr1" d="M750 170C835 170 835 54 920 54H968"/><path id="tr2" d="M750 190C835 190 835 132 920 132H968"/><path id="tr3" d="M750 210H968"/><path id="tr4" d="M750 230C835 230 835 288 920 288H968"/><path id="tr5" d="M750 250C835 250 835 366 920 366H968"/>
-        </defs>
-        <g class="svg-ties">${use(wideIds)}</g>
-        <g class="svg-track">${use(wideIds)}</g>
-        ${left}${right}
-        <g class="svg-packets">
-          ${packet("tl1", 3.6, 0.4)}${packet("tl2", 4.2, 2.1)}${packet("tl3", 3.2, 1.2)}${packet("tl4", 4.6, 3.3)}${packet("tl5", 3.9, 0.9)}
-          ${packet("tr1", 4.0, 1.6, "0;0.1;0.92;1")}${packet("tr2", 3.4, 2.8, "0;0.1;0.92;1")}${packet("tr3", 3.0, 0.2, "0;0.1;0.92;1")}${packet("tr4", 4.4, 1.9, "0;0.1;0.92;1")}${packet("tr5", 3.7, 3.0, "0;0.1;0.92;1")}
-        </g>
-        <g class="svg-hub" transform="translate(450 130)">
-          <rect width="300" height="160" rx="14"/>
-          ${hubMark(24, 20)}
-          <text class="label" x="46" y="33">YARDLY</text>
-          <text class="title" x="24" y="72">${esc(d.hub.title)}</text>
-          <g transform="translate(0 88)">${pillRow(d.hub.pills, 24, 252)}</g>
-          <circle class="live" cx="28" cy="141.5" r="3.5"/>
-          <text class="stat" x="40" y="146">${esc(d.hub.status)}</text>
-          <text class="stat" x="276" y="146" text-anchor="end">${esc(d.hub.last)}</text>
-        </g>
-        <g class="svg-hub">${[170, 190, 210, 230, 250].map((y) => `<circle class="hub-port" cx="450" cy="${y}" r="3.5"/><circle class="hub-port" cx="750" cy="${y}" r="3.5"/>`).join("")}</g>
-      </svg>
-      <svg class="yard__svg yard__svg--tall" viewBox="0 0 360 440" role="img" aria-labelledby="yard-t-title yard-t-desc">
-        <title id="yard-t-title">${esc(d.title)}</title>
-        <desc id="yard-t-desc">${esc(d.desc)}</desc>
-        <defs>
-          <path id="ml1" d="M54 48C54 100 150 98 150 150"/><path id="ml2" d="M180 48V150"/><path id="ml3" d="M306 48C306 100 210 98 210 150"/>
-          <path id="mr1" d="M150 290C150 342 54 340 54 392"/><path id="mr2" d="M180 290V392"/><path id="mr3" d="M210 290C210 342 306 340 306 392"/>
-        </defs>
-        <g class="svg-ties">${use(tallIds)}</g>
-        <g class="svg-track">${use(tallIds)}</g>
-        ${top}${bottom}
-        <g class="svg-packets">
-          ${packet("ml1", 2.6, 0.3, "0;0.1;0.88;1", 3.5)}${packet("ml2", 2.2, 1.4, "0;0.1;0.88;1", 3.5)}${packet("ml3", 2.9, 2.0, "0;0.1;0.88;1", 3.5)}
-          ${packet("mr1", 2.7, 1.1, "0;0.12;0.9;1", 3.5)}${packet("mr2", 2.3, 0.6, "0;0.12;0.9;1", 3.5)}${packet("mr3", 3.0, 2.4, "0;0.12;0.9;1", 3.5)}
-        </g>
-        <g class="svg-hub" transform="translate(30 150)">
-          <rect width="300" height="140" rx="14"/>
-          ${hubMark(22, 18)}
-          <text class="label" x="44" y="31">YARDLY</text>
-          <text class="title" x="22" y="66">${esc(d.hub.title)}</text>
-          <g transform="translate(0 80)">${pillRow(d.hub.pills, 22, 256)}</g>
-          <circle class="live" cx="26" cy="121.5" r="3.5"/>
-          <text class="stat" x="38" y="126">${esc(d.hub.status)}</text>
-          <text class="stat" x="278" y="126" text-anchor="end">${esc(d.hub.last)}</text>
-        </g>
-        <g class="svg-hub">${[150, 180, 210].map((x) => `<circle class="hub-port" cx="${x}" cy="150" r="3.5"/><circle class="hub-port" cx="${x}" cy="290" r="3.5"/>`).join("")}</g>
-      </svg>
-    </div>
-  </div>
-  <figcaption><span class="mono">${esc(d.figLabel)}</span><span>${esc(d.caption)}</span></figcaption>
-</figure>`;
-};
+export const icon = (name, cls = "icon") =>
+  `<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[name] || ""}</svg>`;
 
 // ---------------------------------------------------------------------------
-// Benefit visuals
-
-export const meshFigure = (m) => `<svg class="mesh" viewBox="0 0 320 184" role="img" aria-labelledby="mesh-title">
-  <title id="mesh-title">${esc(m.title)}</title>
-  <path class="edges" d="M80 32L123.3 57M80 32L123.3 107M80 32L80 132M80 32L36.7 107M80 32L36.7 57M123.3 57L123.3 107M123.3 57L80 132M123.3 57L36.7 107M123.3 57L36.7 57M123.3 107L80 132M123.3 107L36.7 107M123.3 107L36.7 57M80 132L36.7 107M80 132L36.7 57M36.7 107L36.7 57"/>
-  <circle class="n" cx="80" cy="32" r="5"/><circle class="n" cx="123.3" cy="57" r="5"/><circle class="n" cx="123.3" cy="107" r="5"/><circle class="n" cx="80" cy="132" r="5"/><circle class="n" cx="36.7" cy="107" r="5"/><circle class="n" cx="36.7" cy="57" r="5"/>
-  <line class="divider" x1="160" y1="20" x2="160" y2="144"/>
-  <path class="spokes" d="M240 82L240 32M240 82L283.3 57M240 82L283.3 107M240 82L240 132M240 82L196.7 107M240 82L196.7 57"/>
-  <circle class="n" cx="240" cy="32" r="5"/><circle class="n" cx="283.3" cy="57" r="5"/><circle class="n" cx="283.3" cy="107" r="5"/><circle class="n" cx="240" cy="132" r="5"/><circle class="n" cx="196.7" cy="107" r="5"/><circle class="n" cx="196.7" cy="57" r="5"/>
-  <circle class="hub" cx="240" cy="82" r="9"/>
-  <text class="k" x="80" y="162" text-anchor="middle">${esc(m.leftKey)}</text>
-  <text class="v" x="80" y="180" text-anchor="middle">${esc(m.leftValue)}</text>
-  <text class="k" x="240" y="162" text-anchor="middle">${esc(m.rightKey)}</text>
-  <text class="v" x="240" y="180" text-anchor="middle">${esc(m.rightValue)}</text>
-</svg>`;
-
-export const trace = (t) => `<div class="trace" aria-hidden="true">
-  <div class="trace__head"><span>${esc(t.head)}</span><span class="status">${esc(t.status)}</span></div>
-  <ol class="trace__steps">${t.steps
-    .map(
-      (s) =>
-        `<li${s.human ? ' class="is-human"' : ""}><span class="trace__mark"></span><span class="trace__what"><b>${esc(s.what)}</b><span>${esc(s.sub)}</span></span><span class="trace__time">${esc(s.time)}</span></li>`
-    )
-    .join("")}</ol>
-</div>`;
+// Home: a small "upcoming deadlines" card, drawn in HTML
 
 export const board = (b) => `<div class="board" aria-hidden="true">
   <div class="board__head"><span>${esc(b.head)}</span><span class="board__counts"><span class="tone-bad">${esc(b.bad)}</span><span class="tone-warn">${esc(b.warn)}</span></span></div>
@@ -244,6 +127,7 @@ export const yardPlan = (p) => {
 // ---------------------------------------------------------------------------
 // Reusable blocks
 
+// Closing call to action: a primary and an optional secondary button.
 export const ctaCard = (c) => `<div class="cta-card">
   <div class="cta-card__body">
     <p class="eyebrow">${c.eyebrow}</p>
@@ -251,7 +135,7 @@ export const ctaCard = (c) => `<div class="cta-card">
     <p class="lead">${c.lead}</p>
     <div class="cta-row">
       <a class="btn btn--primary" href="${c.href}">${esc(c.button)}${arrow()}</a>
-      ${c.note ? `<span class="cta-note">${c.note}</span>` : ""}
+      ${c.secondary ? `<a class="btn btn--ghost" href="${c.secondary.href}">${esc(c.secondary.label)}</a>` : ""}
     </div>
   </div>
   <div class="cta-card__art" aria-hidden="true">
@@ -264,17 +148,33 @@ export const ctaCard = (c) => `<div class="cta-card">
   </div>
 </div>`;
 
-export const screenshot = (s) => `<figure class="shot">
+// App screenshots: real screens with demo data (a made-up company, "Minta Logisztika Kft.").
+export const SHOTS = {
+  dashboard: [1600, 900], teendoim: [1600, 900], gyorskereso: [1600, 900], jarmuvek: [1600, 900],
+  "jarmu-adatlap": [1600, 900], utemterv: [1600, 900], allapotfelmeres: [1600, 900], dokumentumok: [1600, 900],
+  riasztasok: [1600, 900], eszkozok: [1600, 900], "eszkoz-adatlap": [1600, 900], koltsegek: [1600, 900],
+  riportok: [1600, 900], analitika: [1600, 900], csereajanlas: [1600, 900], jogosultsagok: [1600, 900],
+  naplo: [1600, 900], folyamatszerkeszto: [1600, 900], "folyamat-futas": [1600, 900], bejelentes: [1600, 900],
+  dkv: [1600, 900],
+  "leltar-telefon": [540, 1169], "leltar-osszesites": [540, 1169], "allapotfelmeres-telefon": [540, 1169], mobil: [540, 1169],
+};
+
+const imgTag = (name, alt, eager) => {
+  const [w, h] = SHOTS[name];
+  return `<img src="/assets/img/app/${name}.webp" width="${w}" height="${h}" alt="${esc(alt)}"${eager ? ' fetchpriority="high"' : ' loading="lazy"'} decoding="async">`;
+};
+
+// A desktop screenshot in a browser frame.
+export const screenshot = ({ img, alt, url = "app.yardly.hu", caption = "", eager = false }) => `<figure class="shot">
   <div class="shot__frame">
-    <div class="shot__bar" aria-hidden="true"><span></span><span></span><span></span><em>${esc(s.url)}</em></div>
-    <img src="${s.src}" width="${s.width}" height="${s.height}" alt="${esc(s.alt)}" loading="lazy" decoding="async">
+    <div class="shot__bar" aria-hidden="true"><span></span><span></span><span></span><em>${esc(url)}</em></div>
+    ${imgTag(img, alt, eager)}
   </div>
-  ${s.caption ? `<figcaption>${s.caption}</figcaption>` : ""}
+  ${caption ? `<figcaption>${caption}</figcaption>` : ""}
 </figure>`;
 
-export const SHOTS = {
-  dashboard: { src: "/assets/img/app/dashboard.webp", width: 1600, height: 1161 },
-  maintenance: { src: "/assets/img/app/maintenance.webp", width: 1600, height: 659 },
-  forecast: { src: "/assets/img/app/forecast.webp", width: 1600, height: 583 },
-  equipment: { src: "/assets/img/app/equipment.webp", width: 1600, height: 1166 },
-};
+// A phone screenshot in a phone frame.
+export const phoneShot = ({ img, alt, caption = "", eager = false }) => `<figure class="phone">
+  <div class="phone__frame">${imgTag(img, alt, eager)}</div>
+  ${caption ? `<figcaption>${caption}</figcaption>` : ""}
+</figure>`;

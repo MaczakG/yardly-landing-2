@@ -11,7 +11,7 @@
 import { SESv2Client, SendEmailCommand } from "@aws-sdk/client-sesv2";
 
 const ses = new SESv2Client({});
-const LIMITS = { name: 120, email: 200, company: 160, role: 120, size: 80, message: 4000 };
+const LIMITS = { topic: 120, name: 120, email: 200, company: 160, phone: 40, count: 12, message: 4000 };
 
 const respond = (status, body) => ({
   statusCode: status,
@@ -42,29 +42,29 @@ export const handler = async (event) => {
   if (data.website) return respond(200, { ok: true });
 
   const form = {
+    topic: clean(data.topicLabel || data.topic, LIMITS.topic),
     name: clean(data.name, LIMITS.name),
     email: clean(data.email, LIMITS.email),
     company: clean(data.company, LIMITS.company),
-    role: clean(data.role, LIMITS.role),
-    size: clean(data.size, LIMITS.size),
-    systems: (Array.isArray(data.systems) ? data.systems : []).slice(0, 12).map((s) => clean(s, 60)),
+    phone: clean(data.phone, LIMITS.phone),
+    vehicles: clean(data.vehicles, LIMITS.count),
+    equipment: clean(data.equipment, LIMITS.count),
     message: String(data.message ?? "").trim().slice(0, LIMITS.message),
-    language: clean(data.language, 8),
     page: clean(data.page, 200),
   };
 
-  if (!form.name || !form.company || !form.size || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+  if (!form.topic || !form.name || !form.company || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
     return respond(400, { error: "missing_fields" });
   }
 
   const text = [
-    `Név / Name: ${form.name}`,
+    `Téma: ${form.topic}`,
+    `Név: ${form.name}`,
     `E-mail: ${form.email}`,
-    `Cég / Company: ${form.company}`,
-    `Beosztás / Role: ${form.role || "–"}`,
-    `Cégméret / Size: ${form.size}`,
-    `Rendszerek / Systems: ${form.systems.join(", ") || "–"}`,
-    `Nyelv / Language: ${form.language}  ·  Oldal / Page: ${form.page}`,
+    `Cég: ${form.company}`,
+    `Telefon: ${form.phone || "–"}`,
+    `Járművek: ${form.vehicles || "–"}  ·  Eszközök: ${form.equipment || "–"}`,
+    `Oldal: ${form.page}`,
     "",
     form.message || "–",
   ].join("\n");
@@ -77,7 +77,7 @@ export const handler = async (event) => {
         ReplyToAddresses: [form.email],
         Content: {
           Simple: {
-            Subject: { Data: `Új megkeresés: ${form.company} (${form.name})`, Charset: "UTF-8" },
+            Subject: { Data: `Új megkeresés (${form.topic}): ${form.company}, ${form.name}`, Charset: "UTF-8" },
             Body: { Text: { Data: text, Charset: "UTF-8" } },
           },
         },
