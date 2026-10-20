@@ -88,7 +88,7 @@ export const home = {
       { slug: "szerviz-karbantartas", title: "Szerviz és ütemterv", text: "Km vagy idő szerinti karbantartás, „ami előbb jön”, és egy kattintással rögzített szerviz." },
       { slug: "allapotfelmeres", title: "Állapotfelmérés telefonról", text: "A sofőr egy linkről tölti ki a saját ellenőrzőlistádat, belépés nélkül." },
       { slug: "leltar", title: "Leltár kamerával", text: "A kolléga végigmegy a raktáron, és beolvassa a címkéket. A lista nem látszik előre, így a számlálás valós." },
-      { slug: "folyamatok", title: "Karbantartási folyamatok", text: "Árajánlat, jóváhagyás összeghatárral, javítás, lezárás: a rendszer végigviszi a lépéseket." },
+      { slug: "folyamatok", title: "Egyedi workflow beállítás", text: "Árajánlat, jóváhagyás összeghatárral, javítás, lezárás: a rendszer végigviszi a lépéseket." },
       { slug: "tankolas-dkv", title: "DKV-integráció", text: "A kártyás tankolások 6 óránként maguk kerülnek a járművekhez." },
       { slug: "koltsegek-riportok", title: "Költségek és analitika", text: "Ft/km autónként, vezetői összefoglaló PDF-ben, és azok az autók, amelyeket már érdemes lecserélni." },
     ],

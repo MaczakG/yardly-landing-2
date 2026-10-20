@@ -13,7 +13,7 @@ export const about = {
     paragraphs: [
       "A yard angolul udvart, telephelyet jelent: azt a helyet, ahol egy cég járművei, targoncái és gépei állnak és dolgoznak. Ezekből sok van, és mindegyiknek megvannak a maga határidői, szervizei és költségei.",
       "A Yardlyt Maczák Gergő alapította Budapesten azzal a céllal, hogy ezek nyilvántartása ne bonyolult táblázatokban és kézi adminisztrációban éljen, hanem egy átlátható rendszerben, amely szól, mielőtt valami lejár.",
-      "Ma a járművek mellett az eszközparkot, a leltárt és a karbantartási folyamatokat is kezeli. A fejlesztést az ügyfelek kérdései és a napi munka valós gondjai vezetik.",
+      "Ma a járművek mellett az eszközparkot, a leltárt és az egyedi workflow-kat is kezeli. A fejlesztést az ügyfelek kérdései és a napi munka valós gondjai vezetik.",
     ],
     plan: { title: "Egy telephely felülnézetből: raktár targoncákkal, parkoló járművekkel, a szervizre esedékes eszközök kiemelve.", warehouse: "RAKTÁR", forklifts: "TARGONCÁK", parking: "PARKOLÓ", gate: "BEJÁRAT" },
     caption: "A yard: a telephely, ahol a cég eszközei dolgoznak. Kiemelve, aminek közeleg a szervize.",

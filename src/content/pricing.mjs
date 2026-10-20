@@ -20,7 +20,7 @@ export const plans = [
     highlights: [
       "25 aktív jármű a díjban, felette 990 Ft/jármű/hó + ÁFA (legfeljebb 40)",
       "100 eszköz, 10 felhasználó, 1 telephely",
-      "1 aktív karbantartási folyamat, sablonból",
+      "1 aktív egyedi workflow, sablonból",
       "DKV-integráció kiegészítőként: +9 990 Ft/hó + ÁFA",
       "Támogatás e-mailben",
     ],
@@ -38,7 +38,7 @@ export const plans = [
     highlights: [
       "75 aktív jármű a díjban, felette 890 Ft/jármű/hó + ÁFA (legfeljebb 150)",
       "1 000 eszköz, korlátlan felhasználó és telephely",
-      "10 aktív karbantartási folyamat",
+      "10 aktív egyedi workflow",
       "Telefonos állapotfelmérés és QR-leltár",
       "Saját szerepkörök és jogosultsági mátrix",
       "Változásnapló (90 napos)",
@@ -59,7 +59,7 @@ export const plans = [
     highlights: [
       "150 aktív jármű a díjban, felette 790 Ft/jármű/hó + ÁFA (legfeljebb 300)",
       "Korlátlan eszköz, felhasználó és telephely",
-      "Korlátlan karbantartási folyamat",
+      "Korlátlan egyedi workflow",
       "Minden, ami az Üzletiben",
       "Analitika, előrejelzés, csereajánlások",
       "Változásnapló korlátlanul, exporttal",
@@ -94,7 +94,7 @@ export const limits = [
   { label: "Eszköz", cells: ["100", "1 000", "korlátlan"] },
   { label: "Felhasználó", cells: ["10", "korlátlan", "korlátlan"] },
   { label: "Telephely", cells: ["1", "korlátlan", "korlátlan"] },
-  { label: "Karbantartási folyamat", cells: ["1 aktív, sablonból", "10 aktív", "korlátlan"] },
+  { label: "Egyedi workflow", cells: ["1 aktív, sablonból", "10 aktív", "korlátlan"] },
   { label: "Támogatás", cells: ["e-mailben", "1 munkanapon belül", "4 munkaórán belül, kijelölt kapcsolattartóval"] },
 ];
 
