@@ -1,5 +1,5 @@
-// Főoldal. One promise: every vehicle, piece of equipment and deadline in one place, and the
-// system speaks up before something goes wrong. Sections follow the visitor's questions:
+// Főoldal. One promise: automated operations for equipment and vehicles — deadlines kept,
+// workflows of one's own, automation under a permission matrix. Sections follow the visitor's questions:
 // what is it, is it for me, what does it do, what does it cost, how do I start.
 
 export const home = {
@@ -8,8 +8,8 @@ export const home = {
 
   hero: {
     eyebrow: "Flotta- és eszközkezelés magyar cégeknek",
-    title: "Minden jármű, eszköz és határidő egy helyen.",
-    lead: "A Yardly szól, mielőtt lejár a műszaki, esedékes a szerviz vagy eltűnik egy targonca a leltárból. Böngészőben és telefonon, telepítés nélkül.",
+    title: "Automatizált üzemeltetési megoldások eszközökre és járművekre.",
+    lead: "A Yardly számon tartja a lejáratokat, Ön pedig teljesen egyedi workflow-kat hozhat létre benne, és jogosultsági mátrixszal automatizálhatja a folyamatokat.",
     shotAlt: "A Yardly irányítópultja: elöl a közelgő és lejárt határidők, alatta a fő mutatók",
     phoneAlt: "A telefonos állapotfelmérő űrlap",
   },
@@ -25,11 +25,12 @@ export const home = {
     eyebrow: "Ismerős?",
     title: "Ismerős?",
     items: [
-      { quote: "„Lejárt a műszaki, és csak az ellenőrzésnél derült ki.”", text: "A határidők naptárakban, e-mailekben és fejekben vannak. Egy szabadság, és már csúszik is." },
-      { quote: "„Az Excel háromféle verzióban él.”", text: "Mindenki a sajátját frissíti. A költségekről senki nem tud pontos számot mondani." },
-      { quote: "„Senki nem tudja, hol a 3-as targonca.”", text: "A leltár egy napig tart, és a végén akkor sem egyezik." },
+      { quote: "„Bonyolult folyamatok Excelben vezetve, háromféleképpen?”", text: "Csak egy valaki szerkesztheti őket, és minden lépés egy 1,5 órás rémálom." },
+      { quote: "„Aki hozzáfér az Excelhez, az szerkesztheti, és ez így nem jó!”", text: "Mindenki, akinek jogosultsága van a mappához, szerkesztheti az amúgy is mindenre érzékeny függvénylabirintust, és hetente kétszer kell visszaállítani." },
+      { quote: "„Minden leltárkor a jelenlegi programunk összevissza dobja be a tételeket.”", text: "A jelenleg használt leltárprogramunk mindig olyan eszközöket dob fel következőnek, amelyek a telephely túloldalán vannak, és legalább tízszer megyek körbe." },
     ],
-    close: "A Yardly ezt a három gondot oldja meg egyszerre.",
+    close: "A Yardly ezt a három gondot is megoldja egyszerre.",
+    button: "Megoldásaink",
   },
 
   modules: {
