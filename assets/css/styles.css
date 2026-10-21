@@ -3461,6 +3461,56 @@ mark.ph {
   font-weight: 700;
 }
 
+/* A fieldset: block layout, since a legend doesn't take part in a grid. */
+.calc__features {
+  display: block;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.calc__features legend {
+  float: left; /* keeps the legend inside the box, so the border-top stays above it */
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 0;
+}
+
+.calc__features .calc__hint {
+  clear: both;
+  margin: 0 0 14px;
+}
+
+.calc__checks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 20px;
+}
+
+.calc__check {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  font-size: 0.9375rem;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+
+.calc__check input {
+  width: 18px;
+  height: 18px;
+  margin: 2px 0 0;
+  accent-color: var(--accent-fill);
+  cursor: pointer;
+}
+
+.calc__check:has(input:checked) {
+  color: var(--ink);
+  font-weight: 600;
+}
+
 .calc__plans {
   display: grid;
   gap: 8px;
@@ -3699,6 +3749,10 @@ mark.ph {
 
   .calc__number {
     width: 100%;
+  }
+
+  .calc__checks {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 

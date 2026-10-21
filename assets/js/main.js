@@ -128,7 +128,7 @@
     });
   }
 
-  /* Pricing: monthly or annual payment, and the calculator for vehicles and equipment */
+  /* Pricing: monthly or annual payment, and the calculator for vehicles, equipment, users and features */
   var cycle = "monthly";
   var calc = document.querySelector("[data-calc]");
   var updateCalc = function () {};
@@ -137,6 +137,8 @@
     var plans = JSON.parse(calc.getAttribute("data-plans"));
     var addon = JSON.parse(calc.getAttribute("data-addon"));
     var text = JSON.parse(calc.getAttribute("data-text"));
+    var features = JSON.parse(calc.getAttribute("data-features") || "[]");
+    var checks = calc.querySelectorAll("[data-calc-feature]");
     var vat = Number(calc.getAttribute("data-vat")) || 0;
     var max = Number(calc.getAttribute("data-max")) || 300;
     var range = document.getElementById("calc-range");
@@ -144,6 +146,9 @@
     var eRange = document.getElementById("calc-e-range");
     var eNumber = document.getElementById("calc-e");
     var eMaxInput = Number(eNumber.getAttribute("max")) || 100000;
+    var uRange = document.getElementById("calc-u-range");
+    var uNumber = document.getElementById("calc-u");
+    var uMaxInput = Number(uNumber.getAttribute("max")) || 100000;
     var out = {
       plans: calc.querySelector("[data-calc-plans]"),
       note: calc.querySelector("[data-calc-note]"),
@@ -152,22 +157,42 @@
       lines: calc.querySelector("[data-calc-lines]"),
     };
 
-    // Same rules as calcQuote in src/pages.mjs: vehicles up to the plan's ceiling, equipment
-    // above the plan's limit in "+250 eszköz" packs (Prémium: no limit).
+    // Same rules as planQuote in src/pages.mjs: vehicles up to the plan's ceiling, equipment
+    // above the plan's limit in "+250 eszköz" packs (Prémium: no limit); too many users or a
+    // ticked feature the plan lacks rules it out, unless the plan can buy that feature as an extra.
+    var yearly = function (monthly) {
+      return cycle === "annual" ? (monthly * (12 - addon.freeMonths)) / 12 : monthly;
+    };
     var addonMonthly = function () {
-      return cycle === "annual" ? (addon.monthly * (12 - addon.freeMonths)) / 12 : addon.monthly;
+      return yearly(addon.monthly);
     };
     var maxEquipment = function (plan) {
       return plan.equipment === null ? Infinity : plan.equipment + addon.size * addon.maxQuantity;
     };
-    var quote = function (plan, n, e) {
+    var rank = function (key) {
+      for (var i = 0; i < plans.length; i++) if (plans[i].key === key) return i;
+      return -1;
+    };
+    var quote = function (plan, n, e, u, wanted) {
       if (n > plan.ceiling) return { plan: plan, off: fill(text.max, { n: plan.ceiling }) };
       if (e > maxEquipment(plan)) return { plan: plan, off: fill(text.maxEquipment, { n: num(maxEquipment(plan)) }) };
+      if (plan.users !== null && u > plan.users) return { plan: plan, off: fill(text.maxUsers, { n: plan.users }) };
+      var extras = [];
+      for (var i = 0; i < wanted.length; i++) {
+        var f = wanted[i];
+        if (rank(plan.key) >= rank(f.plan)) continue;
+        if (!f.addOn || f.addOn.plan !== plan.key) return { plan: plan, off: fill(text.missing, { feature: f.label }) };
+        extras.push({ name: f.addOn.name, monthly: yearly(f.addOn.monthly) });
+      }
       var base = cycle === "annual" ? plan.annualMonthly : plan.monthly;
       var over = Math.max(0, n - plan.included);
       var packs = plan.equipment === null ? 0 : Math.ceil(Math.max(0, e - plan.equipment) / addon.size);
       var extra = packs * addonMonthly();
-      return { plan: plan, base: base, over: over, packs: packs, addon: extra, total: base + over * plan.extra + extra };
+      var total = base + over * plan.extra + extra;
+      extras.forEach(function (x) {
+        total += x.monthly;
+      });
+      return { plan: plan, base: base, over: over, packs: packs, addon: extra, extras: extras, total: total };
     };
 
     var item = function (tag, cls, parts) {
@@ -190,9 +215,17 @@
     updateCalc = function () {
       var n = clamp(number.value, 1, max, 1);
       var e = clamp(eNumber.value, 0, eMaxInput, 0);
+      var u = clamp(uNumber.value, 1, uMaxInput, 1);
+      var ticked = {};
+      checks.forEach(function (c) {
+        if (c.checked) ticked[c.value] = true;
+      });
+      var wanted = features.filter(function (f) {
+        return ticked[f.key];
+      });
 
       var quotes = plans.map(function (p) {
-        return quote(p, n, e);
+        return quote(p, n, e, u, wanted);
       });
       var best = quotes
         .filter(function (q) {
@@ -214,6 +247,9 @@
       var lines = [[fill(text.base, { plan: plan.name, included: plan.included, equipment: plan.equipment === null ? text.unlimited : num(plan.equipment) }), huf(best.base)]];
       if (best.over) lines.push([fill(text.extra, { n: best.over, price: huf(plan.extra) }), huf(best.over * plan.extra)]);
       if (best.packs) lines.push([fill(text.equipment, { packs: best.packs, price: huf(addonMonthly()) }), huf(best.addon)]);
+      best.extras.forEach(function (x) {
+        lines.push([fill(text.addOn, { name: x.name }), huf(x.monthly)]);
+      });
       lines.push([text.gross, huf(best.total * (1 + vat / 100))]);
       out.lines.replaceChildren.apply(
         out.lines,
@@ -222,7 +258,7 @@
         })
       );
 
-      out.tier.textContent = fill(text.tier, { plan: plan.name, n: n, e: num(e) });
+      out.tier.textContent = fill(text.tier, { plan: plan.name, n: n, e: num(e), u: num(u) });
       out.amount.textContent = huf(best.total);
       out.note.textContent = calc.getAttribute(cycle === "annual" ? "data-note-annual" : "data-note-monthly");
     };
@@ -247,6 +283,10 @@
     };
     pair(range, number, 1, max);
     pair(eRange, eNumber, 0, eMaxInput);
+    pair(uRange, uNumber, 1, uMaxInput);
+    checks.forEach(function (c) {
+      c.addEventListener("change", updateCalc);
+    });
     updateCalc();
   }
 

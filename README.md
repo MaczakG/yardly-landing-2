@@ -11,7 +11,7 @@ The site is static and Hungarian only. The former English and German pages, and 
 | Home | `/` |
 | Solutions overview (Megoldásaink) | `/megoldasaink/` |
 | 14 solution pages, one per area of the app | `/megoldasaink/<slug>/` |
-| Pricing, with the calculator for vehicles and equipment | `/arak/` |
+| Pricing, with the calculator for vehicles, equipment, users and features | `/arak/` |
 | Vállalati megoldás: self-hosted install and integration with existing systems (highlighted in the menu as „Vállalatoknak”) | `/vallalati-megoldas/` |
 | Contact | `/kapcsolat/` |
 | Blog (8 posts, filterable by category) | `/blog/`, `/blog/<slug>/` |
@@ -67,7 +67,7 @@ To change copy, edit the matching file in `src/content/` and rebuild. To add a b
 
 ### Prices
 
-The prices in `src/content/pricing.mjs` are a copy of the app's price list (`pricing.json` in the yardly-saas repository). The site does not read them from the app, so update both together. The calculator takes the number of vehicles and of equipment and picks the cheapest plan that can hold both: the per-vehicle fee above the included vehicles (up to the plan's ceiling), and "+250 eszköz" packs above the plan's equipment limit (at most 20; Prémium has no limit; on annual billing a pack costs 10 months for 12). It shows the net monthly amount and the gross amount with 27% VAT. The same logic runs in `src/pages.mjs` (the starting state) and `assets/js/main.js` (when the visitor changes a number).
+The prices in `src/content/pricing.mjs` are a copy of the app's price list (`pricing.json` in the yardly-saas repository). The site does not read them from the app, so update both together. The calculator takes the number of vehicles, equipment and users and the features ticked (`CALC_FEATURES`, each with the smallest plan that has it) and picks the cheapest plan that can hold them all: the per-vehicle fee above the included vehicles (up to the plan's ceiling), and "+250 eszköz" packs above the plan's equipment limit (at most 20; Prémium has no limit; on annual billing a pack costs 10 months for 12). Too many users or a ticked feature the plan lacks rules the plan out, so the answer jumps to the next plan; a feature a smaller plan can buy as an extra (DKV on Alap) is added there as a line instead. It shows the net monthly amount and the gross amount with 27% VAT. The same logic runs in `src/pages.mjs` (the starting state) and `assets/js/main.js` (when the visitor changes a number).
 
 ### Contact form links
 
