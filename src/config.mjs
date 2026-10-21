@@ -2,7 +2,7 @@
 // gaId and formEndpoint can also be set at build time through the
 // YARDLY_GA_ID and YARDLY_FORM_ENDPOINT environment variables.
 export const config = {
-  // Absolute origin, used for canonical URLs, hreflang links and the sitemap.
+  // Absolute origin, used for canonical URLs, social previews and the sitemap.
   siteUrl: "https://yardly.hu",
 
   // The only public contact address.

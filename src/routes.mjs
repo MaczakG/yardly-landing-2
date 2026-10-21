@@ -1,24 +1,50 @@
-export const LANGS = ["hu", "en", "de"];
-export const DEFAULT_LANG = "hu";
+// URLs. The site is Hungarian only; the former English and German pages and the removed
+// Hungarian pages redirect to their nearest Hungarian page (see REDIRECTS).
 
-export const LANG_META = {
-  hu: { name: "Magyar", locale: "hu_HU", htmlLang: "hu" },
-  en: { name: "English", locale: "en_GB", htmlLang: "en" },
-  de: { name: "Deutsch", locale: "de_DE", htmlLang: "de" },
-};
-
-// One entry per page; each language has its own path.
 export const ROUTES = {
-  home: { hu: "/", en: "/en/", de: "/de/" },
-  solutions: { hu: "/megoldasok/", en: "/en/solutions/", de: "/de/loesungen/" },
-  cases: { hu: "/esettanulmanyok/", en: "/en/case-studies/", de: "/de/fallstudien/" },
-  blog: { hu: "/blog/", en: "/en/blog/", de: "/de/blog/" },
-  about: { hu: "/rolunk/", en: "/en/about/", de: "/de/ueber-uns/" },
-  contact: { hu: "/kapcsolat/", en: "/en/contact/", de: "/de/kontakt/" },
-  privacy: { hu: "/adatkezeles/", en: "/en/privacy/", de: "/de/datenschutz/" },
-  imprint: { hu: "/impresszum/", en: "/en/imprint/", de: "/de/impressum/" },
+  home: "/",
+  solutions: "/megoldasaink/",
+  pricing: "/arak/",
+  about: "/rolunk/",
+  contact: "/kapcsolat/",
+  blog: "/blog/",
+  privacy: "/adatkezeles/",
+  imprint: "/impresszum/",
 };
 
-export const route = (key, lang) => ROUTES[key][lang];
+export const route = (key) => ROUTES[key];
+export const solutionRoute = (slug) => `${ROUTES.solutions}${slug}/`;
+export const postRoute = (post) => `${ROUTES.blog}${post.slug}/`;
 
-export const postRoute = (post, lang) => `${ROUTES.blog[lang]}${post.slug[lang]}/`;
+// Old path → new path. Each old path gets a small page that forwards the visitor (and tells
+// search engines the new address). Kept so links and search results to the old site keep working.
+export const REDIRECTS = {
+  "/megoldasok/": "/megoldasaink/",
+  "/esettanulmanyok/": "/megoldasaink/",
+  "/blog/karbantartas-nyilvantartasa-excel-helyett/": "/blog/flottakezeles-excelben/",
+  "/blog/kiegeszites-vagy-csere/": "/blog/",
+
+  "/en/": "/",
+  "/en/solutions/": "/megoldasaink/",
+  "/en/case-studies/": "/megoldasaink/",
+  "/en/blog/": "/blog/",
+  "/en/blog/maintenance-tracking-beyond-excel/": "/blog/flottakezeles-excelben/",
+  "/en/blog/forecasting-service-dates/": "/blog/szervizidopontok-elorejelzese/",
+  "/en/blog/extend-or-replace/": "/blog/",
+  "/en/about/": "/rolunk/",
+  "/en/contact/": "/kapcsolat/",
+  "/en/privacy/": "/adatkezeles/",
+  "/en/imprint/": "/impresszum/",
+
+  "/de/": "/",
+  "/de/loesungen/": "/megoldasaink/",
+  "/de/fallstudien/": "/megoldasaink/",
+  "/de/blog/": "/blog/",
+  "/de/blog/wartungsdokumentation-statt-excel/": "/blog/flottakezeles-excelben/",
+  "/de/blog/servicetermine-prognostizieren/": "/blog/szervizidopontok-elorejelzese/",
+  "/de/blog/erweitern-oder-ersetzen/": "/blog/",
+  "/de/ueber-uns/": "/rolunk/",
+  "/de/kontakt/": "/kapcsolat/",
+  "/de/datenschutz/": "/adatkezeles/",
+  "/de/impressum/": "/impresszum/",
+};

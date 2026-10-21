@@ -1,23 +1,30 @@
 # yardly.hu
 
-Marketing site for Yardly: tailored maintenance and operations software for logistics companies. It extends the systems a company already uses rather than replacing them.
+Marketing site for Yardly, the fleet and equipment management system for Hungarian companies (app at `app.yardly.hu`).
 
-The site is static and comes in three languages: Hungarian (default, `/`), English (`/en/`) and German (`/de/`). The content is based on the completed content questionnaire.
+The site is static and Hungarian only. The former English and German pages, and the pages the old site had but this one does not, forward to their nearest Hungarian page (see Redirects below).
 
 ## Pages
 
-| Page | HU | EN | DE |
-| --- | --- | --- | --- |
-| Home | `/` | `/en/` | `/de/` |
-| Solutions | `/megoldasok/` | `/en/solutions/` | `/de/loesungen/` |
-| Case studies | `/esettanulmanyok/` | `/en/case-studies/` | `/de/fallstudien/` |
-| Blog (3 posts) | `/blog/` | `/en/blog/` | `/de/blog/` |
-| About | `/rolunk/` | `/en/about/` | `/de/ueber-uns/` |
-| Contact | `/kapcsolat/` | `/en/contact/` | `/de/kontakt/` |
-| Privacy notice | `/adatkezeles/` | `/en/privacy/` | `/de/datenschutz/` |
-| Imprint | `/impresszum/` | `/en/imprint/` | `/de/impressum/` |
+| Page | Path |
+| --- | --- |
+| Home | `/` |
+| Solutions overview (Megoldásaink) | `/megoldasaink/` |
+| 14 solution pages, one per area of the app | `/megoldasaink/<slug>/` |
+| Pricing, with the vehicle calculator | `/arak/` |
+| About | `/rolunk/` |
+| Contact | `/kapcsolat/` |
+| Blog (8 posts, filterable by category) | `/blog/`, `/blog/<slug>/` |
+| Privacy notice | `/adatkezeles/` |
+| Imprint | `/impresszum/` |
 
-The build also writes `sitemap.xml` (with hreflang alternates), `robots.txt` and `404.html`.
+The Megoldásaink menu item opens a mega menu with all solution pages in four groups (Flotta, Eszközpark, Napi működés, Vezetés). On phones the same list is an accordion in the menu.
+
+The build also writes `sitemap.xml`, `robots.txt` and `404.html`.
+
+### Redirects
+
+`REDIRECTS` in `src/routes.mjs` maps old addresses (`/en/…`, `/de/…`, `/megoldasok/`, `/esettanulmanyok/`, renamed blog posts) to new ones. Each gets a small page with a meta refresh and a canonical link. The site's Content-Security-Policy allows scripts from files only, so the forward cannot be an inline script.
 
 ## Build and preview
 
@@ -32,24 +39,39 @@ npm run serve    # serves dist/ on http://localhost:4173
 
 ```
 src/
-  config.mjs        site URL, e-mail, GA4 ID, form endpoint, social links
-  i18n/hu|en|de.mjs all page copy, one file per language
-  posts.mjs         blog posts (all three languages)
-  pages.mjs         page templates
-  layout.mjs        <head>, header, language switcher, footer, cookie banner
-  components.mjs    hand-drawn SVG illustrations and shared blocks
-  build.mjs         static site generator
+  config.mjs          site URL, e-mail, GA4 ID, form endpoint, social links
+  content/
+    site.mjs          menu, mega menu, footer, shared labels, app links
+    home.mjs          home page copy
+    solutions.mjs     solutions overview and the 14 solution pages
+    pricing.mjs       plans, limits, comparison table, pricing FAQ
+    pages.mjs         about, contact, privacy notice, imprint
+    posts.mjs         blog categories and posts
+  routes.mjs          URLs and redirects
+  pages.mjs           page templates
+  layout.mjs          <head>, header with mega menu, mobile menu, footer, cookie banner
+  components.mjs      icons (Lucide), screenshot and phone frames, shared blocks
+  build.mjs           static site generator
 assets/
-  css/styles.css    all styles; design tokens at the top
-  js/main.js        menu, cookie consent, contact form
-  img/app/          product screenshots (test environment, demo names)
-  brand/            official logo and the social sharing image
-  fonts/            self-hosted Manrope and Geist Mono (SIL OFL)
-public/             favicons and web manifest, copied to the site root
-aws/contact-form/   Lambda function that e-mails contact form submissions
+  css/styles.css      all styles; design tokens at the top
+  js/main.js          mega menu, mobile menu, pricing toggle and calculator, blog filters,
+                      cookie consent, contact form
+  img/app/            product screenshots (demo company, see below)
+  brand/              official logo and the social sharing image
+  fonts/              self-hosted Manrope and Geist Mono (SIL OFL)
+public/               favicons and web manifest, copied to the site root
+aws/contact-form/     Lambda function that e-mails contact form submissions
 ```
 
-To change copy, edit `src/i18n/*.mjs` and rebuild. To add a blog post, add an entry at the top of `src/posts.mjs`.
+To change copy, edit the matching file in `src/content/` and rebuild. To add a blog post, add an entry at the top of `posts` in `src/content/posts.mjs`.
+
+### Prices
+
+The prices in `src/content/pricing.mjs` are a copy of the app's price list (`pricing.json` in the yardly-saas repository). The site does not read them from the app, so update both together. The calculator picks the cheapest plan whose vehicle ceiling fits, adds the per-vehicle fee above the included number, and shows the net monthly amount and the gross amount with 27% VAT. The same logic runs in `src/pages.mjs` (the starting state) and `assets/js/main.js` (when the visitor changes the number).
+
+### Contact form links
+
+Links can preselect the form's topic: `/kapcsolat/?tema=demo#enquiry`. With `tema=notify&funkcio=<name>` the message also starts with "Szólj, ha elérhető: <name>". The "Szólj, ha elérhető" buttons next to features marked Hamarosan use this.
 
 ## Brand
 
@@ -67,6 +89,26 @@ Small accent text on light backgrounds (links, numbers) uses `#0B7A69`, a darker
 Headings use Manrope Bold (700) and body text Manrope Medium (500), as the brand guide specifies. Labels and figures use Geist Mono.
 
 The header and footer show `assets/brand/yardly-vizszintes-szines.svg` (the horizontal logo for light backgrounds). Keep it at least 96 px wide, and use the `szines-sotet-hatterre` version from the package on dark backgrounds.
+
+## Live site (yardly.hu)
+
+`yardly.hu` is served by Caddy on the `flotta-app` EC2 instance, next to the Yardly apps (`app.yardly.hu`, `tesztapp.yardly.hu` and `teszt.yardly.hu`). `www.yardly.hu` redirects to `yardly.hu`.
+
+- Each build is extracted to `/opt/flotta/landing/releases/<date>-<commit>/`, and `/opt/flotta/landing/current` is a symlink to the live one. Caddy sees it as `/srv/landing/current`, mounted read-only in `/opt/flotta/deploy/docker-compose.yml`.
+- The `yardly.hu` site block and its security headers (`landing_headers`) are in `/opt/flotta/deploy/Caddyfile`. The Content-Security-Policy allows scripts, fonts and connections from the site's own origin only. Before enabling Google Analytics or a contact form endpoint, add their origins to that policy, or the browser will block them.
+
+To publish a new version:
+
+1. Build and pack it: `npm run build && tar -czf yardly-landing.tgz -C dist .`
+2. Copy `yardly-landing.tgz` to the server (scp with the instance key, or through SSM).
+3. Extract it next to the current release and switch the symlink. No Caddy reload is needed:
+   ```sh
+   REL=/opt/flotta/landing/releases/$(date -u +%Y%m%d-%H%M%S)-<commit>
+   sudo mkdir -p "$REL" && sudo tar -xzf yardly-landing.tgz -C "$REL"
+   cd /opt/flotta/landing && sudo ln -sfn "releases/$(basename "$REL")" current.tmp && sudo mv -T current.tmp current
+   ```
+
+To roll back, point `current` at the previous release the same way.
 
 ## Deploying to Cloudflare Workers
 
@@ -100,8 +142,7 @@ YARDLY_GA_ID="G-XXXXXXX" npm run build
 ## Before going live
 
 - **Company details.** The privacy notice and the imprint contain highlighted placeholders (company name, registered office, registration and tax numbers, representative, retention periods, e-mail provider) that must be filled in once the company is registered. Both texts are drafts and need legal review. Remove the "draft" notice in `src/pages.mjs` (`legal()`) afterwards.
-- **Mailbox.** Make sure `hello@yardly.hu` exists. The previous site used `info@yardly.hu`.
-- **App login.** The new site has no login link. If existing customers sign in at `yardly.hu/login.html`, move the app to its own address (for example `app.yardly.hu`) before switching domains.
+- **Mailbox.** The site shows `config.email` (`hello@yardly.hu`) everywhere. Make sure the mailbox exists, or change the address in `src/config.mjs`.
+- **Prices.** The site shows the new price list. Publish it once the app at `app.yardly.hu` charges the same prices.
 - **Social profiles.** The LinkedIn, Instagram, Facebook and TikTok icons render without links until the URLs are set in `src/config.mjs`.
-- **Case study.** The case is anonymised. Get the client's written consent before naming them or quoting anyone.
-- **Screenshots.** Images in `assets/img/app/` come from the test environment. Personal and company names were replaced with demo names before capture.
+- **Screenshots.** Images in `assets/img/app/` are real screens of the app filled with a made-up company (Minta Logisztika Kft.) and made-up people.

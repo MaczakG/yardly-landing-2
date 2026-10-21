@@ -18,6 +18,17 @@
     return null;
   }
 
+  // "29 990 Ft": thousands grouped with a non-breaking space (Intl leaves 4-digit numbers ungrouped).
+  function huf(n) {
+    return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " Ft";
+  }
+
+  function fill(template, values) {
+    return template.replace(/\{(\w+)\}/g, function (m, key) {
+      return key in values ? values[key] : m;
+    });
+  }
+
   /* Header hairline once the page scrolls */
   var header = document.querySelector(".site-header");
   function onScroll() {
@@ -25,6 +36,63 @@
   }
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
+
+  /* Mega menu (Megoldásaink). Without JavaScript the trigger is a plain link to the overview. */
+  var trigger = document.querySelector(".nav__trigger");
+  var mega = document.getElementById("mega");
+
+  if (trigger && mega) {
+    var closeTimer = 0;
+    var hoverOpenedAt = 0;
+
+    var setMega = function (open) {
+      window.clearTimeout(closeTimer);
+      trigger.setAttribute("aria-expanded", String(open));
+      mega.hidden = !open;
+      if (header) header.classList.toggle("mega-open", open);
+    };
+
+    trigger.addEventListener("click", function (e) {
+      e.preventDefault();
+      var open = trigger.getAttribute("aria-expanded") === "true";
+      // A click right after the pointer opened the menu keeps it open.
+      if (open && Date.now() - hoverOpenedAt < 400) return;
+      setMega(!open);
+    });
+
+    [trigger.parentElement, mega].forEach(function (el) {
+      el.addEventListener("pointerenter", function (e) {
+        if (e.pointerType !== "mouse") return;
+        if (mega.hidden) hoverOpenedAt = Date.now();
+        setMega(true);
+      });
+      el.addEventListener("pointerleave", function (e) {
+        if (e.pointerType !== "mouse") return;
+        closeTimer = window.setTimeout(function () {
+          setMega(false);
+        }, 200);
+      });
+    });
+
+    document.addEventListener("click", function (e) {
+      if (!mega.hidden && !mega.contains(e.target) && !trigger.contains(e.target)) setMega(false);
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !mega.hidden) {
+        setMega(false);
+        trigger.focus();
+      }
+    });
+
+    mega.addEventListener("focusout", function (e) {
+      if (e.relatedTarget && !mega.contains(e.relatedTarget) && e.relatedTarget !== trigger) setMega(false);
+    });
+
+    window.matchMedia("(max-width: 1079px)").addEventListener("change", function (mq) {
+      if (mq.matches) setMega(false);
+    });
+  }
 
   /* Mobile navigation */
   var toggle = document.querySelector(".nav-toggle");
@@ -56,17 +124,133 @@
     });
   }
 
-  /* Pause diagram animation for people who prefer reduced motion */
-  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  function applyMotionPreference() {
-    document.querySelectorAll(".yard__svg").forEach(function (svg) {
-      if (typeof svg.pauseAnimations !== "function") return;
-      if (reduceMotion.matches) svg.pauseAnimations();
-      else svg.unpauseAnimations();
+  /* Pricing: monthly or annual payment, and the vehicle calculator */
+  var cycle = "monthly";
+  var calc = document.querySelector("[data-calc]");
+  var updateCalc = function () {};
+
+  if (calc) {
+    var plans = JSON.parse(calc.getAttribute("data-plans"));
+    var text = JSON.parse(calc.getAttribute("data-text"));
+    var vat = Number(calc.getAttribute("data-vat")) || 0;
+    var max = Number(calc.getAttribute("data-max")) || 300;
+    var range = document.getElementById("calc-range");
+    var number = document.getElementById("calc-n");
+    var out = {
+      plans: calc.querySelector("[data-calc-plans]"),
+      note: calc.querySelector("[data-calc-note]"),
+      tier: calc.querySelector("[data-calc-tier]"),
+      amount: calc.querySelector("[data-calc-amount]"),
+      lines: calc.querySelector("[data-calc-lines]"),
+    };
+
+    var priceOf = function (plan, n) {
+      var base = cycle === "annual" ? plan.annualMonthly : plan.monthly;
+      var over = Math.max(0, n - plan.included);
+      return { plan: plan, base: base, over: over, total: base + over * plan.extra };
+    };
+
+    var item = function (tag, cls, parts) {
+      var li = document.createElement(tag);
+      if (cls) li.className = cls;
+      parts.forEach(function (p) {
+        var el = document.createElement(p[0]);
+        el.textContent = p[1];
+        li.appendChild(el);
+      });
+      return li;
+    };
+
+    updateCalc = function () {
+      var n = Math.round(Number(number.value));
+      if (!isFinite(n) || n < 1) n = 1;
+      if (n > max) n = max;
+
+      var fits = plans.filter(function (p) {
+        return n <= p.ceiling;
+      });
+      var best = fits
+        .map(function (p) {
+          return priceOf(p, n);
+        })
+        .reduce(function (a, b) {
+          return b.total < a.total ? b : a;
+        });
+
+      out.plans.replaceChildren.apply(
+        out.plans,
+        plans.map(function (p) {
+          if (n > p.ceiling) return item("li", "is-off", [["b", p.name], ["span", fill(text.max, { n: p.ceiling })]]);
+          return item("li", p === best.plan ? "is-on" : "", [["b", p.name], ["span", huf(priceOf(p, n).total) + " " + text.unit]]);
+        })
+      );
+
+      var lines = [[fill(text.base, { plan: best.plan.name, included: best.plan.included }), huf(best.base)]];
+      if (best.over) lines.push([fill(text.extra, { n: best.over, price: huf(best.plan.extra) }), huf(best.over * best.plan.extra)]);
+      lines.push([text.gross, huf(best.total * (1 + vat / 100))]);
+      out.lines.replaceChildren.apply(
+        out.lines,
+        lines.map(function (l) {
+          return item("li", "", [["span", l[0]], ["b", l[1]]]);
+        })
+      );
+
+      out.tier.textContent = fill(text.tier, { plan: best.plan.name, n: n });
+      out.amount.textContent = huf(best.total);
+      out.note.textContent = calc.getAttribute(cycle === "annual" ? "data-note-annual" : "data-note-monthly");
+    };
+
+    range.addEventListener("input", function () {
+      number.value = range.value;
+      updateCalc();
+    });
+    number.addEventListener("input", function () {
+      if (number.value === "") return;
+      range.value = Math.min(max, Math.max(1, Number(number.value) || 1));
+      updateCalc();
+    });
+    number.addEventListener("change", function () {
+      var n = Math.min(max, Math.max(1, Math.round(Number(number.value)) || 1));
+      number.value = n;
+      range.value = n;
+      updateCalc();
+    });
+    updateCalc();
+  }
+
+  var cycleButtons = document.querySelectorAll(".cycle__btn");
+  cycleButtons.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      cycle = btn.getAttribute("data-cycle");
+      cycleButtons.forEach(function (b) {
+        var on = b === btn;
+        b.classList.toggle("is-on", on);
+        b.setAttribute("aria-pressed", String(on));
+      });
+      document.querySelectorAll("[data-cycle-root] [data-monthly]").forEach(function (el) {
+        el.textContent = el.getAttribute("data-" + cycle);
+      });
+      updateCalc();
+    });
+  });
+
+  /* Blog: category filters */
+  var filters = document.querySelector("[data-filters]");
+  if (filters) {
+    filters.addEventListener("click", function (e) {
+      var btn = e.target.closest("[data-filter]");
+      if (!btn) return;
+      var value = btn.getAttribute("data-filter");
+      filters.querySelectorAll("[data-filter]").forEach(function (b) {
+        var on = b === btn;
+        b.classList.toggle("is-on", on);
+        b.setAttribute("aria-pressed", String(on));
+      });
+      document.querySelectorAll(".posts .post-card").forEach(function (card) {
+        card.hidden = value !== "" && card.getAttribute("data-category") !== value;
+      });
     });
   }
-  applyMotionPreference();
-  reduceMotion.addEventListener("change", applyMotionPreference);
 
   /* Analytics: Google Analytics 4 loads only after explicit consent */
   var CONSENT_KEY = "yardly-consent";
@@ -129,11 +313,24 @@
     });
   }
 
-  /* Contact form: validation, then POST to the configured endpoint or fall back to e-mail */
+  /* Contact form: prefill from the link, validate, then POST to the endpoint or fall back to e-mail */
   var form = document.getElementById("enquiry-form");
   if (form) {
     var success = document.getElementById("enquiry-success");
     var submitBtn = form.querySelector('button[type="submit"]');
+    var topic = form.querySelector("#f-topic");
+    var message = form.querySelector("#f-message");
+
+    // Links such as /kapcsolat/?tema=notify&funkcio=SSO#enquiry pick the topic and start the message.
+    var params = new URLSearchParams(window.location.search);
+    var wanted = params.get("tema");
+    if (wanted && Array.prototype.some.call(topic.options, function (o) { return o.value === wanted; })) {
+      topic.value = wanted;
+    }
+    var feature = params.get("funkcio");
+    if (feature && !message.value) {
+      message.value = (form.getAttribute("data-notify-prefix") || "") + " " + feature.slice(0, 120);
+    }
 
     function fieldOf(input) {
       return input.closest(".field");
@@ -160,18 +357,28 @@
       });
     });
 
+    // A field's label without its hint ("Telefon (nem kötelező)" → "Telefon").
+    function labelOf(id) {
+      var label = form.querySelector('label[for="f-' + id + '"]');
+      return label && label.firstChild ? label.firstChild.textContent.trim() : id;
+    }
+
     function collect() {
       var data = new FormData(form);
+      var get = function (key) {
+        return String(data.get(key) || "").trim();
+      };
       return {
-        name: (data.get("name") || "").trim(),
-        email: (data.get("email") || "").trim(),
-        company: (data.get("company") || "").trim(),
-        role: (data.get("role") || "").trim(),
-        size: data.get("size") || "",
-        systems: data.getAll("systems"),
-        message: (data.get("message") || "").trim(),
-        website: data.get("website") || "",
-        language: document.documentElement.lang,
+        topic: get("topic"),
+        topicLabel: topic.value ? topic.options[topic.selectedIndex].text : "",
+        name: get("name"),
+        company: get("company"),
+        email: get("email"),
+        phone: get("phone"),
+        vehicles: get("vehicles"),
+        equipment: get("equipment"),
+        message: get("message"),
+        website: get("website"),
         page: window.location.pathname,
       };
     }
@@ -190,19 +397,25 @@
     }
 
     function openMail(payload) {
+      var line = function (id, value) {
+        return value ? labelOf(id) + ": " + value : null;
+      };
       var lines = [
-        payload.name + " · " + payload.company + (payload.role ? " · " + payload.role : ""),
-        payload.email,
-        payload.size,
-        payload.systems.join(", "),
+        line("topic", payload.topicLabel),
+        line("name", payload.name),
+        line("company", payload.company),
+        line("email", payload.email),
+        line("phone", payload.phone),
+        line("vehicles", payload.vehicles),
+        line("equipment", payload.equipment),
         "",
         payload.message,
-      ];
-      var href =
-        "mailto:" + settings.email +
-        "?subject=" + encodeURIComponent(form.getAttribute("data-subject") || "") +
-        "&body=" + encodeURIComponent(lines.join("\n"));
-      window.location.href = href;
+      ].filter(function (l) {
+        return l !== null;
+      });
+      var subject = (form.getAttribute("data-subject") || "") + (payload.topicLabel ? " – " + payload.topicLabel : "");
+      window.location.href =
+        "mailto:" + settings.email + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(lines.join("\n"));
       showResult(form.getAttribute("data-mailto-title"), withEmail(form.getAttribute("data-mailto-text")));
     }
 

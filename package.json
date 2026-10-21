@@ -2,7 +2,7 @@
   "name": "yardly-site",
   "private": true,
   "type": "module",
-  "description": "yardly.hu marketing site (static, three languages)",
+  "description": "yardly.hu marketing site (static, Hungarian)",
   "scripts": {
     "build": "node src/build.mjs",
     "serve": "npx --yes http-server dist -p 4173 -c-1",
