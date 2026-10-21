@@ -763,9 +763,11 @@ body.nav-open .site-header {
   align-items: end;
 }
 
+/* Smaller than .display, growing with the viewport, so the headline stays on three lines
+   beside the lead on a laptop or desktop. */
 .hero__title {
   margin-top: 24px;
-  max-width: 11.5em;
+  font-size: clamp(2.25rem, 5vw - 0.8rem, 3.5rem);
 }
 
 .hero__aside {
