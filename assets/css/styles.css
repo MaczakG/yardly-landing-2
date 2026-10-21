@@ -1228,176 +1228,6 @@ body.nav-open .site-header {
   }
 }
 
-/* About: story ----------------------------------------------------------- */
-
-.story {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 48px 80px;
-  align-items: center;
-}
-
-.story__text {
-  display: grid;
-  gap: 20px;
-  justify-items: start;
-}
-
-.story__text p {
-  color: var(--ink-2);
-  max-width: 34em;
-}
-
-.story__art {
-  padding: clamp(20px, 3vw, 36px);
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 18px;
-}
-
-.story__art figcaption {
-  margin-top: 16px;
-  padding-top: 14px;
-  border-top: 1px solid var(--line);
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--ink-3);
-}
-
-.plan .plan-yard {
-  fill: var(--tint);
-  stroke: var(--line-2);
-  stroke-width: 1.5;
-  stroke-dasharray: 4 5;
-}
-
-.plan .plan-road {
-  fill: none;
-  stroke: var(--line);
-  stroke-width: 30;
-}
-
-.plan .plan-road-line {
-  fill: none;
-  stroke: var(--surface);
-  stroke-width: 1.5;
-  stroke-dasharray: 10 8;
-}
-
-.plan .plan-gate {
-  stroke: var(--surface);
-  stroke-width: 5;
-}
-
-.plan .plan-building {
-  fill: var(--surface);
-  stroke: var(--ink);
-  stroke-width: 1.5;
-}
-
-.plan .plan-rack {
-  fill: var(--line-2);
-}
-
-.plan .plan-door,
-.plan .plan-forklift,
-.plan .plan-cab {
-  fill: var(--ink);
-}
-
-.plan .plan-forks {
-  fill: none;
-  stroke: var(--ink);
-  stroke-width: 1.5;
-  stroke-linecap: round;
-}
-
-.plan .plan-vehicle {
-  fill: var(--surface);
-  stroke: var(--ink);
-  stroke-width: 1.25;
-}
-
-.plan .is-due {
-  fill: var(--accent-fill);
-  stroke: var(--accent-fill);
-}
-
-.plan .plan-ring {
-  fill: none;
-  stroke: var(--accent-fill);
-  stroke-width: 1.5;
-  stroke-dasharray: 3 3;
-}
-
-.plan .plan-bays {
-  fill: none;
-  stroke: var(--line-2);
-  stroke-width: 1;
-}
-
-.plan .plan-label {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  fill: var(--ink-3);
-}
-
-@media (max-width: 899px) {
-  .story {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-
-/* Principles */
-
-.principles {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0 64px;
-}
-
-.principle {
-  display: grid;
-  grid-template-columns: 56px minmax(0, 1fr);
-  align-content: start;
-  gap: 8px 16px;
-  padding-block: 32px;
-  border-top: 1px solid var(--line);
-}
-
-.principle__num {
-  grid-row: span 2;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  color: var(--accent);
-  padding-top: 6px;
-}
-
-.principle p {
-  color: var(--ink-2);
-}
-
-@media (max-width: 899px) {
-  .principles {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-
-@media (max-width: 479px) {
-  .principle {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .principle__num {
-    grid-row: auto;
-    padding-top: 0;
-  }
-}
-
 /* Contact ---------------------------------------------------------------- */
 
 .contact {
@@ -3631,6 +3461,56 @@ mark.ph {
   font-weight: 700;
 }
 
+/* A fieldset: block layout, since a legend doesn't take part in a grid. */
+.calc__features {
+  display: block;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.calc__features legend {
+  float: left; /* keeps the legend inside the box, so the border-top stays above it */
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 0;
+}
+
+.calc__features .calc__hint {
+  clear: both;
+  margin: 0 0 14px;
+}
+
+.calc__checks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 20px;
+}
+
+.calc__check {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  font-size: 0.9375rem;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+
+.calc__check input {
+  width: 18px;
+  height: 18px;
+  margin: 2px 0 0;
+  accent-color: var(--accent-fill);
+  cursor: pointer;
+}
+
+.calc__check:has(input:checked) {
+  color: var(--ink);
+  font-weight: 600;
+}
+
 .calc__plans {
   display: grid;
   gap: 8px;
@@ -3870,25 +3750,13 @@ mark.ph {
   .calc__number {
     width: 100%;
   }
+
+  .calc__checks {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
-/* About, blog, contact --------------------------------------------------- */
-
-.mission {
-  display: grid;
-  gap: 28px;
-  justify-items: center;
-  text-align: center;
-}
-
-.mission__text {
-  max-width: 22em;
-  font-size: clamp(1.625rem, 1.2rem + 2vw, 2.75rem);
-  font-weight: 650;
-  line-height: 1.2;
-  letter-spacing: -0.03em;
-  text-wrap: balance;
-}
+/* Blog, contact ---------------------------------------------------------- */
 
 .filters {
   display: flex;
