@@ -1,5 +1,5 @@
-// Főoldal. One promise: every vehicle, piece of equipment and deadline in one place, and the
-// system speaks up before something goes wrong. Sections follow the visitor's questions:
+// Főoldal. One promise: automated operations for equipment and vehicles — deadlines kept,
+// workflows of one's own, automation under a permission matrix. Sections follow the visitor's questions:
 // what is it, is it for me, what does it do, what does it cost, how do I start.
 
 export const home = {
@@ -8,8 +8,8 @@ export const home = {
 
   hero: {
     eyebrow: "Flotta- és eszközkezelés magyar cégeknek",
-    title: "Minden jármű, eszköz és határidő egy helyen.",
-    lead: "A Yardly szól, mielőtt lejár a műszaki, esedékes a szerviz vagy eltűnik egy targonca a leltárból. Böngészőben és telefonon, telepítés nélkül.",
+    title: "Automatizált üzemeltetési megoldások eszközökre és járművekre.",
+    lead: "A Yardly számon tartja a lejáratokat, Ön pedig teljesen egyedi workflow-kat hozhat létre benne, és jogosultsági mátrixszal automatizálhatja a folyamatokat.",
     shotAlt: "A Yardly irányítópultja: elöl a közelgő és lejárt határidők, alatta a fő mutatók",
     phoneAlt: "A telefonos állapotfelmérő űrlap",
   },

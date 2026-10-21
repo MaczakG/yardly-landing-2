@@ -15,7 +15,7 @@ export const ui = {
   trial: "Kipróbálom 14 napig",
   trialShort: "Kipróbálom",
   demo: "Bemutatót kérek",
-  trialNote: "14 nap ingyen, a Prémium csomag minden funkciójával. Bankkártya nem kell.",
+  trialNote: "14 nap ingyen, a Prémium csomag minden funkciójával.",
   soon: "Hamarosan",
   notify: "Értesítést kérek",
   vat: "+ ÁFA",

@@ -26,7 +26,7 @@ export const overview = {
       { key: "Sso", name: "SSO (Microsoft Entra ID, Google)" },
     ],
   },
-  cta: { title: "Nézze meg a saját adataival.", lead: "14 nap ingyen, a Prémium csomag minden funkciójával. Bankkártya nem kell." },
+  cta: { title: "Nézze meg a saját adataival.", lead: "14 nap ingyen, a Prémium csomag minden funkciójával." },
 };
 
 export const groups = {
