@@ -756,24 +756,30 @@ body.nav-open .site-header {
   padding-block: clamp(48px, 7vw, 104px) clamp(64px, 8vw, 112px);
 }
 
+/* The eyebrow on its own row; the headline and the lead start on the same line below it. */
 .hero__grid {
   display: grid;
   grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
-  gap: 32px 72px;
-  align-items: end;
+  gap: 24px 72px;
+  align-items: start;
+}
+
+.hero__eyebrow {
+  grid-column: 1 / -1;
 }
 
 /* Smaller than .display, growing with the viewport, so the headline stays on three lines
-   beside the lead on a laptop or desktop. */
+   beside the lead on a laptop or desktop; a little more leading than .display so accents
+   and descenders of neighbouring lines don't touch. */
 .hero__title {
-  margin-top: 24px;
   font-size: clamp(2.25rem, 5vw - 0.8rem, 3.5rem);
+  line-height: 1.1;
 }
 
 .hero__aside {
   display: grid;
   gap: 32px;
-  padding-bottom: 10px;
+  padding-top: 0.35em;
 }
 
 .hero__aside .lead {
@@ -786,7 +792,7 @@ body.nav-open .site-header {
   }
 
   .hero__aside {
-    padding-bottom: 0;
+    padding-top: 0;
     gap: 28px;
   }
 }

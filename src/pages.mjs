@@ -147,10 +147,8 @@ export const home = () => {
 <section class="hero" aria-labelledby="hero-title">
   <div class="container">
     <div class="hero__grid">
-      <div>
-        <p class="eyebrow">${h.hero.eyebrow}</p>
-        <h1 class="display hero__title" id="hero-title">${g(h.hero.title)}</h1>
-      </div>
+      <p class="eyebrow hero__eyebrow">${h.hero.eyebrow}</p>
+      <h1 class="display hero__title" id="hero-title">${g(h.hero.title)}</h1>
       <div class="hero__aside">
         <p class="lead">${h.hero.lead}</p>
         ${ctaButtons()}
