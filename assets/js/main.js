@@ -93,7 +93,7 @@
       if (e.relatedTarget && !mega.contains(e.relatedTarget) && e.relatedTarget !== trigger) setMega(false);
     });
 
-    window.matchMedia("(max-width: 1079px)").addEventListener("change", function (mq) {
+    window.matchMedia("(max-width: 1199px)").addEventListener("change", function (mq) {
       if (mq.matches) setMega(false);
     });
   }
@@ -123,7 +123,7 @@
         toggle.focus();
       }
     });
-    window.matchMedia("(min-width: 1080px)").addEventListener("change", function (mq) {
+    window.matchMedia("(min-width: 1200px)").addEventListener("change", function (mq) {
       if (mq.matches) setNav(false);
     });
   }

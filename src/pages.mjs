@@ -6,7 +6,7 @@ import { APP, ui } from "./content/site.mjs";
 import { home as h } from "./content/home.mjs";
 import { overview, groups, solutions, solutionBySlug } from "./content/solutions.mjs";
 import { pricing as pr, plans, comparison, limits, VAT_PERCENT, SELF_SERVICE_MAX_VEHICLES, ANNUAL_FREE_MONTHS, EQUIPMENT_ADDON } from "./content/pricing.mjs";
-import { about as ab, contact as co, privacy as pv, imprint as im } from "./content/pages.mjs";
+import { about as ab, contact as co, privacy as pv, imprint as im, enterprise as en } from "./content/pages.mjs";
 import { blog as bl, categories, posts } from "./content/posts.mjs";
 
 // "29 990 Ft": thousands grouped with a non-breaking space, so a price never wraps.
@@ -641,7 +641,10 @@ ${faqBlock(pr.faq, "gyik")}
     </div>
     <div>
       <p class="lead">${pr.quote.text}</p>
-      <a class="btn btn--teal" href="${contactHref("quote")}">${pr.quote.button}${arrow()}</a>
+      <div class="cta-row">
+        <a class="btn btn--teal" href="${contactHref("quote")}">${pr.quote.button}${arrow()}</a>
+        <a class="text-link" href="${route("enterprise")}">${pr.quote.more}${arrow("text-link__arrow")}</a>
+      </div>
     </div>
   </div>
 </section>
@@ -649,6 +652,77 @@ ${faqBlock(pr.faq, "gyik")}
 ${ctaSection({ title: "Próbáld ki 14 napig, kártya nélkül." })}`,
   };
 };
+
+// ---------------------------------------------------------------------------
+// Vállalati megoldás
+
+export const enterprise = () => ({
+  title: en.title,
+  description: en.description,
+  jsonLd: faqJsonLd(en.faq.items),
+  body: `
+${pageHero(
+  en,
+  `<div class="cta-row">
+      <a class="btn btn--primary" href="${contactHref("quote")}">${en.quoteButton}${arrow()}</a>
+      <a class="btn btn--ghost" href="${contactHref("demo")}">${ui.demo}</a>
+    </div>`
+)}
+
+<section class="section section--band" aria-label="Röviden">
+  <div class="container">
+    <ol class="benefit-row">
+      ${en.pillars.map((b, i) => `<li><span class="benefit-row__num">0${i + 1}</span><h2 class="h3">${b.title}</h2><p>${b.text}</p></li>`).join("")}
+    </ol>
+  </div>
+</section>
+
+<section class="section" id="integracio" aria-labelledby="integration-title">
+  <div class="container">
+    ${sectionHead(en.integrations, "integration-title")}
+    ${featureList(en.integrations.items)}
+  </div>
+</section>
+
+<section class="section section--deep" id="sajat-szerver" aria-labelledby="hosting-title">
+  <div class="container split">
+    <div class="split__text">
+      <p class="eyebrow">${en.hosting.eyebrow}</p>
+      <h2 class="h2" id="hosting-title">${g(en.hosting.title)}</h2>
+      <p class="lead">${en.hosting.lead}</p>
+      ${ticks(en.hosting.points)}
+    </div>
+    <div class="split__art">
+      <div class="spec-card">
+        <p class="spec-card__title">${en.hosting.specsTitle}</p>
+        <dl>${en.hosting.specs.map((x) => `<div><dt>${x.k}</dt><dd>${x.v}</dd></div>`).join("")}</dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="steps-title">
+  <div class="container">
+    <div class="section-head section-head--single"><div><p class="eyebrow">${en.steps.eyebrow}</p><h2 class="h2" id="steps-title">${en.steps.title}</h2></div></div>
+    <ol class="howto">${en.steps.items.map((st, i) => `<li><span class="howto__num">${i + 1}</span><p>${st}</p></li>`).join("")}</ol>
+  </div>
+</section>
+
+<section class="section section--band" aria-labelledby="fit-title">
+  <div class="container">
+    <div class="section-head section-head--single"><div><p class="eyebrow">${en.fit.eyebrow}</p><h2 class="h2" id="fit-title">${en.fit.title}</h2></div></div>
+    <ul class="personas">${en.fit.items.map((p) => `<li class="persona"><h3 class="h3">${p.title}</h3><p>${p.text}</p></li>`).join("")}</ul>
+  </div>
+</section>
+
+${faqBlock(en.faq, "gyik")}
+
+<section class="section section--cta" aria-labelledby="cta-title">
+  <div class="container">
+    ${ctaCard({ eyebrow: en.cta.eyebrow, title: g(en.cta.title), lead: en.cta.lead, button: en.quoteButton, href: contactHref("quote"), secondary: { label: ui.demo, href: contactHref("demo") } })}
+  </div>
+</section>`,
+});
 
 // ---------------------------------------------------------------------------
 // Rólunk

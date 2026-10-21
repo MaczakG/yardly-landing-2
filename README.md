@@ -11,7 +11,8 @@ The site is static and Hungarian only. The former English and German pages, and 
 | Home | `/` |
 | Solutions overview (Megoldásaink) | `/megoldasaink/` |
 | 14 solution pages, one per area of the app | `/megoldasaink/<slug>/` |
-| Pricing, with the vehicle calculator | `/arak/` |
+| Pricing, with the calculator for vehicles and equipment | `/arak/` |
+| Vállalati megoldás: self-hosted install and integration with existing systems (highlighted in the menu as „Vállalatoknak”) | `/vallalati-megoldas/` |
 | About | `/rolunk/` |
 | Contact | `/kapcsolat/` |
 | Blog (8 posts, filterable by category) | `/blog/`, `/blog/<slug>/` |

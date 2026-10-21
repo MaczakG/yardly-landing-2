@@ -155,5 +155,6 @@ export const pricing = {
     title: "300 jármű felett vagy saját szerverre telepítve? Kérj ajánlatot.",
     text: "Egy munkanapon belül jelentkezünk. Nagyobb flottára egyedi árat adunk, és a Yardly a saját szerveredre, saját adatközpontodba is telepíthető.",
     button: "Ajánlatot kérek",
+    more: "A vállalati megoldásról",
   },
 };
