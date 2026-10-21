@@ -5,12 +5,17 @@ import { esc, glue as g, arrow, icon, board, yardPlan, ctaCard, screenshot, phon
 import { APP, ui } from "./content/site.mjs";
 import { home as h } from "./content/home.mjs";
 import { overview, groups, solutions, solutionBySlug } from "./content/solutions.mjs";
-import { pricing as pr, plans, comparison, limits, VAT_PERCENT, SELF_SERVICE_MAX_VEHICLES } from "./content/pricing.mjs";
+import { pricing as pr, plans, comparison, limits, VAT_PERCENT, SELF_SERVICE_MAX_VEHICLES, ANNUAL_FREE_MONTHS, EQUIPMENT_ADDON } from "./content/pricing.mjs";
 import { about as ab, contact as co, privacy as pv, imprint as im } from "./content/pages.mjs";
 import { blog as bl, categories, posts } from "./content/posts.mjs";
 
 // "29 990 Ft": thousands grouped with a non-breaking space, so a price never wraps.
-export const huf = (n) => `${String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, " ")} Ft`;
+export const huf = (n) => `${num(n)} Ft`;
+// "1 000": a whole number with its thousands grouped by a non-breaking space.
+export const num = (n) => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+
+// The equipment slider's top end; the number field next to it takes any count.
+const CALC_EQUIPMENT_RANGE = 2000;
 
 const withEmail = (html) => html.replaceAll("{email}", config.email);
 const contactHref = (topic, extra = "") => `${route("contact")}?tema=${topic}${extra}#enquiry`;
@@ -470,50 +475,69 @@ const cell = (v) =>
         ? `${soonTag}<span class="cmp-text">${String(v).replace(/^Hamarosan,?\s*/, "")}</span>`
         : `<span class="cmp-text">${v}</span>`;
 
-// The calculator's answer for n active vehicles: the cheapest plan whose vehicle ceiling fits,
-// with overage for the vehicles above what the plan includes. assets/js/main.js does the same
-// in the browser; this renders the starting state so the page reads right without JavaScript.
-const calcQuote = (n, cycle = "monthly") => {
-  const options = plans
-    .filter((p) => n <= p.ceiling)
-    .map((p) => {
-      const base = cycle === "annual" ? p.annualMonthly : p.monthly;
-      const over = Math.max(0, n - p.included);
-      return { plan: p, base, over, total: base + over * p.extra };
-    });
-  return options.reduce((a, b) => (b.total < a.total ? b : a));
+// The calculator's answer for n active vehicles and e pieces of equipment: the cheapest plan
+// that can take both. Vehicles above the plan's included number cost the per-vehicle fee, up to
+// the plan's vehicle ceiling; equipment above the plan's limit needs "+250 eszköz" packs (at
+// most EQUIPMENT_ADDON.maxQuantity; Prémium has no equipment limit). assets/js/main.js does the
+// same in the browser; this renders the starting state so the page reads right without JavaScript.
+const addonMonthly = (cycle) => (cycle === "annual" ? (EQUIPMENT_ADDON.monthly * (12 - ANNUAL_FREE_MONTHS)) / 12 : EQUIPMENT_ADDON.monthly);
+const maxEquipment = (p) => (p.equipment === null ? Infinity : p.equipment + EQUIPMENT_ADDON.size * EQUIPMENT_ADDON.maxQuantity);
+
+const planQuote = (p, n, e, cycle) => {
+  if (n > p.ceiling) return { plan: p, off: pr.calc.max(p.ceiling) };
+  if (e > maxEquipment(p)) return { plan: p, off: pr.calc.maxEquipment(num(maxEquipment(p))) };
+  const base = cycle === "annual" ? p.annualMonthly : p.monthly;
+  const over = Math.max(0, n - p.included);
+  const packs = p.equipment === null ? 0 : Math.ceil(Math.max(0, e - p.equipment) / EQUIPMENT_ADDON.size);
+  const addon = packs * addonMonthly(cycle);
+  return { plan: p, base, over, packs, addon, total: base + over * p.extra + addon };
 };
 
-const calcLines = (q) => {
+const calcQuote = (n, e, cycle = "monthly") =>
+  plans
+    .map((p) => planQuote(p, n, e, cycle))
+    .filter((q) => !q.off)
+    .reduce((a, b) => (b.total < a.total ? b : a));
+
+const calcLines = (q, cycle = "monthly") => {
   const c = pr.calc;
-  const lines = [[c.lineBase(q.plan.name, q.plan.included), huf(q.base)]];
+  const lines = [[c.lineBase(q.plan.name, q.plan.included, q.plan.equipment === null ? c.unlimited : num(q.plan.equipment)), huf(q.base)]];
   if (q.over) lines.push([c.lineExtra(q.over, huf(q.plan.extra)), huf(q.over * q.plan.extra)]);
+  if (q.packs) lines.push([c.lineEquipment(q.packs, huf(addonMonthly(cycle))), huf(q.addon)]);
   lines.push([c.lineGross, huf(q.total * (1 + VAT_PERCENT / 100))]);
   return lines.map(([k, v]) => `<li><span>${k}</span><b>${v}</b></li>`).join("");
 };
 
-const calcPlans = (n, best) =>
+const calcPlans = (n, e, best) =>
   plans
-    .map((p) =>
-      n > p.ceiling
-        ? `<li class="is-off"><b>${p.name}</b><span>${pr.calc.max(p.ceiling)}</span></li>`
-        : `<li${p === best.plan ? ' class="is-on"' : ""}><b>${p.name}</b><span>${huf(p.monthly + Math.max(0, n - p.included) * p.extra)} ${pr.perMonth}</span></li>`
+    .map((p) => planQuote(p, n, e, "monthly"))
+    .map((q) =>
+      q.off
+        ? `<li class="is-off"><b>${q.plan.name}</b><span>${q.off}</span></li>`
+        : `<li${q.plan === best.plan ? ' class="is-on"' : ""}><b>${q.plan.name}</b><span>${huf(q.total)} ${pr.perMonth}</span></li>`
     )
     .join("");
 
 export const pricing = () => {
-  const calcData = plans.map((p) => ({ name: p.name, monthly: p.monthly, annualMonthly: p.annualMonthly, included: p.included, extra: p.extra, ceiling: p.ceiling }));
+  const calcData = plans.map((p) => ({
+    name: p.name, monthly: p.monthly, annualMonthly: p.annualMonthly, included: p.included, extra: p.extra, ceiling: p.ceiling, equipment: p.equipment,
+  }));
   const START = 30;
-  const q = calcQuote(START);
+  const START_EQUIPMENT = 50;
+  const q = calcQuote(START, START_EQUIPMENT);
   // Text templates for the browser: the copy functions called with {placeholders}.
   const t = {
-    tier: pr.calc.resultTier("{plan}", "{n}"),
-    base: pr.calc.lineBase("{plan}", "{included}"),
+    tier: pr.calc.resultTier("{plan}", "{n}", "{e}"),
+    base: pr.calc.lineBase("{plan}", "{included}", "{equipment}"),
     extra: pr.calc.lineExtra("{n}", "{price}"),
+    equipment: pr.calc.lineEquipment("{packs}", "{price}"),
     gross: pr.calc.lineGross,
+    unlimited: pr.calc.unlimited,
     max: pr.calc.max("{n}"),
+    maxEquipment: pr.calc.maxEquipment("{n}"),
     unit: pr.perMonth,
   };
+  const addon = { ...EQUIPMENT_ADDON, freeMonths: ANNUAL_FREE_MONTHS };
   return {
     title: pr.title,
     description: pr.description,
@@ -550,19 +574,31 @@ ${pageHero(pr)}
 <section class="section section--band" id="kalkulator" aria-labelledby="calc-title">
   <div class="container">
     ${sectionHead({ eyebrow: pr.calc.eyebrow, title: pr.calc.title }, "calc-title")}
-    <div class="calc" data-calc data-plans="${esc(JSON.stringify(calcData))}" data-text="${esc(JSON.stringify(t))}" data-vat="${VAT_PERCENT}" data-max="${SELF_SERVICE_MAX_VEHICLES}"
+    <div class="calc" data-calc data-plans="${esc(JSON.stringify(calcData))}" data-addon="${esc(JSON.stringify(addon))}" data-text="${esc(JSON.stringify(t))}"
+      data-vat="${VAT_PERCENT}" data-max="${SELF_SERVICE_MAX_VEHICLES}"
       data-note-monthly="${esc(pr.calc.noteMonthly)}" data-note-annual="${esc(pr.calc.noteAnnual)}">
       <div class="calc__input">
-        <label class="calc__label" for="calc-n">${pr.calc.label}</label>
-        <div class="calc__row">
-          <input type="range" id="calc-range" min="1" max="${SELF_SERVICE_MAX_VEHICLES}" value="${START}" aria-label="${esc(pr.calc.label)}">
-          <input class="input calc__number" type="number" id="calc-n" min="1" max="${SELF_SERVICE_MAX_VEHICLES}" value="${START}" inputmode="numeric">
+        <div class="calc__field">
+          <label class="calc__label" for="calc-n">${pr.calc.label}</label>
+          <div class="calc__row">
+            <input type="range" id="calc-range" min="1" max="${SELF_SERVICE_MAX_VEHICLES}" value="${START}" aria-label="${esc(pr.calc.label)}">
+            <input class="input calc__number" type="number" id="calc-n" min="1" max="${SELF_SERVICE_MAX_VEHICLES}" value="${START}" inputmode="numeric">
+          </div>
         </div>
-        <ul class="calc__plans" data-calc-plans>${calcPlans(START, q)}</ul>
+        <div class="calc__field">
+          <label class="calc__label" for="calc-e">${pr.calc.equipmentLabel}</label>
+          <p class="calc__hint" id="calc-e-hint">${pr.calc.equipmentHint}</p>
+          <div class="calc__row">
+            <input type="range" id="calc-e-range" min="0" max="${CALC_EQUIPMENT_RANGE}" step="10" value="${START_EQUIPMENT}" aria-label="${esc(pr.calc.equipmentLabel)}" aria-describedby="calc-e-hint">
+            <input class="input calc__number" type="number" id="calc-e" min="0" max="100000" value="${START_EQUIPMENT}" inputmode="numeric" aria-describedby="calc-e-hint">
+          </div>
+        </div>
+        <ul class="calc__plans" data-calc-plans>${calcPlans(START, START_EQUIPMENT, q)}</ul>
         <p class="calc__note muted" data-calc-note>${pr.calc.noteMonthly}</p>
+        <p class="calc__note muted">${pr.calc.equipmentNote}</p>
       </div>
       <div class="calc__result" aria-live="polite">
-        <p class="calc__tier" data-calc-tier>${pr.calc.resultTier(q.plan.name, START)}</p>
+        <p class="calc__tier" data-calc-tier>${pr.calc.resultTier(q.plan.name, START, START_EQUIPMENT)}</p>
         <p class="calc__amount"><span data-calc-amount>${huf(q.total)}</span> <small>${pr.perMonth}</small></p>
         <ul class="calc__lines" data-calc-lines>${calcLines(q)}</ul>
         <a class="btn btn--teal" href="${APP.register}">${ui.trial}${arrow()}</a>

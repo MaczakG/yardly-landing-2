@@ -67,7 +67,7 @@ To change copy, edit the matching file in `src/content/` and rebuild. To add a b
 
 ### Prices
 
-The prices in `src/content/pricing.mjs` are a copy of the app's price list (`pricing.json` in the yardly-saas repository). The site does not read them from the app, so update both together. The calculator picks the cheapest plan whose vehicle ceiling fits, adds the per-vehicle fee above the included number, and shows the net monthly amount and the gross amount with 27% VAT. The same logic runs in `src/pages.mjs` (the starting state) and `assets/js/main.js` (when the visitor changes the number).
+The prices in `src/content/pricing.mjs` are a copy of the app's price list (`pricing.json` in the yardly-saas repository). The site does not read them from the app, so update both together. The calculator takes the number of vehicles and of equipment and picks the cheapest plan that can hold both: the per-vehicle fee above the included vehicles (up to the plan's ceiling), and "+250 eszköz" packs above the plan's equipment limit (at most 20; Prémium has no limit; on annual billing a pack costs 10 months for 12). It shows the net monthly amount and the gross amount with 27% VAT. The same logic runs in `src/pages.mjs` (the starting state) and `assets/js/main.js` (when the visitor changes a number).
 
 ### Contact form links
 
