@@ -181,6 +181,7 @@ export const home = () => {
       ${h.problems.items.map((p) => `<article class="pain"><p class="pain__quote">${p.quote}</p><p>${p.text}</p></article>`).join("")}
     </div>
     <p class="pains__close">${h.problems.close}</p>
+    <p class="center pains__cta"><a class="btn btn--primary" href="${route("solutions")}">${h.problems.button}${arrow()}</a></p>
   </div>
 </section>
 

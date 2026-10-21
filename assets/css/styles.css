@@ -2617,6 +2617,10 @@ mark.ph {
   color: var(--ink-2);
 }
 
+.pains__cta {
+  margin-top: 20px;
+}
+
 .pains__close {
   max-width: 34em;
   margin: clamp(36px, 4vw, 56px) auto 0;

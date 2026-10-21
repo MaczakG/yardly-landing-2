@@ -25,11 +25,12 @@ export const home = {
     eyebrow: "Ismerős?",
     title: "Ismerős?",
     items: [
-      { quote: "„Lejárt a műszaki, és csak az ellenőrzésnél derült ki.”", text: "A határidők naptárakban, e-mailekben és fejekben vannak. Egy szabadság, és már csúszik is." },
-      { quote: "„Az Excel háromféle verzióban él.”", text: "Mindenki a sajátját frissíti. A költségekről senki nem tud pontos számot mondani." },
-      { quote: "„Senki nem tudja, hol a 3-as targonca.”", text: "A leltár egy napig tart, és a végén akkor sem egyezik." },
+      { quote: "„Bonyolult folyamatok Excelben vezetve, háromféleképpen?”", text: "Csak egy valaki szerkesztheti őket, és minden lépés egy 1,5 órás rémálom." },
+      { quote: "„Aki hozzáfér az Excelhez, az szerkesztheti, és ez így nem jó!”", text: "Mindenki, akinek jogosultsága van a mappához, szerkesztheti az amúgy is mindenre érzékeny függvénylabirintust, és hetente kétszer kell visszaállítani." },
+      { quote: "„Minden leltárkor a jelenlegi programunk összevissza dobja be a tételeket.”", text: "A jelenleg használt leltárprogramunk mindig olyan eszközöket dob fel következőnek, amelyek a telephely túloldalán vannak, és legalább tízszer megyek körbe." },
     ],
-    close: "A Yardly ezt a három gondot oldja meg egyszerre.",
+    close: "A Yardly ezt a három gondot is megoldja egyszerre.",
+    button: "Megoldásaink",
   },
 
   modules: {
