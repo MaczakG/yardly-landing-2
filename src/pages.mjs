@@ -1,12 +1,12 @@
 // Page templates. Each returns { title, description, body, jsonLd? }; layout.mjs wraps them.
 import { config } from "./config.mjs";
 import { route, solutionRoute, postRoute } from "./routes.mjs";
-import { esc, glue as g, arrow, icon, board, yardPlan, ctaCard, screenshot, phoneShot } from "./components.mjs";
+import { esc, glue as g, arrow, icon, board, ctaCard, screenshot, phoneShot } from "./components.mjs";
 import { APP, ui } from "./content/site.mjs";
 import { home as h } from "./content/home.mjs";
 import { overview, groups, solutions, solutionBySlug } from "./content/solutions.mjs";
 import { pricing as pr, plans, comparison, limits, VAT_PERCENT, SELF_SERVICE_MAX_VEHICLES, ANNUAL_FREE_MONTHS, EQUIPMENT_ADDON } from "./content/pricing.mjs";
-import { about as ab, contact as co, privacy as pv, imprint as im, enterprise as en } from "./content/pages.mjs";
+import { contact as co, privacy as pv, imprint as im, enterprise as en } from "./content/pages.mjs";
 import { blog as bl, categories, posts } from "./content/posts.mjs";
 
 // "29 990 Ft": thousands grouped with a non-breaking space, so a price never wraps.
@@ -720,72 +720,6 @@ ${faqBlock(en.faq, "gyik")}
 <section class="section section--cta" aria-labelledby="cta-title">
   <div class="container">
     ${ctaCard({ eyebrow: en.cta.eyebrow, title: g(en.cta.title), lead: en.cta.lead, button: en.quoteButton, href: contactHref("quote"), secondary: { label: ui.demo, href: contactHref("demo") } })}
-  </div>
-</section>`,
-});
-
-// ---------------------------------------------------------------------------
-// Rólunk
-
-export const about = () => ({
-  title: ab.title,
-  description: ab.description,
-  body: `
-${pageHero(ab)}
-
-<section class="section section--band" aria-labelledby="story-title">
-  <div class="container story">
-    <div class="story__text">
-      <p class="eyebrow">${ab.story.eyebrow}</p>
-      <h2 class="h2" id="story-title">${g(ab.story.title)}</h2>
-      ${ab.story.paragraphs.map((p) => `<p>${p}</p>`).join("")}
-    </div>
-    <figure class="story__art">
-      ${yardPlan(ab.story.plan)}
-      <figcaption>${ab.story.caption}</figcaption>
-    </figure>
-  </div>
-</section>
-
-<section class="section section--deep" aria-label="${esc(ab.mission.eyebrow)}">
-  <div class="container mission">
-    <p class="eyebrow">${ab.mission.eyebrow}</p>
-    <p class="mission__text">„${g(ab.mission.text)}”</p>
-  </div>
-</section>
-
-<section class="section" aria-labelledby="values-title">
-  <div class="container">
-    ${sectionHead(ab.values, "values-title")}
-    <ol class="principles">
-      ${ab.values.items.map((p, i) => `<li class="principle"><span class="principle__num">0${i + 1}</span><h3 class="h3">${p.title}</h3><p>${p.text}</p></li>`).join("")}
-    </ol>
-  </div>
-</section>
-
-<section class="section section--band" aria-labelledby="why-title">
-  <div class="container">
-    ${sectionHead(ab.why, "why-title")}
-    <ul class="personas">${ab.why.items.map((p) => `<li class="persona"><h3 class="h3">${p.title}</h3><p>${p.text}</p></li>`).join("")}</ul>
-  </div>
-</section>
-
-<section class="section" aria-labelledby="team-title">
-  <div class="container team">
-    <div>
-      <p class="eyebrow">${ab.team.eyebrow}</p>
-      <h2 class="h2" id="team-title">${g(ab.team.title)}</h2>
-    </div>
-    <div>
-      <p class="lead">${ab.team.text}</p>
-      <a class="text-link" href="${route("imprint")}">Impresszum${arrow("text-link__arrow")}</a>
-    </div>
-  </div>
-</section>
-
-<section class="section section--cta" aria-labelledby="cta-title">
-  <div class="container">
-    ${ctaCard({ eyebrow: ab.cta.eyebrow, title: g(ab.cta.title), lead: ab.cta.lead, button: ui.demo, href: contactHref("demo"), secondary: { label: ui.trial, href: APP.register } })}
   </div>
 </section>`,
 });

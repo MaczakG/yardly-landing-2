@@ -135,7 +135,6 @@ const footer = () => {
         <ul>
           <li><a href="${route("pricing")}">Árak</a></li>
           <li><a href="${route("enterprise")}">Vállalati megoldás</a></li>
-          <li><a href="${route("about")}">Rólunk</a></li>
           <li><a href="${route("blog")}">Blog</a></li>
           <li><a href="${route("contact")}">Kapcsolat</a></li>
           <li><a href="${APP.login}">${ui.login}</a></li>

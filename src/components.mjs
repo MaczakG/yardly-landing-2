@@ -89,42 +89,6 @@ export const board = (b) => `<div class="board" aria-hidden="true">
 </div>`;
 
 // ---------------------------------------------------------------------------
-// About page: top-down plan of a company yard
-
-export const yardPlan = (p) => {
-  const truck = (x, y, accent) =>
-    `<g transform="translate(${x} ${y})"><rect class="plan-vehicle${accent ? " is-due" : ""}" width="58" height="20" rx="3"/><rect class="plan-cab${accent ? " is-due" : ""}" x="60" y="2" width="16" height="16" rx="3"/></g>`;
-  const van = (x, y) => `<rect class="plan-vehicle" x="${x}" y="${y}" width="40" height="18" rx="4"/>`;
-  const forklift = (x, y, accent) =>
-    `<g transform="translate(${x} ${y})"><rect class="plan-forklift${accent ? " is-due" : ""}" width="16" height="12" rx="2.5"/><path class="plan-forks" d="M16 3h8M16 9h8"/></g>`;
-  return `<svg class="plan" viewBox="0 0 480 300" role="img" aria-labelledby="plan-title">
-  <title id="plan-title">${esc(p.title)}</title>
-  <rect class="plan-yard" x="8" y="8" width="464" height="284" rx="14"/>
-  <path class="plan-road" d="M8 252H288"/>
-  <path class="plan-road-line" d="M20 252H280"/>
-  <path class="plan-gate" d="M8 236v32"/>
-  <rect class="plan-building" x="28" y="28" width="196" height="150" rx="6"/>
-  <rect class="plan-rack" x="44" y="50" width="164" height="9" rx="2"/>
-  <rect class="plan-rack" x="44" y="78" width="164" height="9" rx="2"/>
-  <rect class="plan-rack" x="44" y="106" width="164" height="9" rx="2"/>
-  <rect class="plan-rack" x="44" y="134" width="164" height="9" rx="2"/>
-  <rect class="plan-door" x="224" y="44" width="7" height="22" rx="1.5"/>
-  <rect class="plan-door" x="224" y="80" width="7" height="22" rx="1.5"/>
-  <rect class="plan-door" x="224" y="116" width="7" height="22" rx="1.5"/>
-  ${forklift(246, 48, false)}${forklift(246, 86, true)}${forklift(246, 124, false)}${forklift(120, 158, false)}
-  <circle class="plan-ring" cx="258" cy="92" r="17"/>
-  <path class="plan-bays" d="M312 28v150M364 28v150M416 28v150M468 28v150M312 28h156M312 178h156"/>
-  ${van(318, 40)}${van(370, 40)}${van(422, 40)}
-  ${van(318, 76)}${van(422, 76)}
-  ${truck(300, 214, false)}${truck(386, 214, true)}${truck(300, 252, false)}
-  <text class="plan-label" x="36" y="198">${esc(p.warehouse)}</text>
-  <text class="plan-label" x="238" y="166">${esc(p.forklifts)}</text>
-  <text class="plan-label" x="312" y="198">${esc(p.parking)}</text>
-  <text class="plan-label" x="20" y="226">${esc(p.gate)}</text>
-</svg>`;
-};
-
-// ---------------------------------------------------------------------------
 // Reusable blocks
 
 // Closing call to action: a primary and an optional secondary button.

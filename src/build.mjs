@@ -36,7 +36,6 @@ render("solutions", ROUTES.solutions, pages.solutionsIndex());
 for (const s of pages.solutions) render(`solution:${s.slug}`, solutionRoute(s.slug), pages.solution(s));
 render("pricing", ROUTES.pricing, pages.pricing());
 render("enterprise", ROUTES.enterprise, pages.enterprise());
-render("about", ROUTES.about, pages.about());
 render("contact", ROUTES.contact, pages.contact());
 render("blog", ROUTES.blog, pages.blog());
 for (const p of pages.posts) render("post", postRoute(p), pages.post(p));
