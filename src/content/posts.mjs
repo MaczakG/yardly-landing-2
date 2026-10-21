@@ -10,7 +10,7 @@ export const blog = {
   all: "Összes",
   postCta: {
     title: "Ezt a Yardly magától csinálja.",
-    text: "Próbáld ki 14 napig, bankkártya nélkül.",
+    text: "Próbálja ki 14 napig, bankkártya nélkül.",
     more: "Részletek",
   },
   relatedTitle: "Kapcsolódó cikkek",
@@ -38,12 +38,12 @@ export const posts = [
 <h2>Mit csinál?</h2>
 <ul>
 <li>6 óránként lekéri az új tranzakciókat, és bármikor kézzel is indítható.</li>
-<li>A kártyát a DKV-nál rögzített rendszám alapján köti a járműhöz; ahol ez nem egyezik, kézzel választhatsz.</li>
+<li>A kártyát a DKV-nál rögzített rendszám alapján köti a járműhöz; ahol ez nem egyezik, kézzel választhat.</li>
 <li>Minden tranzakcióból tankolás lesz a jármű adatlapján (mennyiség, összeg, kút, km-óra), „DKV” jelöléssel, így a költségekbe és a fogyasztásba is beleszámít.</li>
 <li>Az AdBlue, az olaj és a mosás nem számít tankolásnak, az elektromos töltés külön jelölést kap.</li>
 </ul>
-<h2>Hogyan kapcsold be?</h2>
-<p>A Beállítások → Integrációk fülön add meg a DKV-tól kapott API-hozzáférést, és egy gombbal próbáld ki a kapcsolatot. A titkos kulcsokat a rendszer titkosítva tárolja. Megadhatod azt is, melyik naptól hívja le a korábbi tranzakciókat.</p>
+<h2>Hogyan kapcsolja be?</h2>
+<p>A Beállítások → Integrációk fülön adja meg a DKV-tól kapott API-hozzáférést, és egy gombbal próbálja ki a kapcsolatot. A titkos kulcsokat a rendszer titkosítva tárolja. Megadhatja azt is, melyik naptól hívja le a korábbi tranzakciókat.</p>
 <h2>Melyik csomagban érhető el?</h2>
 <p>Az Üzleti és a Prémium csomag tartalmazza. Az Alap csomaghoz kiegészítőként vehető meg, +9 990 Ft/hó + ÁFA áron.</p>`,
   },
@@ -57,7 +57,7 @@ export const posts = [
     excerpt: "Az Excel tíz autóig remek. Utána a verziók szaporodnak, a határidők csúsznak, és senki nem tudja, melyik a jó fájl.",
     body: `
 <p>Szinte minden flotta egy táblázattal indul. Ez nem hiba: egy kis flottánál egy jól felépített Excel gyors, ingyenes és mindenki ért hozzá. Egy ponton túl viszont több időt visz el, mint amennyit megspórol. Az alábbi öt jel azt mutatja, hogy ez a pont már eljött.</p>
-<h2>Öt jel, hogy kinőtted a táblázatot</h2>
+<h2>Öt jel, hogy kinőtte a táblázatot</h2>
 <ol>
 <li><strong>Több verzió él egyszerre.</strong> A flottavezetőnél, a pénzügyön és a telephelyen is van egy „aktuális” fájl, és nem egyeznek.</li>
 <li><strong>A határidők fejben vannak.</strong> A táblázat tudja, mikor jár le a műszaki, de nem szól. Ha valaki szabadságra megy, a határidő vele megy.</li>
@@ -76,8 +76,8 @@ export const posts = [
 <li>Telefonról is használható felület a sofőröknek.</li>
 <li>Szerepkörök: mindenki azt látja, amire szüksége van.</li>
 </ul>
-<h2>Hogyan vidd át az adatokat egy délután alatt?</h2>
-<p>A legtöbb rendszer, így a Yardly is, Excel-sablonnal tölthető fel. Töltsd le a sablont, másold bele a meglévő listádat (rendszám, márka, típus, évjárat, km-óra, telephely), és töltsd fel. A Yardly a hiányzó telephelyeket és típusokat magától létrehozza, a hibás sorokat pedig soronként jelzi. Utána már csak a dokumentumokat és az ütemterveket kell feltenni, és a rendszer onnantól figyel helyetted.</p>`,
+<h2>Hogyan vigye át az adatokat egy délután alatt?</h2>
+<p>A legtöbb rendszer, így a Yardly is, Excel-sablonnal tölthető fel. Töltse le a sablont, másolja bele a meglévő listáját (rendszám, márka, típus, évjárat, km-óra, telephely), és töltse fel. A Yardly a hiányzó telephelyeket és típusokat magától létrehozza, a hibás sorokat pedig soronként jelzi. Utána már csak a dokumentumokat és az ütemterveket kell feltenni, és a rendszer onnantól figyel Ön helyett.</p>`,
   },
   {
     slug: "lejarati-naptar-ceges-flotta",
@@ -88,7 +88,7 @@ export const posts = [
     title: "Lejárati naptár céges flottának: forgalmi, műszaki, kötelező, casco",
     excerpt: "Egy 20 autós flottánál könnyen 80 határidő jön össze egy évben. Mutatjuk, hogyan lesz ebből egyetlen lista.",
     body: `
-<p>Ha autónként csak négy évente ismétlődő dátummal számolsz (műszaki vizsga, kötelező biztosítási évforduló, casco és egy szerviz), egy 20 autós flottánál ez már 80 határidő egy évben. A téli és nyári gumicserét, a tachográf-kalibrálást és a sofőrök jogosítványait még nem is számoltuk.</p>
+<p>Ha autónként csak négy évente ismétlődő dátummal számol (műszaki vizsga, kötelező biztosítási évforduló, casco és egy szerviz), egy 20 autós flottánál ez már 80 határidő egy évben. A téli és nyári gumicserét, a tachográf-kalibrálást és a sofőrök jogosítványait még nem is számoltuk.</p>
 <h2>Mit érdemes nyilvántartani?</h2>
 <p><strong>Járművenként:</strong></p>
 <ul>
@@ -104,20 +104,20 @@ export const posts = [
 <li>jogosítvány és kategóriái,</li>
 <li>sofőrkártya és egyéb szakmai igazolványok, ha a munkához szükségesek.</li>
 </ul>
-<p>Az érvényességi időket és a rád vonatkozó szabályokat mindig az aktuális jogszabályok és a szerződéseid alapján ellenőrizd. A lényeg az, hogy minden dátum egy helyen legyen, és a dokumentum is mellette.</p>
+<p>Az érvényességi időket és az Önre vonatkozó szabályokat mindig az aktuális jogszabályok és a szerződései alapján ellenőrizze. A lényeg az, hogy minden dátum egy helyen legyen, és a dokumentum is mellette.</p>
 <h2>Hány nappal előtte szóljon a riasztás?</h2>
 <p>Egy jól bevált beosztás: 30, 14, 7 és 1 nappal előtte. A 30 nap elég egy szervizidőpont vagy egy biztosítási ajánlat beszerzésére, az utolsó kettő pedig emlékeztető, ha valami mégis elcsúszott. A km-alapú szervizeknél a kilométer a fontos: érdemes 1000 km-rel előtte jelezni.</p>
 <h2>Ki kapja az értesítést?</h2>
 <p>A flottavezető mindig. A sofőrt akkor érdemes bevonni, ha neki is van teendője, például a saját jogosítványa vagy a hozzá rendelt autó műszakija miatt. Napi egy összesített e-mail jobb, mint tíz külön levél: azt elolvassák.</p>
 <h2>Ellenőrzőlista az induláshoz</h2>
 <ul>
-<li>Gyűjtsd össze az összes forgalmit, kötvényt és szerződést, autónként egy mappába.</li>
-<li>Írd fel minden dokumentum lejárati dátumát.</li>
-<li>Rögzítsd a sofőrök jogosítványainak lejáratát.</li>
-<li>Döntsd el, hány nappal előtte és kinek szóljon a riasztás.</li>
-<li>Jelölj ki egy felelőst, aki a lejárt tételeket lezárja.</li>
+<li>Gyűjtse össze az összes forgalmit, kötvényt és szerződést, autónként egy mappába.</li>
+<li>Írja fel minden dokumentum lejárati dátumát.</li>
+<li>Rögzítse a sofőrök jogosítványainak lejáratát.</li>
+<li>Döntse el, hány nappal előtte és kinek szóljon a riasztás.</li>
+<li>Jelöljön ki egy felelőst, aki a lejárt tételeket lezárja.</li>
 </ul>
-<p>A Yardlyban mindezt egy helyen teheted meg: a dokumentum a járműhöz vagy a sofőrhöz kerül, a lejáratot a rendszer figyeli, és a beállított napokon e-mailt küld.</p>`,
+<p>A Yardlyban mindezt egy helyen teheti meg: a dokumentum a járműhöz vagy a sofőrhöz kerül, a lejáratot a rendszer figyeli, és a beállított napokon e-mailt küld.</p>`,
   },
   {
     slug: "ceges-auto-ft-km-koltseg",
@@ -147,8 +147,8 @@ export const posts = [
 </ul>
 <p class="formula">Ft/km = éves összes költség ÷ éves futás = 4 040 000 Ft ÷ 40 000 km ≈ 101 Ft/km</p>
 <p>Ha csak az üzemanyagot nézzük, a szám 50 Ft/km lenne. A különbség kétszeres, és pont ez az, ami egy csere- vagy bérlési döntésnél számít.</p>
-<h2>Hogyan hasonlítsd össze a flottát?</h2>
-<p>Ugyanazzal a módszerrel számolj minden autóra, ugyanarra az időszakra. Utána rangsorold őket Ft/km szerint. A lista eleje és vége azonnal megmutatja, hol érdemes vizsgálódni. A flottaátlag is hasznos: ahhoz képest látszik, mi számít kiugrónak.</p>
+<h2>Hogyan hasonlítsa össze a flottát?</h2>
+<p>Ugyanazzal a módszerrel számoljon minden autóra, ugyanarra az időszakra. Utána rangsorolja őket Ft/km szerint. A lista eleje és vége azonnal megmutatja, hol érdemes vizsgálódni. A flottaátlag is hasznos: ahhoz képest látszik, mi számít kiugrónak.</p>
 <h2>Mikor gyanús egy kiugró érték?</h2>
 <ul>
 <li>Ha egy autó Ft/km-e legalább másfélszerese a flottaátlagnak.</li>
@@ -170,17 +170,17 @@ export const posts = [
 <h2>1. Címkézés</h2>
 <p>Minden eszközre kerüljön egy címke QR-kóddal vagy vonalkóddal. Ha már van leltári szám vagy gyári vonalkód, nem kell újat nyomtatni: a Yardly a leltári számot, a vonalkódot, a gyári számot és a belső azonosítót is felismeri. A címkére érdemes a kód mellé olvashatóan is ráírni a leltári számot, hogy kézzel is beírható legyen.</p>
 <h2>2. Kategóriák és helyek</h2>
-<p>Építsd fel a kategóriákat (targonca, kéziszerszám, informatika…) és a helyeket (telephely › raktár › helyiség › polc). Így a leltárt részletekben is el lehet végezni, például csak egy raktárra vagy egy kategóriára.</p>
+<p>Építse fel a kategóriákat (targonca, kéziszerszám, informatika…) és a helyeket (telephely › raktár › helyiség › polc). Így a leltárt részletekben is el lehet végezni, például csak egy raktárra vagy egy kategóriára.</p>
 <h2>3. A „vak” leltár</h2>
 <p>A leltározó telefonja nem mutatja előre, mit kellene találnia. Csak beolvassa, ami előtte van. A rendszer a háttérben pipálja ki a tételeket, és a végén mutatja meg, mi került elő és mi nem. Így a számlálás valós, nem a lista megerősítése.</p>
 <h2>4. A hiányzó tételek</h2>
-<p>Ami nem került elő, nem feltétlenül veszett el. Lehet szervizben, kölcsönben vagy rossz helyen. A leltár végén minden hiányzó tételhez írj megjegyzést, és jelöld meg, ha mégis megvan. A végeredmény PDF-ben is letölthető.</p>
+<p>Ami nem került elő, nem feltétlenül veszett el. Lehet szervizben, kölcsönben vagy rossz helyen. A leltár végén minden hiányzó tételhez írjon megjegyzést, és jelölje meg, ha mégis megvan. A végeredmény PDF-ben is letölthető.</p>
 <h2>Hogyan megy ez a Yardlyban?</h2>
 <ol>
-<li>Kiválasztod az eszközöket, és elküldöd a leltárt egy kollégának.</li>
+<li>Kiválasztja az eszközöket, és elküldi a leltárt egy kollégának.</li>
 <li>Ő e-mailben kap egy linket, amely a telefonon azonnal megnyitja a kamerát. Bejelentkezni nem kell.</li>
 <li>Végigmegy a raktáron, és beolvassa a címkéket. Címke nélküli tételhez kézi beírás, sötét helyen lámpa is van.</li>
-<li>A végén rögzíti a leltárt, te pedig látod az eredményt.</li>
+<li>A végén rögzíti a leltárt, Ön pedig látja az eredményt.</li>
 </ol>`,
   },
   {
@@ -189,7 +189,7 @@ export const posts = [
     minutes: 4,
     category: "fleet",
     solution: "analitika",
-    title: "Mikor cseréld le a flotta autóit? Adatalapú szempontok",
+    title: "Mikor cserélje le a flotta autóit? Adatalapú szempontok",
     excerpt: "Az „egész jól megy még” nem döntési szempont. A Ft/km és a szervizgyakoriság az.",
     body: `
 <p>Egy autó cseréje drága döntés, ezért gyakran halogatjuk. Közben a régi autó egyre többe kerül: szervizben áll, javítani kell, és többet fogyaszt. A jó hír: a döntéshez szükséges adatok többnyire már megvannak, csak egy helyre kell tenni őket.</p>
@@ -217,7 +217,7 @@ export const posts = [
     minutes: 5,
     category: "fleet",
     solution: "folyamatok",
-    title: "Jóváhagyás a javításokra: így tartsd kordában a szervizköltséget",
+    title: "Jóváhagyás a javításokra: így tartsa kordában a szervizköltséget",
     excerpt: "Nem kell minden olajcserét jóváhagyni. De a 300 000 Ft-os javítást igen. Egy jól beállított folyamat ezt magától eldönti.",
     body: `
 <p>A szervizköltség ott szokott elszaladni, ahol nincs szabály: valaki elviszi az autót, a szerviz megjavítja, és a számla utólag érkezik. Egy egyszerű jóváhagyási folyamat ezt megfordítja.</p>
@@ -241,7 +241,7 @@ export const posts = [
 <li><strong>Javítás:</strong> szervizbe vinni, javítás.</li>
 <li><strong>Lezárás:</strong> a számla feltöltése, és a munka bekerül a szerviznaplóba.</li>
 </ol>
-<p>A Yardly folyamatszerkesztőjében ezt egy vásznon rakod össze, vagy a kész „Járműjavítás jóváhagyással” sablonból indulsz. Minden lépés a felelőse Teendőim listájában vár, a lezárás pedig magától beírja a munkát és a költséget a szerviznaplóba.</p>`,
+<p>A Yardly folyamatszerkesztőjében ezt egy vásznon rakja össze, vagy a kész „Járműjavítás jóváhagyással” sablonból indul. Minden lépés a felelőse Teendőim listájában vár, a lezárás pedig magától beírja a munkát és a költséget a szerviznaplóba.</p>`,
   },
   {
     slug: "szervizidopontok-elorejelzese",
@@ -253,7 +253,7 @@ export const posts = [
     excerpt: "A km- vagy üzemóra-alapú karbantartás nehezen tervezhető naptárban. Egy egyszerű, átlátható számítással mégis megbecsülhető, mikor esedékes a következő szerviz.",
     body: `
 <p>A járművek és targoncák karbantartása jellemzően nem naptári dátumhoz, hanem futásteljesítményhez kötött: egy olajcsere bizonyos kilométerenként, egy targoncaszerviz bizonyos üzemóránként esedékes. Ez műszakilag pontos, a tervezést viszont megnehezíti. A kérdés ugyanis nem az, hány kilométer van hátra, hanem az, hogy melyik héten kell a gépet kivenni a munkából.</p>
-<h2>A számítás egyszerűbb, mint gondolnád</h2>
+<h2>A számítás egyszerűbb, mint gondolná</h2>
 <p>Ha megvannak a korábbi km-óraállások vagy üzemóra-adatok, a becslés egyetlen osztás:</p>
 <p class="formula">becsült hátralévő idő = hátralévő futásteljesítmény ÷ átlagos havi futásteljesítmény</p>
 <p>Ha például egy járműnek 2 000 km van hátra a következő olajcseréig, és havonta átlagosan 1 850 km-t fut, akkor nagyjából egy hónap múlva esedékes a szerviz. Ezt a dátumot már be lehet tervezni, egyeztetni lehet a szervizpartnerrel, és időben lehet helyettesítő járművet szervezni.</p>

@@ -53,7 +53,7 @@ const pageHero = (p, extra = "") => `<section class="page-hero" aria-labelledby=
 const ctaSection = (c) => `<section class="section section--cta" aria-labelledby="cta-title">
   <div class="container">
     ${ctaCard({
-      eyebrow: c.eyebrow || "Kezdd el",
+      eyebrow: c.eyebrow || "Kezdje el",
       title: g(c.title),
       lead: c.lead || ui.trialNote,
       button: ui.trial,
@@ -69,7 +69,7 @@ const faqBlock = (f, id = "faq") => `<section class="section" id="${id}" aria-la
       <p class="eyebrow">${f.eyebrow}</p>
       <h2 class="h2" id="${id}-title">${g(f.title)}</h2>
       ${f.lead ? `<p class="muted">${f.lead}</p>` : ""}
-      <a class="text-link" href="${route("contact")}">Kérdezz tőlünk${arrow("text-link__arrow")}</a>
+      <a class="text-link" href="${route("contact")}">Kérdezzen tőlünk${arrow("text-link__arrow")}</a>
     </div>
     <div class="faq__list">
       ${f.items
@@ -345,7 +345,7 @@ ${pageHero(overview, ctaButtons(""))}
       <div>
         <p class="eyebrow">${overview.soon.title}</p>
         <h2 class="h3-lg" id="soon-title">${overview.soon.text}</h2>
-        <p class="muted">Pontos dátumot nem ígérünk. Kérj értesítést, és szólunk, amint használható.</p>
+        <p class="muted">Pontos dátumot nem ígérünk. Kérjen értesítést, és szólunk, amint használható.</p>
       </div>
       <ul class="soon-list">
         ${overview.soon.items.map((i) => `<li><span class="soon-list__name">${i.name} ${soonTag}</span><a class="btn btn--ghost btn--sm" href="${notifyHref(i.name)}">${ui.notify}</a></li>`).join("")}
@@ -649,7 +649,7 @@ ${faqBlock(pr.faq, "gyik")}
   </div>
 </section>
 
-${ctaSection({ title: "Próbáld ki 14 napig, kártya nélkül." })}`,
+${ctaSection({ title: "Próbálja ki 14 napig, kártya nélkül." })}`,
   };
 };
 
@@ -843,7 +843,7 @@ export const contact = () => {
           ${field(
             "topic",
             f.topic,
-            `<select class="input" id="f-topic" name="topic" required aria-describedby="e-topic"><option value="">Válassz…</option>${f.topics.map((t) => `<option value="${t.value}">${t.label}</option>`).join("")}</select>`,
+            `<select class="input" id="f-topic" name="topic" required aria-describedby="e-topic"><option value="">Válasszon…</option>${f.topics.map((t) => `<option value="${t.value}">${t.label}</option>`).join("")}</select>`,
             { error: f.errors.topic, full: true }
           )}
           ${field("name", f.name, text("name", "text", "name", true), { error: f.errors.name })}
@@ -920,7 +920,7 @@ ${pageHero(bl)}
   </div>
 </section>
 
-${ctaSection({ title: "Próbáld ki a saját flottáddal." })}`,
+${ctaSection({ title: "Próbálja ki a saját flottájával." })}`,
 });
 
 export const post = (p) => {
