@@ -26,7 +26,7 @@ export const home = {
     title: "Ismerős?",
     items: [
       { quote: "„Bonyolult folyamatok Excelben vezetve, háromféleképpen?”", text: "Csak egy valaki szerkesztheti őket, és minden lépés egy 1,5 órás rémálom." },
-      { quote: "„Aki hozzáfér az Excelhez, az szerkesztheti, és ez így nem jó!”", text: "Mindenki, akinek jogosultsága van a mappához, szerkesztheti az amúgy is mindenre érzékeny függvénylabirintust, és hetente kétszer kell visszaállítani." },
+      { quote: "„Sosincs pontos összképünk az eszközeink költségéről.”", text: "Ekkora mennyiségnél a költségeik mindig magasak, de sosem tudjuk, melyik eszköz viszi a legtöbbet, vagy mennyibe kerül a flotta." },
       { quote: "„Minden leltárkor a jelenlegi programunk összevissza dobja be a tételeket.”", text: "A jelenleg használt leltárprogramunk mindig olyan eszközöket dob fel következőnek, amelyek a telephely túloldalán vannak, és legalább tízszer megyek körbe." },
     ],
     close: "A Yardly ezt a három gondot is megoldja egyszerre.",
