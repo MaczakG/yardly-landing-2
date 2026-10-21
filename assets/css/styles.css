@@ -486,13 +486,18 @@ body.nav-open .site-header {
   border-bottom-color: var(--line);
 }
 
-/* Logo left, menu centred on the page, login link and CTA right. */
+/* Logo left, login link and CTA right, the menu centred in the space between them, so it
+   keeps the same distance from both. */
 .site-header__inner {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
   gap: 40px;
   height: var(--header-h);
+}
+
+.site-header__inner > .nav {
+  justify-self: center;
 }
 
 .logo {

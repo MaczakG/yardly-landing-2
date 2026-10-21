@@ -3,7 +3,7 @@
 
 export const about = {
   title: "Rólunk – Yardly",
-  description: "Magyar cégeknek épített flotta- és eszközkezelő rendszer. Ismerd meg a történetünket és azt, amiben hiszünk.",
+  description: "Magyar cégeknek épített flotta- és eszközkezelő rendszer. Ismerje meg a történetünket és azt, amiben hiszünk.",
   eyebrow: "Rólunk",
   h1: "Magyar cégeknek építjük, a napi munkából kiindulva",
   lead: "A Yardly azért született, hogy a flotta- és eszközkezelés ne táblázatokban, e-mailekben és fejekben éljen, hanem egy helyen, ahol a rendszer szól, mielőtt baj lenne.",
@@ -28,9 +28,9 @@ export const about = {
     items: [
       { title: "Egyszerűség", text: "A Yardlyt nem kell betanítani. Ami kell, egy kattintásra van, ami nem kell, nem látszik." },
       { title: "Átláthatóság", text: "Nyilvános árak, hűségidő nélkül. Az analitika magyarázható szabályokkal dolgozik, minden ajánlás mellé indoklást ad." },
-      { title: "Az adat a tiéd", text: "Bármikor letöltheted az egészet Excelben. Csomagváltáskor sem törlünk semmit." },
+      { title: "Az adat az Öné", text: "Bármikor letöltheti az egészet Excelben. Csomagváltáskor sem törlünk semmit." },
       { title: "Biztonság alapból", text: "Kétlépcsős belépés, titkosított kapcsolat, cégenként elkülönített adatok, minden csomagban." },
-      { title: "Folyamatos fejlesztés", text: "Az appban látod, mi újult meg, és a „Szólj, ha elérhető” gombbal jelezheted, mire vársz." },
+      { title: "Folyamatos fejlesztés", text: "Az appban látja, mi újult meg, és egy gombnyomással jelezheti, mire vár." },
     ],
   },
   why: {
@@ -46,35 +46,35 @@ export const about = {
   team: {
     eyebrow: "Kik vagyunk",
     title: "Kis csapat, közvetlen kapcsolat",
-    text: "Budapesti csapat vagyunk, Maczák Gergő alapító vezetésével. Ha bemutatót kérsz, ő vagy valaki a csapatból személyesen keres. A cégadatok az Impresszumban találhatók.",
+    text: "Budapesti csapat vagyunk, Maczák Gergő alapító vezetésével. Ha bemutatót kér, ő vagy valaki a csapatból személyesen keresi. A cégadatok az Impresszumban találhatók.",
   },
   cta: {
-    eyebrow: "Ismerj meg minket",
-    title: "Ismerj meg minket egy bemutatón",
-    lead: "30 perc, a saját kérdéseiddel. Vagy próbáld ki egyedül, 14 napig ingyen.",
+    eyebrow: "Ismerjen meg minket",
+    title: "Ismerjen meg minket egy bemutatón",
+    lead: "30 perc, az Ön kérdéseivel. Vagy próbálja ki egyedül, 14 napig ingyen.",
   },
 };
 
 export const contact = {
   title: "Kapcsolat – Yardly",
-  description: "Kérj bemutatót vagy ajánlatot, vagy kérdezz bármit. Egy munkanapon belül válaszolunk.",
+  description: "Kérjen bemutatót vagy ajánlatot, vagy kérdezzen bármit. Egy munkanapon belül válaszolunk.",
   eyebrow: "Kapcsolat",
   h1: "Beszéljünk!",
-  lead: "Kérj bemutatót, ajánlatot, vagy kérdezz bármit. Egy munkanapon belül válaszolunk.",
+  lead: "Kérjen bemutatót, ajánlatot, vagy kérdezzen bármit. Egy munkanapon belül válaszolunk.",
   direct: [
     { k: "E-mail", email: true },
     { k: "Székhely", v: "Budapest" },
   ],
-  customer: "Ha már ügyfelünk vagy: a támogatást a csomagod szerint adjuk. Alapnál e-mailben, Üzletinél egy munkanapon belül, Prémiumnál 4 munkaórán belül, kijelölt kapcsolattartóval.",
-  loginLink: "Már használod? Bejelentkezés",
+  customer: "Ha már ügyfelünk: a támogatást a csomagja szerint adjuk. Alapnál e-mailben, Üzletinél egy munkanapon belül, Prémiumnál 4 munkaórán belül, kijelölt kapcsolattartóval.",
+  loginLink: "Már használja? Bejelentkezés",
   stepsTitle: "Mi történik utána?",
   steps: [
-    "Egy munkanapon belül válaszolunk e-mailben vagy telefonon. Bemutatókérésnél Maczák Gergő, a Yardly alapítója személyesen keres.",
-    "Bemutatónál egy 30 perces online alkalmat egyeztetünk, ahol a saját kérdéseidre koncentrálunk.",
-    "Ha szeretnéd, segítünk az Excel-importban, hogy a próbaidőben már a saját adataiddal dolgozz.",
+    "Egy munkanapon belül válaszolunk e-mailben vagy telefonon. Bemutatókérésnél Maczák Gergő, a Yardly alapítója személyesen keresi.",
+    "Bemutatónál egy 30 perces online alkalmat egyeztetünk, ahol az Ön kérdéseire koncentrálunk.",
+    "Ha szeretné, segítünk az Excel-importban, hogy a próbaidőben már a saját adataival dolgozhasson.",
   ],
   form: {
-    title: "Írj nekünk",
+    title: "Írjon nekünk",
     intro: "A csillaggal jelölt mezők kötelezők.",
     topic: "Miben segíthetünk?",
     topics: [
@@ -82,44 +82,44 @@ export const contact = {
       { value: "price", label: "Kérdésem van az árakról" },
       { value: "quote", label: "Vállalati megoldás (saját szerver, integráció, 300 jármű felett)" },
       { value: "support", label: "Ügyfélként segítség kell" },
-      { value: "notify", label: "Szólj, ha elérhető egy funkció" },
+      { value: "notify", label: "Értesítést kérek egy funkcióról" },
       { value: "other", label: "Egyéb" },
     ],
     name: "Név",
     company: "Cég",
     email: "E-mail",
     phone: "Telefon",
-    phoneHint: "Ha inkább felhívnál minket",
+    phoneHint: "Ha inkább telefonon beszélne",
     vehicles: "Járművek száma",
     vehiclesHint: "Nagyjából is jó",
     equipment: "Eszközök száma",
     equipmentHint: "Targoncák, gépek, laptopok, bármi",
     message: "Üzenet",
-    placeholder: "Mit szeretnél megoldani? Mit használsz most?",
+    placeholder: "Mit szeretne megoldani? Mit használ most?",
     consent: "Elolvastam az",
     consentLink: "Adatvédelmi tájékoztatót",
     submit: "Elküldöm",
     sending: "Küldés…",
     note: "Egy munkanapon belül válaszolunk.",
     successTitle: "Köszönjük!",
-    successText: "Egy munkanapon belül jelentkezünk. Addig is kipróbálhatod a Yardlyt 14 napig ingyen.",
+    successText: "Egy munkanapon belül jelentkezünk. Addig is kipróbálhatja a Yardlyt 14 napig ingyen.",
     mailSubject: "Megkeresés a yardly.hu-ról",
     mailtoTitle: "Már csak el kell küldeni",
-    mailtoText: "Megnyitottuk a levelezőprogramodat a kitöltött üzenettel. Ha nem nyílt meg, írj nekünk közvetlenül: {email}.",
-    errorText: "Nem sikerült elküldeni. Próbáld újra, vagy írj az {email} címre.",
-    notifyPrefix: "Szólj, ha elérhető:",
+    mailtoText: "Megnyitottuk a levelezőprogramját a kitöltött üzenettel. Ha nem nyílt meg, írjon nekünk közvetlenül: {email}.",
+    errorText: "Nem sikerült elküldeni. Próbálja újra, vagy írjon az {email} címre.",
+    notifyPrefix: "Értesítést kérek, ha elérhető:",
     errors: {
-      topic: "Válassz egy témát.",
-      name: "Add meg a neved.",
-      company: "Add meg a céged nevét.",
-      email: "Adj meg egy érvényes e-mail-címet.",
-      consent: "A küldéshez fogadd el az adatvédelmi tájékoztatót.",
+      topic: "Válasszon egy témát.",
+      name: "Adja meg a nevét.",
+      company: "Adja meg a cége nevét.",
+      email: "Adjon meg egy érvényes e-mail-címet.",
+      consent: "A küldéshez fogadja el az adatvédelmi tájékoztatót.",
     },
   },
   faq: [
     { q: "Mennyi ideig tart egy bemutató?", a: "Általában 30 perc, online." },
-    { q: "Segítetek az adatok áthozásában?", a: "Igen. Az Excel-sablon a legtöbb esetben elég, de szívesen ránézünk a fájlodra." },
-    { q: "Lehet saját szerverre telepíteni?", a: "Igen, egyedi ajánlat alapján. Válaszd az „Egyedi ajánlat” témát." },
+    { q: "Segítenek az adatok áthozásában?", a: "Igen. Az Excel-sablon a legtöbb esetben elég, de szívesen ránézünk a fájljára." },
+    { q: "Lehet saját szerverre telepíteni?", a: "Igen, egyedi ajánlat alapján. Válassza a „Vállalati megoldás” témát." },
   ],
 };
 
@@ -134,16 +134,16 @@ export const privacy = {
 
 <h2>2. Milyen adatokat kezelünk</h2>
 <h3>Kapcsolatfelvételi űrlap és e-mail</h3>
-<p>A megkeresés témája, név, cégnév, e-mail-cím, telefonszám, a járművek és eszközök hozzávetőleges száma és az üzenet tartalma, valamint mindaz, amit e-mailben önként megosztasz velünk.</p>
+<p>A megkeresés témája, név, cégnév, e-mail-cím, telefonszám, a járművek és eszközök hozzávetőleges száma és az üzenet tartalma, valamint mindaz, amit e-mailben önként megoszt velünk.</p>
 <h3>Látogatottságmérés (csak hozzájárulással)</h3>
-<p>Ha hozzájárulsz, a Google Analytics sütik segítségével mérjük, mely oldalakat és hogyan használják a látogatók: a megtekintett oldalak, a látogatás ideje, az eszköz és a böngésző típusa, a hozzávetőleges földrajzi hely. Hozzájárulás nélkül ilyen sütit nem helyezünk el.</p>
+<p>Ha hozzájárul, a Google Analytics sütik segítségével mérjük, mely oldalakat és hogyan használják a látogatók: a megtekintett oldalak, a látogatás ideje, az eszköz és a böngésző típusa, a hozzávetőleges földrajzi hely. Hozzájárulás nélkül ilyen sütit nem helyezünk el.</p>
 <h3>Technikai naplók</h3>
 <p>A tárhelyszolgáltató szerverei a kérések kiszolgálásához és a visszaélések kivédéséhez naplózzák az IP-címet és a kérés időpontját.</p>
 
 <h2>3. Az adatkezelés célja és jogalapja</h2>
 <ul>
-<li><strong>Megkeresés megválaszolása, ajánlatadás:</strong> a hozzájárulásod (GDPR 6. cikk (1) a)), illetve a szerződéskötést megelőző lépések (GDPR 6. cikk (1) b)).</li>
-<li><strong>Látogatottságmérés:</strong> a hozzájárulásod (GDPR 6. cikk (1) a)), amelyet bármikor visszavonhatsz.</li>
+<li><strong>Megkeresés megválaszolása, ajánlatadás:</strong> az Ön hozzájárulása (GDPR 6. cikk (1) a)), illetve a szerződéskötést megelőző lépések (GDPR 6. cikk (1) b)).</li>
+<li><strong>Látogatottságmérés:</strong> az Ön hozzájárulása (GDPR 6. cikk (1) a)), amelyet bármikor visszavonhat.</li>
 <li><strong>Technikai naplók:</strong> az oldal biztonságos működtetéséhez fűződő jogos érdek (GDPR 6. cikk (1) f)).</li>
 </ul>
 <p><mark class="ph">[Jogi ellenőrzés: a jogalapok véglegesítése.]</mark></p>
@@ -160,18 +160,18 @@ export const privacy = {
 <ul>
 <li><strong>Amazon Web Services EMEA SARL</strong> (Luxemburg): tárhely és az oldal üzemeltetése, frankfurti (EU-s) adatközpontban.</li>
 <li><strong>E-mail-szolgáltató:</strong> <mark class="ph">[a ténylegesen használt szolgáltató neve]</mark>, az üzenetek kézbesítéséhez.</li>
-<li><strong>Google Ireland Ltd.</strong>: látogatottságmérés, kizárólag a hozzájárulásod esetén. Az adatok az Egyesült Államokba is továbbításra kerülhetnek; a Google részt vesz az EU–USA adatvédelmi keretrendszerben.</li>
+<li><strong>Google Ireland Ltd.</strong>: látogatottságmérés, kizárólag az Ön hozzájárulása esetén. Az adatok az Egyesült Államokba is továbbításra kerülhetnek; a Google részt vesz az EU–USA adatvédelmi keretrendszerben.</li>
 </ul>
 <p><mark class="ph">[Jogi ellenőrzés: az adatfeldolgozói szerződések megléte és tartalma.]</mark></p>
 
 <h2>6. Sütik</h2>
-<p>A sütikkel kapcsolatos döntésedet a böngésződ tárolja el, ehhez nem használunk sütit. Hozzájárulás esetén a Google Analytics a <code>_ga</code> és <code>_ga_*</code> sütiket helyezi el, legfeljebb 2 évre. Döntésedet bármikor megváltoztathatod az oldal alján található „Süti-beállítások” hivatkozással.</p>
+<p>A sütikkel kapcsolatos döntését a böngészője tárolja el, ehhez nem használunk sütit. Hozzájárulás esetén a Google Analytics a <code>_ga</code> és <code>_ga_*</code> sütiket helyezi el, legfeljebb 2 évre. Döntését bármikor megváltoztathatja az oldal alján található „Süti-beállítások” hivatkozással.</p>
 
-<h2>7. A jogaid</h2>
-<p>Kérheted a személyes adataidhoz való hozzáférést, azok helyesbítését, törlését vagy kezelésük korlátozását, élhetsz az adathordozhatósághoz és a tiltakozáshoz való jogoddal, és a hozzájárulásodat bármikor visszavonhatod. Kérésedet a(z) <a href="mailto:{email}">{email}</a> címre küldheted.</p>
+<h2>7. Az Ön jogai</h2>
+<p>Kérheti a személyes adataihoz való hozzáférést, azok helyesbítését, törlését vagy kezelésük korlátozását, élhet az adathordozhatósághoz és a tiltakozáshoz való jogával, és hozzájárulását bármikor visszavonhatja. Kérését a(z) <a href="mailto:{email}">{email}</a> címre küldheti.</p>
 
 <h2>8. Jogorvoslat</h2>
-<p>Ha úgy gondolod, hogy az adatkezelés jogsértő, panasszal fordulhatsz a Nemzeti Adatvédelmi és Információszabadság Hatósághoz (NAIH, 1055 Budapest, Falk Miksa utca 9–11., <a href="https://naih.hu" rel="noopener">naih.hu</a>), vagy bírósághoz fordulhatsz.</p>
+<p>Ha úgy gondolja, hogy az adatkezelés jogsértő, panasszal fordulhat a Nemzeti Adatvédelmi és Információszabadság Hatósághoz (NAIH, 1055 Budapest, Falk Miksa utca 9–11., <a href="https://naih.hu" rel="noopener">naih.hu</a>), vagy bírósághoz fordulhat.</p>
 
 <p class="legal-meta">Hatályos: <mark class="ph">[dátum]</mark></p>`,
 };
@@ -202,39 +202,39 @@ export const imprint = {
 
 // Vállalati megoldás: the self-hosted, integrated version for larger companies.
 export const enterprise = {
-  title: "Vállalati megoldás – saját szerveren, a meglévő rendszereidhez kötve | Yardly",
+  title: "Vállalati megoldás – saját szerveren, a meglévő rendszereihez kötve | Yardly",
   description:
-    "A Yardly a saját szervereden is fut, és összekötjük a már használt rendszereitekkel: ERP, könyvelés, HR, telematika, üzemanyagkártyák. Egyedi ajánlat 300 jármű felett is.",
+    "A Yardly a saját szerverén is fut, és összekötjük a már használt rendszereivel: ERP, könyvelés, HR, telematika, üzemanyagkártyák. Egyedi ajánlat 300 jármű felett is.",
   eyebrow: "Vállalati megoldás",
-  h1: "A Yardly a saját szervereden, a meglévő rendszereidhez kötve",
-  lead: "Nagyobb cégeknél a flotta és az eszközpark adatai már sok helyen ott vannak: az ERP-ben, a könyvelésben, a HR-rendszerben, a telematikában. A Yardly ezeket nem lecseréli, hanem összeköti, és ha kell, a saját szervereteken fut.",
+  h1: "A Yardly a saját szerverén, a meglévő rendszereihez kötve",
+  lead: "Nagyobb cégeknél a flotta és az eszközpark adatai már sok helyen ott vannak: az ERP-ben, a könyvelésben, a HR-rendszerben, a telematikában. A Yardly ezeket nem lecseréli, hanem összeköti, és ha kell, az Önök saját szerverén fut.",
   quoteButton: "Ajánlatot kérek",
   pillars: [
-    { title: "Összekötjük, amit már használtok", text: "Az adatok egyszer kerülnek be, és oda mennek tovább, ahol szükség van rájuk. Nincs kétszeri rögzítés." },
-    { title: "A ti szervereteken fut", text: "Saját szerveren, adatközpontban vagy privát felhőben. Az adatok a cégen belül maradnak." },
-    { title: "A ti működésetekre szabva", text: "Saját workflow-k, mezők, szerepkörök és riportok, a cégetek szabályai szerint." },
+    { title: "Összekötjük, amit már használnak", text: "Az adatok egyszer kerülnek be, és oda mennek tovább, ahol szükség van rájuk. Nincs kétszeri rögzítés." },
+    { title: "Az Önök szerverén fut", text: "Saját szerveren, adatközpontban vagy privát felhőben. Az adatok a cégen belül maradnak." },
+    { title: "Az Önök működésére szabva", text: "Saját workflow-k, mezők, szerepkörök és riportok, a cég szabályai szerint." },
   ],
   integrations: {
     eyebrow: "Integráció",
     title: "Összekapcsolás a meglévő rendszerekkel",
-    lead: "Felmérjük, milyen rendszereket használtok, és megtervezzük, mi honnan hová menjen. A kapcsolat lehet közvetlen (API vagy adatbázis), vagy ütemezett fájlcsere (Excel, CSV), aszerint, amit a másik rendszer enged.",
+    lead: "Felmérjük, milyen rendszereket használnak, és megtervezzük, mi honnan hová menjen. A kapcsolat lehet közvetlen (API vagy adatbázis), vagy ütemezett fájlcsere (Excel, CSV), aszerint, amit a másik rendszer enged.",
     items: [
       { title: "ERP és könyvelés", text: "Beszerzések, számlák és költséghelyek: a járművek és eszközök költségei a könyvelésből jönnek, vagy oda mennek." },
       { title: "HR és bérszámfejtés", text: "A munkatársak listája és a belépők, kilépők: az új kolléga hozzáférést kap, a kilépőé megszűnik." },
       { title: "Telematika és GPS", text: "A km-óra magától frissül, így a km-alapú szervizek és ellenőrzések mindig a valós futáshoz igazodnak." },
       { title: "Üzemanyagkártyák", text: "A DKV-kártyás tankolások már most maguktól bekerülnek. További szolgáltatókat is be tudunk kötni." },
       { title: "Raktár- és beléptetőrendszerek", text: "Eszközök, helyek és mozgások: a leltár és a nyilvántartás ugyanabból az adatból dolgozik." },
-      { title: "Levelezés és egyszeri belépés", text: "Az értesítések a saját levelezőszervereteken mennek ki. Az egyszeri belépés (Microsoft Entra ID, Google) hamarosan érkezik." },
+      { title: "Levelezés és egyszeri belépés", text: "Az értesítések a cég saját levelezőszerverén mennek ki. Az egyszeri belépés (Microsoft Entra ID, Google) hamarosan érkezik." },
     ],
   },
   hosting: {
     eyebrow: "Saját szerveres telepítés",
-    title: "Az adatok nálatok maradnak",
-    lead: "A Yardly a felhős változattal azonos rendszer, de csak a ti cégetek adataival, a ti infrastruktúrátokon.",
+    title: "Az adatok Önöknél maradnak",
+    lead: "A Yardly a felhős változattal azonos rendszer, de csak az Önök cégének adataival, az Önök infrastruktúráján.",
     points: [
       "Saját szerveren, adatközpontban vagy privát felhőben",
       "Egycéges telepítés: más cég adata nincs a rendszerben",
-      "A ti mentési, naplózási és biztonsági szabályaitok szerint",
+      "Az Önök mentési, naplózási és biztonsági szabályai szerint",
       "Saját domainen és saját levelezőszerverrel",
       "A frissítéseket egyeztetett időpontban telepítjük, visszaállítható módon",
     ],
@@ -251,7 +251,7 @@ export const enterprise = {
     eyebrow: "Bevezetés",
     title: "Így indul a közös munka",
     items: [
-      "Felmérés: megnézzük, milyen rendszereket használtok, és hogyan zajlik ma a flotta és az eszközpark kezelése.",
+      "Felmérés: megnézzük, milyen rendszereket használnak, és hogyan zajlik ma a flotta és az eszközpark kezelése.",
       "Ajánlat és ütemterv: leírjuk, mit kötünk össze, hová telepítünk, mennyi idő alatt és mennyiért.",
       "Telepítés és összekötés: felállítjuk a rendszert, bekötjük az integrációkat, és áthozzuk a meglévő adatokat.",
       "Betanítás és támogatás: megtanítjuk a kollégáknak, élesítjük, és utána is ott vagyunk, kijelölt kapcsolattartóval.",
@@ -262,9 +262,9 @@ export const enterprise = {
     title: "Kinek ajánljuk",
     items: [
       { title: "300 jármű felett", text: "Nagy flottára egyedi árat adunk, a járművek és eszközök számához igazítva." },
-      { title: "Szigorú IT-előírásokkal", text: "Ha az adatoknak a cégen belül kell maradniuk, vagy saját biztonsági szabályaitok vannak." },
-      { title: "Sok rendszerrel", text: "Ha a flotta és az eszközpark adatai már több helyen vannak, és nem akartok kétszer rögzíteni." },
-      { title: "Saját folyamatokkal", text: "Ha a jóváhagyások, a szerviz és a leltár a cégetek saját szabályai szerint megy." },
+      { title: "Szigorú IT-előírásokkal", text: "Ha az adatoknak a cégen belül kell maradniuk, vagy saját biztonsági szabályaik vannak." },
+      { title: "Sok rendszerrel", text: "Ha a flotta és az eszközpark adatai már több helyen vannak, és nem szeretnének kétszer rögzíteni." },
+      { title: "Saját folyamatokkal", text: "Ha a jóváhagyások, a szerviz és a leltár a cég saját szabályai szerint megy." },
     ],
   },
   faq: {
@@ -272,14 +272,14 @@ export const enterprise = {
     title: "Kérdések a vállalati megoldásról",
     items: [
       { q: "Mennyibe kerül?", a: "A felmérés után egyedi ajánlatot adunk. Az ár a járművek és eszközök számától, a telepítés módjától és az integrációktól függ." },
-      { q: "Ki üzemelteti a szervert?", a: "Ahogy nektek jobb: üzemeltetheti a ti IT-csapatotok, de mi is megtehetjük, távoli eléréssel." },
+      { q: "Ki üzemelteti a szervert?", a: "Ahogy Önöknek jobb: üzemeltetheti a saját IT-csapatuk, de mi is megtehetjük, távoli eléréssel." },
       { q: "Megkapjuk a fejlesztéseket?", a: "Igen. A saját szerveres változat ugyanaz a rendszer, mint a felhős, a frissítéseket egyeztetett időpontban telepítjük." },
-      { q: "Ki lehet előbb próbálni?", a: "Igen. A 14 napos próbával a felhős változatot nézheted meg, a próbaidő alatt felvitt adatokat pedig át tudjuk költöztetni." },
+      { q: "Ki lehet előbb próbálni?", a: "Igen. A 14 napos próbával a felhős változatot nézheti meg, a próbaidő alatt felvitt adatokat pedig át tudjuk költöztetni." },
     ],
   },
   cta: {
     eyebrow: "Beszéljünk",
-    title: "Beszéljük meg, mire van szükségetek.",
+    title: "Beszéljük meg, mire van szükségük.",
     lead: "Egy munkanapon belül jelentkezünk, és egy rövid hívásban felmérjük, mit érdemes összekötni.",
   },
 };

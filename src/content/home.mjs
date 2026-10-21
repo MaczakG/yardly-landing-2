@@ -35,7 +35,7 @@ export const home = {
   modules: {
     eyebrow: "Két modul, egy rendszer",
     title: "A teljes flotta és eszközpark, egy helyen",
-    lead: "Minden csomagban mindkettő benne van. Azt használod, amire szükséged van.",
+    lead: "Minden csomagban mindkettő benne van. Azt használja, amire szüksége van.",
     items: [
       {
         name: "Flotta",
@@ -47,7 +47,7 @@ export const home = {
       },
       {
         name: "Eszközpark",
-        text: "Targoncától a laptopig bármi, amit nyilván kell tartani. Kategóriánként saját jellemzők, pontos hely a polcig, szerviz és ütemterv. A leltárt telefonnal végzed.",
+        text: "Targoncától a laptopig bármi, amit nyilván kell tartani. Kategóriánként saját jellemzők, pontos hely a polcig, szerviz és ütemterv. A leltárt telefonnal végezheti.",
         link: "Eszközpark megoldások",
         slug: "eszkoznyilvantartas",
         img: "eszkozok",
@@ -58,10 +58,10 @@ export const home = {
 
   alerts: {
     eyebrow: "Riasztások",
-    title: "A rendszer szól, nem neked kell emlékezned",
-    text: "A Yardly figyeli a forgalmik, műszakik, biztosítások, jogosítványok és szervizek határidejét. Te döntöd el, hány nappal előtte szóljon, és kinek. Naponta egy összesített e-mailt kapsz, nem tíz külön levelet.",
+    title: "A rendszer szól, nem Önnek kell emlékeznie",
+    text: "A Yardly figyeli a forgalmik, műszakik, biztosítások, jogosítványok és szervizek határidejét. Ön dönti el, hány nappal előtte szóljon, és kinek. Naponta egy összesített e-mailt kap, nem tíz külön levelet.",
     points: [
-      "30, 14, 7 és 1 nappal előtte, vagy amikor te szeretnéd",
+      "30, 14, 7 és 1 nappal előtte, vagy amikor Ön szeretné",
       "a km-alapú szerviznél a km-óra állása alapján",
       "a flottavezetőnek és az érintett kollégának is",
     ],
@@ -86,7 +86,7 @@ export const home = {
       { slug: "iranyitopult", title: "Irányítópult", text: "Belépés után az látszik először, ami figyelmet igényel, hátralévő napokkal és kilométerekkel." },
       { slug: "dokumentumok", title: "Dokumentumok", text: "Forgalmi, műszaki, casco és jogosítvány egy helyen, lejárattal és verziókkal." },
       { slug: "szerviz-karbantartas", title: "Szerviz és ütemterv", text: "Km vagy idő szerinti karbantartás, „ami előbb jön”, és egy kattintással rögzített szerviz." },
-      { slug: "allapotfelmeres", title: "Állapotfelmérés telefonról", text: "A sofőr egy linkről tölti ki a saját ellenőrzőlistádat, belépés nélkül." },
+      { slug: "allapotfelmeres", title: "Állapotfelmérés telefonról", text: "A sofőr egy linkről tölti ki a cég saját ellenőrzőlistáját, belépés nélkül." },
       { slug: "leltar", title: "Leltár kamerával", text: "A kolléga végigmegy a raktáron, és beolvassa a címkéket. A lista nem látszik előre, így a számlálás valós." },
       { slug: "folyamatok", title: "Egyedi workflow beállítás", text: "Árajánlat, jóváhagyás összeghatárral, javítás, lezárás: a rendszer végigviszi a lépéseket." },
       { slug: "tankolas-dkv", title: "DKV-integráció", text: "A kártyás tankolások 6 óránként maguk kerülnek a járművekhez." },
@@ -96,14 +96,14 @@ export const home = {
   },
 
   steps: {
-    eyebrow: "Hogyan kezdj bele",
+    eyebrow: "Hogyan kezdjen bele",
     title: "Három lépés, és a rendszer már dolgozik is",
     items: [
-      { title: "Regisztrálsz.", text: "Két perc, bankkártya nélkül. 14 napig minden funkciót kipróbálhatsz." },
-      { title: "Áthozod a meglévő adatokat.", text: "Töltsd le az Excel-sablont, másold bele a listádat, és töltsd fel. A hiányzó telephelyek, típusok és kategóriák maguk létrejönnek." },
-      { title: "Meghívod a kollégákat.", text: "Mindenki a saját szerepkörével lép be. A sofőr csak a saját autóját látja, a pénzügy a költségeket." },
+      { title: "Regisztrál.", text: "Két perc, bankkártya nélkül. 14 napig minden funkciót kipróbálhat." },
+      { title: "Áthozza a meglévő adatokat.", text: "Töltse le az Excel-sablont, másolja bele a listáját, és töltse fel. A hiányzó telephelyek, típusok és kategóriák maguk létrejönnek." },
+      { title: "Meghívja a kollégákat.", text: "Mindenki a saját szerepkörével lép be. A sofőr csak a saját autóját látja, a pénzügy a költségeket." },
     ],
-    close: "Onnantól a Yardly figyel helyetted.",
+    close: "Onnantól a Yardly figyel Ön helyett.",
   },
 
   personas: {
@@ -127,7 +127,7 @@ export const home = {
 
   pricing: {
     eyebrow: "Árak",
-    title: "Átlátható árak, a flottád méretéhez",
+    title: "Átlátható árak, a flottája méretéhez",
     note: "Éves fizetéssel 2 hónap ingyen. A 300 jármű feletti flottáknak egyedi ajánlatot adunk.",
     button: "Összes ár és kalkulátor",
   },
@@ -135,19 +135,19 @@ export const home = {
   faq: {
     eyebrow: "Gyakori kérdések",
     title: "Gyakori kérdések",
-    lead: "Nem találod a választ? Írj nekünk, egy munkanapon belül válaszolunk.",
+    lead: "Nem találja a választ? Írjon nekünk, egy munkanapon belül válaszolunk.",
     items: [
       { q: "Kell telepíteni valamit?", a: "Nem. A Yardly böngészőben fut, számítógépen és telefonon is." },
       { q: "Hogyan kerülnek be a meglévő adataink?", a: "Excel-sablonnal, egyszerre. A rendszer soronként jelzi, ha valamit javítani kell." },
-      { q: "Mi történik a próbaidő végén?", a: "Csomagot választasz. Ha nem, a fiók csak olvasható lesz, de minden adatod megmarad." },
-      { q: "Csak a flottához vagy csak az eszközökhöz is használható?", a: "Igen. Minden csomagban mindkét modul benne van, azt használod, amire szükséged van." },
+      { q: "Mi történik a próbaidő végén?", a: "Csomagot választ. Ha nem, a fiók csak olvasható lesz, de minden adata megmarad." },
+      { q: "Csak a flottához vagy csak az eszközökhöz is használható?", a: "Igen. Minden csomagban mindkét modul benne van, azt használja, amire szüksége van." },
       { q: "Hol tárolódnak az adataink?", a: "Titkosított kapcsolaton érhetők el, és minden cég csak a saját adatait látja." },
     ],
   },
 
   cta: {
-    eyebrow: "Kezdd el",
-    title: "Próbáld ki a saját flottáddal.",
-    lead: "14 nap ingyen, bankkártya nélkül. Ha elakadsz, szívesen végigmegyünk veled egy rövid bemutatón.",
+    eyebrow: "Kezdje el",
+    title: "Próbálja ki a saját flottájával.",
+    lead: "14 nap ingyen, bankkártya nélkül. Ha elakad, szívesen végigmegyünk Önnel egy rövid bemutatón.",
   },
 };

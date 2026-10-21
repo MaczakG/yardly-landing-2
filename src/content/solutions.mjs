@@ -16,7 +16,7 @@ export const overview = {
     "Telefonra szabott felület",
     "Helyben szerkeszthető adatlapok",
     "Teljes adatexport Excelben",
-    "Verzióelőzmények az appban: mindig látod, mi újult meg",
+    "Verzióelőzmények az appban: mindig látja, mi újult meg",
   ],
   soon: {
     title: "Hamarosan",
@@ -26,7 +26,7 @@ export const overview = {
       { key: "Sso", name: "SSO (Microsoft Entra ID, Google)" },
     ],
   },
-  cta: { title: "Nézd meg a saját adataiddal.", lead: "14 nap ingyen, a Prémium csomag minden funkciójával. Bankkártya nem kell." },
+  cta: { title: "Nézze meg a saját adataival.", lead: "14 nap ingyen, a Prémium csomag minden funkciójával. Bankkártya nem kell." },
 };
 
 export const groups = {
@@ -48,21 +48,21 @@ export const solutions = [
     description: "Az egész flotta egy kereshető listában, minden autó saját adatlappal. Excel-importtal percek alatt áthozható.",
     eyebrow: "Flotta",
     h1: "Az egész flotta egy táblázatban, minden autó egy adatlapon",
-    lead: "Rendszám, km-óra, telephely, sofőr és állapot egy kereshető listában. Minden sorból egy kattintással rögzíted a tankolást, a szervizt, a kárt vagy egy dokumentumot.",
+    lead: "Rendszám, km-óra, telephely, sofőr és állapot egy kereshető listában. Minden sorból egy kattintással rögzítheti a tankolást, a szervizt, a kárt vagy egy dokumentumot.",
     benefits: [
       { title: "Egy pillantás alatt", text: "Élő számlálók mutatják, hány autó aktív, szervizben vagy kivonva." },
-      { title: "Azonnal megtalálod", text: "Keresés rendszámra, márkára, alvázszámra, telephelyre és sofőrre, ékezet nélkül is." },
+      { title: "Azonnal megtalálja", text: "Keresés rendszámra, márkára, alvázszámra, telephelyre és sofőrre, ékezet nélkül is." },
       { title: "Teljes előélet", text: "Minden járműnek saját adatlapja van, fülekre bontva." },
     ],
     features: [
       { title: "Járműlista", text: "Rendszám, típus, évjárat, km-óra, üzemeltetési forma, telephely, hozzárendelt felhasználó és állapot (Aktív, Szervizben, Kivonva). Szűrés állapotra és járműtípusra, soronkénti gyorsgombok." },
       { title: "Felvétel", text: "Rendszám, alvázszám, márka, típus, évjárat, km-óra, üzemanyag (gázolaj, benzin, elektromos), telephely és sofőr." },
-      { title: "Üzemeltetési forma", text: "Saját, bérelt, lízing vagy bármi, amit felveszel. Bérletnél a havi díj magától a költségekbe kerül." },
-      { title: "Saját katalógusok", text: "A járműtípusokat és az üzemeltetési formákat te határozod meg." },
+      { title: "Üzemeltetési forma", text: "Saját, bérelt, lízing vagy bármi, amit felvesz. Bérletnél a havi díj magától a költségekbe kerül." },
+      { title: "Saját katalógusok", text: "A járműtípusokat és az üzemeltetési formákat Ön határozza meg." },
       { title: "Jármű-adatlap", text: "Az adatok helyben szerkeszthetők, a változás azonnal mentődik. A km-óra módosítása újraszámolja a km-alapú karbantartásokat." },
       { title: "Összegzés az adatlap tetején", text: "Következő karbantartás, utolsó szerviz, következő állapotfelmérés, nyitott kárügyek, kötelező és casco, tartozékok." },
       { title: "Fülek", text: "Szerviznapló, Tankolás, Ütemterv, Kárügyek, Tartozékok, Biztosítás, Dokumentumok, Állapotfelmérés, Bejelentések, Folyamatok, Telephelyek." },
-      { title: "Telephely-előzmények", text: "Látod, melyik autó mikor melyik telephelyhez tartozott." },
+      { title: "Telephely-előzmények", text: "Látja, melyik autó mikor melyik telephelyhez tartozott." },
       { title: "Telephelyek", text: "Telephelyenként a járművek és eszközök száma, a havi és az éves költség. Törléskor a rendszer átteszi a járműveket és eszközöket egy másik telephelyre." },
       { title: "Sofőr-hozzárendelés", text: "A sofőr csak a hozzá rendelt autót látja, ha a szerepköre így van beállítva." },
       { title: "Excel-import sablonnal", text: "A teljes flotta egyszerre feltölthető. Az ismeretlen telephely, típus és üzemeltetési forma magától létrejön, a hibás sorokról soronkénti jelentés készül." },
@@ -74,7 +74,7 @@ export const solutions = [
       { img: "mobil", alt: "A járműlista telefonon", phone: true },
     ],
     related: ["szerviz-karbantartas", "dokumentumok", "koltsegek-riportok"],
-    cta: "Töltsd fel a flottádat Excelből, és nézd meg öt perc múlva.",
+    cta: "Töltse fel a flottáját Excelből, és nézze meg öt perc múlva.",
   },
   {
     slug: "szerviz-karbantartas",
@@ -85,12 +85,12 @@ export const solutions = [
     title: "Karbantartási ütemterv és szerviznapló – Yardly",
     description: "Km vagy idő szerinti karbantartás, „ami előbb jön”. Szerviznapló, szervizpartnerek és riasztás, mielőtt esedékes.",
     eyebrow: "Flotta",
-    h1: "Szerviz, amit nem felejtesz el",
+    h1: "Szerviz, amely nem marad el",
     lead: "Km vagy idő szerint ütemezett karbantartás, teljes szerviznapló és a szervizpartnerek egy helyen.",
     benefits: [
       { title: "„Ami előbb jön”", text: "A karbantartás km-óra vagy idő szerint esedékes, amelyik hamarabb teljesül." },
       { title: "Egy kattintás", text: "Az „Elvégezve” gomb szervizbejegyzést rögzít, és újraindítja az ütemtervet." },
-      { title: "Vissza tudod keresni", text: "Minden szerviz dátummal, km-rel, költséggel és garanciával." },
+      { title: "Visszakereshető", text: "Minden szerviz dátummal, km-rel, költséggel és garanciával." },
     ],
     features: [
       { title: "Karbantartási ütemterv", text: "Járművenként több tétel (pl. olajcsere, nagy szerviz, fékfolyadék), állapotjelzéssel: Rendben, Hamarosan esedékes, Lejárt." },
@@ -116,7 +116,7 @@ export const solutions = [
     description: "A DKV-kártyás tankolások 6 óránként maguk kerülnek a járművekhez. Fogyasztás és Ft/km kézi rögzítés nélkül.",
     eyebrow: "Flotta",
     h1: "Tankolás és töltés, kézi rögzítés nélkül",
-    lead: "A DKV-kártyás tankolások maguk kerülnek a járművekhez. Ami nem kártyás, azt telefonról is pillanatok alatt rögzíted.",
+    lead: "A DKV-kártyás tankolások maguk kerülnek a járművekhez. Ami nem kártyás, azt telefonról is pillanatok alatt rögzítheti.",
     benefits: [
       { title: "Nincs többé Excel-import", text: "A DKV-tranzakciók 6 óránként maguk érkeznek." },
       { title: "Pontos fogyasztás", text: "Literben, elektromos autónál kWh-ban, járművenként." },
@@ -126,8 +126,8 @@ export const solutions = [
       { title: "Tankolás rögzítése", text: "Dátum, km-óra, liter, összeg és megjegyzés. A km-óraállást is frissíti." },
       { title: "Elektromos töltés", text: "kWh és Ft/kWh tarifa szerint." },
       { title: "Tankolás oldal", text: "Az egész flotta tankolásai egy kereshető listában, és járművenként az adatlapon." },
-      { title: "DKV egyszeri beállítás", text: "A DKV-tól kapott API-hozzáférést megadod, és egy gombbal kipróbálod a kapcsolatot. A titkos kulcsokat a rendszer titkosítva tárolja, és nem jeleníti meg újra." },
-      { title: "Automatikus szinkron", text: "6 óránként, és bármikor kézzel is. Te választod meg, melyik naptól hívja le a korábbi tranzakciókat." },
+      { title: "DKV egyszeri beállítás", text: "A DKV-tól kapott API-hozzáférést megadja, és egy gombbal kipróbálja a kapcsolatot. A titkos kulcsokat a rendszer titkosítva tárolja, és nem jeleníti meg újra." },
+      { title: "Automatikus szinkron", text: "6 óránként, és bármikor kézzel is. Ön választja meg, melyik naptól hívja le a korábbi tranzakciókat." },
       { title: "Kártya → jármű", text: "A kártyákat a DKV-nál rögzített rendszám alapján köti a járművekhez; bármelyik kártya kézzel átállítható." },
       { title: "Okos szűrés", text: "Az AdBlue, az olaj és a mosás nem számít tankolásnak; az elektromos töltés külön jelölést kap; a hiányzó vagy elgépelt km-órát a rendszer az előző adatokból becsüli." },
       { title: "Tranzakciók állapottal", text: "Bekerült, nincs járműhöz rendelve, nem üzemanyag vagy ellenőrzést igényel. A törölt tankolás nem kerül be újra." },
@@ -135,7 +135,7 @@ export const solutions = [
     ],
     shots: [{ img: "dkv", alt: "DKV-kártyák a járművekhez rendelve, alatta a tranzakciók állapottal" }],
     related: ["koltsegek-riportok", "analitika", "jarmunyilvantartas"],
-    cta: "Kösd össze a DKV-kártyáidat öt perc alatt.",
+    cta: "Kösse össze a DKV-kártyáit öt perc alatt.",
   },
   {
     slug: "karugyek-biztositas-tartozekok",
@@ -149,9 +149,9 @@ export const solutions = [
     h1: "Kárügyek, biztosítás és tartozékok: semmi nem vész el",
     lead: "A kár fotóval, a biztosítói ügy állapota, a kötelező és a casco díja, a téli gumi gyári száma. Mind a jármű adatlapján.",
     benefits: [
-      { title: "Minden kár követhető", text: "A bejelentéstől a lezárásig látod, hol tart." },
+      { title: "Minden kár követhető", text: "A bejelentéstől a lezárásig látja, hol tart." },
       { title: "Biztosítás átláthatóan", text: "A díjak időszakonként, és a költségekben is." },
-      { title: "Tartozékok névre szólóan", text: "Tudod, melyik autóban van a tolatókamera, és mennyiért vetted." },
+      { title: "Tartozékok névre szólóan", text: "Tudja, melyik autóban van a tolatókamera, és mennyiért vették." },
     ],
     features: [
       { title: "Kárügyek", text: "Típus (baleset, lopás, rongálás, egyéb), dátum, leírás, helyszín és érintett kolléga." },
@@ -176,11 +176,11 @@ export const solutions = [
     description: "A sofőr a telefonján tölti ki a cég saját ellenőrzőlistáját, belépés nélkül. Ütemezve, előzményekkel, PDF-ben.",
     eyebrow: "Flotta",
     badge: "Üzleti csomagtól",
-    h1: "A sofőr ellenőriz, te látod az eredményt",
-    lead: "A saját ellenőrzőlistád a sofőr telefonján, ütemezve. Belépés és alkalmazás nélkül.",
+    h1: "A sofőr ellenőriz, Ön látja az eredményt",
+    lead: "Az Ön ellenőrzőlistája a sofőr telefonján, ütemezve. Belépés és alkalmazás nélkül.",
     benefits: [
       { title: "Nincs papír", text: "A sofőr egy linket kap e-mailben, és a telefonján tölti ki." },
-      { title: "A te listád", text: "Gumik, lámpák, olajszint vagy bármi, amit fontosnak tartasz." },
+      { title: "Az Ön listája", text: "Gumik, lámpák, olajszint vagy bármi, amit fontosnak tart." },
       { title: "Nem csúszik el", text: "A késésről az irányítópult és a riasztás is szól." },
     ],
     features: [
@@ -196,7 +196,7 @@ export const solutions = [
       { img: "allapotfelmeres", alt: "Az állapotfelmérések a jármű adatlapján, eredménnyel és előzményekkel" },
     ],
     related: ["jarmunyilvantartas", "riasztasok", "folyamatok"],
-    cta: "Állítsd össze az első ellenőrzőlistádat tíz perc alatt.",
+    cta: "Állítsa össze az első ellenőrzőlistáját tíz perc alatt.",
   },
 
   // ------------------------------------------------------------ Eszközpark
@@ -209,10 +209,10 @@ export const solutions = [
     title: "Eszköznyilvántartás targoncától a laptopig – Yardly",
     description: "Kategóriánként saját jellemzők, pontos hely a polcig, felelős, szerviz és ütemterv. Excel-importtal.",
     eyebrow: "Eszközpark",
-    h1: "Targoncától a laptopig: tudod, mi van, hol van, és kinél",
+    h1: "Targoncától a laptopig: tudja, mi van, hol van, és kinél",
     lead: "Minden, ami nem jármű, de nyilván kell tartani, a beszerzéstől a selejtezésig. Kategóriánként saját jellemzőkkel és pontos hellyel, a polcig.",
     benefits: [
-      { title: "A te kategóriáid", text: "A targoncánál teherbírás és hatósági vizsga, a laptopnál processzor és garancia." },
+      { title: "Saját kategóriák", text: "A targoncánál teherbírás és hatósági vizsga, a laptopnál processzor és garancia." },
       { title: "Pontos hely", text: "Telephely, raktár, helyiség, polc." },
       { title: "Felelőssel", text: "Minden eszköznek van felelőse és használója." },
     ],
@@ -220,9 +220,9 @@ export const solutions = [
       { title: "Eszközadatok", text: "Név, kategória, típus, gyártó, modell, gyári szám, leltári szám, belső azonosító és vonalkód." },
       { title: "Beszerzés", text: "Dátum, érték, beszerzés helye és számlaszáma." },
       { title: "Üzemeltetési forma", text: "Saját, bérelt vagy hitel, havi díjjal és záró dátummal; a díj a költségekbe kerül." },
-      { title: "Kategóriák és típusok", text: "A típusok a kategóriák altípusai, kategóriánként veszed fel őket. Minden kategória külön menüpontot kap az Eszközpark alatt." },
+      { title: "Kategóriák és típusok", text: "A típusok a kategóriák altípusai, kategóriánként veheti fel őket. Minden kategória külön menüpontot kap az Eszközpark alatt." },
       { title: "Saját jellemzők kategóriánként", text: "Szöveg, szám mértékegységgel, dátum, igen/nem és választólista. A kategória listájában oszlopként jelennek meg, és keresni is lehet bennük." },
-      { title: "Hely", text: "Telephely › raktár › helyiség › polc. A raktárakat, helyiségeket és polcokat te veszed fel." },
+      { title: "Hely", text: "Telephely › raktár › helyiség › polc. A raktárakat, helyiségeket és polcokat Ön veszi fel." },
       { title: "Felelős és használó", text: "Külön megadható, ki felel az eszközért, és ki használja." },
       { title: "Saját állapotok", text: "Pl. Használatban, Javítás alatt, Selejtezésre vár. Az irányítópulton csoportosítva látszanak." },
       { title: "Eszköz-adatlap", text: "Helyben szerkeszthető adatok, fülek: Szerviz, Bejelentések, Ütemterv, Folyamatok, Dokumentumok." },
@@ -237,7 +237,7 @@ export const solutions = [
       { img: "eszkoz-adatlap", alt: "Az eszköz adatlapja jellemzőkkel, elhelyezéssel és beszerzéssel" },
     ],
     related: ["leltar", "folyamatok", "koltsegek-riportok"],
-    cta: "Hozd át az eszközlistádat Excelből, és már ma tudod, mi hol van.",
+    cta: "Hozza át az eszközlistáját Excelből, és már ma tudja, mi hol van.",
   },
   {
     slug: "leltar",
@@ -253,16 +253,16 @@ export const solutions = [
     lead: "A kolléga végigmegy a raktáron, és a telefon kamerájával beolvassa a címkéket. Nem kell listát pipálni, és bejelentkezni sem.",
     benefits: [
       { title: "Valós számlálás", text: "A leltár „vak”, a telefon nem mutatja előre a listát." },
-      { title: "A meglévő címkéiddel", text: "QR-kód és vonalkód is; a leltári számot, a vonalkódot, a gyári számot és a belső azonosítót is felismeri." },
-      { title: "Azonnal látod, mi hiányzik", text: "A végén összesítő, megjegyzésekkel, PDF-ben." },
+      { title: "A meglévő címkékkel", text: "QR-kód és vonalkód is; a leltári számot, a vonalkódot, a gyári számot és a belső azonosítót is felismeri." },
+      { title: "Azonnal látja, mi hiányzik", text: "A végén összesítő, megjegyzésekkel, PDF-ben." },
     ],
     featuresTitle: "Hogyan működik",
     steps: [
-      "Kiválasztod az eszközöket és a járműtartozékokat, kategória, típus, állapot, telephely, raktár vagy helyiség szerint szűrve, és elküldöd a leltárt egy kollégának.",
+      "Kiválasztja az eszközöket és a járműtartozékokat, kategória, típus, állapot, telephely, raktár vagy helyiség szerint szűrve, és elküldi a leltárt egy kollégának.",
       "A kolléga e-mailben kap egy 14 napig érvényes linket, amely a telefonon azonnal megnyitja a kamerát.",
       "Minden beolvasott kód kipipálja a tételt. A címke nélküli tételekhez van kézi beírás, sötét helyen bekapcsolható a lámpa.",
       "A végén látszik, mi került elő és mi nem. A hiányzókhoz megjegyzés írható, majd a leltár rögzíthető.",
-      "Te a Leltár előzményekben látod az eredményt, és PDF-ben letöltheted.",
+      "Ön a Leltár előzményekben látja az eredményt, és PDF-ben letöltheti.",
     ],
     note: "A haladás a telefonon megmarad, ha közben megszakad. iPhone-on és Androidon is működik, alkalmazás telepítése nélkül.",
     shots: [
@@ -270,7 +270,7 @@ export const solutions = [
       { img: "leltar-osszesites", alt: "A leltár összesítése a megtalált és hiányzó tételekkel", phone: true },
     ],
     related: ["eszkoznyilvantartas", "karugyek-biztositas-tartozekok", "koltsegek-riportok"],
-    cta: "A következő leltárt már telefonnal csináld.",
+    cta: "A következő leltárt már telefonnal végezze.",
   },
 
   // ---------------------------------------------------------- Napi működés
@@ -281,10 +281,10 @@ export const solutions = [
     menuTitle: "Irányítópult és Teendőim",
     menuDesc: "Belépés után az látszik, ami figyelmet igényel.",
     title: "Irányítópult és teendőlista – Yardly",
-    description: "Belépés után az látszik, ami figyelmet igényel: közelgő határidők, mutatók, költségek és a rád váró feladatok.",
+    description: "Belépés után az látszik, ami figyelmet igényel: közelgő határidők, mutatók, költségek és az Önre váró feladatok.",
     eyebrow: "Napi működés",
     h1: "Belépés után az látszik, ami figyelmet igényel",
-    lead: "Nem egy menü fogad, hanem a közelgő és lejárt határidők, a fő mutatók és a rád váró feladatok.",
+    lead: "Nem egy menü fogad, hanem a közelgő és lejárt határidők, a fő mutatók és az Önre váró feladatok.",
     benefits: [
       { title: "Első helyen a sürgős", text: "Hátralévő napokkal és kilométerekkel." },
       { title: "Minden szám egy helyen", text: "Járművek, eszközök, károk, költségek." },
@@ -299,7 +299,7 @@ export const solutions = [
       { title: "Gyorskereső (Ctrl/⌘ + K)", text: "Bármelyik oldal elérhető néhány betű beírásával, ékezet nélkül is. Minden lista keresője ékezet- és kisbetű-független." },
       { title: "Több cég egy fiókkal", text: "Egy személy több cég tagja is lehet, cégenként más szerepkörrel, és az oldalsávban válthat közöttük." },
       { title: "Saját profil", text: "Név, telefon és a többi személyes adat szerkesztése." },
-      { title: "Verzióelőzmények", text: "Az appban látod, mi újult meg az egyes verziókban." },
+      { title: "Verzióelőzmények", text: "Az appban látja, mi újult meg az egyes verziókban." },
     ],
     shots: [
       { img: "dashboard", alt: "Az irányítópult a közelgő és lejárt határidőkkel, alatta a fő mutatók" },
@@ -307,7 +307,7 @@ export const solutions = [
       { img: "gyorskereso", alt: "Gyorskereső: néhány betűből megtalálja az oldalt, ékezet nélkül is" },
     ],
     related: ["riasztasok", "folyamatok", "koltsegek-riportok"],
-    cta: "Nézd meg, mit mutat a Yardly holnap reggel.",
+    cta: "Nézze meg, mit mutat a Yardly holnap reggel.",
   },
   {
     slug: "dokumentumok",
@@ -322,7 +322,7 @@ export const solutions = [
     lead: "Minden dokumentum ahhoz a járműhöz, eszközhöz vagy kollégához van csatolva, akihez tartozik. A lejáratot a rendszer figyeli.",
     benefits: [
       { title: "Mindig a friss verzió", text: "A régiek is megmaradnak." },
-      { title: "A saját dokumentumtípusaid", text: "Te döntöd el, mit tartasz nyilván." },
+      { title: "Saját dokumentumtípusok", text: "Ön dönti el, mit tart nyilván." },
       { title: "Költség is egyben", text: "A biztosítás vagy a bérleti díj összege magától költség lesz." },
     ],
     features: [
@@ -337,7 +337,7 @@ export const solutions = [
     ],
     shots: [{ img: "dokumentumok", alt: "A Dokumentumok lista típussal, tulajdonossal, lejárattal és verziókkal" }],
     related: ["riasztasok", "jarmunyilvantartas", "eszkoznyilvantartas"],
-    cta: "Töltsd fel a forgalmikat, és felejtsd el a lejáratokat.",
+    cta: "Töltse fel a forgalmikat, és felejtse el a lejáratokat.",
   },
   {
     slug: "riasztasok",
@@ -349,9 +349,9 @@ export const solutions = [
     description: "E-mail 30, 14, 7 és 1 nappal a lejárat előtt, a megfelelő embernek. Naponta egy összesített levél.",
     eyebrow: "Napi működés",
     h1: "A rendszer szól, mielőtt valami lejár",
-    lead: "Dokumentum, karbantartás, állapotfelmérés vagy saját emlékeztető: a Yardly időben szól e-mailben, és te döntöd el, mikor és kinek.",
+    lead: "Dokumentum, karbantartás, állapotfelmérés vagy saját emlékeztető: a Yardly időben szól e-mailben, és Ön dönti el, mikor és kinek.",
     benefits: [
-      { title: "Időben", text: "30, 14, 7 és 1 nappal előtte, vagy amikor szeretnéd." },
+      { title: "Időben", text: "30, 14, 7 és 1 nappal előtte, vagy amikor szeretné." },
       { title: "A jó embernek", text: "A flottavezetőnek, az érintett kollégának vagy mindkettőnek." },
       { title: "Nem árasztja el a postafiókot", text: "Naponta egy összesített e-mail, nem tételenként külön levél." },
     ],
@@ -361,13 +361,13 @@ export const solutions = [
       { title: "Kinek", text: "A flottavezetőknek és/vagy az érintett felhasználónak." },
       { title: "Km-küszöb", text: "A km-alapú karbantartásnál hány km-rel előtte jelezzen." },
       { title: "Riasztások oldal", text: "A következő 60 nap határideje és a kiküldött riasztások előzménye; „Ellenőrzés futtatása most” gomb." },
-      { title: "Teszt e-mail", text: "Egy gombbal kipróbálhatod, megérkezik-e a levél." },
+      { title: "Teszt e-mail", text: "Egy gombbal kipróbálhatja, megérkezik-e a levél." },
       { title: "Emlékeztetők", text: "Egyszeri vagy ismétlődő (1–60 havonta), pl. téli gumi csere vagy tachográf-kalibrálás." },
       { title: "Emlékeztető bármihez", text: "Járműhöz, személyhez vagy eszközhöz köthető; „Teljesítve” gombbal és előzményekkel." },
     ],
     shots: [{ img: "riasztasok", alt: "A Riasztások oldal a közelgő lejáratokkal és a kiküldött értesítésekkel" }],
     related: ["dokumentumok", "szerviz-karbantartas", "allapotfelmeres"],
-    cta: "Állítsd be egyszer, és a Yardly emlékezik helyetted.",
+    cta: "Állítsa be egyszer, és a Yardly emlékezik Ön helyett.",
   },
   {
     slug: "folyamatok",
@@ -376,17 +376,17 @@ export const solutions = [
     menuTitle: "Egyedi workflow beállítás és bejelentések",
     menuDesc: "A bejelentéstől a szervizbejegyzésig, jóváhagyásokkal.",
     title: "Egyedi workflow beállítás és jóváhagyások – Yardly",
-    description: "Bejelentés, árajánlat, jóváhagyás összeghatárral, javítás és szervizbejegyzés: rajzold meg, a Yardly végigviszi.",
+    description: "Bejelentés, árajánlat, jóváhagyás összeghatárral, javítás és szervizbejegyzés: rajzolja meg, a Yardly végigviszi.",
     eyebrow: "Napi működés",
     h1: "A bejelentéstől a szervizbejegyzésig, jóváhagyásokkal",
-    lead: "Rajzold meg a céged saját karbantartási és javítási folyamatát: ki mit csinál, mekkora összegtől kell jóváhagyás, kit kell értesíteni. A Yardly végigviszi a lépéseket.",
+    lead: "Rajzolja meg a cége saját karbantartási és javítási folyamatát: ki mit csinál, mekkora összegtől kell jóváhagyás, kit kell értesíteni. A Yardly végigviszi a lépéseket.",
     benefits: [
       { title: "Senki nem felejt el semmit", text: "Minden lépés ott vár a felelőse Teendőim listájában." },
-      { title: "A te szabályaid", text: "Például 100 000 Ft felett a vezetőnek kell jóváhagynia." },
+      { title: "Az Ön szabályai", text: "Például 100 000 Ft felett a vezetőnek kell jóváhagynia." },
       { title: "A végén magától", text: "A lezárás beírja a munkát és a költséget a szerviznaplóba." },
     ],
     features: [
-      { title: "Vizuális folyamatszerkesztő", text: "A lépéseket egy vásznon kötöd össze. Lépéstípusok: Indítás, Feladat, Jóváhagyás, Feltétel, Értesítés, Lezárás." },
+      { title: "Vizuális folyamatszerkesztő", text: "A lépéseket egy vásznon köti össze. Lépéstípusok: Indítás, Feladat, Jóváhagyás, Feltétel, Értesítés, Lezárás." },
       { title: "Kész sablonok", text: "Pl. „Járműjavítás jóváhagyással” (árajánlat, vezetői jóváhagyás, javítás), amit csak testre kell szabni." },
       { title: "Alapértelmezett folyamat típusonként", text: "Jármű- és eszköztípusonként megadható, melyik folyamat induljon; egy-egy jármű vagy eszköz saját folyamatot is kaphat az adatlapján." },
       { title: "Indítás", text: "Kézzel, egy esedékes ütemtervből automatikusan, vagy egy bejelentésből." },
@@ -395,7 +395,7 @@ export const solutions = [
       { title: "Jóváhagyás összeghatárral", text: "Elutasításkor visszakerülhet javításra, mehet az „Elutasítva” ágon, vagy lezárulhat a folyamat." },
       { title: "Értesítések", text: "E-mail a lépés indulásakor, lezárásakor vagy elutasításakor, saját szöveggel." },
       { title: "Feltételek szabályokkal", text: "A folyamat elágazhat összeg, kitöltött mező, dokumentum, km-óraállás, a jármű kora, az utolsó szerviz óta eltelt napok, nyitott kárügyek, járműtípus, üzemeltetési forma, állapot, üzemanyag, eszközkategória és -típus szerint." },
-      { title: "Saját lépések", text: "Egyszer beállított lépés, amit bármelyik folyamatba behúzhatsz." },
+      { title: "Saját lépések", text: "Egyszer beállított lépés, amelyet bármelyik folyamatba behúzhat." },
       { title: "Piszkozatok", text: "A folyamat félkészen is menthető, és csak a kész változat élesedik." },
       { title: "Futó folyamatok", text: "A folyamatábra mutatja, hol tart; a lépésekhez fájl csatolható, a folyamat leállítható." },
       { title: "Automatikus szervizbejegyzés", text: "A lezárási lépés az elvégzett munkát és a költséget beírja a szerviznaplóba, és elvégzettnek jelöli az esedékes ütemtervet." },
@@ -408,7 +408,7 @@ export const solutions = [
       { img: "bejelentes", alt: "Bejelentések a jármű adatlapján" },
     ],
     related: ["szerviz-karbantartas", "iranyitopult", "eszkoznyilvantartas"],
-    cta: "Rajzold meg az első folyamatodat egy sablonból.",
+    cta: "Rajzolja meg az első folyamatát egy sablonból.",
   },
 
   // --------------------------------------------------------------- Vezetés
@@ -421,12 +421,12 @@ export const solutions = [
     title: "Flottaköltségek, Ft/km és riportok – Yardly",
     description: "Járművenkénti havi, éves és Ft/km költség, vezetői összefoglaló PDF-ben, teljes adatexport Excelben.",
     eyebrow: "Vezetés",
-    h1: "Tudd pontosan, mennyibe kerül egy autó kilométerenként",
+    h1: "Tudja pontosan, mennyibe kerül egy autó kilométerenként",
     lead: "A Yardly a rögzített tankolásokból, szervizekből, biztosításokból, bérleti díjakból és beszerzésekből számolja a költséget, külön könyvelés nélkül.",
     benefits: [
       { title: "Ft/km autónként", text: "Havi, éves és teljes költség egy táblázatban." },
       { title: "Vezetői összefoglaló egy kattintással", text: "PDF-ben, bármely időszakra." },
-      { title: "Minden adat a tiéd", text: "Teljes export Excelben, bármikor." },
+      { title: "Minden adat az Öné", text: "Teljes export Excelben, bármikor." },
     ],
     features: [
       { title: "Jármű-összesítő", text: "Járművenként havi, éves és teljes költség, valamint Ft/km." },
@@ -460,7 +460,7 @@ export const solutions = [
     lead: "Az analitika a már rögzített szerviz-, tankolási és km-adatokból dolgozik, külön adatbevitel nélkül, és megmutatja, hol érdemes beavatkozni.",
     benefits: [
       { title: "Magyarázható", text: "Küszöbalapú szabályok, nem fekete doboz. Minden ajánlás mellé indoklás jár." },
-      { title: "Előre látsz", text: "A szerviz esedékessége a valós futás alapján." },
+      { title: "Előre lát", text: "A szerviz esedékessége a valós futás alapján." },
       { title: "Csere vagy javítás", text: "Számokkal alátámasztva." },
     ],
     features: [
@@ -475,7 +475,7 @@ export const solutions = [
       { img: "csereajanlas", alt: "Csereajánlások indoklással: melyik jármű kerül túl sokba" },
     ],
     related: ["koltsegek-riportok", "szerviz-karbantartas", "eszkoznyilvantartas"],
-    cta: "A próbaidőben a Prémium analitikát is kipróbálhatod.",
+    cta: "A próbaidőben a Prémium analitikát is kipróbálhatja.",
   },
   {
     slug: "csapat-biztonsag",
@@ -538,7 +538,7 @@ export const solutions = [
     ],
     related: ["iranyitopult", "folyamatok", "dokumentumok"],
     relatedPages: ["pricing", "contact"],
-    cta: "Hívd meg a csapatodat, és állítsd be, ki mit lát.",
+    cta: "Hívja meg a csapatát, és állítsa be, ki mit lát.",
   },
 ];
 

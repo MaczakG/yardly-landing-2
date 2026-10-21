@@ -17,7 +17,7 @@ export const ui = {
   demo: "Bemutatót kérek",
   trialNote: "14 nap ingyen, a Prémium csomag minden funkciójával. Bankkártya nem kell.",
   soon: "Hamarosan",
-  notify: "Szólj, ha elérhető",
+  notify: "Értesítést kérek",
   vat: "+ ÁFA",
   readMore: "Tovább olvasom",
   minutes: (n) => `${n} perc olvasás`,
@@ -28,7 +28,7 @@ export const ui = {
   allSolutions: "Az összes funkció",
   draft: "Tervezet. Élesítés előtt a kiemelt részeket ki kell tölteni, a szöveget jogi szakértőnek kell ellenőriznie.",
   consent: {
-    text: "Az oldal látogatottságát a Google Analytics segítségével mérjük, de csak akkor, ha ehhez hozzájárulsz.",
+    text: "Az oldal látogatottságát a Google Analytics segítségével mérjük, de csak akkor, ha ehhez hozzájárul.",
     more: "Részletek",
     accept: "Elfogadom",
     reject: "Elutasítom",
@@ -63,7 +63,7 @@ export const megamenu = {
   },
   bottom: {
     all: "Az összes funkció egy oldalon",
-    note: "Excel-import: a meglévő nyilvántartásod percek alatt átkerül.",
+    note: "Excel-import: a meglévő nyilvántartása percek alatt átkerül.",
   },
 };
 
