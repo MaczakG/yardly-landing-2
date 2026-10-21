@@ -19,8 +19,12 @@
   }
 
   // "29 990 Ft": thousands grouped with a non-breaking space (Intl leaves 4-digit numbers ungrouped).
+  function num(n) {
+    return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, "\u00a0");
+  }
+
   function huf(n) {
-    return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " Ft";
+    return num(n) + "\u00a0Ft";
   }
 
   function fill(template, values) {
@@ -89,7 +93,7 @@
       if (e.relatedTarget && !mega.contains(e.relatedTarget) && e.relatedTarget !== trigger) setMega(false);
     });
 
-    window.matchMedia("(max-width: 1079px)").addEventListener("change", function (mq) {
+    window.matchMedia("(max-width: 1199px)").addEventListener("change", function (mq) {
       if (mq.matches) setMega(false);
     });
   }
@@ -119,23 +123,27 @@
         toggle.focus();
       }
     });
-    window.matchMedia("(min-width: 1080px)").addEventListener("change", function (mq) {
+    window.matchMedia("(min-width: 1200px)").addEventListener("change", function (mq) {
       if (mq.matches) setNav(false);
     });
   }
 
-  /* Pricing: monthly or annual payment, and the vehicle calculator */
+  /* Pricing: monthly or annual payment, and the calculator for vehicles and equipment */
   var cycle = "monthly";
   var calc = document.querySelector("[data-calc]");
   var updateCalc = function () {};
 
   if (calc) {
     var plans = JSON.parse(calc.getAttribute("data-plans"));
+    var addon = JSON.parse(calc.getAttribute("data-addon"));
     var text = JSON.parse(calc.getAttribute("data-text"));
     var vat = Number(calc.getAttribute("data-vat")) || 0;
     var max = Number(calc.getAttribute("data-max")) || 300;
     var range = document.getElementById("calc-range");
     var number = document.getElementById("calc-n");
+    var eRange = document.getElementById("calc-e-range");
+    var eNumber = document.getElementById("calc-e");
+    var eMaxInput = Number(eNumber.getAttribute("max")) || 100000;
     var out = {
       plans: calc.querySelector("[data-calc-plans]"),
       note: calc.querySelector("[data-calc-note]"),
@@ -144,10 +152,22 @@
       lines: calc.querySelector("[data-calc-lines]"),
     };
 
-    var priceOf = function (plan, n) {
+    // Same rules as calcQuote in src/pages.mjs: vehicles up to the plan's ceiling, equipment
+    // above the plan's limit in "+250 eszköz" packs (Prémium: no limit).
+    var addonMonthly = function () {
+      return cycle === "annual" ? (addon.monthly * (12 - addon.freeMonths)) / 12 : addon.monthly;
+    };
+    var maxEquipment = function (plan) {
+      return plan.equipment === null ? Infinity : plan.equipment + addon.size * addon.maxQuantity;
+    };
+    var quote = function (plan, n, e) {
+      if (n > plan.ceiling) return { plan: plan, off: fill(text.max, { n: plan.ceiling }) };
+      if (e > maxEquipment(plan)) return { plan: plan, off: fill(text.maxEquipment, { n: num(maxEquipment(plan)) }) };
       var base = cycle === "annual" ? plan.annualMonthly : plan.monthly;
       var over = Math.max(0, n - plan.included);
-      return { plan: plan, base: base, over: over, total: base + over * plan.extra };
+      var packs = plan.equipment === null ? 0 : Math.ceil(Math.max(0, e - plan.equipment) / addon.size);
+      var extra = packs * addonMonthly();
+      return { plan: plan, base: base, over: over, packs: packs, addon: extra, total: base + over * plan.extra + extra };
     };
 
     var item = function (tag, cls, parts) {
@@ -161,17 +181,22 @@
       return li;
     };
 
-    updateCalc = function () {
-      var n = Math.round(Number(number.value));
-      if (!isFinite(n) || n < 1) n = 1;
-      if (n > max) n = max;
+    var clamp = function (value, low, high, fallback) {
+      var v = Math.round(Number(value));
+      if (!isFinite(v)) v = fallback;
+      return Math.min(high, Math.max(low, v));
+    };
 
-      var fits = plans.filter(function (p) {
-        return n <= p.ceiling;
+    updateCalc = function () {
+      var n = clamp(number.value, 1, max, 1);
+      var e = clamp(eNumber.value, 0, eMaxInput, 0);
+
+      var quotes = plans.map(function (p) {
+        return quote(p, n, e);
       });
-      var best = fits
-        .map(function (p) {
-          return priceOf(p, n);
+      var best = quotes
+        .filter(function (q) {
+          return !q.off;
         })
         .reduce(function (a, b) {
           return b.total < a.total ? b : a;
@@ -179,14 +204,16 @@
 
       out.plans.replaceChildren.apply(
         out.plans,
-        plans.map(function (p) {
-          if (n > p.ceiling) return item("li", "is-off", [["b", p.name], ["span", fill(text.max, { n: p.ceiling })]]);
-          return item("li", p === best.plan ? "is-on" : "", [["b", p.name], ["span", huf(priceOf(p, n).total) + " " + text.unit]]);
+        quotes.map(function (q) {
+          if (q.off) return item("li", "is-off", [["b", q.plan.name], ["span", q.off]]);
+          return item("li", q === best ? "is-on" : "", [["b", q.plan.name], ["span", huf(q.total) + " " + text.unit]]);
         })
       );
 
-      var lines = [[fill(text.base, { plan: best.plan.name, included: best.plan.included }), huf(best.base)]];
-      if (best.over) lines.push([fill(text.extra, { n: best.over, price: huf(best.plan.extra) }), huf(best.over * best.plan.extra)]);
+      var plan = best.plan;
+      var lines = [[fill(text.base, { plan: plan.name, included: plan.included, equipment: plan.equipment === null ? text.unlimited : num(plan.equipment) }), huf(best.base)]];
+      if (best.over) lines.push([fill(text.extra, { n: best.over, price: huf(plan.extra) }), huf(best.over * plan.extra)]);
+      if (best.packs) lines.push([fill(text.equipment, { packs: best.packs, price: huf(addonMonthly()) }), huf(best.addon)]);
       lines.push([text.gross, huf(best.total * (1 + vat / 100))]);
       out.lines.replaceChildren.apply(
         out.lines,
@@ -195,26 +222,31 @@
         })
       );
 
-      out.tier.textContent = fill(text.tier, { plan: best.plan.name, n: n });
+      out.tier.textContent = fill(text.tier, { plan: plan.name, n: n, e: num(e) });
       out.amount.textContent = huf(best.total);
       out.note.textContent = calc.getAttribute(cycle === "annual" ? "data-note-annual" : "data-note-monthly");
     };
 
-    range.addEventListener("input", function () {
-      number.value = range.value;
-      updateCalc();
-    });
-    number.addEventListener("input", function () {
-      if (number.value === "") return;
-      range.value = Math.min(max, Math.max(1, Number(number.value) || 1));
-      updateCalc();
-    });
-    number.addEventListener("change", function () {
-      var n = Math.min(max, Math.max(1, Math.round(Number(number.value)) || 1));
-      number.value = n;
-      range.value = n;
-      updateCalc();
-    });
+    // A slider and a number field per count: either one moves the other.
+    var pair = function (slider, field, low, high) {
+      slider.addEventListener("input", function () {
+        field.value = slider.value;
+        updateCalc();
+      });
+      field.addEventListener("input", function () {
+        if (field.value === "") return;
+        slider.value = clamp(field.value, low, Number(slider.max), low);
+        updateCalc();
+      });
+      field.addEventListener("change", function () {
+        var v = clamp(field.value, low, high, low);
+        field.value = v;
+        slider.value = Math.min(v, Number(slider.max));
+        updateCalc();
+      });
+    };
+    pair(range, number, 1, max);
+    pair(eRange, eNumber, 0, eMaxInput);
     updateCalc();
   }
 

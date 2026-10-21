@@ -5,6 +5,7 @@ export const ROUTES = {
   home: "/",
   solutions: "/megoldasaink/",
   pricing: "/arak/",
+  enterprise: "/vallalati-megoldas/",
   about: "/rolunk/",
   contact: "/kapcsolat/",
   blog: "/blog/",

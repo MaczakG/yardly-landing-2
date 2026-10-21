@@ -54,7 +54,7 @@ const header = (current) => {
   const item = (n) =>
     n.key === "solutions"
       ? `<li class="nav__item--mega"><a class="nav__trigger" href="${route("solutions")}" aria-expanded="false" aria-controls="mega"${isCurrent(n.key) ? ' aria-current="page"' : ""}>${n.label}${chevron}</a></li>`
-      : `<li><a href="${route(n.key)}"${isCurrent(n.key) ? ' aria-current="page"' : ""}>${n.label}</a></li>`;
+      : `<li><a${n.highlight ? ' class="nav__highlight"' : ""} href="${route(n.key)}"${isCurrent(n.key) ? ' aria-current="page"' : ""}>${n.label}</a></li>`;
 
   const mobileGroups = megamenu.columns
     .map(
@@ -95,7 +95,7 @@ const header = (current) => {
       </li>
       ${nav
         .filter((n) => n.key !== "solutions")
-        .map((n) => `<li><a href="${route(n.key)}"${isCurrent(n.key) ? ' aria-current="page"' : ""}>${n.label}${arrow("mobile-nav__arrow")}</a></li>`)
+        .map((n) => `<li><a${n.highlight ? ' class="nav__highlight"' : ""} href="${route(n.key)}"${isCurrent(n.key) ? ' aria-current="page"' : ""}>${n.label}${arrow("mobile-nav__arrow")}</a></li>`)
         .join("")}
     </ul>
   </nav>
@@ -134,6 +134,7 @@ const footer = () => {
         <h2>${f.colCompany}</h2>
         <ul>
           <li><a href="${route("pricing")}">Árak</a></li>
+          <li><a href="${route("enterprise")}">Vállalati megoldás</a></li>
           <li><a href="${route("about")}">Rólunk</a></li>
           <li><a href="${route("blog")}">Blog</a></li>
           <li><a href="${route("contact")}">Kapcsolat</a></li>

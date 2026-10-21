@@ -35,10 +35,11 @@ export const ui = {
   },
 };
 
-// Header menu, in order. "solutions" opens the mega menu.
+// Header menu, in order. "solutions" opens the mega menu; "highlight" sets an item off a little.
 export const nav = [
   { key: "solutions", label: "Megoldásaink" },
   { key: "pricing", label: "Árak" },
+  { key: "enterprise", label: "Vállalatoknak", highlight: true },
   { key: "about", label: "Rólunk" },
   { key: "blog", label: "Blog" },
   { key: "contact", label: "Kapcsolat" },

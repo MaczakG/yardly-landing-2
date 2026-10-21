@@ -80,7 +80,7 @@ export const contact = {
     topics: [
       { value: "demo", label: "Bemutatót kérek" },
       { value: "price", label: "Kérdésem van az árakról" },
-      { value: "quote", label: "Egyedi ajánlat (300 jármű felett vagy saját szerver)" },
+      { value: "quote", label: "Vállalati megoldás (saját szerver, integráció, 300 jármű felett)" },
       { value: "support", label: "Ügyfélként segítség kell" },
       { value: "notify", label: "Szólj, ha elérhető egy funkció" },
       { value: "other", label: "Egyéb" },
@@ -198,4 +198,88 @@ export const imprint = {
 <div><dt>Cím</dt><dd>38 Avenue John F. Kennedy, L-1855 Luxembourg</dd></div>
 <div><dt>Weboldal</dt><dd><a href="https://aws.amazon.com" rel="noopener">aws.amazon.com</a></dd></div>
 </dl>`,
+};
+
+// Vállalati megoldás: the self-hosted, integrated version for larger companies.
+export const enterprise = {
+  title: "Vállalati megoldás – saját szerveren, a meglévő rendszereidhez kötve | Yardly",
+  description:
+    "A Yardly a saját szervereden is fut, és összekötjük a már használt rendszereitekkel: ERP, könyvelés, HR, telematika, üzemanyagkártyák. Egyedi ajánlat 300 jármű felett is.",
+  eyebrow: "Vállalati megoldás",
+  h1: "A Yardly a saját szervereden, a meglévő rendszereidhez kötve",
+  lead: "Nagyobb cégeknél a flotta és az eszközpark adatai már sok helyen ott vannak: az ERP-ben, a könyvelésben, a HR-rendszerben, a telematikában. A Yardly ezeket nem lecseréli, hanem összeköti, és ha kell, a saját szervereteken fut.",
+  quoteButton: "Ajánlatot kérek",
+  pillars: [
+    { title: "Összekötjük, amit már használtok", text: "Az adatok egyszer kerülnek be, és oda mennek tovább, ahol szükség van rájuk. Nincs kétszeri rögzítés." },
+    { title: "A ti szervereteken fut", text: "Saját szerveren, adatközpontban vagy privát felhőben. Az adatok a cégen belül maradnak." },
+    { title: "A ti működésetekre szabva", text: "Saját workflow-k, mezők, szerepkörök és riportok, a cégetek szabályai szerint." },
+  ],
+  integrations: {
+    eyebrow: "Integráció",
+    title: "Összekapcsolás a meglévő rendszerekkel",
+    lead: "Felmérjük, milyen rendszereket használtok, és megtervezzük, mi honnan hová menjen. A kapcsolat lehet közvetlen (API vagy adatbázis), vagy ütemezett fájlcsere (Excel, CSV), aszerint, amit a másik rendszer enged.",
+    items: [
+      { title: "ERP és könyvelés", text: "Beszerzések, számlák és költséghelyek: a járművek és eszközök költségei a könyvelésből jönnek, vagy oda mennek." },
+      { title: "HR és bérszámfejtés", text: "A munkatársak listája és a belépők, kilépők: az új kolléga hozzáférést kap, a kilépőé megszűnik." },
+      { title: "Telematika és GPS", text: "A km-óra magától frissül, így a km-alapú szervizek és ellenőrzések mindig a valós futáshoz igazodnak." },
+      { title: "Üzemanyagkártyák", text: "A DKV-kártyás tankolások már most maguktól bekerülnek. További szolgáltatókat is be tudunk kötni." },
+      { title: "Raktár- és beléptetőrendszerek", text: "Eszközök, helyek és mozgások: a leltár és a nyilvántartás ugyanabból az adatból dolgozik." },
+      { title: "Levelezés és egyszeri belépés", text: "Az értesítések a saját levelezőszervereteken mennek ki. Az egyszeri belépés (Microsoft Entra ID, Google) hamarosan érkezik." },
+    ],
+  },
+  hosting: {
+    eyebrow: "Saját szerveres telepítés",
+    title: "Az adatok nálatok maradnak",
+    lead: "A Yardly a felhős változattal azonos rendszer, de csak a ti cégetek adataival, a ti infrastruktúrátokon.",
+    points: [
+      "Saját szerveren, adatközpontban vagy privát felhőben",
+      "Egycéges telepítés: más cég adata nincs a rendszerben",
+      "A ti mentési, naplózási és biztonsági szabályaitok szerint",
+      "Saját domainen és saját levelezőszerverrel",
+      "A frissítéseket egyeztetett időpontban telepítjük, visszaállítható módon",
+    ],
+    specsTitle: "Technikai részletek",
+    specs: [
+      { k: "Futtatás", v: "Linux-szerver, konténerekben (Docker)" },
+      { k: "Adatbázis", v: "PostgreSQL" },
+      { k: "Elérés", v: "Böngészőből és telefonról, HTTPS-en" },
+      { k: "Belépés", v: "Kétlépcsős azonosítás, szerepkörök és jogosultsági mátrix" },
+      { k: "Frissítés", v: "Ugyanazok a fejlesztések, mint a felhős változatban" },
+    ],
+  },
+  steps: {
+    eyebrow: "Bevezetés",
+    title: "Így indul a közös munka",
+    items: [
+      "Felmérés: megnézzük, milyen rendszereket használtok, és hogyan zajlik ma a flotta és az eszközpark kezelése.",
+      "Ajánlat és ütemterv: leírjuk, mit kötünk össze, hová telepítünk, mennyi idő alatt és mennyiért.",
+      "Telepítés és összekötés: felállítjuk a rendszert, bekötjük az integrációkat, és áthozzuk a meglévő adatokat.",
+      "Betanítás és támogatás: megtanítjuk a kollégáknak, élesítjük, és utána is ott vagyunk, kijelölt kapcsolattartóval.",
+    ],
+  },
+  fit: {
+    eyebrow: "Kinek szól",
+    title: "Kinek ajánljuk",
+    items: [
+      { title: "300 jármű felett", text: "Nagy flottára egyedi árat adunk, a járművek és eszközök számához igazítva." },
+      { title: "Szigorú IT-előírásokkal", text: "Ha az adatoknak a cégen belül kell maradniuk, vagy saját biztonsági szabályaitok vannak." },
+      { title: "Sok rendszerrel", text: "Ha a flotta és az eszközpark adatai már több helyen vannak, és nem akartok kétszer rögzíteni." },
+      { title: "Saját folyamatokkal", text: "Ha a jóváhagyások, a szerviz és a leltár a cégetek saját szabályai szerint megy." },
+    ],
+  },
+  faq: {
+    eyebrow: "Gyakori kérdések",
+    title: "Kérdések a vállalati megoldásról",
+    items: [
+      { q: "Mennyibe kerül?", a: "A felmérés után egyedi ajánlatot adunk. Az ár a járművek és eszközök számától, a telepítés módjától és az integrációktól függ." },
+      { q: "Ki üzemelteti a szervert?", a: "Ahogy nektek jobb: üzemeltetheti a ti IT-csapatotok, de mi is megtehetjük, távoli eléréssel." },
+      { q: "Megkapjuk a fejlesztéseket?", a: "Igen. A saját szerveres változat ugyanaz a rendszer, mint a felhős, a frissítéseket egyeztetett időpontban telepítjük." },
+      { q: "Ki lehet előbb próbálni?", a: "Igen. A 14 napos próbával a felhős változatot nézheted meg, a próbaidő alatt felvitt adatokat pedig át tudjuk költöztetni." },
+    ],
+  },
+  cta: {
+    eyebrow: "Beszéljünk",
+    title: "Beszéljük meg, mire van szükségetek.",
+    lead: "Egy munkanapon belül jelentkezünk, és egy rövid hívásban felmérjük, mit érdemes összekötni.",
+  },
 };

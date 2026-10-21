@@ -7,6 +7,9 @@ export const ANNUAL_FREE_MONTHS = 2;
 export const TRIAL_DAYS = 14;
 export const SELF_SERVICE_MAX_VEHICLES = 300;
 
+// "+250 eszköz": bought in packs above a plan's equipment limit (Alap and Üzleti; Prémium has no limit).
+export const EQUIPMENT_ADDON = { size: 250, monthly: 4990, maxQuantity: 20 };
+
 export const plans = [
   {
     key: "alap",
@@ -17,6 +20,7 @@ export const plans = [
     included: 25,
     extra: 990,
     ceiling: 40,
+    equipment: 100,
     highlights: [
       "25 aktív jármű a díjban, felette 990 Ft/jármű/hó + ÁFA (legfeljebb 40)",
       "100 eszköz, 10 felhasználó, 1 telephely",
@@ -35,6 +39,7 @@ export const plans = [
     included: 75,
     extra: 890,
     ceiling: 150,
+    equipment: 1000,
     highlights: [
       "75 aktív jármű a díjban, felette 890 Ft/jármű/hó + ÁFA (legfeljebb 150)",
       "1 000 eszköz, korlátlan felhasználó és telephely",
@@ -56,6 +61,7 @@ export const plans = [
     included: 150,
     extra: 790,
     ceiling: 300,
+    equipment: null, // unlimited
     highlights: [
       "150 aktív jármű a díjban, felette 790 Ft/jármű/hó + ÁFA (legfeljebb 300)",
       "Korlátlan eszköz, felhasználó és telephely",
@@ -100,7 +106,7 @@ export const limits = [
 
 export const pricing = {
   title: "Árak – Yardly flottakezelő rendszer",
-  description: "Három csomag havi 29 990 Ft + ÁFA-tól, éves fizetéssel 2 hónap ingyen. Kalkulátor 1–300 járműig.",
+  description: "Három csomag havi 29 990 Ft + ÁFA-tól, éves fizetéssel 2 hónap ingyen. Kalkulátor a járműveid és az eszközeid számára.",
   eyebrow: "Árak",
   h1: "Egy csomag, a flottád méretéhez igazítva",
   lead: "Minden csomagban benne van a Flotta és az Eszközpark modul. A díj a csomagban foglalt aktív járművekig fix, felette járművenként számolunk. 14 napig díjmentesen kipróbálhatod a Prémium csomag minden funkciójával, bankkártya nélkül.",
@@ -116,11 +122,17 @@ export const pricing = {
     eyebrow: "Kalkulátor",
     title: "Mennyibe kerül a te flottádnak?",
     label: "Aktív járművek száma",
-    resultTier: (plan, n) => `${plan} csomag · ${n} aktív jármű`,
-    lineBase: (plan, included) => `${plan} csomag (${included} jármű benne)`,
+    equipmentLabel: "Eszközök száma",
+    equipmentHint: "Targoncák, laptopok, szerszámok, gépek: minden, amit nyilván szeretnél tartani.",
+    resultTier: (plan, n, e) => `${plan} csomag · ${n} jármű · ${e} eszköz`,
+    lineBase: (plan, included, equipment) => `${plan} csomag (${included} jármű, ${equipment} eszköz benne)`,
     lineExtra: (n, price) => `${n} többletjármű × ${price}`,
+    lineEquipment: (packs, price) => `${packs} × 250 eszköz bővítés × ${price}`,
     lineGross: "Bruttó, 27% ÁFA-val",
+    unlimited: "korlátlan",
     max: (n) => `legfeljebb ${n} jármű`,
+    maxEquipment: (n) => `legfeljebb ${n} eszköz`,
+    equipmentNote: "Eszközből a csomag kerete felett 250 darabonként +4 990 Ft/hó + ÁFA bővítést veszel (Alap, Üzleti). A Prémiumban korlátlan az eszköz.",
     noteMonthly: "A többletjárművet havonta utólag számoljuk, a hónap legmagasabb aktív járműszáma alapján.",
     noteAnnual: "Éves fizetésnél a csomag díját egy összegben, előre fizeted. A többletjárművet negyedévente utólag számoljuk, a negyedév havi csúcsai alapján.",
   },
@@ -143,5 +155,6 @@ export const pricing = {
     title: "300 jármű felett vagy saját szerverre telepítve? Kérj ajánlatot.",
     text: "Egy munkanapon belül jelentkezünk. Nagyobb flottára egyedi árat adunk, és a Yardly a saját szerveredre, saját adatközpontodba is telepíthető.",
     button: "Ajánlatot kérek",
+    more: "A vállalati megoldásról",
   },
 };
