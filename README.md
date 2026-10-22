@@ -14,7 +14,7 @@ The site is static and Hungarian only. The former English and German pages, and 
 | Pricing, with the calculator for vehicles, equipment, users and features | `/arak/` |
 | Vállalati megoldás: self-hosted install and integration with existing systems (highlighted in the menu as „Vállalatoknak”) | `/vallalati-megoldas/` |
 | Contact | `/kapcsolat/` |
-| Blog (8 posts, filterable by category) | `/blog/`, `/blog/<slug>/` |
+| Blog (filterable by category; posts appear on their dates) | `/blog/`, `/blog/<slug>/` |
 | Privacy notice | `/adatkezeles/` |
 | Imprint | `/impresszum/` |
 
@@ -24,7 +24,7 @@ The build also writes `sitemap.xml`, `robots.txt` and `404.html`.
 
 ### Redirects
 
-`REDIRECTS` in `src/routes.mjs` maps old addresses (`/en/…`, `/de/…`, `/megoldasok/`, `/esettanulmanyok/`, renamed blog posts) to new ones. Each gets a small page with a meta refresh and a canonical link. The site's Content-Security-Policy allows scripts from files only, so the forward cannot be an inline script.
+`REDIRECTS` in `src/routes.mjs` maps old addresses (`/en/…`, `/de/…`, `/megoldasok/`, `/esettanulmanyok/`, renamed blog posts) to new ones. On yardly.hu Caddy answers them with real 301s: the build writes them to `dist/redirects.caddy`, and the same lines are in the `yardly.hu` block of the server's Caddyfile (update both when the list changes). Each old address also gets a small page with a meta refresh and a canonical link, for hosts without the 301s. The site's Content-Security-Policy allows scripts from files only, so the forward cannot be an inline script.
 
 ## Build and preview
 
@@ -63,7 +63,12 @@ public/               favicons and web manifest, copied to the site root
 aws/contact-form/     Lambda function that e-mails contact form submissions
 ```
 
-To change copy, edit the matching file in `src/content/` and rebuild. To add a blog post, add an entry at the top of `posts` in `src/content/posts.mjs`.
+To change copy, edit the matching file in `src/content/` and rebuild. To add a blog post, add an entry to `written` in `src/content/posts.mjs` (or to `guides` in `src/content/guides.mjs`).
+
+### Scheduled posts and Search Console
+
+- A post is published from its `date` on: the build leaves out posts dated after the build day (Budapest time) and turns links to them into plain text. `YARDLY_BUILD_DATE=2027-01-31 npm run build` previews a later day. On the server a timer rebuilds the site every morning (see below), so a post comes out on its day without a deploy.
+- Google Search Console: put the HTML-tag verification code in `googleSiteVerification` in `src/config.mjs` (or `YARDLY_GSC` at build time); every page then carries `<meta name="google-site-verification">`. The sitemap is `https://yardly.hu/sitemap.xml`, with `lastmod` for the blog and the posts.
 
 ### Prices
 
@@ -109,6 +114,8 @@ To publish a new version:
    ```
 
 To roll back, point `current` at the previous release the same way.
+
+The server also publishes by itself: `/opt/flotta/landing/rebuild.sh` builds the `main` branch (in `node:22-alpine`, with the Budapest date as `YARDLY_BUILD_DATE`) and switches `current` only when the output changed. `yardly-landing-rebuild.timer` runs it every morning at 04:05 Budapest time, which publishes the posts dated that day; after a merge it can be run by hand (`sudo systemctl start yardly-landing-rebuild`). It shares the SaaS deploy lock, so it never builds at the same time as an app image. Log: `/var/log/yardly-landing-rebuild.log`.
 
 ## Deploying to Cloudflare Workers
 
