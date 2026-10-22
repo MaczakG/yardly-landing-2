@@ -3,12 +3,12 @@
 // what is it, is it for me, what does it do, what does it cost, how do I start.
 
 export const home = {
-  title: "Yardly – flotta- és eszközkezelő rendszer",
-  description: "Járművek, eszközök, dokumentumok és határidők egy helyen. A Yardly szól, mielőtt valami lejár. 14 napig ingyen kipróbálható.",
+  title: "Flottakezelő és eszköznyilvántartó szoftver cégeknek – Yardly",
+  description: "Flottakezelő és eszköznyilvántartó szoftver: járművek, eszközök, dokumentumok és határidők egy helyen. A Yardly szól, mielőtt valami lejár. 14 nap ingyen.",
 
   hero: {
     eyebrow: "Flotta- és eszközkezelés magyar cégeknek",
-    title: "Automatizált üzemeltetési megoldások eszközökre és járművekre.",
+    title: "Flottakezelő szoftver és eszköznyilvántartás, egy rendszerben.",
     lead: "A Yardly számon tartja a lejáratokat, Ön pedig teljesen egyedi workflow-kat hozhat létre benne, és jogosultsági mátrixszal automatizálhatja a folyamatokat.",
     shotAlt: "A Yardly irányítópultja: elöl a közelgő és lejárt határidők, alatta a fő mutatók",
     phoneAlt: "A telefonos állapotfelmérő űrlap",

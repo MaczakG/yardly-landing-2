@@ -182,6 +182,7 @@ export const layout = (page) => {
   <title>${esc(page.title)}</title>
   <meta name="description" content="${esc(page.description)}">
   ${page.noindex ? '<meta name="robots" content="noindex">' : `<link rel="canonical" href="${canonical}">`}
+  ${config.googleSiteVerification ? `<meta name="google-site-verification" content="${esc(config.googleSiteVerification)}">` : ""}
   <meta name="theme-color" content="#ffffff">
   <meta property="og:type" content="${page.type || "website"}">
   <meta property="og:site_name" content="Yardly">

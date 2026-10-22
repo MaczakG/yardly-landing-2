@@ -439,7 +439,7 @@ const cell = (v) =>
   v === true
     ? `<span class="cmp-yes">${icon("check")}<span class="visually-hidden">Benne van</span></span>`
     : v === false
-      ? `<span class="cmp-no" aria-label="Nincs benne">—</span>`
+      ? `<span class="cmp-no" role="img" aria-label="Nincs benne">—</span>`
       : String(v).startsWith("Hamarosan")
         ? `${soonTag}<span class="cmp-text">${String(v).replace(/^Hamarosan,?\s*/, "")}</span>`
         : `<span class="cmp-text">${v}</span>`;
@@ -869,17 +869,33 @@ export const post = (p) => {
     title: `${p.title} | Yardly`,
     description: p.excerpt,
     type: "article",
-    jsonLd: {
-      "@context": "https://schema.org",
-      "@type": "BlogPosting",
-      headline: p.title,
-      description: p.excerpt,
-      datePublished: p.date,
-      inLanguage: "hu",
-      url,
-      author: { "@type": "Organization", name: "Yardly" },
-      publisher: { "@type": "Organization", name: "Yardly" },
-    },
+    jsonLd: [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        headline: p.title,
+        description: p.excerpt,
+        datePublished: p.date,
+        dateModified: p.updated || p.date,
+        inLanguage: "hu",
+        url,
+        mainEntityOfPage: url,
+        image: `${config.siteUrl}/assets/brand/og-image.png`,
+        articleSection: categories[p.category],
+        wordCount: p.body.replace(/<[^>]+>/g, " ").split(/\s+/).filter(Boolean).length,
+        author: { "@type": "Organization", name: "Yardly", url: config.siteUrl },
+        publisher: { "@type": "Organization", name: "Yardly", url: config.siteUrl, logo: { "@type": "ImageObject", url: `${config.siteUrl}/icon-512px.png` } },
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Yardly", item: `${config.siteUrl}/` },
+          { "@type": "ListItem", position: 2, name: "Blog", item: `${config.siteUrl}${route("blog")}` },
+          { "@type": "ListItem", position: 3, name: p.title, item: url },
+        ],
+      },
+    ],
     body: `
 <article class="article">
   <div class="container container--narrow">
@@ -887,7 +903,7 @@ export const post = (p) => {
     <p class="article__meta"><span class="post-card__cat">${categories[p.category]}</span><time datetime="${p.date}">${fmtDate(p.date)}</time><span>${ui.minutes(p.minutes)}</span></p>
     <h1 class="h1 article__title" id="page-title">${g(p.title)}</h1>
     <p class="lead article__lead">${p.excerpt}</p>
-    <div class="prose">${p.body}</div>
+    <div class="prose">${p.body.replace(/<table>/g, '<div class="prose-table"><table>').replace(/<\/table>/g, "</table></div>")}</div>
     <aside class="article-cta">
       <h2 class="h3-lg">${bl.postCta.title}</h2>
       <p>${bl.postCta.text}</p>

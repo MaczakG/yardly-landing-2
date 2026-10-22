@@ -122,10 +122,10 @@ export const limits = [
 ];
 
 export const pricing = {
-  title: "Árak – Yardly flottakezelő rendszer",
+  title: "Flottakezelő szoftver árak 2026: csomagok és díjak – Yardly",
   description: "Három csomag havi 29 990 Ft + ÁFA-tól, éves fizetéssel 2 hónap ingyen. Kalkulátor a járművei, eszközei, felhasználói és a szükséges funkciók alapján.",
   eyebrow: "Árak",
-  h1: "Egy csomag, a flottája méretéhez igazítva",
+  h1: "Flottakezelő szoftver árak: három csomag a flotta méretéhez",
   lead: "Minden csomagban benne van a Flotta és az Eszközpark modul. A díj a csomagban foglalt aktív járművekig fix, felette járművenként számolunk. 14 napig díjmentesen kipróbálhatja a Prémium csomag minden funkciójával. Utána a választott csomag díját díjbekérő alapján, átutalással fizeti.",
   toggle: { monthly: "Havi fizetés", annual: "Éves fizetés", free: "2 hónap ingyen" },
   perMonth: "+ ÁFA / hó",
