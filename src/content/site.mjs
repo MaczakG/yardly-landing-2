@@ -55,10 +55,10 @@ export const megamenu = {
   ],
   featured: {
     tag: "Új",
-    title: "DKV-kártyás tankolások kézi rögzítés nélkül",
-    text: "A tranzakciók 6 óránként maguk kerülnek a járművekhez.",
+    title: "Folyamatok, amelyek egy bejegyzésre maguktól elindulnak",
+    text: "Tankolás, szerviz, kárügy vagy bírság után: jóváhagyás, értesítés, PDF, e-mail.",
     link: "Megnézem",
-    slug: "tankolas-dkv",
+    slug: "folyamatok",
   },
   bottom: {
     all: "Az összes funkció egy oldalon",
