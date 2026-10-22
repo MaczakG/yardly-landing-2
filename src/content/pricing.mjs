@@ -179,9 +179,8 @@ export const pricing = {
   },
   quote: {
     eyebrow: "Egyedi ajánlat",
-    title: "300 jármű felett vagy saját szerverre telepítve? Kérjen ajánlatot.",
-    text: "Egy munkanapon belül jelentkezünk. Nagyobb flottára egyedi árat adunk, és a Yardly a saját szerverére, saját adatközpontjába is telepíthető.",
+    title: "300 jármű felett? Kérjen egyedi ajánlatot.",
+    text: "Egy munkanapon belül jelentkezünk, és a flottája méretéhez igazított árat adunk.",
     button: "Ajánlatot kérek",
-    more: "A vállalati megoldásról",
   },
 };

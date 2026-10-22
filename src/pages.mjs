@@ -678,7 +678,6 @@ ${faqBlock(pr.faq, "gyik")}
       <p class="lead">${pr.quote.text}</p>
       <div class="cta-row">
         <a class="btn btn--teal" href="${contactHref("quote")}">${pr.quote.button}${arrow()}</a>
-        <a class="text-link" href="${route("enterprise")}">${pr.quote.more}${arrow("text-link__arrow")}</a>
       </div>
     </div>
   </div>

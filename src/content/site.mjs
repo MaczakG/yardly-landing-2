@@ -36,10 +36,10 @@ export const ui = {
 };
 
 // Header menu, in order. "solutions" opens the mega menu; "highlight" sets an item off a little.
+// "Vállalatoknak" (the self-hosted offer) is off for now: only the SaaS is sold.
 export const nav = [
   { key: "solutions", label: "Megoldásaink" },
   { key: "pricing", label: "Árak" },
-  { key: "enterprise", label: "Vállalatoknak", highlight: true },
   { key: "blog", label: "Blog" },
   { key: "contact", label: "Kapcsolat" },
 ];

@@ -26,7 +26,7 @@ export const contact = {
     topics: [
       { value: "demo", label: "Bemutatót kérek" },
       { value: "price", label: "Kérdésem van az árakról" },
-      { value: "quote", label: "Vállalati megoldás (saját szerver, integráció, 300 jármű felett)" },
+      { value: "quote", label: "Egyedi ajánlat (300 jármű felett)" },
       { value: "support", label: "Ügyfélként segítség kell" },
       { value: "notify", label: "Értesítést kérek egy funkcióról" },
       { value: "other", label: "Egyéb" },
@@ -65,7 +65,6 @@ export const contact = {
   faq: [
     { q: "Mennyi ideig tart egy bemutató?", a: "Általában 30 perc, online." },
     { q: "Segítenek az adatok áthozásában?", a: "Igen. Az Excel-sablon a legtöbb esetben elég, de szívesen ránézünk a fájljára." },
-    { q: "Lehet saját szerverre telepíteni?", a: "Igen, egyedi ajánlat alapján. Válassza a „Vállalati megoldás” témát." },
   ],
 };
 

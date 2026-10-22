@@ -24,6 +24,9 @@ export const REDIRECTS = {
   "/blog/karbantartas-nyilvantartasa-excel-helyett/": "/blog/flottakezeles-excelben/",
   "/blog/kiegeszites-vagy-csere/": "/blog/",
   "/rolunk/": "/",
+  // The self-hosted offer is off for now (only the SaaS is sold); its copy and template stay in
+  // content/pages.mjs and pages.mjs for when it comes back.
+  "/vallalati-megoldas/": "/arak/#ajanlat",
 
   "/en/": "/",
   "/en/solutions/": "/megoldasaink/",
