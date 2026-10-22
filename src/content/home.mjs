@@ -140,7 +140,7 @@ export const home = {
     items: [
       { q: "Kell telepíteni valamit?", a: "Nem. A Yardly böngészőben fut, számítógépen és telefonon is." },
       { q: "Hogyan kerülnek be a meglévő adataink?", a: "Excel-sablonnal, egyszerre. A rendszer soronként jelzi, ha valamit javítani kell." },
-      { q: "Mi történik a próbaidő végén?", a: "Csomagot választ. Ha nem, a fiók csak olvasható lesz, de minden adata megmarad." },
+      { q: "Mi történik a próbaidő végén?", a: "A regisztrációkor választott csomag díját terheljük a kártyájára; előtte 3 és 1 nappal e-mailben emlékeztetjük. Ha nem kéri a folytatást, a fiók csak olvasható lesz, de minden adata megmarad." },
       { q: "Csak a flottához vagy csak az eszközökhöz is használható?", a: "Igen. Minden csomagban mindkét modul benne van, azt használja, amire szüksége van." },
       { q: "Hol tárolódnak az adataink?", a: "Titkosított kapcsolaton érhetők el, és minden cég csak a saját adatait látja." },
     ],
