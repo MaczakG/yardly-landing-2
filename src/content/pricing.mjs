@@ -75,7 +75,6 @@ export const plans = [
       "Beállítások átadása szerepköröknek",
       "Támogatás 4 munkaórán belül, kijelölt kapcsolattartóval",
     ],
-    soon: ["REST API és webhook", "SSO (Microsoft Entra ID, Google)"],
   },
 ];
 
@@ -109,8 +108,6 @@ export const comparison = [
   { label: "Beállítások átadása szerepköröknek", cells: [false, false, true] },
   { label: "DKV üzemanyagkártya-integráció", cells: ["kiegészítő: +9 990 Ft/hó + ÁFA", true, true] },
   { label: "+250 eszköz", cells: ["+4 990 Ft/hó + ÁFA", "+4 990 Ft/hó + ÁFA", "nem szükséges"] },
-  { label: "SSO (Microsoft Entra ID, Google)", soon: "Sso", cells: [false, "Hamarosan, kiegészítő: +19 990 Ft/hó + ÁFA", "Hamarosan, díj nélkül"] },
-  { label: "REST API és webhook", soon: "RestApi", cells: [false, false, "Hamarosan, díj nélkül"] },
 ];
 
 // The limits table under the cards.
@@ -137,7 +134,7 @@ export const pricing = {
   recommended: "Ajánlott",
   limitsTitle: "Keretek",
   comparisonTitle: "Mi van az egyes csomagokban",
-  comparisonNote: "Minden ár nettó, + 27% ÁFA. Éves fizetésnél a csomagra és a kiegészítőkre is 2 hónap ingyenes. A „Hamarosan” jelölésű funkciók még nem vásárolhatók, és nem számlázzuk őket.",
+  comparisonNote: "Minden ár nettó, + 27% ÁFA. Éves fizetésnél a csomagra és a kiegészítőkre is 2 hónap ingyenes.",
   calc: {
     eyebrow: "Kalkulátor",
     title: "Mennyibe kerül az Ön flottájának?",
@@ -173,7 +170,6 @@ export const pricing = {
       { q: "Az árak tartalmazzák az ÁFA-t?", a: "Nem. Minden ár nettó, erre jön a 27% ÁFA. A számlán tételesen látszik a nettó összeg, az ÁFA és a bruttó végösszeg." },
       { q: "Hogyan fizethetek?", a: "Bankkártyával, havonta vagy évente. Az Üzleti és a Prémium csomag éves díja átutalással, díjbekérő alapján is fizethető. Csomagot váltani, kiegészítőt venni és a számlákat letölteni az appban, a Beállítások → Előfizetés fülön tudja, árajánlattal a váltás előtt." },
       { q: "Mi a helyzet a próbaidővel?", a: "14 napig díjmentesen kipróbálhatja a Prémium csomag összes funkciójával, bankkártya nélkül. A végén csomagot választ; ha nem, a fiók csak olvasható lesz, és minden adata megmarad." },
-      { q: "Mikor érkeznek a „Hamarosan” jelölt funkciók?", a: "A REST API-n és az SSO-n dolgozunk, de pontos dátumot nem ígérünk. Amíg el nem készülnek, nem vásárolhatók, és nem számlázzuk őket. Az „Értesítést kérek” gombbal jelezheti, hogy szóljunk, amint elérhetők." },
       { q: "Régi előfizető vagyok. Mi változik?", a: "12 hónapig a régi csomagja és ára marad. A lejárat előtt 60 és 30 nappal e-mailben szólunk, utána automatikusan az új csomagra kerül. Bármikor önként is átválthat." },
     ],
   },

@@ -18,14 +18,6 @@ export const overview = {
     "Teljes adatexport Excelben",
     "Verzióelőzmények az appban: mindig látja, mi újult meg",
   ],
-  soon: {
-    title: "Hamarosan",
-    text: "Hamarosan, a Prémium csomagban díj nélkül.",
-    items: [
-      { key: "RestApi", name: "REST API és webhook" },
-      { key: "Sso", name: "SSO (Microsoft Entra ID, Google)" },
-    ],
-  },
   cta: { title: "Nézze meg a saját adataival.", lead: "14 nap ingyen, a Prémium csomag minden funkciójával." },
 };
 
@@ -530,7 +522,6 @@ export const solutions = [
         ],
       },
     ],
-    soon: true,
     shots: [
       { img: "jogosultsagok", alt: "Jogosultsági mátrix: szerepkörönként, funkciónként beállítható hozzáférés" },
       { img: "naplo", alt: "Napló: ki, mikor, mit változtatott, régi és új értékekkel" },

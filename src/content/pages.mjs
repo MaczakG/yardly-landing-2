@@ -169,7 +169,7 @@ export const enterprise = {
       { title: "Telematika és GPS", text: "A km-óra magától frissül, így a km-alapú szervizek és ellenőrzések mindig a valós futáshoz igazodnak." },
       { title: "Üzemanyagkártyák", text: "A DKV-kártyás tankolások már most maguktól bekerülnek. További szolgáltatókat is be tudunk kötni." },
       { title: "Raktár- és beléptetőrendszerek", text: "Eszközök, helyek és mozgások: a leltár és a nyilvántartás ugyanabból az adatból dolgozik." },
-      { title: "Levelezés és egyszeri belépés", text: "Az értesítések a cég saját levelezőszerverén mennek ki. Az egyszeri belépés (Microsoft Entra ID, Google) hamarosan érkezik." },
+      { title: "Levelezés", text: "Az értesítések a cég saját levelezőszerverén mennek ki." },
     ],
   },
   hosting: {
