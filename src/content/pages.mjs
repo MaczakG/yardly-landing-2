@@ -72,50 +72,43 @@ export const privacy = {
   title: "Adatvédelmi tájékoztató | Yardly",
   description: "Hogyan kezeli a Yardly a weboldalon megadott és a látogatás során keletkező személyes adatokat.",
   heading: "Adatvédelmi tájékoztató",
-  intro: "Ez a tájékoztató a yardly.hu weboldalra vonatkozik: a kapcsolatfelvételi űrlapon megadott adatokra, az e-mailes megkeresésekre és a látogatottság mérésére. A Yardly alkalmazás használata során kezelt adatokról külön tájékoztató szól.",
+  intro: "Ez a tájékoztató a yardly.hu weboldalra vonatkozik: a kapcsolatfelvételi űrlapon és e-mailben megadott adatokra, valamint a webszerver technikai naplóira. A Yardly alkalmazás (app.yardly.hu) használata során kezelt adatokról külön tájékoztató szól.",
   body: `
 <h2>1. Az adatkezelő</h2>
 <p><mark class="ph">[Cégnév]</mark><br>Székhely: <mark class="ph">[székhely]</mark><br>Cégjegyzékszám: <mark class="ph">[cégjegyzékszám]</mark><br>Adószám: <mark class="ph">[adószám]</mark><br>E-mail: <a href="mailto:{email}">{email}</a></p>
 
 <h2>2. Milyen adatokat kezelünk</h2>
 <h3>Kapcsolatfelvételi űrlap és e-mail</h3>
-<p>A megkeresés témája, név, cégnév, e-mail-cím, telefonszám, a járművek és eszközök hozzávetőleges száma és az üzenet tartalma, valamint mindaz, amit e-mailben önként megoszt velünk.</p>
-<h3>Látogatottságmérés (csak hozzájárulással)</h3>
-<p>Ha hozzájárul, a Google Analytics sütik segítségével mérjük, mely oldalakat és hogyan használják a látogatók: a megtekintett oldalak, a látogatás ideje, az eszköz és a böngésző típusa, a hozzávetőleges földrajzi hely. Hozzájárulás nélkül ilyen sütit nem helyezünk el.</p>
+<p>A megkeresés témája, név, cégnév, e-mail-cím, telefonszám, a járművek és eszközök hozzávetőleges száma és az üzenet tartalma, valamint mindaz, amit e-mailben önként megoszt velünk. Az űrlap az Ön levelezőprogramjában nyit meg egy e-mailt; az adatok csak az elküldött levélben jutnak el hozzánk.</p>
 <h3>Technikai naplók</h3>
-<p>A tárhelyszolgáltató szerverei a kérések kiszolgálásához és a visszaélések kivédéséhez naplózzák az IP-címet és a kérés időpontját.</p>
+<p>A webszerver a hibák kivizsgálásához naplózhatja a hibás kérés időpontját és a küldő IP-címét. Látogatási (forgalmi) naplót nem vezetünk.</p>
+<h3>Sütik és látogatottságmérés</h3>
+<p>A weboldal nem helyez el sütit, nem mér látogatottságot, és nem használ követőkódot. Betűtípust, szkriptet vagy más tartalmat sem tölt be harmadik féltől.</p>
 
 <h2>3. Az adatkezelés célja és jogalapja</h2>
 <ul>
-<li><strong>Megkeresés megválaszolása, ajánlatadás:</strong> az Ön hozzájárulása (GDPR 6. cikk (1) a)), illetve a szerződéskötést megelőző lépések (GDPR 6. cikk (1) b)).</li>
-<li><strong>Látogatottságmérés:</strong> az Ön hozzájárulása (GDPR 6. cikk (1) a)), amelyet bármikor visszavonhat.</li>
-<li><strong>Technikai naplók:</strong> az oldal biztonságos működtetéséhez fűződő jogos érdek (GDPR 6. cikk (1) f)).</li>
+<li><strong>Megkeresés megválaszolása, ajánlatadás:</strong> a szerződéskötést megelőző lépések megtétele (GDPR 6. cikk (1) b)), illetve vállalkozás nevében érkező megkeresésnél az üzleti kapcsolattartáshoz fűződő jogos érdekünk (GDPR 6. cikk (1) f)). Az űrlap „Elolvastam” jelölőnégyzete azt rögzíti, hogy a tájékoztatót megismerte; nem hozzájárulás.</li>
+<li><strong>Technikai naplók:</strong> az oldal biztonságos működtetéséhez és a hibák elhárításához fűződő jogos érdekünk (GDPR 6. cikk (1) f)).</li>
 </ul>
-<p><mark class="ph">[Jogi ellenőrzés: a jogalapok véglegesítése.]</mark></p>
 
 <h2>4. Meddig őrizzük az adatokat</h2>
 <ul>
-<li>Megkeresések: <mark class="ph">[például a megkereséstől számított 1 évig, szerződéskötés esetén a szerződés megszűnéséig]</mark>.</li>
-<li>Látogatottsági adatok: a Google Analytics beállításai szerint <mark class="ph">[2 vagy 14 hónapig]</mark>.</li>
-<li>Technikai naplók: <mark class="ph">[megőrzési idő]</mark>.</li>
+<li>Megkeresések: a megkereséstől számított 1 évig; ha szerződést kötünk, a szerződés megszűnéséig, illetve ameddig jogszabály előírja.</li>
+<li>Technikai naplók: legfeljebb 90 napig.</li>
 </ul>
 
 <h2>5. Kik férnek hozzá az adatokhoz</h2>
 <p>Az adatokhoz a Yardly munkatársai férnek hozzá, a feladatukhoz szükséges mértékben. Az alábbi szolgáltatókat vesszük igénybe:</p>
 <ul>
 <li><strong>Amazon Web Services EMEA SARL</strong> (Luxemburg): tárhely és az oldal üzemeltetése, frankfurti (EU-s) adatközpontban.</li>
-<li><strong>E-mail-szolgáltató:</strong> <mark class="ph">[a ténylegesen használt szolgáltató neve]</mark>, az üzenetek kézbesítéséhez.</li>
-<li><strong>Google Ireland Ltd.</strong>: látogatottságmérés, kizárólag az Ön hozzájárulása esetén. Az adatok az Egyesült Államokba is továbbításra kerülhetnek; a Google részt vesz az EU–USA adatvédelmi keretrendszerben.</li>
+<li><strong>Google Ireland Ltd.</strong> (Google Workspace): az e-mailek fogadása és tárolása. Az adatokat EU-s adatközpontban is tárolhatja, és az Egyesült Államokba is továbbíthatja; a Google részt vesz az EU–USA adatvédelmi keretrendszerben.</li>
 </ul>
 <p><mark class="ph">[Jogi ellenőrzés: az adatfeldolgozói szerződések megléte és tartalma.]</mark></p>
 
-<h2>6. Sütik</h2>
-<p>A sütikkel kapcsolatos döntését a böngészője tárolja el, ehhez nem használunk sütit. Hozzájárulás esetén a Google Analytics a <code>_ga</code> és <code>_ga_*</code> sütiket helyezi el, legfeljebb 2 évre. Döntését bármikor megváltoztathatja az oldal alján található „Süti-beállítások” hivatkozással.</p>
+<h2>6. Az Ön jogai</h2>
+<p>Kérheti a személyes adataihoz való hozzáférést, azok helyesbítését, törlését vagy kezelésük korlátozását, élhet az adathordozhatósághoz való jogával, és tiltakozhat a jogos érdeken alapuló adatkezelés ellen. Kérését a(z) <a href="mailto:{email}">{email}</a> címre küldheti; legkésőbb egy hónapon belül válaszolunk.</p>
 
-<h2>7. Az Ön jogai</h2>
-<p>Kérheti a személyes adataihoz való hozzáférést, azok helyesbítését, törlését vagy kezelésük korlátozását, élhet az adathordozhatósághoz és a tiltakozáshoz való jogával, és hozzájárulását bármikor visszavonhatja. Kérését a(z) <a href="mailto:{email}">{email}</a> címre küldheti.</p>
-
-<h2>8. Jogorvoslat</h2>
+<h2>7. Jogorvoslat</h2>
 <p>Ha úgy gondolja, hogy az adatkezelés jogsértő, panasszal fordulhat a Nemzeti Adatvédelmi és Információszabadság Hatósághoz (NAIH, 1055 Budapest, Falk Miksa utca 9–11., <a href="https://naih.hu" rel="noopener">naih.hu</a>), vagy bírósághoz fordulhat.</p>
 
 <p class="legal-meta">Hatályos: <mark class="ph">[dátum]</mark></p>`,
