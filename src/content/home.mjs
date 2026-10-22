@@ -3,12 +3,12 @@
 // what is it, is it for me, what does it do, what does it cost, how do I start.
 
 export const home = {
-  title: "Yardly – flotta- és eszközkezelő rendszer",
-  description: "Járművek, eszközök, dokumentumok és határidők egy helyen. A Yardly szól, mielőtt valami lejár. 14 napig ingyen kipróbálható.",
+  title: "Flottakezelő és eszköznyilvántartó szoftver cégeknek – Yardly",
+  description: "Flottakezelő és eszköznyilvántartó szoftver: járművek, eszközök, dokumentumok és határidők egy helyen. A Yardly szól, mielőtt valami lejár. 14 nap ingyen.",
 
   hero: {
     eyebrow: "Flotta- és eszközkezelés magyar cégeknek",
-    title: "Automatizált üzemeltetési megoldások eszközökre és járművekre.",
+    title: "Flottakezelő szoftver és eszköznyilvántartás, egy rendszerben.",
     lead: "A Yardly számon tartja a lejáratokat, Ön pedig teljesen egyedi workflow-kat hozhat létre benne, és jogosultsági mátrixszal automatizálhatja a folyamatokat.",
     shotAlt: "A Yardly irányítópultja: elöl a közelgő és lejárt határidők, alatta a fő mutatók",
     phoneAlt: "A telefonos állapotfelmérő űrlap",
@@ -100,7 +100,7 @@ export const home = {
     eyebrow: "Hogyan kezdjen bele",
     title: "Három lépés, és a rendszer már dolgozik is",
     items: [
-      { title: "Regisztrál.", text: "Két perc, a cégadatokkal és egy bankkártyával. 14 napig minden funkciót kipróbálhat, a próbaidő alatt nem terhelünk semmit." },
+      { title: "Regisztrál.", text: "Két perc, a cégadatokkal. 14 napig minden funkciót díjmentesen kipróbálhat." },
       { title: "Áthozza a meglévő adatokat.", text: "Töltse le az Excel-sablont, másolja bele a listáját, és töltse fel. A hiányzó telephelyek, típusok és kategóriák maguk létrejönnek." },
       { title: "Meghívja a kollégákat.", text: "Mindenki a saját szerepkörével lép be. A sofőr csak a saját autóját látja, a pénzügy a költségeket." },
     ],
@@ -140,7 +140,7 @@ export const home = {
     items: [
       { q: "Kell telepíteni valamit?", a: "Nem. A Yardly böngészőben fut, számítógépen és telefonon is." },
       { q: "Hogyan kerülnek be a meglévő adataink?", a: "Excel-sablonnal, egyszerre. A rendszer soronként jelzi, ha valamit javítani kell." },
-      { q: "Mi történik a próbaidő végén?", a: "Csomagot választ. Ha nem, a fiók csak olvasható lesz, de minden adata megmarad." },
+      { q: "Mi történik a próbaidő végén?", a: "A próbaidő alatt kiválasztott csomag díjáról díjbekérőt küldünk, amelyet 8 napon belül átutalással rendezhet; előtte 3 és 1 nappal e-mailben emlékeztetjük. Ha nem választ csomagot, a fiók csak olvasható lesz, de minden adata megmarad." },
       { q: "Csak a flottához vagy csak az eszközökhöz is használható?", a: "Igen. Minden csomagban mindkét modul benne van, azt használja, amire szüksége van." },
       { q: "Hol tárolódnak az adataink?", a: "Titkosított kapcsolaton érhetők el, és minden cég csak a saját adatait látja." },
     ],

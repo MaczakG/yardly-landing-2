@@ -1,5 +1,6 @@
-// Blog posts, newest first. `solution` is the related solution page (content/solutions.mjs).
-// Old URLs of removed posts are redirected in routes.mjs.
+// Blog posts. `solution` is the related solution page (content/solutions.mjs). Old URLs of
+// removed posts are redirected in routes.mjs. The guides (guides.mjs) come out on their dates.
+import { guides } from "./guides.mjs";
 
 export const blog = {
   title: "Blog – flotta- és eszközkezelés a gyakorlatban",
@@ -24,7 +25,7 @@ export const categories = {
   news: "Termékújdonságok",
 };
 
-export const posts = [
+const written = [
   {
     slug: "dkv-integracio",
     date: "2026-10-20",
@@ -268,3 +269,18 @@ export const posts = [
 <p>Egyik logisztikai partnerünknél a gépjárműpark kötelező szervizeinek időpontját a meglévő futásadatokból és a használati szokásokból becsüljük. A karbantartás így tervezhető feladat lett, nem meglepetés.</p>`,
   },
 ];
+
+// The day the site is built, in Budapest (YARDLY_BUILD_DATE=YYYY-MM-DD overrides it, e.g. to
+// preview a later day). A post is out from its date on.
+export const buildDate =
+  process.env.YARDLY_BUILD_DATE || new Intl.DateTimeFormat("sv-SE", { timeZone: "Europe/Budapest" }).format(new Date());
+
+const live = [...written, ...guides].filter((p) => p.date <= buildDate).sort((a, b) => b.date.localeCompare(a.date));
+const liveSlugs = new Set(live.map((p) => p.slug));
+
+// A link to a post that is not out yet stays plain text until it is.
+const unlinkUpcoming = (html) =>
+  html.replace(/<a href="\/blog\/([a-z0-9-]+)\/">([\s\S]*?)<\/a>/g, (link, slug, text) => (liveSlugs.has(slug) ? link : text));
+
+// The published posts, newest first.
+export const posts = live.map((p) => ({ ...p, body: unlinkUpcoming(p.body) }));

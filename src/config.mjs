@@ -16,6 +16,10 @@ export const config = {
   // Leave empty to fall back to opening the visitor's e-mail program.
   formEndpoint: process.env.YARDLY_FORM_ENDPOINT ?? "",
 
+  // Google Search Console: the content of the HTML-tag verification
+  // (<meta name="google-site-verification" content="…">). Also YARDLY_GSC at build time.
+  googleSiteVerification: process.env.YARDLY_GSC ?? "",
+
   // Social profiles. An empty value renders the icon without a link.
   social: {
     linkedin: "",

@@ -10,6 +10,7 @@ import { ROUTES, REDIRECTS, solutionRoute, postRoute } from "./routes.mjs";
 import { layout, redirectPage } from "./layout.mjs";
 import * as pages from "./pages.mjs";
 import { notFound } from "./content/site.mjs";
+import { buildDate } from "./content/posts.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const out = join(root, "dist");
@@ -25,10 +26,11 @@ mkdirSync(out, { recursive: true });
 cpSync(join(root, "assets"), join(out, "assets"), { recursive: true });
 cpSync(join(root, "public"), out, { recursive: true }); // favicons and web manifest, served from the root
 
+// The sitemap lists every page; posts and the blog carry their date as lastmod.
 const sitemap = [];
-const render = (key, path, page) => {
+const render = (key, path, page, lastmod) => {
   write(path, layout({ key, path, ...page }));
-  sitemap.push(path);
+  sitemap.push({ path, lastmod });
 };
 
 render("home", ROUTES.home, pages.home());
@@ -36,8 +38,8 @@ render("solutions", ROUTES.solutions, pages.solutionsIndex());
 for (const s of pages.solutions) render(`solution:${s.slug}`, solutionRoute(s.slug), pages.solution(s));
 render("pricing", ROUTES.pricing, pages.pricing());
 render("contact", ROUTES.contact, pages.contact());
-render("blog", ROUTES.blog, pages.blog());
-for (const p of pages.posts) render("post", postRoute(p), pages.post(p));
+render("blog", ROUTES.blog, pages.blog(), pages.posts[0]?.date);
+for (const p of pages.posts) render("post", postRoute(p), pages.post(p), p.updated || p.date);
 render("privacy", ROUTES.privacy, pages.privacy());
 render("imprint", ROUTES.imprint, pages.imprint());
 
@@ -47,10 +49,13 @@ for (const [from, to] of Object.entries(REDIRECTS)) write(from, redirectPage(to)
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${sitemap.map((path) => `  <url><loc>${config.siteUrl}${path}</loc></url>`).join("\n")}
+${sitemap.map(({ path, lastmod }) => `  <url><loc>${config.siteUrl}${path}</loc>${lastmod ? `<lastmod>${lastmod}</lastmod>` : ""}</url>`).join("\n")}
 </urlset>
 `;
 writeFileSync(join(out, "sitemap.xml"), xml);
 writeFileSync(join(out, "robots.txt"), `User-agent: *\nAllow: /\n\nSitemap: ${config.siteUrl}/sitemap.xml\n`);
 
-console.log(`Built ${sitemap.length} pages, a 404 page and ${Object.keys(REDIRECTS).length} redirects into dist/`);
+// The same redirects as real 301s for the web server (Caddy), which answers them before these pages.
+writeFileSync(join(out, "redirects.caddy"), Object.entries(REDIRECTS).map(([from, to]) => `redir ${from} ${to} 301`).join("\n") + "\n");
+
+console.log(`Built ${sitemap.length} pages (${pages.posts.length} posts up to ${buildDate}), a 404 page and ${Object.keys(REDIRECTS).length} redirects into dist/`);
