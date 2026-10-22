@@ -36,10 +36,10 @@ export const ui = {
 };
 
 // Header menu, in order. "solutions" opens the mega menu; "highlight" sets an item off a little.
+// "Vállalatoknak" (the self-hosted offer) is off for now: only the SaaS is sold.
 export const nav = [
   { key: "solutions", label: "Megoldásaink" },
   { key: "pricing", label: "Árak" },
-  { key: "enterprise", label: "Vállalatoknak", highlight: true },
   { key: "blog", label: "Blog" },
   { key: "contact", label: "Kapcsolat" },
 ];
@@ -55,10 +55,10 @@ export const megamenu = {
   ],
   featured: {
     tag: "Új",
-    title: "DKV-kártyás tankolások kézi rögzítés nélkül",
-    text: "A tranzakciók 6 óránként maguk kerülnek a járművekhez.",
+    title: "Folyamatok, amelyek egy bejegyzésre maguktól elindulnak",
+    text: "Tankolás, szerviz, kárügy vagy bírság után: jóváhagyás, értesítés, PDF, e-mail.",
     link: "Megnézem",
-    slug: "tankolas-dkv",
+    slug: "folyamatok",
   },
   bottom: {
     all: "Az összes funkció egy oldalon",

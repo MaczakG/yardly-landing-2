@@ -26,7 +26,7 @@ export const contact = {
     topics: [
       { value: "demo", label: "Bemutatót kérek" },
       { value: "price", label: "Kérdésem van az árakról" },
-      { value: "quote", label: "Vállalati megoldás (saját szerver, integráció, 300 jármű felett)" },
+      { value: "quote", label: "Egyedi ajánlat (300 jármű felett)" },
       { value: "support", label: "Ügyfélként segítség kell" },
       { value: "notify", label: "Értesítést kérek egy funkcióról" },
       { value: "other", label: "Egyéb" },
@@ -65,7 +65,6 @@ export const contact = {
   faq: [
     { q: "Mennyi ideig tart egy bemutató?", a: "Általában 30 perc, online." },
     { q: "Segítenek az adatok áthozásában?", a: "Igen. Az Excel-sablon a legtöbb esetben elég, de szívesen ránézünk a fájljára." },
-    { q: "Lehet saját szerverre telepíteni?", a: "Igen, egyedi ajánlat alapján. Válassza a „Vállalati megoldás” témát." },
   ],
 };
 
@@ -170,7 +169,7 @@ export const enterprise = {
       { title: "Telematika és GPS", text: "A km-óra magától frissül, így a km-alapú szervizek és ellenőrzések mindig a valós futáshoz igazodnak." },
       { title: "Üzemanyagkártyák", text: "A DKV-kártyás tankolások már most maguktól bekerülnek. További szolgáltatókat is be tudunk kötni." },
       { title: "Raktár- és beléptetőrendszerek", text: "Eszközök, helyek és mozgások: a leltár és a nyilvántartás ugyanabból az adatból dolgozik." },
-      { title: "Levelezés és egyszeri belépés", text: "Az értesítések a cég saját levelezőszerverén mennek ki. Az egyszeri belépés (Microsoft Entra ID, Google) hamarosan érkezik." },
+      { title: "Levelezés", text: "Az értesítések a cég saját levelezőszerverén mennek ki." },
     ],
   },
   hosting: {

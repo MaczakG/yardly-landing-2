@@ -4,7 +4,7 @@
 
 export const home = {
   title: "Yardly – flotta- és eszközkezelő rendszer",
-  description: "Járművek, eszközök, dokumentumok és határidők egy helyen. A Yardly szól, mielőtt valami lejár. 14 nap ingyen, kártya nélkül.",
+  description: "Járművek, eszközök, dokumentumok és határidők egy helyen. A Yardly szól, mielőtt valami lejár. 14 napig ingyen kipróbálható.",
 
   hero: {
     eyebrow: "Flotta- és eszközkezelés magyar cégeknek",
@@ -89,7 +89,7 @@ export const home = {
       { slug: "szerviz-karbantartas", title: "Szerviz és ütemterv", text: "Km vagy idő szerinti karbantartás, „ami előbb jön”, és egy kattintással rögzített szerviz." },
       { slug: "allapotfelmeres", title: "Állapotfelmérés telefonról", text: "A sofőr egy linkről tölti ki a cég saját ellenőrzőlistáját, belépés nélkül." },
       { slug: "leltar", title: "Leltár kamerával", text: "A kolléga végigmegy a raktáron, és beolvassa a címkéket. A lista nem látszik előre, így a számlálás valós." },
-      { slug: "folyamatok", title: "Egyedi workflow beállítás", text: "Árajánlat, jóváhagyás összeghatárral, javítás, lezárás: a rendszer végigviszi a lépéseket." },
+      { slug: "folyamatok", title: "Folyamatok és automatizálás", text: "Egy tankolás, szerviz, kárügy vagy bírság rögzítése elindítja a folyamatot: jóváhagyás, értesítés, PDF, e-mail." },
       { slug: "tankolas-dkv", title: "DKV-integráció", text: "A kártyás tankolások 6 óránként maguk kerülnek a járművekhez." },
       { slug: "koltsegek-riportok", title: "Költségek és analitika", text: "Ft/km autónként, vezetői összefoglaló PDF-ben, és azok az autók, amelyeket már érdemes lecserélni." },
     ],
@@ -100,7 +100,7 @@ export const home = {
     eyebrow: "Hogyan kezdjen bele",
     title: "Három lépés, és a rendszer már dolgozik is",
     items: [
-      { title: "Regisztrál.", text: "Két perc, bankkártya nélkül. 14 napig minden funkciót kipróbálhat." },
+      { title: "Regisztrál.", text: "Két perc, a cégadatokkal és egy bankkártyával. 14 napig minden funkciót kipróbálhat, a próbaidő alatt nem terhelünk semmit." },
       { title: "Áthozza a meglévő adatokat.", text: "Töltse le az Excel-sablont, másolja bele a listáját, és töltse fel. A hiányzó telephelyek, típusok és kategóriák maguk létrejönnek." },
       { title: "Meghívja a kollégákat.", text: "Mindenki a saját szerepkörével lép be. A sofőr csak a saját autóját látja, a pénzügy a költségeket." },
     ],
@@ -149,6 +149,6 @@ export const home = {
   cta: {
     eyebrow: "Kezdje el",
     title: "Próbálja ki a saját flottájával.",
-    lead: "14 nap ingyen, bankkártya nélkül. Ha elakad, szívesen végigmegyünk Önnel egy rövid bemutatón.",
+    lead: "14 nap ingyen, a Prémium csomag minden funkciójával. Ha elakad, szívesen végigmegyünk Önnel egy rövid bemutatón.",
   },
 };

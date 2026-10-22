@@ -339,20 +339,6 @@ ${pageHero(overview, ctaButtons(""))}
   </div>
 </section>
 
-<section class="section" aria-labelledby="soon-title">
-  <div class="container">
-    <div class="soon-band">
-      <div>
-        <p class="eyebrow">${overview.soon.title}</p>
-        <h2 class="h3-lg" id="soon-title">${overview.soon.text}</h2>
-        <p class="muted">Pontos dátumot nem ígérünk. Kérjen értesítést, és szólunk, amint használható.</p>
-      </div>
-      <ul class="soon-list">
-        ${overview.soon.items.map((i) => `<li><span class="soon-list__name">${i.name} ${soonTag}</span><a class="btn btn--ghost btn--sm" href="${notifyHref(i.name)}">${ui.notify}</a></li>`).join("")}
-      </ul>
-    </div>
-  </div>
-</section>
 
 ${ctaSection(overview.cta)}`,
 });
@@ -432,24 +418,7 @@ ${(s.extra || [])
   )
   .join("")}
 
-${
-  s.soon
-    ? `<section class="section" aria-labelledby="soon-title">
-  <div class="container">
-    <div class="soon-band">
-      <div>
-        <p class="eyebrow">${overview.soon.title}</p>
-        <h2 class="h3-lg" id="soon-title">${overview.soon.text}</h2>
-        <p class="muted">Az SSO az Üzleti csomagban kiegészítőként lesz elérhető: +19 990 Ft/hó + ÁFA.</p>
-      </div>
-      <ul class="soon-list">
-        ${overview.soon.items.map((i) => `<li><span class="soon-list__name">${i.name} ${soonTag}</span><a class="btn btn--ghost btn--sm" href="${notifyHref(i.name)}">${ui.notify}</a></li>`).join("")}
-      </ul>
-    </div>
-  </div>
-</section>`
-    : ""
-}
+
 
 <section class="section section--band" aria-labelledby="related-title">
   <div class="container">
@@ -678,13 +647,12 @@ ${faqBlock(pr.faq, "gyik")}
       <p class="lead">${pr.quote.text}</p>
       <div class="cta-row">
         <a class="btn btn--teal" href="${contactHref("quote")}">${pr.quote.button}${arrow()}</a>
-        <a class="text-link" href="${route("enterprise")}">${pr.quote.more}${arrow("text-link__arrow")}</a>
       </div>
     </div>
   </div>
 </section>
 
-${ctaSection({ title: "Próbálja ki 14 napig, kártya nélkül." })}`,
+${ctaSection({ title: "Próbálja ki 14 napig ingyen." })}`,
   };
 };
 
