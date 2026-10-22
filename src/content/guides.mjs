@@ -519,7 +519,7 @@ export const guides = [
 </thead>
 <tbody>
 <tr><td>Havidíj</td><td>29 990 Ft + ÁFA</td><td>79 990 Ft + ÁFA</td><td>169 990 Ft + ÁFA</td></tr>
-<tr><td>Éves fizetésnél havonta</td><td>24 990 Ft + ÁFA</td><td>66 990 Ft + ÁFA</td><td>141 990 Ft + ÁFA</td></tr>
+<tr><td>Éves fizetésnél havonta</td><td>24 990 Ft + ÁFA</td><td>66 650 Ft + ÁFA</td><td>141 650 Ft + ÁFA</td></tr>
 <tr><td>Aktív jármű a díjban</td><td>25</td><td>75</td><td>150</td></tr>
 <tr><td>További jármű</td><td>990 Ft/hó + ÁFA, legfeljebb 40-ig</td><td>890 Ft/hó + ÁFA, legfeljebb 150-ig</td><td>790 Ft/hó + ÁFA, legfeljebb 300-ig</td></tr>
 <tr><td>Eszköz</td><td>100</td><td>1 000</td><td>korlátlan</td></tr>
