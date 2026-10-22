@@ -18,7 +18,7 @@ export const config = {
 
   // Google Search Console: the content of the HTML-tag verification
   // (<meta name="google-site-verification" content="…">). Also YARDLY_GSC at build time.
-  googleSiteVerification: process.env.YARDLY_GSC ?? "",
+  googleSiteVerification: process.env.YARDLY_GSC ?? "85EloEk88cfxVAGMwnbOL6CHDp18KT5hcojsblUjmYk",
 
   // Social profiles. An empty value renders the icon without a link.
   social: {
