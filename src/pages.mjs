@@ -652,7 +652,7 @@ ${faqBlock(pr.faq, "gyik")}
   </div>
 </section>
 
-${ctaSection({ title: "Próbálja ki 14 napig, kártya nélkül." })}`,
+${ctaSection({ title: "Próbálja ki 14 napig ingyen." })}`,
   };
 };
 

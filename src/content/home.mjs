@@ -4,7 +4,7 @@
 
 export const home = {
   title: "Yardly – flotta- és eszközkezelő rendszer",
-  description: "Járművek, eszközök, dokumentumok és határidők egy helyen. A Yardly szól, mielőtt valami lejár. 14 nap ingyen, kártya nélkül.",
+  description: "Járművek, eszközök, dokumentumok és határidők egy helyen. A Yardly szól, mielőtt valami lejár. 14 napig ingyen kipróbálható.",
 
   hero: {
     eyebrow: "Flotta- és eszközkezelés magyar cégeknek",
@@ -100,7 +100,7 @@ export const home = {
     eyebrow: "Hogyan kezdjen bele",
     title: "Három lépés, és a rendszer már dolgozik is",
     items: [
-      { title: "Regisztrál.", text: "Két perc, bankkártya nélkül. 14 napig minden funkciót kipróbálhat." },
+      { title: "Regisztrál.", text: "Két perc, a cégadatokkal és egy bankkártyával. 14 napig minden funkciót kipróbálhat, a próbaidő alatt nem terhelünk semmit." },
       { title: "Áthozza a meglévő adatokat.", text: "Töltse le az Excel-sablont, másolja bele a listáját, és töltse fel. A hiányzó telephelyek, típusok és kategóriák maguk létrejönnek." },
       { title: "Meghívja a kollégákat.", text: "Mindenki a saját szerepkörével lép be. A sofőr csak a saját autóját látja, a pénzügy a költségeket." },
     ],
@@ -149,6 +149,6 @@ export const home = {
   cta: {
     eyebrow: "Kezdje el",
     title: "Próbálja ki a saját flottájával.",
-    lead: "14 nap ingyen, bankkártya nélkül. Ha elakad, szívesen végigmegyünk Önnel egy rövid bemutatón.",
+    lead: "14 nap ingyen, a Prémium csomag minden funkciójával. Ha elakad, szívesen végigmegyünk Önnel egy rövid bemutatón.",
   },
 };

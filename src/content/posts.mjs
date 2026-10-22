@@ -10,7 +10,7 @@ export const blog = {
   all: "Összes",
   postCta: {
     title: "Ezt a Yardly magától csinálja.",
-    text: "Próbálja ki 14 napig, bankkártya nélkül.",
+    text: "Próbálja ki 14 napig ingyen, a Prémium csomag minden funkciójával.",
     more: "Részletek",
   },
   relatedTitle: "Kapcsolódó cikkek",
