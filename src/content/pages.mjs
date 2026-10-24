@@ -180,7 +180,7 @@ export const process = {
   description: "Felmérjük, hogyan dolgoznak, a cég szabályaira szabjuk a Yardlyt, telepítjük az Önök szerverére vagy a felhőbe, áthozzuk az adatokat, és utána is támogatjuk.",
   eyebrow: "Hogyan dolgozunk",
   h1: "A rendszert a cégükhöz igazítjuk, nem fordítva",
-  lead: "Nem dobozos szoftvert adunk át. Megnézzük, hogyan működik ma a flotta és az eszközpark kezelése, és ehhez szabjuk a Yardlyt, a folyamatoktól a jogosultságokig.",
+  lead: "Nem dobozos szoftvert adunk át. Megnézzük, hogyan működik ma a flotta és az eszközpark kezelése, ehhez szabjuk a Yardlyt, a folyamatoktól a jogosultságokig, és összekötjük a cég többi rendszerével.",
   steps: {
     eyebrow: "Bevezetés",
     title: "Négy lépés az első hívástól az éles rendszerig",
@@ -274,6 +274,7 @@ export const process = {
     items: [
       { q: "Mennyibe kerül?", a: "A felmérés után egyedi ajánlatot adunk. Az ár a járművek és eszközök számától, a testreszabástól, az integrációktól és az üzemeltetés módjától függ." },
       { q: "Mennyi ideig tart a bevezetés?", a: "A testreszabás és az integrációk mértékétől függ. Az ütemtervet az ajánlatban rögzítjük, lépésenként." },
+      { q: "Össze tudják kötni a meglévő rendszereinkkel?", a: "Igen. A felmérésen végignézzük, milyen rendszereket használnak, és az ajánlatban rögzítjük, mit kötünk össze és hogyan: közvetlenül (API vagy adatbázis), vagy ütemezett Excel- és CSV-cserével." },
       { q: "Mi van, ha később változnak a folyamataink?", a: "A folyamatokat, a mezőket és a szerepköröket a cég adminisztrátorai maguk is módosíthatják. Nagyobb változásnál mi segítünk." },
       { q: "Megnézhetjük előbb?", a: "Igen. Egy 30 perces online bemutatón egy kitalált cég adataival végigmegyünk a rendszeren, és megbeszéljük, hogyan működne az Önök folyamataival." },
       { q: "Kié az adat?", a: "Az Önöké. A rendszerből bármikor teljes adatexportot készíthetnek Excelben." },

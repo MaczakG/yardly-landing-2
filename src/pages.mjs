@@ -204,6 +204,25 @@ export const home = () => {
   </div>
 </section>
 
+<section class="section section--deep" aria-labelledby="integration-title">
+  <div class="container split">
+    <div class="split__text">
+      <p class="eyebrow">${h.integrations.eyebrow}</p>
+      <h2 class="h2" id="integration-title">${g(h.integrations.title)}</h2>
+      <p class="lead">${h.integrations.lead}</p>
+      ${ticks(h.integrations.points)}
+      <a class="text-link" href="${route("process")}#integracio">${h.integrations.link}${arrow("text-link__arrow")}</a>
+    </div>
+    <div class="split__art">
+      <ul class="hub" aria-label="${h.integrations.hubLabel}">
+        ${h.integrations.hub.slice(0, 4).map((x) => `<li class="hub__node">${icon(x.icon)}<span>${x.label}</span></li>`).join("")}
+        <li class="hub__core"><img src="/assets/brand/yardly-vizszintes-szines.svg" width="131" height="36" alt="Yardly"></li>
+        ${h.integrations.hub.slice(4).map((x) => `<li class="hub__node">${icon(x.icon)}<span>${x.label}</span></li>`).join("")}
+      </ul>
+    </div>
+  </div>
+</section>
+
 <section class="section section--band" aria-labelledby="modules-title">
   <div class="container">
     ${sectionHead(h.modules, "modules-title")}
