@@ -8,8 +8,8 @@ export const home = {
   description: "Járművek, eszközök, határidők és jóváhagyások egy rendszerben, a cége szabályaira szabva és a többi céges rendszerrel összekötve. Az Önök szerverére telepítve, vagy általunk üzemeltetve a felhőben.",
 
   hero: {
-    eyebrow: "Flotta- és eszközüzemeltetés a cége folyamataira szabva",
-    title: "Üzemeltetési rendszer, amely úgy működik, ahogy az Önök cége.",
+    eyebrow: "Flotta- és eszközüzemeltetés",
+    title: "Üzemeltetési rendszer és automatizációk az Önök cégére szabva",
     lead: "Járművek, eszközök, határidők és jóváhagyások egy rendszerben. Felmérjük, hogyan dolgoznak, ehhez szabjuk a Yardlyt, és összekötjük a cég többi rendszerével. Az Önök szerverén fut, vagy mi üzemeltetjük a felhőben.",
     shotAlt: "A Yardly irányítópultja: elöl a közelgő és lejárt határidők, alatta a fő mutatók",
     phoneAlt: "A telefonos állapotfelmérő űrlap",
@@ -41,7 +41,7 @@ export const home = {
     items: [
       { title: "Beállítás", text: "Folyamatok és jóváhagyások, saját mezők és kategóriák, szerepkörök és jogosultságok, ellenőrzőlisták, riasztások és riportok, a cég szabályai szerint." },
       { title: "Egyedi fejlesztés", text: "Ha valami hiányzik, megírjuk: új modult, képernyőt, riportot vagy PDF-et, a cég saját működéséhez." },
-      { title: "Integráció", text: "Összekötjük a már használt rendszerekkel: ERP, könyvelés, HR, üzemanyagkártyák, raktár- és beléptetőrendszerek. Nincs kétszeri rögzítés." },
+      { title: "Integráció", text: "Összekötjük a már használt rendszerekkel: ERP, könyvelés, HR, hibabejelentő és dokumentumkezelő, üzemanyagkártyák, raktár- és beléptetőrendszerek, és a cég egyedi rendszerei. Nincs kétszeri rögzítés." },
     ],
     link: "Így dolgozunk",
   },
@@ -52,21 +52,27 @@ export const home = {
     lead: "A Yardly nem egy újabb sziget a cégben. Összekötjük azokkal a rendszerekkel, amelyeket már használnak, így egy adatot csak egyszer kell rögzíteni, és mindenhol ugyanaz látszik.",
     points: [
       "ERP, könyvelés, HR és bérszámfejtés",
+      "Hibabejelentő és dokumentumkezelő rendszerek",
       "Üzemanyagkártyák: a DKV-kártyás tankolások már most maguktól bekerülnek",
       "Raktár- és beléptetőrendszerek, a cég saját levelezőszervere",
+      "A cég egyedi, saját fejlesztésű rendszerei is",
       "Közvetlen kapcsolat (API vagy adatbázis), vagy ütemezett Excel- és CSV-csere",
     ],
     link: "Hogyan kötjük össze",
     hubLabel: "A Yardly középen, körülötte a rendszerek, amelyekkel összekötjük",
+    // Ten systems round the Yardly tile: five before it, five after (a 4 × 3 grid on a wide
+    // screen, the Yardly tile across the two middle cells).
     hub: [
       { icon: "server", label: "ERP" },
       { icon: "circle-dollar-sign", label: "Könyvelés" },
       { icon: "users", label: "HR és bér" },
       { icon: "fuel", label: "Üzemanyag&shy;kártya" },
-      { icon: "package", label: "Raktár" },
+      { icon: "triangle-alert", label: "Hiba&shy;bejelentő" },
       { icon: "lock", label: "Beléptetés" },
+      { icon: "file-text", label: "Dokumentum&shy;kezelő" },
+      { icon: "package", label: "Raktár" },
       { icon: "mail", label: "Levelezés" },
-      { icon: "file-text", label: "Excel, CSV" },
+      { icon: "code", label: "Egyedi rendszerek" },
     ],
   },
 
@@ -135,7 +141,7 @@ export const home = {
 
   hosting: {
     eyebrow: "Üzemeltetés",
-    title: "Az Önök szerverén, vagy mi üzemeltetjük",
+    title: "Az Önök szerverén, vagy általunk üzemeltetve a felhőben",
     lead: "Mindkét esetben saját, elkülönített példányt kapnak, csak az Önök cégének adataival.",
     link: "Az üzemeltetés részletei",
   },
@@ -180,8 +186,8 @@ export const home = {
       { q: "Mennyibe kerül?", a: "A felmérés után egyedi ajánlatot adunk. Az ár a járművek és eszközök számától, a testreszabástól, az integrációktól és az üzemeltetés módjától függ." },
       { q: "Hol fut a rendszer?", a: "Ahogy Önöknek jobb: a saját szerverükön, adatközpontjukban vagy privát felhőjükben, vagy mi üzemeltetjük egy EU-s (frankfurti) adatközpontban. Mindkét esetben saját, elkülönített példányt kapnak." },
       { q: "Mennyire szabható a cégünkre?", a: "A folyamatok, a mezők, a kategóriák, a szerepkörök, az ellenőrzőlisták és a riportok beállíthatók. Ami hiányzik, azt egyedileg fejlesztjük, és a rendszert összekötjük a már használt programjaikkal." },
-      { q: "Össze tudják kötni a meglévő rendszereinkkel?", a: "Igen. Felmérjük, milyen rendszereket használnak (ERP, könyvelés, HR, üzemanyagkártya, raktár, beléptetés), és bekötjük őket közvetlenül (API vagy adatbázis), vagy ütemezett Excel- és CSV-cserével. A DKV-kártyás tankolások már most maguktól bekerülnek." },
-      { q: "Hogyan kerülnek be a meglévő adataink?", a: "A bevezetés részeként mi hozzuk át őket, Excelből vagy a régi rendszerből." },
+      { q: "Össze tudják kötni a meglévő rendszereinkkel?", a: "Igen. Felmérjük, milyen rendszereket használnak (ERP, könyvelés, HR, hibabejelentő, dokumentumkezelő, üzemanyagkártya, raktár, beléptetés, vagy a cég saját fejlesztésű rendszerei), és bekötjük őket közvetlenül (API vagy adatbázis), vagy ütemezett Excel- és CSV-cserével. A DKV-kártyás tankolások már most maguktól bekerülnek." },
+      { q: "Hogyan kerülnek be a meglévő adataink?", a: "A bevezetés részeként mi hozzuk át őket, Excelből vagy a régi rendszerből. Saját szerveres telepítésnél ehhez Önök adnak időkorlátos, naplózott hozzáférést, adatfeldolgozási szerződés alapján; napi üzemben nem férünk hozzá az adataikhoz." },
       { q: "Kell telepíteni valamit a kollégáknak?", a: "Nem. A Yardly böngészőben fut, számítógépen és telefonon is." },
       { q: "Csak a flottához vagy csak az eszközökhöz is használható?", a: "Igen. A két modul közül azt kapcsoljuk be, amelyikre szükségük van." },
       { q: "Megnézhetjük előbb?", a: "Igen. Egy 30 perces online bemutatón egy kitalált cég adataival végigmegyünk a rendszeren, és megbeszéljük, hogyan működne az Önök folyamataival." },

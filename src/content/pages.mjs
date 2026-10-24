@@ -71,7 +71,7 @@ export const contact = {
   faq: [
     { q: "Mennyi ideig tart egy bemutató?", a: "Általában 30 perc, online." },
     { q: "Mennyibe kerül a Yardly?", a: "A felmérés után egyedi ajánlatot adunk. Az ár a járművek és eszközök számától, a testreszabástól, az integrációktól és az üzemeltetés módjától függ." },
-    { q: "Segítenek az adatok áthozásában?", a: "Igen, ez a bevezetés része: Excelből vagy a régi rendszerből mi hozzuk át őket." },
+    { q: "Segítenek az adatok áthozásában?", a: "Igen, ez a bevezetés része: Excelből vagy a régi rendszerből mi hozzuk át őket. Saját szerveres telepítésnél ehhez Önök adnak időkorlátos, naplózott hozzáférést, adatfeldolgozási szerződés alapján." },
   ],
 };
 
@@ -153,10 +153,11 @@ export const hostingOptions = [
     tagline: "Ha az adatoknak a cégen belül kell maradniuk.",
     points: [
       "Az Önök szerverén, adatközpontjában vagy privát felhőjében",
-      "A szervert üzemeltetheti a saját IT-csapatuk, vagy mi távolról",
+      "A szervert a saját IT-csapatuk üzemelteti",
       "Az Önök mentési, naplózási és biztonsági szabályai szerint",
       "Saját domainen és saját levelezőszerverrel",
-      "Frissítés egyeztetett időpontban, visszaállítható módon",
+      "Az új verziókat átadjuk, az IT-csapatuk telepíti őket",
+      "Napi üzemben nem férünk hozzá az adataikhoz",
     ],
   },
   {
@@ -237,9 +238,11 @@ export const process = {
         points: [
           "ERP és könyvelés",
           "HR és bérszámfejtés",
+          "Hibabejelentő és dokumentumkezelő rendszerek",
           "Üzemanyagkártyák",
           "Raktár- és beléptetőrendszerek",
           "Levelezés a cég saját levelezőszerverén",
+          "A cég egyedi, saját fejlesztésű rendszerei",
         ],
       },
     ],
@@ -253,6 +256,9 @@ export const process = {
       { title: "HR és bérszámfejtés", text: "A munkatársak listája és a belépők, kilépők: az új kolléga hozzáférést kap, a kilépőé megszűnik." },
       { title: "Üzemanyagkártyák", text: "A DKV-kártyás tankolások már most maguktól bekerülnek. További szolgáltatókat is be tudunk kötni." },
       { title: "Raktár- és beléptetőrendszerek", text: "Eszközök, helyek és mozgások: a leltár és a nyilvántartás ugyanabból az adatból dolgozik." },
+      { title: "Hibabejelentő rendszer", text: "A bejelentett hiba a járműhöz vagy eszközhöz kerül, és elindítja a javítás folyamatát; a lezárás visszamegy a hibajegyhez." },
+      { title: "Dokumentumkezelő", text: "A forgalmik, szerződések, kötvények és jegyzőkönyvek a cég dokumentumkezelőjében maradnak, a Yardly onnan mutatja őket a járműhöz és az eszközhöz." },
+      { title: "Egyedi rendszerek", text: "A cég saját fejlesztésű vagy iparági programjait is bekötjük, amennyiben azok API-t, adatbázist vagy fájlcserét engednek." },
       { title: "Levelezés", text: "Az értesítések a cég saját levelezőszerverén mennek ki." },
     ],
   },
@@ -331,9 +337,10 @@ export const hosting = {
     eyebrow: "Gyakori kérdések",
     title: "Kérdések az üzemeltetésről",
     items: [
-      { q: "Ki üzemelteti a szervert?", a: "Saját szervernél ahogy Önöknek jobb: a saját IT-csapatuk, vagy mi, távoli eléréssel. A felhős változatnál mi." },
+      { q: "Ki üzemelteti a szervert?", a: "Saját szervernél a saját IT-csapatuk; mi a telepítésben segítünk, és a Yardlyhoz adunk támogatást. A felhős változatnál mi üzemeltetjük." },
+      { q: "Hozzáférnek az adatainkhoz?", a: "Saját szervernél napi üzemben nem férünk hozzá az adataikhoz. A bevezetéskori adatátvételt, az összekötések beállítását és a kérésükre végzett hibaelhárítást adatfeldolgozási szerződés alapján, az Önök által adott, időkorlátos és naplózott hozzáféréssel végezzük. A felhős változatnál az adatokat mi tároljuk, adatfeldolgozóként, szintén szerződés alapján." },
       { q: "Hol vannak az adatok a felhős változatnál?", a: "Az Amazon Web Services frankfurti (EU-s) adatközpontjában, a cég saját, elkülönített példányában. A mentések titkosítva készülnek." },
-      { q: "Megkapjuk a fejlesztéseket?", a: "Igen. A felhős változatnál mi telepítjük őket, saját szervernél egyeztetett időpontban, visszaállítható módon." },
+      { q: "Megkapjuk a fejlesztéseket?", a: "Igen. A felhős változatnál mi telepítjük őket. Saját szervernél átadjuk az új verziót, és az IT-csapatuk telepíti, amikor nekik megfelel." },
       { q: "Válthatunk később?", a: "Igen. Az adatokat át tudjuk költöztetni a felhőből a saját szerverükre, vagy fordítva." },
       { q: "Mennyibe kerül?", a: "A felmérés után egyedi ajánlatot adunk. Az ár az üzemeltetés módjától, a járművek és eszközök számától, a testreszabástól és az integrációktól függ." },
     ],

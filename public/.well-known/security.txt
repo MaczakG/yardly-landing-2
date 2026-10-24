@@ -1,0 +1,7 @@
+# Biztonsági hiba bejelentése (RFC 9116). Ha sérülékenységet talál a Yardlyban, kérjük, írjon
+# nekünk, mielőtt nyilvánosságra hozná.
+# Reporting a vulnerability in Yardly: please write to us before disclosing it.
+Contact: mailto:hello@yardly.hu
+Expires: 2027-10-01T00:00:00.000Z
+Preferred-Languages: hu, en
+Canonical: https://yardly.hu/.well-known/security.txt

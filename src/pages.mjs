@@ -215,9 +215,9 @@ export const home = () => {
     </div>
     <div class="split__art">
       <ul class="hub" aria-label="${h.integrations.hubLabel}">
-        ${h.integrations.hub.slice(0, 4).map((x) => `<li class="hub__node">${icon(x.icon)}<span>${x.label}</span></li>`).join("")}
+        ${h.integrations.hub.slice(0, 5).map((x) => `<li class="hub__node">${icon(x.icon)}<span>${x.label}</span></li>`).join("")}
         <li class="hub__core"><img src="/assets/brand/yardly-vizszintes-szines.svg" width="131" height="36" alt="Yardly"></li>
-        ${h.integrations.hub.slice(4).map((x) => `<li class="hub__node">${icon(x.icon)}<span>${x.label}</span></li>`).join("")}
+        ${h.integrations.hub.slice(5).map((x) => `<li class="hub__node">${icon(x.icon)}<span>${x.label}</span></li>`).join("")}
       </ul>
     </div>
   </div>
