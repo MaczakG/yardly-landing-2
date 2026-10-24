@@ -9,7 +9,7 @@ export const home = {
 
   hero: {
     eyebrow: "Flotta- és eszközüzemeltetés",
-    title: "Üzemeltetési rendszer az Önök cégére szabva",
+    title: "Üzemeltetési rendszer és automatizációk az Önök cégére szabva",
     lead: "Járművek, eszközök, határidők és jóváhagyások egy rendszerben. Felmérjük, hogyan dolgoznak, ehhez szabjuk a Yardlyt, és összekötjük a cég többi rendszerével. Az Önök szerverén fut, vagy mi üzemeltetjük a felhőben.",
     shotAlt: "A Yardly irányítópultja: elöl a közelgő és lejárt határidők, alatta a fő mutatók",
     phoneAlt: "A telefonos állapotfelmérő űrlap",
