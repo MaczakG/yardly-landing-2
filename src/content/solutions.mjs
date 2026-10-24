@@ -7,8 +7,8 @@ export const overview = {
   description: "Flotta, eszközpark, leltár, dokumentumok, riasztások, folyamatok, költségek és analitika: a Yardly minden funkciója egy oldalon.",
   eyebrow: "Megoldásaink",
   h1: "Egy rendszer a járművekre, az eszközökre és a határidőkre",
-  lead: "A Yardly két modulból áll, a Flottából és az Eszközparkból. Minden csomagban mindkettő benne van. Az alábbi 14 terület együtt a rendszer minden funkciója.",
-  basicsTitle: "Minden csomagban",
+  lead: "A Yardly két modulból áll, a Flottából és az Eszközparkból. Az alábbi 14 terület együtt a rendszer minden funkciója, és mindegyik az Önök szabályaihoz igazítható.",
+  basicsTitle: "Mindig benne van",
   basics: [
     "Excel-import sablonnal",
     "Gyorskereső (Ctrl/⌘ + K)",
@@ -18,7 +18,7 @@ export const overview = {
     "Teljes adatexport Excelben",
     "Verzióelőzmények az appban: mindig látja, mi újult meg",
   ],
-  cta: { title: "Nézze meg a saját adataival.", lead: "14 nap ingyen, a Prémium csomag minden funkciójával." },
+  cta: { title: "Nézze meg egy bemutatón.", lead: "30 perc, online. Megmutatjuk a rendszert, és megbeszéljük, mit kellene az Önök cégére szabni." },
 };
 
 export const groups = {
@@ -58,7 +58,7 @@ export const solutions = [
       { title: "Telephelyek", text: "Telephelyenként a járművek és eszközök száma, a havi és az éves költség. Törléskor a rendszer átteszi a járműveket és eszközöket egy másik telephelyre." },
       { title: "Sofőr-hozzárendelés", text: "A sofőr csak a hozzá rendelt autót látja, ha a szerepköre így van beállítva." },
       { title: "Excel-import sablonnal", text: "A teljes flotta egyszerre feltölthető. Az ismeretlen telephely, típus és üzemeltetési forma magától létrejön, a hibás sorokról soronkénti jelentés készül." },
-      { title: "Kivont járművek", text: "Nem számítanak bele a csomag keretébe, de minden adatuk megmarad." },
+      { title: "Kivont járművek", text: "Külön állapotot kapnak, és minden adatuk megmarad." },
     ],
     shots: [
       { img: "jarmuvek", alt: "A Járművek lista állapotszámlálókkal és soronkénti gyorsgombokkal" },
@@ -66,7 +66,7 @@ export const solutions = [
       { img: "mobil", alt: "A járműlista telefonon", phone: true },
     ],
     related: ["szerviz-karbantartas", "dokumentumok", "koltsegek-riportok"],
-    cta: "Töltse fel a flottáját Excelből, és nézze meg öt perc múlva.",
+    cta: "A flottalistát mi hozzuk át, Ön pedig már az első napon a teljes képet látja.",
   },
   {
     slug: "szerviz-karbantartas",
@@ -92,7 +92,7 @@ export const solutions = [
       { title: "Szervizpartnerek", text: "Név, kapcsolattartó, telefon, e-mail. A szerviznaplóban és az ütemtervben választhatók." },
       { title: "Workflow-val", text: "Az esedékes ütemterv magától elindíthatja a cég egyedi workflow-ját, a lezárás pedig beírja a szervizt a naplóba." },
       { title: "Költségben", text: "A szervizköltség magától beleépül a jármű havi, éves és Ft/km költségébe." },
-      { title: "Előrejelzés (Prémium)", text: "A km-állásokból megbecsüli, mikor esedékes a következő szerviz." },
+      { title: "Előrejelzés", text: "A km-állásokból megbecsüli, mikor esedékes a következő szerviz." },
     ],
     shots: [{ img: "utemterv", alt: "Karbantartási ütemterv km és idő szerinti esedékességgel, állapotjelzéssel" }],
     related: ["folyamatok", "riasztasok", "analitika"],
@@ -124,11 +124,10 @@ export const solutions = [
       { title: "Kártya → jármű", text: "A kártyákat a DKV-nál rögzített rendszám alapján köti a járművekhez; bármelyik kártya kézzel átállítható." },
       { title: "Okos szűrés", text: "Az AdBlue, az olaj és a mosás nem számít tankolásnak; az elektromos töltés külön jelölést kap; a hiányzó vagy elgépelt km-órát a rendszer az előző adatokból becsüli." },
       { title: "Tranzakciók állapottal", text: "Bekerült, nincs járműhöz rendelve, nem üzemanyag vagy ellenőrzést igényel. A törölt tankolás nem kerül be újra." },
-      { title: "Csomagban", text: "Az Üzleti és a Prémium csomag tartalmazza, az Alaphoz kiegészítőként +9 990 Ft/hó + ÁFA." },
     ],
     shots: [{ img: "dkv", alt: "DKV-kártyák a járművekhez rendelve, alatta a tranzakciók állapottal" }],
     related: ["koltsegek-riportok", "analitika", "jarmunyilvantartas"],
-    cta: "Kösse össze a DKV-kártyáit öt perc alatt.",
+    cta: "Nézze meg, hogyan érkeznek a DKV-tankolások maguktól.",
   },
   {
     slug: "karugyek-biztositas-tartozekok",
@@ -169,7 +168,6 @@ export const solutions = [
     title: "Jármű-állapotfelmérés telefonról – Yardly",
     description: "A sofőr a telefonján tölti ki a cég saját ellenőrzőlistáját, belépés nélkül. Ütemezve, előzményekkel, PDF-ben.",
     eyebrow: "Flotta",
-    badge: "Üzleti csomagtól",
     h1: "A sofőr ellenőriz, Ön látja az eredményt",
     lead: "Az Ön ellenőrzőlistája a sofőr telefonján, ütemezve. Belépés és alkalmazás nélkül.",
     benefits: [
@@ -190,7 +188,7 @@ export const solutions = [
       { img: "allapotfelmeres", alt: "Az állapotfelmérések a jármű adatlapján, eredménnyel és előzményekkel" },
     ],
     related: ["jarmunyilvantartas", "riasztasok", "folyamatok"],
-    cta: "Állítsa össze az első ellenőrzőlistáját tíz perc alatt.",
+    cta: "Az Önök ellenőrzőlistája, a sofőrök telefonján.",
   },
 
   // ------------------------------------------------------------ Eszközpark
@@ -224,14 +222,13 @@ export const solutions = [
       { title: "Karbantartási ütemterv", text: "N havonta esedékes karbantartás; az „Elvégezve” gomb szervizbejegyzést rögzít." },
       { title: "Dokumentumok", text: "Gépkönyv, hatósági vizsga, garancialevél az eszközhöz csatolva, lejárattal és riasztással." },
       { title: "Excel-import sablonnal", text: "Az ismeretlen kategória, típus, telephely, raktár, helyiség és polc magától létrejön." },
-      { title: "Keret", text: "Alap csomagban 100, Üzletiben 1000 eszköz, Prémiumban korlátlan. Bővítés 250 eszközönként +4 990 Ft/hó + ÁFA." },
     ],
     shots: [
       { img: "eszkozok", alt: "A Targoncák kategória listája a saját jellemzőkkel" },
       { img: "eszkoz-adatlap", alt: "Az eszköz adatlapja jellemzőkkel, elhelyezéssel és beszerzéssel" },
     ],
     related: ["leltar", "folyamatok", "koltsegek-riportok"],
-    cta: "Hozza át az eszközlistáját Excelből, és már ma tudja, mi hol van.",
+    cta: "Az eszközlistát mi hozzuk át, Önök pedig tudják, mi hol van.",
   },
   {
     slug: "leltar",
@@ -242,7 +239,6 @@ export const solutions = [
     title: "Leltár app telefonra: QR-kódos eszközleltár – Yardly",
     description: "A leltározó a telefon kamerájával olvassa be a címkéket. Vak leltár, valós számlálás, összesítő PDF-ben.",
     eyebrow: "Eszközpark",
-    badge: "Üzleti csomagtól",
     h1: "Leltár telefonnal, QR- és vonalkóddal, terminál nélkül",
     lead: "A kolléga végigmegy a raktáron, és a telefon kamerájával beolvassa a címkéket. Nem kell listát pipálni, és bejelentkezni sem.",
     benefits: [
@@ -291,7 +287,6 @@ export const solutions = [
       { title: "Költségek évválasztóval", text: "Üzemanyag, szerviz, biztosítás, bérleti díj és beszerzés, az aktuális és az előző négy évre; a telephelyek költség szerint rangsorolva." },
       { title: "Teendőim", text: "Minden feladat és jóváhagyás, ami a bejelentkezett felhasználóra vár. A menüben számláló mutatja, a késés piros jelzést kap. Egy ablakban elvégezhető: mezők kitöltése, dokumentum feltöltése, jóváhagyás vagy elutasítás." },
       { title: "Gyorskereső (Ctrl/⌘ + K)", text: "Bármelyik oldal elérhető néhány betű beírásával, ékezet nélkül is. Minden lista keresője ékezet- és kisbetű-független." },
-      { title: "Több cég egy fiókkal", text: "Egy személy több cég tagja is lehet, cégenként más szerepkörrel, és az oldalsávban válthat közöttük." },
       { title: "Saját profil", text: "Név, telefon és a többi személyes adat szerkesztése." },
       { title: "Verzióelőzmények", text: "Az appban látja, mi újult meg az egyes verziókban." },
     ],
@@ -301,7 +296,7 @@ export const solutions = [
       { img: "gyorskereso", alt: "Gyorskereső: néhány betűből megtalálja az oldalt, ékezet nélkül is" },
     ],
     related: ["riasztasok", "folyamatok", "koltsegek-riportok"],
-    cta: "Nézze meg, mit mutat a Yardly holnap reggel.",
+    cta: "Nézze meg, mit mutatna a Yardly Önöknek reggelente.",
   },
   {
     slug: "dokumentumok",
@@ -331,7 +326,7 @@ export const solutions = [
     ],
     shots: [{ img: "dokumentumok", alt: "A Dokumentumok lista típussal, tulajdonossal, lejárattal és verziókkal" }],
     related: ["riasztasok", "jarmunyilvantartas", "eszkoznyilvantartas"],
-    cta: "Töltse fel a forgalmikat, és felejtse el a lejáratokat.",
+    cta: "A lejáratokat ezentúl a rendszer figyeli, nem Önnek kell.",
   },
   {
     slug: "riasztasok",
@@ -386,7 +381,7 @@ export const solutions = [
       { title: "Szabályok a bejegyzésre", text: "Összeg, liter, a tank mérete, fogyasztás az átlaghoz képest, hétvégi, éjszakai vagy külföldi tankolás, rossz üzemanyag, visszafelé tekert km-óra, havi keret, telephely, járműtípus, eszközkategória, kártípus és még sok más." },
       { title: "Ismétlés korlátja", text: "Ugyanarra a járműre, eszközre vagy személyre legfeljebb naponta, hetente, havonta, negyedévente vagy évente egyszer, vagy amíg az előző fut." },
       { title: "Automatikus lépések", text: "PDF készítése (vezetői összefoglaló, költségriport, adatlap, átadás-átvételi elismervény, eszközlista Excelben, bírságértesítő), e-mail a PDF-ekkel akár külső címre is (pl. a könyvelésnek), állapot beállítása, bejelentés létrehozása, másik folyamat vagy leltár indítása, várakozás." },
-      { title: "Teams- és Slack-üzenet (Prémium)", text: "Egy lépés üzenetet küld a csapat Teams- vagy Slack-csatornájára." },
+      { title: "Teams- és Slack-üzenet", text: "Egy lépés üzenetet küld a csapat Teams- vagy Slack-csatornájára." },
       { title: "44 kész automatizálás", text: "Tankolás, költség és jóváhagyás, határidők és km, kollégák és sofőrök, eszközök, leltár és automatikus PDF-ek: válasszon egyet, nézze át, és élesítse." },
       { title: "Vizuális folyamatszerkesztő", text: "A lépéseket egy vásznon köti össze. Lépéstípusok: Indítás, Feladat, Jóváhagyás, Feltétel, Értesítés, automatikus lépések és Lezárás." },
       { title: "Kézzel is", text: "Kézzel, egy esedékes ütemtervből vagy egy bejelentésből is indítható; jármű- és eszköztípusonként megadható, melyik folyamat induljon." },
@@ -398,7 +393,6 @@ export const solutions = [
       { title: "Futó folyamatok", text: "A folyamatábra mutatja, hol tart; a lépésekhez fájl csatolható, a futás során készült PDF-ek és Excel-fájlok letölthetők, a folyamat leállítható." },
       { title: "Automatikus szervizbejegyzés", text: "A lezárási lépés az elvégzett munkát és a költséget beírja a szerviznaplóba, és elvégzettnek jelöli az esedékes ütemtervet." },
       { title: "Bejelentések", text: "A sofőr vagy a kolléga a jármű vagy eszköz adatlapján jelzi a hibát vagy a kárt, sürgősséggel (Ráér, Normál, Sürgős). Ebből indul a javítási folyamat." },
-      { title: "Csomagonként", text: "Alap 1 aktív workflow sablonból, Üzleti 10, Prémium korlátlan." },
     ],
     shots: [
       { img: "folyamatszerkeszto", alt: "Folyamatszerkesztő: árajánlat, vezetői jóváhagyás összeghatárral, javítás" },
@@ -406,7 +400,7 @@ export const solutions = [
       { img: "bejelentes", alt: "Bejelentések a jármű adatlapján" },
     ],
     related: ["tankolas-dkv", "szerviz-karbantartas", "karugyek-biztositas-tartozekok"],
-    cta: "Kapcsolja be az első automatizálást a kész sablonok közül.",
+    cta: "Megrajzoljuk az Önök folyamatait, és a Yardly végigviszi őket.",
   },
 
   // --------------------------------------------------------------- Vezetés
@@ -433,9 +427,9 @@ export const solutions = [
       { title: "Költségkártyák az irányítópulton", text: "Üzemanyag, szerviz, biztosítás, bérleti díj és beszerzés, évválasztóval (az aktuális és az előző négy év); a telephelyek rangsora költség szerint." },
       { title: "Lejárati lista CSV-ben", text: "Minden jármű-, felhasználó- és eszközdokumentum lejárata, Excelben megnyitható formátumban." },
       { title: "Költségösszesítő CSV-ben", text: "Üzemanyag, szerviz, biztosítás, éves és teljes összeg, Ft/km és fogyasztás." },
-      { title: "Vezetői összefoglaló PDF (Üzleti csomagtól)", text: "Flotta, Eszközpark vagy mindkettő, tetszőleges időszakra vagy erre a hónapra, negyedévre, évre." },
+      { title: "Vezetői összefoglaló PDF", text: "Flotta, Eszközpark vagy mindkettő, tetszőleges időszakra vagy erre a hónapra, negyedévre, évre." },
       { title: "Teljes adatexport", text: "Egy Excel-munkafüzet 15 munkalappal, benne minden adattal (járművek, eszközök, dokumentumok, csapat, szerviznaplók, tankolások, biztosítások, kárügyek stb.). Biztonsági másolatnak is jó." },
-      { title: "További letöltések", text: "Leltár PDF-ben, állapotfelmérés PDF-ben, napló CSV-ben (Prémium)." },
+      { title: "További letöltések", text: "Leltár PDF-ben, állapotfelmérés PDF-ben, napló CSV-ben." },
     ],
     shots: [
       { img: "koltsegek", alt: "A Jármű-összesítő havi, éves és teljes költséggel és Ft/km-rel" },
@@ -453,7 +447,6 @@ export const solutions = [
     title: "Flottaanalitika és csereajánlások – Yardly",
     description: "Melyik autó kerül túl sokba, mikor esedékes a szerviz, mit érdemes lecserélni. Magyarázható szabályokkal.",
     eyebrow: "Vezetés",
-    badge: "Prémium csomagban",
     h1: "Melyik autó kerül túl sokba, és mikor jön a következő szerviz",
     lead: "Az analitika a már rögzített szerviz-, tankolási és km-adatokból dolgozik, külön adatbevitel nélkül, és megmutatja, hol érdemes beavatkozni.",
     benefits: [
@@ -473,7 +466,7 @@ export const solutions = [
       { img: "csereajanlas", alt: "Csereajánlások indoklással: melyik jármű kerül túl sokba" },
     ],
     related: ["koltsegek-riportok", "szerviz-karbantartas", "eszkoznyilvantartas"],
-    cta: "A próbaidőben a Prémium analitikát is kipróbálhatja.",
+    cta: "Nézze meg, melyik autójuk kerül túl sokba.",
   },
   {
     slug: "csapat-biztonsag",
@@ -485,7 +478,7 @@ export const solutions = [
     description: "Szerepkörök, jogosultsági mátrix, változásnapló, kétlépcsős belépés és titkosított kapcsolat.",
     eyebrow: "Vezetés",
     h1: "Mindenki azt látja, amire szüksége van, és minden változás visszakövethető",
-    lead: "Szerepkörök, jogosultsági mátrix és változásnapló, kétlépcsős belépéssel és cégenként elkülönített adatokkal.",
+    lead: "Szerepkörök, jogosultsági mátrix és változásnapló, kétlépcsős belépéssel, a cég saját, elkülönített példányában.",
     benefits: [
       { title: "Pontos hozzáférés", text: "A sofőr csak a saját autóját, a pénzügy a költségeket látja." },
       { title: "Visszakövethető", text: "Ki, mikor, mit módosított, a régi és az új értékkel." },
@@ -497,13 +490,11 @@ export const solutions = [
       { title: "Felhasználói adatok", text: "Telefon, jogosítvány-kategóriák, törzsszám, beosztás, és hogy kaphat-e járművet." },
       { title: "Felhasználói adatlap", text: "Kollégánként egy oldalon a dokumentumai (pl. jogosítvány), a bírságai, a hozzá rendelt járművek és a nála lévő vagy általa felelt eszközök." },
       { title: "Beépített szerepkörök", text: "Admin, Diszpécser és Sofőr." },
-      { title: "Saját szerepkörök (Üzleti csomagtól)", text: "Pl. „Raktárvezető” vagy „Szervizes”." },
+      { title: "Saját szerepkörök", text: "Pl. „Raktárvezető” vagy „Szervizes”." },
       { title: "Jogosultsági mátrix", text: "26 funkció × 4 művelet (megtekintés, létrehozás, szerkesztés, törlés), a menü szerint csoportosítva; egy pipával beállítható." },
       { title: "Hatókör", text: "Egy szerepkör korlátozható a saját járműre vagy a saját eszközökre." },
-      { title: "Beállítások átadása (Prémium)", text: "Egyes beállítási fülek (pl. dokumentumtípusok, ellenőrzőlista-sablonok, napló) szerepköröknek is átadhatók." },
-      { title: "Több cég egy fiókkal", text: "Aki több cég flottáját kezeli, egy bejelentkezéssel válthat közöttük." },
-      { title: "Változásnapló", text: "Minden létrehozás, módosítás és törlés mező szinten, a régi és az új értékkel, valamint azzal, hogy ki és mikor végezte. Kereshető és szűrhető felhasználó, típus és időszak szerint. Üzleti csomagban 90 nap látszik, Prémiumban minden, CSV-exporttal." },
-      { title: "Nincs adatvesztés", text: "Kisebb csomagra váltáskor sem törlődik semmi; a keret feletti tételek csak olvashatók lesznek." },
+      { title: "Beállítások átadása", text: "Egyes beállítási fülek (pl. dokumentumtípusok, ellenőrzőlista-sablonok, napló) szerepköröknek is átadhatók." },
+      { title: "Változásnapló", text: "Minden létrehozás, módosítás és törlés mező szinten, a régi és az új értékkel, valamint azzal, hogy ki és mikor végezte. Kereshető és szűrhető felhasználó, típus és időszak szerint, CSV-exporttal." },
     ],
     extra: [
       {
@@ -521,7 +512,7 @@ export const solutions = [
           { title: "Kétlépcsős belépés", text: "A jelszó mellett minden bejelentkezéshez egy e-mailben kapott, 6 jegyű kód is kell (10 percig érvényes, legfeljebb 5 próbálkozás)." },
           { title: "Jelszavak", text: "Erős, sózott hash-sel tárolva (PBKDF2), soha nem olvasható formában." },
           { title: "Támadások ellen", text: "A belépési és e-mail-küldési próbálkozások száma korlátozott." },
-          { title: "Elkülönített cégadatok", text: "Minden cég csak a saját adatait látja, ezt a szerver minden kérésnél ellenőrzi." },
+          { title: "Saját példány", text: "Minden cég saját, elkülönített példányt kap, a saját szerverén vagy az általunk üzemeltetett felhőben. Más cég adata nincs a rendszerben." },
           { title: "Védett fájlok", text: "Csak bejelentkezve tölthetők le; feltöltéskor a rendszer a fájl tartalmát is ellenőrzi." },
           { title: "Lejáró linkek", text: "A meghívó-, leltár- és állapotfelmérés-linkek kitalálhatatlanok, és lejárnak (7, 14, illetve 30 nap)." },
           { title: "Titkosított kapcsolat", text: "HTTPS mindenhol, szigorú böngésző-biztonsági beállításokkal (HSTS, CSP)." },
@@ -535,8 +526,7 @@ export const solutions = [
       { img: "mobil", alt: "A járműlista telefonon", phone: true },
     ],
     related: ["iranyitopult", "folyamatok", "dokumentumok"],
-    relatedPages: ["pricing", "contact"],
-    cta: "Hívja meg a csapatát, és állítsa be, ki mit lát.",
+    cta: "A szerepköröket az Önök szervezetére szabjuk.",
   },
 ];
 

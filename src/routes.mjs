@@ -4,8 +4,8 @@
 export const ROUTES = {
   home: "/",
   solutions: "/megoldasaink/",
-  pricing: "/arak/",
-  enterprise: "/vallalati-megoldas/",
+  process: "/hogyan-dolgozunk/",
+  hosting: "/uzemeltetes/",
   contact: "/kapcsolat/",
   blog: "/blog/",
   privacy: "/adatkezeles/",
@@ -24,9 +24,9 @@ export const REDIRECTS = {
   "/blog/karbantartas-nyilvantartasa-excel-helyett/": "/blog/flottakezeles-excelben/",
   "/blog/kiegeszites-vagy-csere/": "/blog/",
   "/rolunk/": "/",
-  // The self-hosted offer is off for now (only the SaaS is sold); its copy and template stay in
-  // content/pages.mjs and pages.mjs for when it comes back.
-  "/vallalati-megoldas/": "/arak/#ajanlat",
+  // No public prices: the former pricing page and the former self-hosted offer.
+  "/arak/": "/hogyan-dolgozunk/",
+  "/vallalati-megoldas/": "/uzemeltetes/",
 
   "/en/": "/",
   "/en/solutions/": "/megoldasaink/",

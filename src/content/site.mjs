@@ -1,28 +1,16 @@
 // Site-wide copy: navigation, the Megoldásaink mega menu, footer and shared UI strings.
 // Page copy lives next to this file, one module per page.
 
-// Where the app lives. Registration starts the 14-day trial (no card).
-export const APP = {
-  login: "https://app.yardly.hu/",
-  register: "https://app.yardly.hu/?mode=register",
-};
-
 export const ui = {
   skip: "Ugrás a tartalomra",
   homeLabel: "Yardly – kezdőlap",
   menu: "Menü",
-  login: "Bejelentkezés",
-  trial: "Kipróbálom 14 napig",
-  trialShort: "Kipróbálom",
   demo: "Bemutatót kérek",
-  trialNote: "14 nap ingyen, a Prémium csomag minden funkciójával.",
-  soon: "Hamarosan",
-  notify: "Értesítést kérek",
-  vat: "+ ÁFA",
+  quote: "Ajánlatot kérek",
+  demoNote: "Egy 30 perces online bemutatón megmutatjuk, hogyan működne az Önök folyamataival.",
   readMore: "Tovább olvasom",
   minutes: (n) => `${n} perc olvasás`,
   backToBlog: "Vissza a bloghoz",
-  shotUrl: "app.yardly.hu",
   shotNote: "Valós képernyőkép a Yardlyból, egy kitalált cég, a „Minta Logisztika Kft.” adataival.",
   related: "Kapcsolódó megoldások",
   allSolutions: "Az összes funkció",
@@ -36,10 +24,10 @@ export const ui = {
 };
 
 // Header menu, in order. "solutions" opens the mega menu; "highlight" sets an item off a little.
-// "Vállalatoknak" (the self-hosted offer) is off for now: only the SaaS is sold.
 export const nav = [
   { key: "solutions", label: "Megoldásaink" },
-  { key: "pricing", label: "Árak" },
+  { key: "process", label: "Hogyan dolgozunk" },
+  { key: "hosting", label: "Üzemeltetés" },
   { key: "blog", label: "Blog" },
   { key: "contact", label: "Kapcsolat" },
 ];
@@ -62,12 +50,12 @@ export const megamenu = {
   },
   bottom: {
     all: "Az összes funkció egy oldalon",
-    note: "Excel-import: a meglévő nyilvántartása percek alatt átkerül.",
+    note: "Mindegyik az Önök szabályaihoz igazítható. A meglévő nyilvántartást mi hozzuk át.",
   },
 };
 
 export const footer = {
-  desc: "Flotta- és eszközkezelő rendszer magyar cégeknek. A rendszer szól, mielőtt valami lejár.",
+  desc: "Flotta- és eszközüzemeltetési rendszer, a cég folyamataira szabva. Az Önök szerverén vagy általunk üzemeltetve a felhőben.",
   colFleet: "Flotta",
   colOps: "Eszközpark és működés",
   colLead: "Vezetés",

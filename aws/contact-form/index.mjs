@@ -11,7 +11,7 @@
 import { SESv2Client, SendEmailCommand } from "@aws-sdk/client-sesv2";
 
 const ses = new SESv2Client({});
-const LIMITS = { topic: 120, name: 120, email: 200, company: 160, phone: 40, count: 12, message: 4000 };
+const LIMITS = { topic: 120, name: 120, email: 200, company: 160, phone: 40, count: 12, hosting: 60, message: 4000 };
 
 const respond = (status, body) => ({
   statusCode: status,
@@ -49,6 +49,7 @@ export const handler = async (event) => {
     phone: clean(data.phone, LIMITS.phone),
     vehicles: clean(data.vehicles, LIMITS.count),
     equipment: clean(data.equipment, LIMITS.count),
+    hosting: clean(data.hosting, LIMITS.hosting),
     message: String(data.message ?? "").trim().slice(0, LIMITS.message),
     page: clean(data.page, 200),
   };
@@ -64,6 +65,7 @@ export const handler = async (event) => {
     `Cég: ${form.company}`,
     `Telefon: ${form.phone || "–"}`,
     `Járművek: ${form.vehicles || "–"}  ·  Eszközök: ${form.equipment || "–"}`,
+    `Üzemeltetés: ${form.hosting || "–"}`,
     `Oldal: ${form.page}`,
     "",
     form.message || "–",

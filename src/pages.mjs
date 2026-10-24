@@ -2,25 +2,14 @@
 import { config } from "./config.mjs";
 import { route, solutionRoute, postRoute } from "./routes.mjs";
 import { esc, glue as g, arrow, icon, board, ctaCard, screenshot, phoneShot } from "./components.mjs";
-import { APP, ui } from "./content/site.mjs";
+import { ui } from "./content/site.mjs";
 import { home as h } from "./content/home.mjs";
 import { overview, groups, solutions, solutionBySlug } from "./content/solutions.mjs";
-import { pricing as pr, plans, comparison, limits, VAT_PERCENT, SELF_SERVICE_MAX_VEHICLES, ANNUAL_FREE_MONTHS, EQUIPMENT_ADDON, CALC_FEATURES } from "./content/pricing.mjs";
-import { contact as co, privacy as pv, imprint as im, enterprise as en } from "./content/pages.mjs";
+import { contact as co, privacy as pv, imprint as im, process as pc, hosting as ho, hostingOptions } from "./content/pages.mjs";
 import { blog as bl, categories, posts } from "./content/posts.mjs";
 
-// "29 990 Ft": thousands grouped with a non-breaking space, so a price never wraps.
-export const huf = (n) => `${num(n)} Ft`;
-// "1 000": a whole number with its thousands grouped by a non-breaking space.
-export const num = (n) => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-
-// The equipment and user sliders' top ends; the number fields next to them take any count.
-const CALC_EQUIPMENT_RANGE = 2000;
-const CALC_USERS_RANGE = 100;
-
 const withEmail = (html) => html.replaceAll("{email}", config.email);
-const contactHref = (topic, extra = "") => `${route("contact")}?tema=${topic}${extra}#enquiry`;
-const notifyHref = (name) => contactHref("notify", `&funkcio=${encodeURIComponent(name)}`);
+const contactHref = (topic) => `${route("contact")}?tema=${topic}#enquiry`;
 
 const sectionHead = (s, id) => `<div class="section-head">
   <div>
@@ -32,9 +21,10 @@ const sectionHead = (s, id) => `<div class="section-head">
 
 const ticks = (items) => `<ul class="ticks">${items.map((i) => `<li>${i}</li>`).join("")}</ul>`;
 
-const ctaButtons = (note = ui.trialNote) => `<div class="cta-row">
-  <a class="btn btn--primary" href="${APP.register}">${ui.trial}${arrow()}</a>
-  <a class="btn btn--ghost" href="${contactHref("demo")}">${ui.demo}</a>
+// Every call to action asks for a demo or a quote: the site sells no self-service plan.
+const ctaButtons = (note = "") => `<div class="cta-row">
+  <a class="btn btn--primary" href="${contactHref("demo")}">${ui.demo}${arrow()}</a>
+  <a class="btn btn--ghost" href="${contactHref("quote")}">${ui.quote}</a>
 </div>
 ${note ? `<p class="cta-note cta-note--block">${note}</p>` : ""}`;
 
@@ -54,12 +44,12 @@ const pageHero = (p, extra = "") => `<section class="page-hero" aria-labelledby=
 const ctaSection = (c) => `<section class="section section--cta" aria-labelledby="cta-title">
   <div class="container">
     ${ctaCard({
-      eyebrow: c.eyebrow || "Kezdje el",
+      eyebrow: c.eyebrow || "Beszéljünk",
       title: g(c.title),
-      lead: c.lead || ui.trialNote,
-      button: ui.trial,
-      href: APP.register,
-      secondary: { label: ui.demo, href: contactHref("demo") },
+      lead: c.lead || ui.demoNote,
+      button: ui.demo,
+      href: contactHref("demo"),
+      secondary: { label: ui.quote, href: contactHref("quote") },
     })}
   </div>
 </section>`;
@@ -91,6 +81,7 @@ const faqJsonLd = (items) => ({
   mainEntity: items.map((q) => ({ "@type": "Question", name: q.q, acceptedAnswer: { "@type": "Answer", text: q.a } })),
 });
 
+// No offers: there are no public prices.
 const softwareJsonLd = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
@@ -98,18 +89,40 @@ const softwareJsonLd = {
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web",
   url: config.siteUrl,
-  offers: {
-    "@type": "AggregateOffer",
-    priceCurrency: "HUF",
-    lowPrice: Math.min(...plans.map((p) => p.monthly)),
-    highPrice: Math.max(...plans.map((p) => p.monthly)),
-    offerCount: plans.length,
-  },
 };
 
 const shot = (s, eager = false) => (s.phone ? phoneShot({ ...s, eager }) : screenshot({ ...s, eager }));
 
-const soonTag = `<span class="soon-tag">${icon("clock")}${ui.soon}</span>`;
+const numbered = (items) => `<ol class="benefit-row">
+      ${items.map((b, i) => `<li><span class="benefit-row__num">0${i + 1}</span><h3 class="h3">${b.title}</h3><p>${b.text}</p></li>`).join("")}
+    </ol>`;
+
+// The two ways the Yardly runs, side by side.
+const optionCards = () => `<div class="options">
+      ${hostingOptions
+        .map(
+          (o) => `<article class="option-card">
+        <span class="option-card__icon">${icon(o.icon)}</span>
+        <h3 class="option-card__name">${o.name}</h3>
+        <p class="option-card__tagline">${o.tagline}</p>
+        ${ticks(o.points)}
+      </article>`
+        )
+        .join("")}
+    </div>`;
+
+// The rollout steps along a track, on a dark band.
+const stationList = (items) => `<ol class="stations stations--4">
+      ${items
+        .map(
+          (s, i) => `<li class="station">
+        <span class="station__when">0${i + 1}</span>
+        <h3 class="h3">${s.title}</h3>
+        <p>${s.text}</p>
+      </li>`
+        )
+        .join("")}
+    </ol>`;
 
 const solutionCard = (s) => `<a class="sol-card" href="${solutionRoute(s.slug)}">
   <span class="sol-card__icon">${icon(s.icon)}</span>
@@ -183,7 +196,34 @@ export const home = () => {
   </div>
 </section>
 
-<section class="section" aria-labelledby="modules-title">
+<section class="section" aria-labelledby="tailor-title">
+  <div class="container">
+    ${sectionHead(h.tailor, "tailor-title")}
+    ${numbered(h.tailor.items)}
+    <p class="center"><a class="btn btn--ghost" href="${route("process")}">${h.tailor.link}${arrow()}</a></p>
+  </div>
+</section>
+
+<section class="section section--deep" aria-labelledby="integration-title">
+  <div class="container split">
+    <div class="split__text">
+      <p class="eyebrow">${h.integrations.eyebrow}</p>
+      <h2 class="h2" id="integration-title">${g(h.integrations.title)}</h2>
+      <p class="lead">${h.integrations.lead}</p>
+      ${ticks(h.integrations.points)}
+      <a class="text-link" href="${route("process")}#integracio">${h.integrations.link}${arrow("text-link__arrow")}</a>
+    </div>
+    <div class="split__art">
+      <ul class="hub" aria-label="${h.integrations.hubLabel}">
+        ${h.integrations.hub.slice(0, 4).map((x) => `<li class="hub__node">${icon(x.icon)}<span>${x.label}</span></li>`).join("")}
+        <li class="hub__core"><img src="/assets/brand/yardly-vizszintes-szines.svg" width="131" height="36" alt="Yardly"></li>
+        ${h.integrations.hub.slice(4).map((x) => `<li class="hub__node">${icon(x.icon)}<span>${x.label}</span></li>`).join("")}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section section--band" aria-labelledby="modules-title">
   <div class="container">
     ${sectionHead(h.modules, "modules-title")}
     <div class="duo">
@@ -203,7 +243,7 @@ export const home = () => {
   </div>
 </section>
 
-<section class="section section--band" aria-labelledby="alerts-title">
+<section class="section" aria-labelledby="alerts-title">
   <div class="container split">
     <div class="split__text">
       <p class="eyebrow">${a.eyebrow}</p>
@@ -216,7 +256,7 @@ export const home = () => {
   </div>
 </section>
 
-<section class="section" aria-labelledby="features-title">
+<section class="section section--band" aria-labelledby="features-title">
   <div class="container">
     ${sectionHead(h.features, "features-title")}
     <div class="feature-grid">
@@ -235,21 +275,19 @@ export const home = () => {
   </div>
 </section>
 
+<section class="section" aria-labelledby="hosting-title">
+  <div class="container">
+    ${sectionHead(h.hosting, "hosting-title")}
+    ${optionCards()}
+    <p class="center"><a class="btn btn--ghost" href="${route("hosting")}">${h.hosting.link}${arrow()}</a></p>
+  </div>
+</section>
+
 <section class="section section--deep" aria-labelledby="steps-title">
   <div class="container">
     ${sectionHead(h.steps, "steps-title")}
-    <ol class="stations">
-      ${h.steps.items
-        .map(
-          (s, i) => `<li class="station">
-        <span class="station__when">0${i + 1}</span>
-        <h3 class="h3">${s.title}</h3>
-        <p>${s.text}</p>
-      </li>`
-        )
-        .join("")}
-    </ol>
-    <p class="steps__close">${h.steps.close}</p>
+    ${stationList(h.steps.items)}
+    <p class="steps__close">${h.steps.close} <a class="text-link text-link--light" href="${route("process")}">${h.steps.link}${arrow("text-link__arrow")}</a></p>
   </div>
 </section>
 
@@ -273,28 +311,6 @@ export const home = () => {
     <div class="split__art phones">
       ${phoneShot({ img: "leltar-osszesites", alt: h.mobile.phoneAlt })}
       ${phoneShot({ img: "mobil", alt: "A járműlista telefonon" })}
-    </div>
-  </div>
-</section>
-
-<section class="section" aria-labelledby="price-title">
-  <div class="container">
-    ${sectionHead(h.pricing, "price-title")}
-    <div class="mini-plans">
-      ${plans
-        .map(
-          (p) => `<a class="mini-plan${p.recommended ? " is-recommended" : ""}" href="${route("pricing")}">
-        <span class="mini-plan__name">${p.name}${p.recommended ? ` <span class="badge">${pr.recommended}</span>` : ""}</span>
-        <span class="mini-plan__price">${huf(p.monthly)}</span>
-        <span class="mini-plan__unit">${pr.perMonth}</span>
-        <span class="mini-plan__tag">${p.tagline}</span>
-      </a>`
-        )
-        .join("")}
-    </div>
-    <div class="mini-plans__foot">
-      <p class="muted">${h.pricing.note}</p>
-      <a class="btn btn--ghost" href="${route("pricing")}">${h.pricing.button}${arrow()}</a>
     </div>
   </div>
 </section>
@@ -433,298 +449,110 @@ ${ctaSection({ title: s.cta })}`,
 };
 
 // ---------------------------------------------------------------------------
-// Árak
+// Hogyan dolgozunk
 
-const cell = (v) =>
-  v === true
-    ? `<span class="cmp-yes">${icon("check")}<span class="visually-hidden">Benne van</span></span>`
-    : v === false
-      ? `<span class="cmp-no" role="img" aria-label="Nincs benne">—</span>`
-      : String(v).startsWith("Hamarosan")
-        ? `${soonTag}<span class="cmp-text">${String(v).replace(/^Hamarosan,?\s*/, "")}</span>`
-        : `<span class="cmp-text">${v}</span>`;
+export const process = () => ({
+  title: pc.title,
+  description: pc.description,
+  jsonLd: faqJsonLd(pc.faq.items),
+  body: `
+${pageHero(pc, ctaButtons())}
 
-// The calculator's answer for n active vehicles, e pieces of equipment, u users and the ticked
-// features: the cheapest plan that can take them all. Vehicles above the plan's included number
-// cost the per-vehicle fee, up to the plan's vehicle ceiling; equipment above the plan's limit
-// needs "+250 eszköz" packs (at most EQUIPMENT_ADDON.maxQuantity; Prémium has no equipment
-// limit). Users above the plan's limit, or a feature the plan lacks, rule the plan out — the
-// answer jumps to the next plan — unless the plan can buy that feature as an extra (DKV on Alap).
-// assets/js/main.js does the same in the browser; this renders the starting state so the page
-// reads right without JavaScript.
-const yearly = (monthly, cycle) => (cycle === "annual" ? (monthly * (12 - ANNUAL_FREE_MONTHS)) / 12 : monthly);
-const addonMonthly = (cycle) => yearly(EQUIPMENT_ADDON.monthly, cycle);
-const maxEquipment = (p) => (p.equipment === null ? Infinity : p.equipment + EQUIPMENT_ADDON.size * EQUIPMENT_ADDON.maxQuantity);
-const rank = (key) => plans.findIndex((p) => p.key === key);
-
-const planQuote = (p, n, e, cycle, u = 1, features = []) => {
-  if (n > p.ceiling) return { plan: p, off: pr.calc.max(p.ceiling) };
-  if (e > maxEquipment(p)) return { plan: p, off: pr.calc.maxEquipment(num(maxEquipment(p))) };
-  if (p.users !== null && u > p.users) return { plan: p, off: pr.calc.maxUsers(p.users) };
-  const extras = [];
-  for (const f of features) {
-    if (rank(p.key) >= rank(f.plan)) continue;
-    if (f.addOn?.plan !== p.key) return { plan: p, off: pr.calc.missing(f.label) };
-    extras.push({ name: f.addOn.name, monthly: yearly(f.addOn.monthly, cycle) });
-  }
-  const base = cycle === "annual" ? p.annualMonthly : p.monthly;
-  const over = Math.max(0, n - p.included);
-  const packs = p.equipment === null ? 0 : Math.ceil(Math.max(0, e - p.equipment) / EQUIPMENT_ADDON.size);
-  const addon = packs * addonMonthly(cycle);
-  const total = base + over * p.extra + addon + extras.reduce((sum, x) => sum + x.monthly, 0);
-  return { plan: p, base, over, packs, addon, extras, total };
-};
-
-const calcQuote = (n, e, u, cycle = "monthly") =>
-  plans
-    .map((p) => planQuote(p, n, e, cycle, u))
-    .filter((q) => !q.off)
-    .reduce((a, b) => (b.total < a.total ? b : a));
-
-const calcLines = (q, cycle = "monthly") => {
-  const c = pr.calc;
-  const lines = [[c.lineBase(q.plan.name, q.plan.included, q.plan.equipment === null ? c.unlimited : num(q.plan.equipment)), huf(q.base)]];
-  if (q.over) lines.push([c.lineExtra(q.over, huf(q.plan.extra)), huf(q.over * q.plan.extra)]);
-  if (q.packs) lines.push([c.lineEquipment(q.packs, huf(addonMonthly(cycle))), huf(q.addon)]);
-  for (const x of q.extras) lines.push([c.lineAddOn(x.name), huf(x.monthly)]);
-  lines.push([c.lineGross, huf(q.total * (1 + VAT_PERCENT / 100))]);
-  return lines.map(([k, v]) => `<li><span>${k}</span><b>${v}</b></li>`).join("");
-};
-
-const calcPlans = (n, e, u, best) =>
-  plans
-    .map((p) => planQuote(p, n, e, "monthly", u))
-    .map((q) =>
-      q.off
-        ? `<li class="is-off"><b>${q.plan.name}</b><span>${q.off}</span></li>`
-        : `<li${q.plan === best.plan ? ' class="is-on"' : ""}><b>${q.plan.name}</b><span>${huf(q.total)} ${pr.perMonth}</span></li>`
-    )
-    .join("");
-
-export const pricing = () => {
-  const calcData = plans.map((p) => ({
-    key: p.key, name: p.name, monthly: p.monthly, annualMonthly: p.annualMonthly, included: p.included, extra: p.extra, ceiling: p.ceiling,
-    equipment: p.equipment, users: p.users,
-  }));
-  const START = 30;
-  const START_EQUIPMENT = 50;
-  const START_USERS = 5;
-  const q = calcQuote(START, START_EQUIPMENT, START_USERS);
-  // Text templates for the browser: the copy functions called with {placeholders}.
-  const t = {
-    tier: pr.calc.resultTier("{plan}", "{n}", "{e}", "{u}"),
-    base: pr.calc.lineBase("{plan}", "{included}", "{equipment}"),
-    extra: pr.calc.lineExtra("{n}", "{price}"),
-    equipment: pr.calc.lineEquipment("{packs}", "{price}"),
-    gross: pr.calc.lineGross,
-    unlimited: pr.calc.unlimited,
-    max: pr.calc.max("{n}"),
-    maxEquipment: pr.calc.maxEquipment("{n}"),
-    maxUsers: pr.calc.maxUsers("{n}"),
-    missing: pr.calc.missing("{feature}"),
-    addOn: pr.calc.lineAddOn("{name}"),
-    unit: pr.perMonth,
-  };
-  const addon = { ...EQUIPMENT_ADDON, freeMonths: ANNUAL_FREE_MONTHS };
-  return {
-    title: pr.title,
-    description: pr.description,
-    jsonLd: [softwareJsonLd, faqJsonLd(pr.faq.items)],
-    body: `
-${pageHero(pr)}
-
-<section class="section section--flush" aria-label="Csomagok">
+<section class="section section--deep" aria-labelledby="steps-title">
   <div class="container">
-    <div class="cycle" role="group" aria-label="Fizetési gyakoriság">
-      <button type="button" class="cycle__btn is-on" data-cycle="monthly" aria-pressed="true">${pr.toggle.monthly}</button>
-      <button type="button" class="cycle__btn" data-cycle="annual" aria-pressed="false">${pr.toggle.annual} <span class="cycle__free">${pr.toggle.free}</span></button>
-    </div>
-    <div class="plans" data-cycle-root>
-      ${plans
+    <div class="section-head section-head--single"><div><p class="eyebrow">${pc.steps.eyebrow}</p><h2 class="h2" id="steps-title">${g(pc.steps.title)}</h2></div></div>
+    ${stationList(pc.steps.items)}
+  </div>
+</section>
+
+<section class="section" id="testreszabas" aria-labelledby="tailor-title">
+  <div class="container">
+    ${sectionHead(pc.tailor, "tailor-title")}
+    <div class="levels">
+      ${pc.tailor.levels
         .map(
-          (p) => `<article class="plan-card${p.recommended ? " is-recommended" : ""}">
-        ${p.recommended ? `<span class="plan-card__tag">${pr.recommended}</span>` : ""}
-        <h2 class="plan-card__name">${p.name}</h2>
-        <p class="plan-card__tagline">${p.tagline}</p>
-        <p class="plan-card__price"><span data-monthly="${huf(p.monthly)}" data-annual="${huf(p.annualMonthly)}">${huf(p.monthly)}</span> <small>${pr.perMonth}</small></p>
-        <p class="plan-card__sub" data-monthly="${esc(pr.monthlyNote(huf(p.annualMonthly)))}" data-annual="${esc(pr.annualNote(huf(p.annualMonthly * 12)))}">${pr.monthlyNote(huf(p.annualMonthly))}</p>
-        <a class="btn ${p.recommended ? "btn--primary" : "btn--ghost"} plan-card__btn" href="${APP.register}">${ui.trial}</a>
-        <ul class="ticks">${p.highlights.map((x) => `<li>${x}</li>`).join("")}</ul>
-        ${p.soon ? `<ul class="plan-card__soon">${p.soon.map((x) => `<li>${soonTag}<span>${x}</span></li>`).join("")}</ul>` : ""}
+          (l) => `<article class="level">
+        <span class="option-card__icon">${icon(l.icon)}</span>
+        <h3 class="h3-lg">${l.title}</h3>
+        <p>${l.text}</p>
+        ${ticks(l.points)}
       </article>`
         )
         .join("")}
     </div>
-    <p class="plans__note">${ui.trialNote} Minden ár nettó, + ${VAT_PERCENT}% ÁFA. ${SELF_SERVICE_MAX_VEHICLES} aktív jármű felett <a href="#ajanlat">egyedi ajánlatot</a> adunk.</p>
   </div>
 </section>
 
-<section class="section section--band" id="kalkulator" aria-labelledby="calc-title">
+<section class="section section--band" id="integracio" aria-labelledby="integration-title">
   <div class="container">
-    ${sectionHead({ eyebrow: pr.calc.eyebrow, title: pr.calc.title }, "calc-title")}
-    <div class="calc" data-calc data-plans="${esc(JSON.stringify(calcData))}" data-addon="${esc(JSON.stringify(addon))}" data-text="${esc(JSON.stringify(t))}"
-      data-features="${esc(JSON.stringify(CALC_FEATURES))}"
-      data-vat="${VAT_PERCENT}" data-max="${SELF_SERVICE_MAX_VEHICLES}"
-      data-note-monthly="${esc(pr.calc.noteMonthly)}" data-note-annual="${esc(pr.calc.noteAnnual)}">
-      <div class="calc__input">
-        <div class="calc__field">
-          <label class="calc__label" for="calc-n">${pr.calc.label}</label>
-          <div class="calc__row">
-            <input type="range" id="calc-range" min="1" max="${SELF_SERVICE_MAX_VEHICLES}" value="${START}" aria-label="${esc(pr.calc.label)}">
-            <input class="input calc__number" type="number" id="calc-n" min="1" max="${SELF_SERVICE_MAX_VEHICLES}" value="${START}" inputmode="numeric">
-          </div>
-        </div>
-        <div class="calc__field">
-          <label class="calc__label" for="calc-e">${pr.calc.equipmentLabel}</label>
-          <p class="calc__hint" id="calc-e-hint">${pr.calc.equipmentHint}</p>
-          <div class="calc__row">
-            <input type="range" id="calc-e-range" min="0" max="${CALC_EQUIPMENT_RANGE}" step="10" value="${START_EQUIPMENT}" aria-label="${esc(pr.calc.equipmentLabel)}" aria-describedby="calc-e-hint">
-            <input class="input calc__number" type="number" id="calc-e" min="0" max="100000" value="${START_EQUIPMENT}" inputmode="numeric" aria-describedby="calc-e-hint">
-          </div>
-        </div>
-        <div class="calc__field">
-          <label class="calc__label" for="calc-u">${pr.calc.usersLabel}</label>
-          <p class="calc__hint" id="calc-u-hint">${pr.calc.usersHint}</p>
-          <div class="calc__row">
-            <input type="range" id="calc-u-range" min="1" max="${CALC_USERS_RANGE}" value="${START_USERS}" aria-label="${esc(pr.calc.usersLabel)}" aria-describedby="calc-u-hint">
-            <input class="input calc__number" type="number" id="calc-u" min="1" max="100000" value="${START_USERS}" inputmode="numeric" aria-describedby="calc-u-hint">
-          </div>
-        </div>
-        <fieldset class="calc__field calc__features" aria-describedby="calc-f-hint">
-          <legend class="calc__label">${pr.calc.featuresLabel}</legend>
-          <p class="calc__hint" id="calc-f-hint">${pr.calc.featuresHint}</p>
-          <div class="calc__checks">
-            ${CALC_FEATURES.map((f) => `<label class="calc__check"><input type="checkbox" value="${f.key}" data-calc-feature><span>${f.label}</span></label>`).join("")}
-          </div>
-        </fieldset>
-        <ul class="calc__plans" data-calc-plans>${calcPlans(START, START_EQUIPMENT, START_USERS, q)}</ul>
-        <p class="calc__note muted" data-calc-note>${pr.calc.noteMonthly}</p>
-        <p class="calc__note muted">${pr.calc.equipmentNote}</p>
-      </div>
-      <div class="calc__result" aria-live="polite">
-        <p class="calc__tier" data-calc-tier>${pr.calc.resultTier(q.plan.name, START, START_EQUIPMENT, START_USERS)}</p>
-        <p class="calc__amount"><span data-calc-amount>${huf(q.total)}</span> <small>${pr.perMonth}</small></p>
-        <ul class="calc__lines" data-calc-lines>${calcLines(q)}</ul>
-        <a class="btn btn--teal" href="${APP.register}">${ui.trial}${arrow()}</a>
-      </div>
-    </div>
+    ${sectionHead(pc.integrations, "integration-title")}
+    ${featureList(pc.integrations.items)}
   </div>
 </section>
 
-<section class="section" aria-labelledby="limits-title">
-  <div class="container">
-    ${sectionHead({ eyebrow: "Összehasonlítás", title: pr.limitsTitle }, "limits-title")}
-    <div class="table-wrap">
-      <table class="cmp">
-        <thead><tr><th scope="col"><span class="visually-hidden">Keret</span></th>${plans.map((p) => `<th scope="col"${p.recommended ? ' class="is-recommended"' : ""}>${p.name}</th>`).join("")}</tr></thead>
-        <tbody>${limits.map((r) => `<tr><th scope="row">${r.label}</th>${r.cells.map((c) => `<td>${cell(c)}</td>`).join("")}</tr>`).join("")}</tbody>
-      </table>
-    </div>
-    <h2 class="h3-lg cmp-title" id="cmp-title">${pr.comparisonTitle}</h2>
-    <div class="table-wrap">
-      <table class="cmp" aria-labelledby="cmp-title">
-        <thead><tr><th scope="col"><span class="visually-hidden">Funkció</span></th>${plans.map((p) => `<th scope="col"${p.recommended ? ' class="is-recommended"' : ""}>${p.name}</th>`).join("")}</tr></thead>
-        <tbody>${comparison
-          .map(
-            (r) => `<tr><th scope="row">${r.label}${r.soon ? `<a class="cmp-notify" href="${notifyHref(r.label)}">${ui.notify}</a>` : ""}</th>${r.cells.map((c) => `<td>${cell(c)}</td>`).join("")}</tr>`
-          )
-          .join("")}</tbody>
-      </table>
-    </div>
-    <p class="muted cmp-note">${pr.comparisonNote}</p>
-  </div>
-</section>
-
-${faqBlock(pr.faq, "gyik")}
-
-<section class="section section--deep" id="ajanlat" aria-labelledby="quote-title">
-  <div class="container quote">
+<section class="section" aria-labelledby="deliver-title">
+  <div class="container basics">
     <div>
-      <p class="eyebrow">${pr.quote.eyebrow}</p>
-      <h2 class="h2" id="quote-title">${g(pr.quote.title)}</h2>
+      <p class="eyebrow">${pc.deliver.eyebrow}</p>
+      <h2 class="h2" id="deliver-title">${pc.deliver.title}</h2>
     </div>
-    <div>
-      <p class="lead">${pr.quote.text}</p>
-      <div class="cta-row">
-        <a class="btn btn--teal" href="${contactHref("quote")}">${pr.quote.button}${arrow()}</a>
-      </div>
-    </div>
+    ${ticks(pc.deliver.points)}
   </div>
 </section>
 
-${ctaSection({ title: "Próbálja ki 14 napig ingyen." })}`,
-  };
-};
+${faqBlock(pc.faq, "gyik")}
+
+${ctaSection(pc.cta)}`,
+});
 
 // ---------------------------------------------------------------------------
-// Vállalati megoldás
+// Üzemeltetés
 
-export const enterprise = () => ({
-  title: en.title,
-  description: en.description,
-  jsonLd: faqJsonLd(en.faq.items),
+export const hosting = () => ({
+  title: ho.title,
+  description: ho.description,
+  jsonLd: faqJsonLd(ho.faq.items),
   body: `
-${pageHero(
-  en,
-  `<div class="cta-row">
-      <a class="btn btn--primary" href="${contactHref("quote")}">${en.quoteButton}${arrow()}</a>
-      <a class="btn btn--ghost" href="${contactHref("demo")}">${ui.demo}</a>
-    </div>`
-)}
+${pageHero(ho, ctaButtons())}
 
-<section class="section section--band" aria-label="Röviden">
+<section class="section section--flush" aria-label="A két üzemeltetési mód">
   <div class="container">
-    <ol class="benefit-row">
-      ${en.pillars.map((b, i) => `<li><span class="benefit-row__num">0${i + 1}</span><h2 class="h3">${b.title}</h2><p>${b.text}</p></li>`).join("")}
-    </ol>
+    ${optionCards()}
   </div>
 </section>
 
-<section class="section" id="integracio" aria-labelledby="integration-title">
+<section class="section section--band" aria-labelledby="same-title">
   <div class="container">
-    ${sectionHead(en.integrations, "integration-title")}
-    ${featureList(en.integrations.items)}
+    <div class="section-head section-head--single"><div><p class="eyebrow">${ho.same.eyebrow}</p><h2 class="h2" id="same-title">${ho.same.title}</h2></div></div>
+    ${featureList(ho.same.items)}
   </div>
 </section>
 
-<section class="section section--deep" id="sajat-szerver" aria-labelledby="hosting-title">
+<section class="section section--deep" id="sajat-szerver" aria-labelledby="specs-title">
   <div class="container split">
     <div class="split__text">
-      <p class="eyebrow">${en.hosting.eyebrow}</p>
-      <h2 class="h2" id="hosting-title">${g(en.hosting.title)}</h2>
-      <p class="lead">${en.hosting.lead}</p>
-      ${ticks(en.hosting.points)}
+      <p class="eyebrow">${ho.specs.eyebrow}</p>
+      <h2 class="h2" id="specs-title">${g(ho.specs.title)}</h2>
+      <p class="lead">${ho.specs.lead}</p>
     </div>
     <div class="split__art">
       <div class="spec-card">
-        <p class="spec-card__title">${en.hosting.specsTitle}</p>
-        <dl>${en.hosting.specs.map((x) => `<div><dt>${x.k}</dt><dd>${x.v}</dd></div>`).join("")}</dl>
+        <dl>${ho.specs.items.map((x) => `<div><dt>${x.k}</dt><dd>${x.v}</dd></div>`).join("")}</dl>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section" aria-labelledby="steps-title">
+<section class="section" aria-labelledby="fit-title">
   <div class="container">
-    <div class="section-head section-head--single"><div><p class="eyebrow">${en.steps.eyebrow}</p><h2 class="h2" id="steps-title">${en.steps.title}</h2></div></div>
-    <ol class="howto">${en.steps.items.map((st, i) => `<li><span class="howto__num">${i + 1}</span><p>${st}</p></li>`).join("")}</ol>
+    <div class="section-head section-head--single"><div><p class="eyebrow">${ho.fit.eyebrow}</p><h2 class="h2" id="fit-title">${ho.fit.title}</h2></div></div>
+    <ul class="personas">${ho.fit.items.map((p) => `<li class="persona"><h3 class="h3">${p.title}</h3><p>${p.text}</p></li>`).join("")}</ul>
   </div>
 </section>
 
-<section class="section section--band" aria-labelledby="fit-title">
-  <div class="container">
-    <div class="section-head section-head--single"><div><p class="eyebrow">${en.fit.eyebrow}</p><h2 class="h2" id="fit-title">${en.fit.title}</h2></div></div>
-    <ul class="personas">${en.fit.items.map((p) => `<li class="persona"><h3 class="h3">${p.title}</h3><p>${p.text}</p></li>`).join("")}</ul>
-  </div>
-</section>
+${faqBlock(ho.faq, "gyik")}
 
-${faqBlock(en.faq, "gyik")}
-
-<section class="section section--cta" aria-labelledby="cta-title">
-  <div class="container">
-    ${ctaCard({ eyebrow: en.cta.eyebrow, title: g(en.cta.title), lead: en.cta.lead, button: en.quoteButton, href: contactHref("quote"), secondary: { label: ui.demo, href: contactHref("demo") } })}
-  </div>
-</section>`,
+${ctaSection(ho.cta)}`,
 });
 
 // ---------------------------------------------------------------------------
@@ -757,7 +585,6 @@ export const contact = () => {
         ${co.direct.map((d) => `<div><dt>${d.k}</dt><dd>${d.email ? `<a href="mailto:${config.email}">${config.email}</a>` : d.v}</dd></div>`).join("")}
       </dl>
       <p class="muted contact__customer">${co.customer}</p>
-      <a class="text-link" href="${APP.login}">${co.loginLink}${arrow("text-link__arrow")}</a>
       <h2 class="contact__steps-title">${co.stepsTitle}</h2>
       <ol class="next-steps">
         ${co.steps.map((s) => `<li><span>${s}</span></li>`).join("")}
@@ -770,8 +597,7 @@ export const contact = () => {
         data-sending="${esc(f.sending)}"
         data-mailto-title="${esc(f.mailtoTitle)}"
         data-mailto-text="${esc(f.mailtoText)}"
-        data-error-text="${esc(f.errorText)}"
-        data-notify-prefix="${esc(f.notifyPrefix)}">
+        data-error-text="${esc(f.errorText)}">
         <div class="form-card__head">
           <h2 class="h3-lg">${f.title}</h2>
           <p>${f.intro}</p>
@@ -789,6 +615,12 @@ export const contact = () => {
           ${field("phone", f.phone, text("phone", "tel", "tel", false), { hint: f.phoneHint })}
           ${field("vehicles", f.vehicles, text("vehicles", "number", "off", false, ' min="0" inputmode="numeric"'), { hint: f.vehiclesHint })}
           ${field("equipment", f.equipment, text("equipment", "number", "off", false, ' min="0" inputmode="numeric"'), { hint: f.equipmentHint })}
+          ${field(
+            "hosting",
+            f.hosting,
+            `<select class="input" id="f-hosting" name="hosting">${f.hostingOptions.map((o) => `<option value="${o.value}">${o.label}</option>`).join("")}</select>`,
+            { hint: f.hostingHint, full: true }
+          )}
           <div class="field field--full">
             <label for="f-message">${f.message}</label>
             <textarea class="input" id="f-message" name="message" rows="4" placeholder="${esc(f.placeholder)}"></textarea>
@@ -813,7 +645,7 @@ export const contact = () => {
         <span class="form-success__mark" aria-hidden="true"></span>
         <h2 class="h3-lg" data-success-title>${f.successTitle}</h2>
         <p data-success-text>${f.successText}</p>
-        <a class="btn btn--primary" href="${APP.register}">${ui.trialShort}${arrow()}</a>
+        <a class="btn btn--ghost" href="${route("solutions")}">Megoldásaink${arrow()}</a>
       </div>
     </div>
   </div>
@@ -857,7 +689,7 @@ ${pageHero(bl)}
   </div>
 </section>
 
-${ctaSection({ title: "Próbálja ki a saját flottájával." })}`,
+${ctaSection({ title: "Nézze meg egy bemutatón." })}`,
 });
 
 export const post = (p) => {
@@ -908,7 +740,7 @@ export const post = (p) => {
       <h2 class="h3-lg">${bl.postCta.title}</h2>
       <p>${bl.postCta.text}</p>
       <div class="cta-row">
-        <a class="btn btn--primary" href="${APP.register}">${ui.trialShort}${arrow()}</a>
+        <a class="btn btn--primary" href="${contactHref("demo")}">${ui.demo}${arrow()}</a>
         <a class="text-link" href="${solutionRoute(sol.slug)}">${sol.menuTitle}${arrow("text-link__arrow")}</a>
       </div>
     </aside>
