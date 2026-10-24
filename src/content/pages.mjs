@@ -153,7 +153,7 @@ export const hostingOptions = [
     tagline: "Ha az adatoknak a cégen belül kell maradniuk.",
     points: [
       "Az Önök szerverén, adatközpontjában vagy privát felhőjében",
-      "A szervert a saját IT-csapatuk üzemelteti",
+      "A szerver az Önöké, az Önök IT-csapata kezeli",
       "Az Önök mentési, naplózási és biztonsági szabályai szerint",
       "Saját domainen és saját levelezőszerverrel",
       "Az új verziókat átadjuk, az IT-csapatuk telepíti őket",
@@ -330,14 +330,14 @@ export const hosting = {
     title: "Melyik illik Önökhöz?",
     items: [
       { title: "Saját szerver, ha…", text: "az adatoknak a cégen belül kell maradniuk, saját IT-csapatuk és biztonsági szabályaik vannak, vagy a rendszert belső, kívülről nem elérhető rendszerekhez kell kötni." },
-      { title: "Felhő, ha…", text: "nem szeretnének szervert üzemeltetni, gyorsan indulnának, és szívesen ránk bízzák a mentést, a frissítést és a felügyeletet." },
+      { title: "Felhő, ha…", text: "nem szeretnének saját szervert fenntartani, gyorsan indulnának, és szívesen ránk bízzák a mentést, a frissítést és a felügyeletet." },
     ],
   },
   faq: {
     eyebrow: "Gyakori kérdések",
     title: "Kérdések az üzemeltetésről",
     items: [
-      { q: "Ki üzemelteti a szervert?", a: "Saját szervernél a saját IT-csapatuk; mi a telepítésben segítünk, és a Yardlyhoz adunk támogatást. A felhős változatnál mi üzemeltetjük." },
+      { q: "Ki kezeli a szervert?", a: "Saját szervernél a szerver az Önöké, és az Önök IT-csapata kezeli; mi a telepítésben segítünk, és a Yardlyhoz adunk támogatást. A felhős változatnál mi üzemeltetjük." },
       { q: "Hozzáférnek az adatainkhoz?", a: "Saját szervernél napi üzemben nem férünk hozzá az adataikhoz. A bevezetéskori adatátvételt, az összekötések beállítását és a kérésükre végzett hibaelhárítást adatfeldolgozási szerződés alapján, az Önök által adott, időkorlátos és naplózott hozzáféréssel végezzük. A felhős változatnál az adatokat mi tároljuk, adatfeldolgozóként, szintén szerződés alapján." },
       { q: "Hol vannak az adatok a felhős változatnál?", a: "Az Amazon Web Services frankfurti (EU-s) adatközpontjában, a cég saját, elkülönített példányában. A mentések titkosítva készülnek." },
       { q: "Megkapjuk a fejlesztéseket?", a: "Igen. A felhős változatnál mi telepítjük őket. Saját szervernél átadjuk az új verziót, és az IT-csapatuk telepíti, amikor nekik megfelel." },
