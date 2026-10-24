@@ -153,10 +153,10 @@ export const hostingOptions = [
     tagline: "Ha az adatoknak a cégen belül kell maradniuk.",
     points: [
       "Az Önök szerverén, adatközpontjában vagy privát felhőjében",
-      "A szervert üzemeltetheti a saját IT-csapatuk, vagy mi távolról",
+      "A szervert a saját IT-csapatuk üzemelteti",
       "Az Önök mentési, naplózási és biztonsági szabályai szerint",
       "Saját domainen és saját levelezőszerverrel",
-      "Frissítés egyeztetett időpontban, visszaállítható módon",
+      "Az új verziókat átadjuk, az IT-csapatuk telepíti őket",
     ],
   },
   {
@@ -331,9 +331,9 @@ export const hosting = {
     eyebrow: "Gyakori kérdések",
     title: "Kérdések az üzemeltetésről",
     items: [
-      { q: "Ki üzemelteti a szervert?", a: "Saját szervernél ahogy Önöknek jobb: a saját IT-csapatuk, vagy mi, távoli eléréssel. A felhős változatnál mi." },
+      { q: "Ki üzemelteti a szervert?", a: "Saját szervernél a saját IT-csapatuk; mi a telepítésben segítünk, és a Yardlyhoz adunk támogatást. A felhős változatnál mi üzemeltetjük." },
       { q: "Hol vannak az adatok a felhős változatnál?", a: "Az Amazon Web Services frankfurti (EU-s) adatközpontjában, a cég saját, elkülönített példányában. A mentések titkosítva készülnek." },
-      { q: "Megkapjuk a fejlesztéseket?", a: "Igen. A felhős változatnál mi telepítjük őket, saját szervernél egyeztetett időpontban, visszaállítható módon." },
+      { q: "Megkapjuk a fejlesztéseket?", a: "Igen. A felhős változatnál mi telepítjük őket. Saját szervernél átadjuk az új verziót, és az IT-csapatuk telepíti, amikor nekik megfelel." },
       { q: "Válthatunk később?", a: "Igen. Az adatokat át tudjuk költöztetni a felhőből a saját szerverükre, vagy fordítva." },
       { q: "Mennyibe kerül?", a: "A felmérés után egyedi ajánlatot adunk. Az ár az üzemeltetés módjától, a járművek és eszközök számától, a testreszabástól és az integrációktól függ." },
     ],

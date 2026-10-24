@@ -135,7 +135,7 @@ export const home = {
 
   hosting: {
     eyebrow: "Üzemeltetés",
-    title: "Az Önök szerverén, vagy mi üzemeltetjük",
+    title: "Az Önök szerverén, vagy általunk üzemeltetve a felhőben",
     lead: "Mindkét esetben saját, elkülönített példányt kapnak, csak az Önök cégének adataival.",
     link: "Az üzemeltetés részletei",
   },
