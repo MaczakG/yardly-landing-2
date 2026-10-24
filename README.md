@@ -1,6 +1,6 @@
 # yardly.hu
 
-Marketing site for Yardly, the fleet and equipment management system for Hungarian companies (app at `app.yardly.hu`).
+Marketing site for Yardly, the fleet and equipment operations system that is tailored to each company's own processes and runs on the company's own server or in the cloud, run by us. The site shows no prices: every call to action asks for a demo or a quote. `app.yardly.hu` is the demo instance used in presentations; the site does not link to it.
 
 The site is static and Hungarian only. The former English and German pages, and the pages the old site had but this one does not, forward to their nearest Hungarian page (see Redirects below).
 
@@ -11,8 +11,8 @@ The site is static and Hungarian only. The former English and German pages, and 
 | Home | `/` |
 | Solutions overview (Megoldásaink) | `/megoldasaink/` |
 | 14 solution pages, one per area of the app | `/megoldasaink/<slug>/` |
-| Pricing, with the calculator for vehicles, equipment, users and features | `/arak/` |
-| Vállalati megoldás: self-hosted install and integration with existing systems (highlighted in the menu as „Vállalatoknak”) | `/vallalati-megoldas/` |
+| Hogyan dolgozunk: the rollout (survey, customization, install, support), the three levels of customization and the integrations | `/hogyan-dolgozunk/` |
+| Üzemeltetés: the two ways the Yardly runs (own server, or cloud run by us) and the technical details | `/uzemeltetes/` |
 | Contact | `/kapcsolat/` |
 | Blog (filterable by category; posts appear on their dates) | `/blog/`, `/blog/<slug>/` |
 | Privacy notice | `/adatkezeles/` |
@@ -24,7 +24,7 @@ The build also writes `sitemap.xml`, `robots.txt` and `404.html`.
 
 ### Redirects
 
-`REDIRECTS` in `src/routes.mjs` maps old addresses (`/en/…`, `/de/…`, `/megoldasok/`, `/esettanulmanyok/`, renamed blog posts) to new ones. On yardly.hu Caddy answers them with real 301s: the build writes them to `dist/redirects.caddy`, and the same lines are in the `yardly.hu` block of the server's Caddyfile (update both when the list changes). Each old address also gets a small page with a meta refresh and a canonical link, for hosts without the 301s. The site's Content-Security-Policy allows scripts from files only, so the forward cannot be an inline script.
+`REDIRECTS` in `src/routes.mjs` maps old addresses (`/en/…`, `/de/…`, `/megoldasok/`, `/esettanulmanyok/`, the former `/arak/` and `/vallalati-megoldas/`, renamed blog posts) to new ones. On yardly.hu Caddy answers them with real 301s: the build writes them to `dist/redirects.caddy`, and the same lines are in the `yardly.hu` block of the server's Caddyfile (update both when the list changes). Each old address also gets a small page with a meta refresh and a canonical link, for hosts without the 301s. The site's Content-Security-Policy allows scripts from files only, so the forward cannot be an inline script.
 
 ## Build and preview
 
@@ -41,11 +41,10 @@ npm run serve    # serves dist/ on http://localhost:4173
 src/
   config.mjs          site URL, e-mail, GA4 ID, form endpoint, social links
   content/
-    site.mjs          menu, mega menu, footer, shared labels, app links
+    site.mjs          menu, mega menu, footer, shared labels
     home.mjs          home page copy
     solutions.mjs     solutions overview and the 14 solution pages
-    pricing.mjs       plans, limits, comparison table, pricing FAQ
-    pages.mjs         contact, privacy notice, imprint, Vállalati megoldás
+    pages.mjs         contact, Hogyan dolgozunk, Üzemeltetés (and the two hosting options), privacy notice, imprint
     posts.mjs         blog categories and posts
   routes.mjs          URLs and redirects
   pages.mjs           page templates
@@ -54,8 +53,7 @@ src/
   build.mjs           static site generator
 assets/
   css/styles.css      all styles; design tokens at the top
-  js/main.js          mega menu, mobile menu, pricing toggle and calculator, blog filters,
-                      cookie consent, contact form
+  js/main.js          mega menu, mobile menu, blog filters, cookie consent, contact form
   img/app/            product screenshots (demo company, see below)
   brand/              official logo and the social sharing image
   fonts/              self-hosted Manrope and Geist Mono (SIL OFL)
@@ -70,13 +68,9 @@ To change copy, edit the matching file in `src/content/` and rebuild. To add a b
 - A post is published from its `date` on: the build leaves out posts dated after the build day (Budapest time) and turns links to them into plain text. `YARDLY_BUILD_DATE=2027-01-31 npm run build` previews a later day. On the server a timer rebuilds the site every morning (see below), so a post comes out on its day without a deploy.
 - Google Search Console: put the HTML-tag verification code in `googleSiteVerification` in `src/config.mjs` (or `YARDLY_GSC` at build time); every page then carries `<meta name="google-site-verification">`. The sitemap is `https://yardly.hu/sitemap.xml`, with `lastmod` for the blog and the posts.
 
-### Prices
-
-The prices in `src/content/pricing.mjs` are a copy of the app's price list (`pricing.json` in the yardly-saas repository). The site does not read them from the app, so update both together. The calculator takes the number of vehicles, equipment and users and the features ticked (`CALC_FEATURES`, each with the smallest plan that has it) and picks the cheapest plan that can hold them all: the per-vehicle fee above the included vehicles (up to the plan's ceiling), and "+250 eszköz" packs above the plan's equipment limit (at most 20; Prémium has no limit; on annual billing a pack costs 10 months for 12). Too many users or a ticked feature the plan lacks rules the plan out, so the answer jumps to the next plan; a feature a smaller plan can buy as an extra (DKV on Alap) is added there as a line instead. It shows the net monthly amount and the gross amount with 27% VAT. The same logic runs in `src/pages.mjs` (the starting state) and `assets/js/main.js` (when the visitor changes a number).
-
 ### Contact form links
 
-Links can preselect the form's topic: `/kapcsolat/?tema=demo#enquiry`. With `tema=notify&funkcio=<name>` the message also starts with "Szólj, ha elérhető: <name>". The "Szólj, ha elérhető" buttons next to features marked Hamarosan use this.
+Links can preselect the form's topic: `/kapcsolat/?tema=demo#enquiry` (also `quote`, `onprem`, `integration`, `support`, `other`). The "Bemutatót kérek" and "Ajánlatot kérek" buttons use `demo` and `quote`.
 
 ## Brand
 

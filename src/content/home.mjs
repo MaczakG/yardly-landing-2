@@ -1,24 +1,25 @@
-// Főoldal. One promise: automated operations for equipment and vehicles — deadlines kept,
-// workflows of one's own, automation under a permission matrix. Sections follow the visitor's questions:
-// what is it, is it for me, what does it do, what does it cost, how do I start.
+// Főoldal. One promise: an operations system for vehicles and equipment, tailored to the
+// company's own processes, on the company's own server or run by us in the cloud. Sections
+// follow the visitor's questions: what is it, is it for me, what does it do, how is it made to
+// fit, where does it run, how do we start.
 
 export const home = {
-  title: "Flottakezelő és eszköznyilvántartó szoftver cégeknek – Yardly",
-  description: "Flottakezelő és eszköznyilvántartó szoftver: járművek, eszközök, dokumentumok és határidők egy helyen. A Yardly szól, mielőtt valami lejár. 14 nap ingyen.",
+  title: "Flotta- és eszközüzemeltetési rendszer a cég folyamataira szabva – Yardly",
+  description: "Járművek, eszközök, határidők és jóváhagyások egy rendszerben, a cége szabályaira szabva. Az Önök szerverére telepítve, vagy általunk üzemeltetve a felhőben.",
 
   hero: {
-    eyebrow: "Flotta- és eszközkezelés magyar cégeknek",
-    title: "Flottakezelő szoftver és eszköznyilvántartás, egy rendszerben.",
-    lead: "A Yardly számon tartja a lejáratokat, Ön pedig teljesen egyedi workflow-kat hozhat létre benne, és jogosultsági mátrixszal automatizálhatja a folyamatokat.",
+    eyebrow: "Flotta- és eszközüzemeltetés a cége folyamataira szabva",
+    title: "Üzemeltetési rendszer, amely úgy működik, ahogy az Önök cége.",
+    lead: "Járművek, eszközök, határidők és jóváhagyások egy rendszerben. Felmérjük, hogyan dolgoznak, és ehhez szabjuk a Yardlyt. Az Önök szerverén fut, vagy mi üzemeltetjük a felhőben.",
     shotAlt: "A Yardly irányítópultja: elöl a közelgő és lejárt határidők, alatta a fő mutatók",
     phoneAlt: "A telefonos állapotfelmérő űrlap",
   },
 
   trust: [
-    { icon: "upload", text: "Excel-import: a meglévő nyilvántartás percek alatt átkerül" },
-    { icon: "eye", text: "Böngészőben és telefonon, telepítés nélkül" },
-    { icon: "lock", text: "Kétlépcsős belépés, titkosított kapcsolat" },
-    { icon: "flag", text: "Magyar felület, magyar támogatás" },
+    { icon: "server", text: "Az Önök szerverén, vagy általunk üzemeltetve a felhőben" },
+    { icon: "lock", text: "Saját, elkülönített példány: más cég adata nincs benne" },
+    { icon: "workflow", text: "Az Önök folyamatai, mezői és szerepkörei szerint" },
+    { icon: "flag", text: "Magyar fejlesztés, magyar támogatás" },
   ],
 
   problems: {
@@ -29,14 +30,26 @@ export const home = {
       { quote: "„Sosincs pontos összképünk az eszközeink költségéről.”", text: "Ekkora mennyiségnél a költségeik mindig magasak, de sosem tudjuk, melyik eszköz viszi a legtöbbet, vagy mennyibe kerül a flotta." },
       { quote: "„Minden leltárkor a jelenlegi programunk összevissza dobja be a tételeket.”", text: "A jelenleg használt leltárprogramunk mindig olyan eszközöket dob fel következőnek, amelyek a telephely túloldalán vannak, és legalább tízszer megyek körbe." },
     ],
-    close: "A Yardly ezt a három gondot is megoldja egyszerre.",
+    close: "A Yardly mindhármat megoldja, az Önök működésére szabva.",
     button: "Megoldásaink",
+  },
+
+  tailor: {
+    eyebrow: "Az Önök folyamataira szabva",
+    title: "Nem Önöknek kell a programhoz igazodniuk",
+    lead: "Minden cégnél másképp megy a jóváhagyás, a szerviz és a leltár. Felmérjük, hogyan dolgoznak, és ehhez igazítjuk a Yardlyt.",
+    items: [
+      { title: "Beállítás", text: "Folyamatok és jóváhagyások, saját mezők és kategóriák, szerepkörök és jogosultságok, ellenőrzőlisták, riasztások és riportok, a cég szabályai szerint." },
+      { title: "Egyedi fejlesztés", text: "Ha valami hiányzik, megírjuk: új modult, képernyőt, riportot vagy PDF-et, a cég saját működéséhez." },
+      { title: "Integráció", text: "Összekötjük a már használt rendszerekkel: ERP, könyvelés, HR, üzemanyagkártyák, raktár- és beléptetőrendszerek. Nincs kétszeri rögzítés." },
+    ],
+    link: "Így dolgozunk",
   },
 
   modules: {
     eyebrow: "Két modul, egy rendszer",
     title: "A teljes flotta és eszközpark, egy helyen",
-    lead: "Minden csomagban mindkettő benne van. Azt használja, amire szüksége van.",
+    lead: "Mindkettő a rendszer része. Azt kapcsoljuk be, amelyikre szükségük van.",
     items: [
       {
         name: "Flotta",
@@ -96,15 +109,24 @@ export const home = {
     all: "Az összes funkció",
   },
 
+  hosting: {
+    eyebrow: "Üzemeltetés",
+    title: "Az Önök szerverén, vagy mi üzemeltetjük",
+    lead: "Mindkét esetben saját, elkülönített példányt kapnak, csak az Önök cégének adataival.",
+    link: "Az üzemeltetés részletei",
+  },
+
   steps: {
-    eyebrow: "Hogyan kezdjen bele",
-    title: "Három lépés, és a rendszer már dolgozik is",
+    eyebrow: "Hogyan dolgozunk",
+    title: "Négy lépésben az Önök szabályai szerint működő rendszerig",
     items: [
-      { title: "Regisztrál.", text: "Két perc, a cégadatokkal. 14 napig minden funkciót díjmentesen kipróbálhat." },
-      { title: "Áthozza a meglévő adatokat.", text: "Töltse le az Excel-sablont, másolja bele a listáját, és töltse fel. A hiányzó telephelyek, típusok és kategóriák maguk létrejönnek." },
-      { title: "Meghívja a kollégákat.", text: "Mindenki a saját szerepkörével lép be. A sofőr csak a saját autóját látja, a pénzügy a költségeket." },
+      { title: "Felmérés", text: "Megnézzük, hogyan kezelik ma a flottát és az eszközparkot, és mit kell a rendszernek tudnia. Utána egyedi ajánlatot adunk." },
+      { title: "Testreszabás", text: "Beállítjuk a folyamatokat, mezőket és szerepköröket, megírjuk, ami hiányzik, és bekötjük a már használt rendszereiket." },
+      { title: "Telepítés", text: "Az Önök szerverére vagy az általunk üzemeltetett felhőbe. A meglévő adatokat mi hozzuk át Excelből vagy a régi rendszerből." },
+      { title: "Támogatás", text: "Élesítés után is ott vagyunk, kijelölt kapcsolattartóval, és a rendszer a cég változásaival együtt fejlődik." },
     ],
-    close: "Onnantól a Yardly figyel Ön helyett.",
+    close: "Onnantól a Yardly figyel Önök helyett.",
+    link: "A bevezetés részletei",
   },
 
   personas: {
@@ -121,16 +143,9 @@ export const home = {
   mobile: {
     eyebrow: "Mobilon és biztonságosan",
     title: "Az irodában és a telephelyen is",
-    text: "A Yardly böngészőben fut, telefonon is teljes értékű. Az adatokat kétlépcsős belépés, titkosított kapcsolat és cégenként elkülönített tárolás védi. Minden változás visszakövethető.",
+    text: "A Yardly böngészőben fut, telefonon is teljes értékű, a kollégáknak semmit nem kell telepíteniük. Az adatokat kétlépcsős belépés, titkosított kapcsolat és a cég saját, elkülönített példánya védi. Minden változás visszakövethető.",
     link: "Biztonság részletesen",
     phoneAlt: "A leltár összesítése telefonon",
-  },
-
-  pricing: {
-    eyebrow: "Árak",
-    title: "Átlátható árak, a flottája méretéhez",
-    note: "Éves fizetéssel 2 hónap ingyen. A 300 jármű feletti flottáknak egyedi ajánlatot adunk.",
-    button: "Összes ár és kalkulátor",
   },
 
   faq: {
@@ -138,17 +153,19 @@ export const home = {
     title: "Gyakori kérdések",
     lead: "Nem találja a választ? Írjon nekünk, egy munkanapon belül válaszolunk.",
     items: [
-      { q: "Kell telepíteni valamit?", a: "Nem. A Yardly böngészőben fut, számítógépen és telefonon is." },
-      { q: "Hogyan kerülnek be a meglévő adataink?", a: "Excel-sablonnal, egyszerre. A rendszer soronként jelzi, ha valamit javítani kell." },
-      { q: "Mi történik a próbaidő végén?", a: "A próbaidő alatt kiválasztott csomag díjáról díjbekérőt küldünk, amelyet 8 napon belül átutalással rendezhet; előtte 3 és 1 nappal e-mailben emlékeztetjük. Ha nem választ csomagot, a fiók csak olvasható lesz: az adatokat 90 napig megőrizzük és letöltheti, utána véglegesen töröljük." },
-      { q: "Csak a flottához vagy csak az eszközökhöz is használható?", a: "Igen. Minden csomagban mindkét modul benne van, azt használja, amire szüksége van." },
-      { q: "Hol tárolódnak az adataink?", a: "Titkosított kapcsolaton érhetők el, és minden cég csak a saját adatait látja." },
+      { q: "Mennyibe kerül?", a: "A felmérés után egyedi ajánlatot adunk. Az ár a járművek és eszközök számától, a testreszabástól, az integrációktól és az üzemeltetés módjától függ." },
+      { q: "Hol fut a rendszer?", a: "Ahogy Önöknek jobb: a saját szerverükön, adatközpontjukban vagy privát felhőjükben, vagy mi üzemeltetjük egy EU-s (frankfurti) adatközpontban. Mindkét esetben saját, elkülönített példányt kapnak." },
+      { q: "Mennyire szabható a cégünkre?", a: "A folyamatok, a mezők, a kategóriák, a szerepkörök, az ellenőrzőlisták és a riportok beállíthatók. Ami hiányzik, azt egyedileg fejlesztjük, és a rendszert összekötjük a már használt programjaikkal." },
+      { q: "Hogyan kerülnek be a meglévő adataink?", a: "A bevezetés részeként mi hozzuk át őket, Excelből vagy a régi rendszerből." },
+      { q: "Kell telepíteni valamit a kollégáknak?", a: "Nem. A Yardly böngészőben fut, számítógépen és telefonon is." },
+      { q: "Csak a flottához vagy csak az eszközökhöz is használható?", a: "Igen. A két modul közül azt kapcsoljuk be, amelyikre szükségük van." },
+      { q: "Megnézhetjük előbb?", a: "Igen. Egy 30 perces online bemutatón egy kitalált cég adataival végigmegyünk a rendszeren, és megbeszéljük, hogyan működne az Önök folyamataival." },
     ],
   },
 
   cta: {
-    eyebrow: "Kezdje el",
-    title: "Próbálja ki a saját flottájával.",
-    lead: "14 nap ingyen, a Prémium csomag minden funkciójával. Ha elakad, szívesen végigmegyünk Önnel egy rövid bemutatón.",
+    eyebrow: "Beszéljünk",
+    title: "Nézze meg egy bemutatón.",
+    lead: "30 perc, online. Megmutatjuk a rendszert, és megbeszéljük, mire van szükségük.",
   },
 };
