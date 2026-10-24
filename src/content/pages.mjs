@@ -71,7 +71,7 @@ export const contact = {
   faq: [
     { q: "Mennyi ideig tart egy bemutató?", a: "Általában 30 perc, online." },
     { q: "Mennyibe kerül a Yardly?", a: "A felmérés után egyedi ajánlatot adunk. Az ár a járművek és eszközök számától, a testreszabástól, az integrációktól és az üzemeltetés módjától függ." },
-    { q: "Segítenek az adatok áthozásában?", a: "Igen, ez a bevezetés része: Excelből vagy a régi rendszerből mi hozzuk át őket." },
+    { q: "Segítenek az adatok áthozásában?", a: "Igen, ez a bevezetés része: Excelből vagy a régi rendszerből mi hozzuk át őket. Saját szerveres telepítésnél ehhez Önök adnak időkorlátos, naplózott hozzáférést, adatfeldolgozási szerződés alapján." },
   ],
 };
 
@@ -157,6 +157,7 @@ export const hostingOptions = [
       "Az Önök mentési, naplózási és biztonsági szabályai szerint",
       "Saját domainen és saját levelezőszerverrel",
       "Az új verziókat átadjuk, az IT-csapatuk telepíti őket",
+      "Napi üzemben nem férünk hozzá az adataikhoz",
     ],
   },
   {
@@ -337,6 +338,7 @@ export const hosting = {
     title: "Kérdések az üzemeltetésről",
     items: [
       { q: "Ki üzemelteti a szervert?", a: "Saját szervernél a saját IT-csapatuk; mi a telepítésben segítünk, és a Yardlyhoz adunk támogatást. A felhős változatnál mi üzemeltetjük." },
+      { q: "Hozzáférnek az adatainkhoz?", a: "Saját szervernél napi üzemben nem férünk hozzá az adataikhoz. A bevezetéskori adatátvételt, az összekötések beállítását és a kérésükre végzett hibaelhárítást adatfeldolgozási szerződés alapján, az Önök által adott, időkorlátos és naplózott hozzáféréssel végezzük. A felhős változatnál az adatokat mi tároljuk, adatfeldolgozóként, szintén szerződés alapján." },
       { q: "Hol vannak az adatok a felhős változatnál?", a: "Az Amazon Web Services frankfurti (EU-s) adatközpontjában, a cég saját, elkülönített példányában. A mentések titkosítva készülnek." },
       { q: "Megkapjuk a fejlesztéseket?", a: "Igen. A felhős változatnál mi telepítjük őket. Saját szervernél átadjuk az új verziót, és az IT-csapatuk telepíti, amikor nekik megfelel." },
       { q: "Válthatunk később?", a: "Igen. Az adatokat át tudjuk költöztetni a felhőből a saját szerverükre, vagy fordítva." },
