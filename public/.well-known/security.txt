@@ -2,6 +2,7 @@
 # nekünk, mielőtt nyilvánosságra hozná.
 # Reporting a vulnerability in Yardly: please write to us before disclosing it.
 Contact: mailto:hello@yardly.hu
+Policy: https://yardly.hu/biztonsagi-hibak/
 Expires: 2027-10-01T00:00:00.000Z
 Preferred-Languages: hu, en
 Canonical: https://yardly.hu/.well-known/security.txt

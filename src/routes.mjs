@@ -8,8 +8,13 @@ export const ROUTES = {
   hosting: "/uzemeltetes/",
   contact: "/kapcsolat/",
   blog: "/blog/",
+  legal: "/jogi/",
   privacy: "/adatkezeles/",
   imprint: "/impresszum/",
+  subprocessors: "/alfeldolgozok/",
+  dataExport: "/adatexport/",
+  vulnerabilities: "/biztonsagi-hibak/",
+  illegalContent: "/jogserto-tartalom/",
 };
 
 export const route = (key) => ROUTES[key];

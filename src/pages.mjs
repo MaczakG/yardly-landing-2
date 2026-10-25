@@ -5,7 +5,8 @@ import { esc, glue as g, arrow, icon, board, ctaCard, screenshot, phoneShot } fr
 import { ui } from "./content/site.mjs";
 import { home as h } from "./content/home.mjs";
 import { overview, groups, solutions, solutionBySlug } from "./content/solutions.mjs";
-import { contact as co, privacy as pv, imprint as im, process as pc, hosting as ho, hostingOptions } from "./content/pages.mjs";
+import { contact as co, process as pc, hosting as ho, hostingOptions } from "./content/pages.mjs";
+import * as lg from "./content/legal.mjs";
 import { blog as bl, categories, posts } from "./content/posts.mjs";
 
 const withEmail = (html) => html.replaceAll("{email}", config.email);
@@ -774,14 +775,18 @@ const legal = (l) => ({
   <div class="container container--narrow">
     <h1 class="h1" id="page-title">${l.heading}</h1>
     <p class="lead">${l.intro}</p>
-    <p class="notice">${ui.draft}</p>
     <div class="prose">${withEmail(l.body)}</div>
   </div>
 </section>`,
 });
 
-export const privacy = () => legal(pv);
-export const imprint = () => legal(im);
+export const legalHub = () => legal(lg.legalHub);
+export const privacy = () => legal(lg.privacy);
+export const imprint = () => legal(lg.imprint);
+export const subprocessors = () => legal(lg.subprocessors);
+export const dataExport = () => legal(lg.dataExport);
+export const vulnerabilities = () => legal(lg.vulnerabilities);
+export const illegalContent = () => legal(lg.illegalContent);
 
 export const notFound = (nf) => ({
   title: nf.title,

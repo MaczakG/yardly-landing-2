@@ -41,8 +41,13 @@ render("hosting", ROUTES.hosting, pages.hosting());
 render("contact", ROUTES.contact, pages.contact());
 render("blog", ROUTES.blog, pages.blog(), pages.posts[0]?.date);
 for (const p of pages.posts) render("post", postRoute(p), pages.post(p), p.updated || p.date);
+render("legal", ROUTES.legal, pages.legalHub());
 render("privacy", ROUTES.privacy, pages.privacy());
 render("imprint", ROUTES.imprint, pages.imprint());
+render("subprocessors", ROUTES.subprocessors, pages.subprocessors());
+render("dataExport", ROUTES.dataExport, pages.dataExport());
+render("vulnerabilities", ROUTES.vulnerabilities, pages.vulnerabilities());
+render("illegalContent", ROUTES.illegalContent, pages.illegalContent());
 
 write("404.html", layout({ key: "", path: "/404.html", ...pages.notFound(notFound) }));
 

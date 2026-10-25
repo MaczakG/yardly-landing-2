@@ -14,7 +14,6 @@ export const ui = {
   shotNote: "Valós képernyőkép a Yardlyból, egy kitalált cég, a „Minta Logisztika Kft.” adataival.",
   related: "Kapcsolódó megoldások",
   allSolutions: "Az összes funkció",
-  draft: "Tervezet. Élesítés előtt a kiemelt részeket ki kell tölteni, a szöveget jogi szakértőnek kell ellenőriznie.",
   consent: {
     text: "Az oldal látogatottságát a Google Analytics segítségével mérjük, de csak akkor, ha ehhez hozzájárul.",
     more: "Részletek",
@@ -61,8 +60,10 @@ export const footer = {
   colLead: "Vezetés",
   colCompany: "Cég",
   colLegal: "Jogi",
+  legal: "Jogi információk",
   privacy: "Adatvédelmi tájékoztató",
   imprint: "Impresszum",
+  illegalContent: "Jogsértő tartalom bejelentése",
   security: "Biztonság",
   cookies: "Süti-beállítások",
   rights: "© 2026 Yardly. Minden jog fenntartva.",
