@@ -140,8 +140,10 @@ const footer = () => {
         </ul>
         <h2 class="footer-col__second">${f.colLegal}</h2>
         <ul>
+          <li><a href="${route("legal")}">${f.legal}</a></li>
           <li><a href="${route("privacy")}">${f.privacy}</a></li>
           <li><a href="${route("imprint")}">${f.imprint}</a></li>
+          <li><a href="${route("illegalContent")}">${f.illegalContent}</a></li>
           <li><a href="${solutionRoute("csapat-biztonsag")}#biztonsag">${f.security}</a></li>
           ${config.gaId ? `<li><button class="link-button" type="button" data-consent-open>${f.cookies}</button></li>` : ""}
         </ul>

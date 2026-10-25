@@ -1,5 +1,4 @@
-// Kapcsolat, Hogyan dolgozunk, Üzemeltetés and the legal pages. Values marked [kitöltendő] still need real data
-// before going live (company details, team, story); they render as highlighted placeholders.
+// Kapcsolat, Hogyan dolgozunk and Üzemeltetés. The legal pages are in legal.mjs.
 
 export const contact = {
   title: "Kapcsolat – Yardly",
@@ -73,76 +72,6 @@ export const contact = {
     { q: "Mennyibe kerül a Yardly?", a: "A felmérés után egyedi ajánlatot adunk. Az ár a járművek és eszközök számától, a testreszabástól, az integrációktól és az üzemeltetés módjától függ." },
     { q: "Segítenek az adatok áthozásában?", a: "Igen, ez a bevezetés része: Excelből vagy a régi rendszerből mi hozzuk át őket. Saját szerveres telepítésnél ehhez Önök adnak időkorlátos, naplózott hozzáférést, adatfeldolgozási szerződés alapján." },
   ],
-};
-
-export const privacy = {
-  title: "Adatvédelmi tájékoztató | Yardly",
-  description: "Hogyan kezeli a Yardly a weboldalon megadott és a látogatás során keletkező személyes adatokat.",
-  heading: "Adatvédelmi tájékoztató",
-  intro: "Ez a tájékoztató a yardly.hu weboldalra vonatkozik: a kapcsolatfelvételi űrlapon és e-mailben megadott adatokra, valamint a webszerver technikai naplóira. A Yardly alkalmazás használata során kezelt adatokról az ügyfeleinkkel kötött szerződés és külön tájékoztató szól.",
-  body: `
-<h2>1. Az adatkezelő</h2>
-<p><mark class="ph">[Cégnév]</mark><br>Székhely: <mark class="ph">[székhely]</mark><br>Cégjegyzékszám: <mark class="ph">[cégjegyzékszám]</mark><br>Adószám: <mark class="ph">[adószám]</mark><br>E-mail: <a href="mailto:{email}">{email}</a></p>
-
-<h2>2. Milyen adatokat kezelünk</h2>
-<h3>Kapcsolatfelvételi űrlap és e-mail</h3>
-<p>A megkeresés témája, név, cégnév, e-mail-cím, telefonszám, a járművek és eszközök hozzávetőleges száma, az üzemeltetés kívánt módja és az üzenet tartalma, valamint mindaz, amit e-mailben önként megoszt velünk. Az űrlap az Ön levelezőprogramjában nyit meg egy e-mailt; az adatok csak az elküldött levélben jutnak el hozzánk.</p>
-<h3>Technikai naplók</h3>
-<p>A webszerver a hibák kivizsgálásához naplózhatja a hibás kérés időpontját és a küldő IP-címét. Látogatási (forgalmi) naplót nem vezetünk.</p>
-<h3>Sütik és látogatottságmérés</h3>
-<p>A weboldal nem helyez el sütit, nem mér látogatottságot, és nem használ követőkódot. Betűtípust, szkriptet vagy más tartalmat sem tölt be harmadik féltől.</p>
-
-<h2>3. Az adatkezelés célja és jogalapja</h2>
-<ul>
-<li><strong>Megkeresés megválaszolása, ajánlatadás:</strong> a szerződéskötést megelőző lépések megtétele (GDPR 6. cikk (1) b)), illetve vállalkozás nevében érkező megkeresésnél az üzleti kapcsolattartáshoz fűződő jogos érdekünk (GDPR 6. cikk (1) f)). Az űrlap „Elolvastam” jelölőnégyzete azt rögzíti, hogy a tájékoztatót megismerte; nem hozzájárulás.</li>
-<li><strong>Technikai naplók:</strong> az oldal biztonságos működtetéséhez és a hibák elhárításához fűződő jogos érdekünk (GDPR 6. cikk (1) f)).</li>
-</ul>
-
-<h2>4. Meddig őrizzük az adatokat</h2>
-<ul>
-<li>Megkeresések: a megkereséstől számított 1 évig; ha szerződést kötünk, a szerződés megszűnéséig, illetve ameddig jogszabály előírja.</li>
-<li>Technikai naplók: legfeljebb 90 napig.</li>
-</ul>
-
-<h2>5. Kik férnek hozzá az adatokhoz</h2>
-<p>Az adatokhoz a Yardly munkatársai férnek hozzá, a feladatukhoz szükséges mértékben. Az alábbi szolgáltatókat vesszük igénybe:</p>
-<ul>
-<li><strong>Amazon Web Services EMEA SARL</strong> (Luxemburg): tárhely és az oldal üzemeltetése, frankfurti (EU-s) adatközpontban.</li>
-<li><strong>Google Ireland Ltd.</strong> (Google Workspace): az e-mailek fogadása és tárolása. Az adatokat EU-s adatközpontban is tárolhatja, és az Egyesült Államokba is továbbíthatja; a Google részt vesz az EU–USA adatvédelmi keretrendszerben.</li>
-</ul>
-<p><mark class="ph">[Jogi ellenőrzés: az adatfeldolgozói szerződések megléte és tartalma.]</mark></p>
-
-<h2>6. Az Ön jogai</h2>
-<p>Kérheti a személyes adataihoz való hozzáférést, azok helyesbítését, törlését vagy kezelésük korlátozását, élhet az adathordozhatósághoz való jogával, és tiltakozhat a jogos érdeken alapuló adatkezelés ellen. Kérését a(z) <a href="mailto:{email}">{email}</a> címre küldheti; legkésőbb egy hónapon belül válaszolunk.</p>
-
-<h2>7. Jogorvoslat</h2>
-<p>Ha úgy gondolja, hogy az adatkezelés jogsértő, panasszal fordulhat a Nemzeti Adatvédelmi és Információszabadság Hatósághoz (NAIH, 1055 Budapest, Falk Miksa utca 9–11., <a href="https://naih.hu" rel="noopener">naih.hu</a>), vagy bírósághoz fordulhat.</p>
-
-<p class="legal-meta">Hatályos: <mark class="ph">[dátum]</mark></p>`,
-};
-
-export const imprint = {
-  title: "Impresszum | Yardly",
-  description: "A yardly.hu weboldal üzemeltetőjének adatai.",
-  heading: "Impresszum",
-  intro: "Az elektronikus kereskedelmi szolgáltatásokról szóló 2001. évi CVIII. törvény alapján.",
-  body: `
-<h2>Szolgáltató</h2>
-<dl class="legal-dl">
-<div><dt>Cégnév</dt><dd><mark class="ph">[cégnév]</mark></dd></div>
-<div><dt>Székhely</dt><dd><mark class="ph">[székhely]</mark></dd></div>
-<div><dt>Cégjegyzékszám</dt><dd><mark class="ph">[cégjegyzékszám]</mark></dd></div>
-<div><dt>Nyilvántartó bíróság</dt><dd><mark class="ph">[cégbíróság]</mark></dd></div>
-<div><dt>Adószám</dt><dd><mark class="ph">[adószám]</mark></dd></div>
-<div><dt>Képviselő</dt><dd><mark class="ph">[képviselő neve]</mark></dd></div>
-<div><dt>E-mail</dt><dd><a href="mailto:{email}">{email}</a></dd></div>
-</dl>
-<h2>Tárhelyszolgáltató</h2>
-<dl class="legal-dl">
-<div><dt>Név</dt><dd>Amazon Web Services EMEA SARL</dd></div>
-<div><dt>Cím</dt><dd>38 Avenue John F. Kennedy, L-1855 Luxembourg</dd></div>
-<div><dt>Weboldal</dt><dd><a href="https://aws.amazon.com" rel="noopener">aws.amazon.com</a></dd></div>
-</dl>`,
 };
 
 // The two ways the Yardly runs. Shown on the home page and on the Üzemeltetés page.
