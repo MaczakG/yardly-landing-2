@@ -92,11 +92,17 @@ A Bographic Kft. cég az app.yardly.hu-n nem törölhető.
 
 ## 4. Kötelezettségek a szerződésből és a jogszabályokból
 
-Ügyfelenként két dokumentumot írunk alá, a [Yardly – titoktartás és adatfeldolgozás 2.0](https://claude.ai/artifact/DsPjkxQU4EzsxvBxF435mT)
-szerint: egy kölcsönös titoktartási megállapodást és egy adatfeldolgozási szerződést. A díjat, a fizetést és a munkát
-az admin.yardly.hu-n készült, írásban elfogadott árajánlat rögzíti; minden másra a Ptk. és a szerzői jogi törvény
-vonatkozik. A korábbi szerződéscsomag 1.0-t (keretszerződés és mellékletek) nem használjuk. A két megállapodás
-szövegét ne változtasd meg; eltérés csak a tulajdonos jóváhagyásával lehet.
+Ügyfelenként három dokumentumot írunk alá:
+- a [megbízási szerződést](https://claude.ai/artifact/8cxseanW6UjhkmX9fkiUR3), amely melléklet nélkül mindent
+  tartalmaz: felhasználási jog, bevezetés és átadás-átvétel, támogatás és SLA, felhős üzemeltetés, fizetés,
+  szavatosság, felelősség, megszűnés;
+- a kétoldalú titoktartási megállapodást és az adatfeldolgozási szerződést
+  ([Yardly – titoktartás és adatfeldolgozás 2.0](https://claude.ai/artifact/DsPjkxQU4EzsxvBxF435mT)).
+
+A díjat és a megrendelt szolgáltatásokat az admin.yardly.hu-n készült, írásban elfogadott árajánlat adja; az árajánlat
+a megbízási szerződés része. A PDF-ek az admin.yardly.hu Szerződések oldalán vannak. A korábbi szerződéscsomag 1.0-t
+(keretszerződés, megrendelő, mellékletek) nem használjuk. A szerződések szövegét ne változtasd meg; eltérés csak a
+tulajdonos jóváhagyásával lehet.
 
 | Mit vállaltunk | Határidő vagy mérték | Mit jelent neked |
 |---|---|---|
@@ -105,17 +111,19 @@ szövegét ne változtasd meg; eltérés csak a tulajdonos jóváhagyásával le
 | Súlyos biztonsági esemény (CRA) | 24 óra, 72 óra, zárójelentés 1 hónapon belül | ugyanígy |
 | Támogatási időszak (CRA) | főverziónként 5 év a kiadástól; a biztonsági frissítések 10 évig letölthetők | biztonsági javítás minden támogatott verzióra kell, az ügyfélágakra is |
 | Támogatott verziók | a legutolsó és az azt megelőző főverzió | ezekre adj javítást |
-| Támogatás és válaszidők | az elfogadott árajánlatban vállalt szint szerint (admin.yardly.hu, Árajánlatok) | P1-nél (nem használható a rendszer, vagy kihasznált biztonsági hiba) mindent tegyél félre |
-| Felhős üzemeltetés | napi mentés, 30 napig őrizve, egy nem törölhető másolattal (adatfeldolgozási szerződés 4. pont) | a mentés és a helyreállítás mindig működjön |
-| Tervezett karbantartás | előre jelezve, munkaidőn kívül | éles leállást ne tervezz munkaidőre |
-| Biztonsági frissítések (CRA) | késedelem nélkül | a kiadási jegyzetben jelöld, melyik biztonsági frissítés |
+| Támogatás és válaszidők | a megbízási szerződés 5. pontja szerint, az árajánlatban vállalt szinten. Első válasz (alap / kiemelt / SLA): P1: 1 munkanap / 4 munkaóra / 2 munkaóra; P2: 1 munkanap / 1 munkanap / 4 munkaóra. Javítási cél SLA-nál: P1 8 munkaóra, P2 3 munkanap | P1-nél (nem használható a rendszer, vagy kihasznált biztonsági hiba) mindent tegyél félre |
+| Felhős üzemeltetés | vállalati SLA mellett havi 99,5%; napi mentés, 30 napig őrizve, egy nem törölhető másolattal; legfeljebb 24 óra adatvesztés, helyreállítás 1 munkanapon belül (megbízási szerződés 6. pont) | a mentés és a helyreállítás mindig működjön |
+| Tervezett karbantartás | legalább 3 munkanappal előre jelezve, munkaidőn kívül, havonta legfeljebb 4 óra (megbízási szerződés 6.3. pont) | éles leállást ne tervezz munkaidőre |
+| Biztonsági frissítések (CRA) | késedelem nélkül, díjmentesen; saját szerveren az ügyfél a P1-et 3 munkanapon, a többit 30 napon belül telepíti (megbízási szerződés 5.7. pont) | a kiadási jegyzetben jelöld, melyik biztonsági frissítés |
 | Alfeldolgozók | AWS (Frankfurt, EU) és Google Workspace; újat legalább 30 nappal előre jelezni kell (adatfeldolgozási szerződés 6. pont), és frissíteni a yardly.hu/alfeldolgozok oldalt | ügyféladatot kapó új külső szolgáltatást ne vezess be jóváhagyás nélkül |
 | Adatok helye | felhőben csak az EU-ban (eu-central-1) | más régiót ne használj |
 | Adatexport és szolgáltatóváltás (Data Act) | díjmentes; felfüggesztéskor is elérhető; kérésre 30 napon belül, titkosítva | az exportfunkciót soha ne vedd el és ne korlátozd |
-| Megszűnés után (felhő) | legfeljebb 30 napos átmeneti időszak, utána legalább 30 napig kérhető az adatok átadása, majd törlés; a mentésekből 30 napon belül tűnnek el (adatfeldolgozási szerződés 9. pont) | a törlési és megőrzési feladatokat ne kapcsold ki |
+| Felmondás | bármelyik fél bármikor, írásban (Ptk. 6:278. §); ha mi mondunk fel, még 60 napig szolgáltatunk (megbízási szerződés 13. pont) | felmondást csak a tulajdonos küldhet |
+| Felelősség | legfeljebb az előző 12 hónapban fizetett díj (megbízási szerződés 10. pont); adatvédelmi kárnál a kétszerese (adatfeldolgozási szerződés 10. pont) | ennél többet, kötbért vagy 48 óránál rövidebb incidensjelzést ne vállalj a tulajdonos nélkül |
+| Megszűnés után (felhő) | a leállás legfeljebb 2 hónap múlva, utána legfeljebb 30 napos átmeneti időszak, majd legalább 30 napig kérhető az adatok átadása, utána törlés; a mentésekből 30 napon belül tűnnek el (megbízási szerződés 13.5. pont, adatfeldolgozási szerződés 9. pont) | a törlési és megőrzési feladatokat ne kapcsold ki |
 | Naplók megőrzése | a weboldal hozzáférési naplója 90 nap; a többi az adatkezelési tájékoztató szerint | megőrzési időt ne hosszabbíts |
 | Titoktartás | az együttműködés vége után 5 évig; üzleti titok és forráskód addig, amíg titok marad (titoktartási megállapodás) | ügyfélinformációt ne adj tovább, és ne vigyél át másik ügyfélhez |
-| Licenc | az ügyfél konténerképet kap, forráskódot nem | forráskódot ne adj ki |
+| Licenc | az ügyfél konténerképet kap, forráskódot nem (megbízási szerződés 3. pont) | forráskódot ne adj ki |
 
 Más jogszabályok:
 - Reklám és megkeresés: e-mailes reklámot csak előzetes, kifejezett hozzájárulással szabad küldeni (Grt. 6. §).
@@ -151,11 +159,11 @@ Egy chat egy ügyféllel foglalkozik. Az ügyfél rövid azonosítója (példáu
   - Az ügyfél által küldött adatot a feladat után töröld, a levelezésből is.
   - Saját szerveres ügyfélnél ilyenkor az adatfeldolgozási szerződés él.
 - **Kommunikáció:** ügyfélnek te nem írsz. Levelet, ajánlatot, kiadási jegyzetet a tulajdonosnak készíts elő.
-- **Árajánlat és szerződés:** az ár az admin.yardly.hu kalkulátorából és árajánlataiból jön, a titoktartási
-  megállapodás és az adatfeldolgozási szerződés a 2.0-s mintából (4. pont). Díjat ne találj ki.
+- **Árajánlat és szerződés:** az ár az admin.yardly.hu kalkulátorából és árajánlataiból jön, a megbízási szerződés,
+  a titoktartási megállapodás és az adatfeldolgozási szerződés a mintákból (4. pont). Díjat ne találj ki.
 - **ADR (teszt.yardly.hu):** külön ügyfél, külön chat. Jelenleg a mi szerverünkön fut, a `flotta_management`
   `staging` ágáról; a tervek szerint az ADR saját szerverére költözik. Addig rá a felhős üzemeltetés szabályai
-  vonatkoznak, az adatfeldolgozási szerződés szerint.
+  vonatkoznak, a megbízási és az adatfeldolgozási szerződés szerint.
   - Az ADR chatje csak a `flotta_management` repót (`staging`, `main`) és az ADR rendszerét módosítja. A többi
     rendszerhez (1. pont) és a közös Caddy más oldalaihoz nem nyúl.
   - A költözés után az ADR szerverén a `main` ágról készült aláírt kiadás fut, és SSH-n frissítjük, a fenti
