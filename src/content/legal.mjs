@@ -148,7 +148,7 @@ export const imprint = {
   title: "Impresszum | Yardly",
   description: "A yardly.hu weboldal és a Yardly-alkalmazások szolgáltatójának és tárhelyszolgáltatójának adatai.",
   heading: "Impresszum",
-  intro: "Az elektronikus kereskedelmi szolgáltatásokról szóló 2001. évi CVIII. törvény 4. §-a alapján. Az impresszum a yardly.hu weboldalra és az általunk üzemeltetett Yardly-alkalmazásokra (az app.yardly.hu-ra és ügyfeleink felhős példányaira) vonatkozik.",
+  intro: "Az elektronikus kereskedelmi szolgáltatásokról szóló 2001. évi CVIII. törvény 4. §-a alapján. Az impresszum a yardly.hu weboldalra és az általunk üzemeltetett Yardly-rendszerekre (a bemutató-rendszerre és ügyfeleink felhős példányaira) vonatkozik.",
   body: `
 <h2>Szolgáltató</h2>
 <dl class="legal-dl">
@@ -275,7 +275,7 @@ export const vulnerabilities = {
 <ul>
 <li>a Yardly szoftver, a saját szerveres kiadásokkal együtt;</li>
 <li>a felhőben általunk üzemeltetett ügyfélpéldányok;</li>
-<li>az app.yardly.hu, az admin.yardly.hu és a yardly.hu.</li>
+<li>a bemutató-rendszer (app.yardly.hu), az admin.yardly.hu és a yardly.hu.</li>
 </ul>
 <p>Ügyfeleink saját szerverei az ügyfeleink tulajdonában vannak: ezeket ne tesztelje. Ha egy ilyen telepítésen talál hibát, a szoftver hibáját nekünk, a szerver beállításait érintőt az adott cégnek jelezze.</p>
 
@@ -312,7 +312,7 @@ export const illegalContent = {
   title: "Jogsértő tartalom bejelentése | Yardly",
   description: "Hogyan jelezheti, ha a Yardly által tárolt tartalom jogsértő, mi történik a bejelentéssel, és kik a kapcsolattartóink a digitális szolgáltatásokról szóló rendelet szerint.",
   heading: "Jogsértő tartalom bejelentése",
-  intro: "A felhőben általunk üzemeltetett Yardly-példányokban és az app.yardly.hu-n ügyfeleink tárolnak tartalmat: dokumentumokat, fotókat és szöveget. Ha úgy látja, hogy ezek közül valami jogsértő, itt jelezheti. A digitális szolgáltatásokról szóló rendelet ((EU) 2022/2065, DSA) szerinti tájékoztatás.",
+  intro: "A felhőben általunk üzemeltetett, ügyfelenként külön Yardly-példányokban ügyfeleink tárolnak tartalmat: dokumentumokat, fotókat és szöveget. Ha úgy látja, hogy ezek közül valami jogsértő, itt jelezheti. A digitális szolgáltatásokról szóló rendelet ((EU) 2022/2065, DSA) szerinti tájékoztatás.",
   body: `
 <p>Ezek a tartalmak nem nyilvánosak: csak az adott cég felhasználói látják őket. A saját szerveres telepítéseken mi semmit nem tárolunk; az ott tárolt tartalom miatt a szervert üzemeltető céghez forduljon.</p>
 
