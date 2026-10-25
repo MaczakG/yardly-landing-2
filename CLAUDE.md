@@ -92,27 +92,38 @@ A Bographic Kft. cég az app.yardly.hu-n nem törölhető.
 
 ## 4. Kötelezettségek a szerződésből és a jogszabályokból
 
-A szerződések alapja a [Yardly – szerződéscsomag 1.0](https://claude.ai/artifact/T9Rk84e1KYn6Wa7Z8u3Dbt): keretszerződés, megrendelő és öt melléklet. A szerződéses feltételeket ne változtasd meg. Egyedi eltérés csak a megrendelő
-„Különös feltételek” részébe kerülhet, a tulajdonos jóváhagyásával.
+Ügyfelenként három dokumentumot írunk alá:
+- a [megbízási szerződést](https://claude.ai/artifact/8cxseanW6UjhkmX9fkiUR3), amely melléklet nélkül mindent
+  tartalmaz: felhasználási jog, bevezetés és átadás-átvétel, támogatás és SLA, felhős üzemeltetés, fizetés,
+  szavatosság, felelősség, megszűnés;
+- a kétoldalú titoktartási megállapodást és az adatfeldolgozási szerződést
+  ([Yardly – titoktartás és adatfeldolgozás 2.0](https://claude.ai/artifact/DsPjkxQU4EzsxvBxF435mT)).
+
+A díjat és a megrendelt szolgáltatásokat az admin.yardly.hu-n készült, írásban elfogadott árajánlat adja; az árajánlat
+a megbízási szerződés része. A PDF-ek az admin.yardly.hu Szerződések oldalán vannak. A korábbi szerződéscsomag 1.0-t
+(keretszerződés, megrendelő, mellékletek) nem használjuk. A szerződések szövegét ne változtasd meg; eltérés csak a
+tulajdonos jóváhagyásával lehet.
 
 | Mit vállaltunk | Határidő vagy mérték | Mit jelent neked |
 |---|---|---|
-| Adatvédelmi incidens jelzése az ügyfélnek | legkésőbb 48 óra (NIS2 hatálya alá tartozó ügyfélnél kiköthető 24 óra) | azonnal jelezd a tulajdonosnak, és készítsd elő a GDPR 33. cikk (3) szerinti adatokat |
+| Adatvédelmi incidens jelzése az ügyfélnek | legkésőbb 48 óra (adatfeldolgozási szerződés 7. pont) | azonnal jelezd a tulajdonosnak, és készítsd elő a GDPR 33. cikk (3) szerinti adatokat |
 | Aktívan kihasznált sebezhetőség (CRA 14. cikk) | korai figyelmeztetés 24 órán belül, bejelentés 72 órán belül, zárójelentés 14 napon belül a javítás után; az érintett ügyfelek tájékoztatása | készítsd elő a bejelentést a tulajdonosnak (ENISA egységes bejelentési platform) |
 | Súlyos biztonsági esemény (CRA) | 24 óra, 72 óra, zárójelentés 1 hónapon belül | ugyanígy |
-| Támogatási időszak | főverziónként 5 év a kiadástól; a biztonsági frissítések 10 évig letölthetők | biztonsági javítás minden támogatott verzióra kell, az ügyfélágakra is |
+| Támogatási időszak (CRA) | főverziónként 5 év a kiadástól; a biztonsági frissítések 10 évig letölthetők | biztonsági javítás minden támogatott verzióra kell, az ügyfélágakra is |
 | Támogatott verziók | a legutolsó és az azt megelőző főverzió | ezekre adj javítást |
-| Hibák első válasza (alap / kiemelt / SLA) | P1: 1 munkanap / 4 munkaóra / 2 munkaóra; P2: 1 munkanap / 1 munkanap / 4 munkaóra; P3: 1 munkanap / 2 munkanap / 1 munkanap; P4: 2 munkanap | P1-nél (nem használható a rendszer, vagy kihasznált biztonsági hiba) mindent tegyél félre |
-| Javítási cél (SLA) | P1: 8 munkaóra (javítás vagy kerülőút), P2: 3 munkanap, P3: a következő kiadás | |
-| Felhős üzemeltetés | 99,5% havi rendelkezésre állás (vállalati SLA); legfeljebb 24 óra adatvesztés (RPO), helyreállítás 1 munkanapon belül (RTO) | a mentés és a helyreállítás mindig működjön |
-| Tervezett karbantartás | legalább 3 munkanappal előre jelezve, munkaidőn kívül, havonta legfeljebb 4 óra | éles leállást ne tervezz munkaidőre |
-| Az ügyfél biztonsági frissítései | P1: 3 munkanapon belül, a többi: 30 napon belül | a kiadási jegyzetben jelöld, melyik biztonsági frissítés |
-| Alfeldolgozók | AWS (Frankfurt, EU) és Google Workspace; újat legalább 30 nappal előre jelezni kell, és frissíteni a yardly.hu/alfeldolgozok oldalt | ügyféladatot kapó új külső szolgáltatást ne vezess be jóváhagyás nélkül |
+| Támogatás és válaszidők | a megbízási szerződés 5. pontja szerint, az árajánlatban vállalt szinten. Első válasz (alap / kiemelt / SLA): P1: 1 munkanap / 4 munkaóra / 2 munkaóra; P2: 1 munkanap / 1 munkanap / 4 munkaóra. Javítási cél SLA-nál: P1 8 munkaóra, P2 3 munkanap | P1-nél (nem használható a rendszer, vagy kihasznált biztonsági hiba) mindent tegyél félre |
+| Felhős üzemeltetés | vállalati SLA mellett havi 99,5%; napi mentés, 30 napig őrizve, egy nem törölhető másolattal; legfeljebb 24 óra adatvesztés, helyreállítás 1 munkanapon belül (megbízási szerződés 6. pont) | a mentés és a helyreállítás mindig működjön |
+| Tervezett karbantartás | legalább 3 munkanappal előre jelezve, munkaidőn kívül, havonta legfeljebb 4 óra (megbízási szerződés 6.3. pont) | éles leállást ne tervezz munkaidőre |
+| Biztonsági frissítések (CRA) | késedelem nélkül, díjmentesen; saját szerveren az ügyfél a P1-et 3 munkanapon, a többit 30 napon belül telepíti (megbízási szerződés 5.7. pont) | a kiadási jegyzetben jelöld, melyik biztonsági frissítés |
+| Alfeldolgozók | AWS (Frankfurt, EU) és Google Workspace; újat legalább 30 nappal előre jelezni kell (adatfeldolgozási szerződés 6. pont), és frissíteni a yardly.hu/alfeldolgozok oldalt | ügyféladatot kapó új külső szolgáltatást ne vezess be jóváhagyás nélkül |
 | Adatok helye | felhőben csak az EU-ban (eu-central-1) | más régiót ne használj |
 | Adatexport és szolgáltatóváltás (Data Act) | díjmentes; felfüggesztéskor is elérhető; kérésre 30 napon belül, titkosítva | az exportfunkciót soha ne vedd el és ne korlátozd |
-| Megszűnés után | az adatok 90 napig exportálhatók, utána törlődnek | a törlési és megőrzési feladatokat ne kapcsold ki |
+| Felmondás | bármelyik fél bármikor, írásban (Ptk. 6:278. §); ha mi mondunk fel, még 60 napig szolgáltatunk (megbízási szerződés 13. pont) | felmondást csak a tulajdonos küldhet |
+| Felelősség | legfeljebb az előző 12 hónapban fizetett díj (megbízási szerződés 10. pont); adatvédelmi kárnál a kétszerese (adatfeldolgozási szerződés 10. pont) | ennél többet, kötbért vagy 48 óránál rövidebb incidensjelzést ne vállalj a tulajdonos nélkül |
+| Megszűnés után (felhő) | a leállás legfeljebb 2 hónap múlva, utána legfeljebb 30 napos átmeneti időszak, majd legalább 30 napig kérhető az adatok átadása, utána törlés; a mentésekből 30 napon belül tűnnek el (megbízási szerződés 13.5. pont, adatfeldolgozási szerződés 9. pont) | a törlési és megőrzési feladatokat ne kapcsold ki |
 | Naplók megőrzése | a weboldal hozzáférési naplója 90 nap; a többi az adatkezelési tájékoztató szerint | megőrzési időt ne hosszabbíts |
-| Licenc | az ügyfél konténerképet kap, forráskódot nem (kivéve a letétet) | forráskódot ne adj ki |
+| Titoktartás | az együttműködés vége után 5 évig; üzleti titok és forráskód addig, amíg titok marad (titoktartási megállapodás) | ügyfélinformációt ne adj tovább, és ne vigyél át másik ügyfélhez |
+| Licenc | az ügyfél konténerképet kap, forráskódot nem (megbízási szerződés 3. pont) | forráskódot ne adj ki |
 
 Más jogszabályok:
 - Reklám és megkeresés: e-mailes reklámot csak előzetes, kifejezett hozzájárulással szabad küldeni (Grt. 6. §).
@@ -146,13 +157,13 @@ Egy chat egy ügyféllel foglalkozik. Az ügyfél rövid azonosítója (példáu
   - Csak az ügyfél írásos engedélyével, a feladat idejére, a feladathoz szükséges adatokhoz.
   - Minden alkalmat jegyezz fel a Telepítések bejegyzésében: ki, mikor, mit csinált.
   - Az ügyfél által küldött adatot a feladat után töröld, a levelezésből is.
-  - Saját szerveres ügyfélnél ilyenkor az adatfeldolgozási melléklet (5. melléklet) él.
+  - Saját szerveres ügyfélnél ilyenkor az adatfeldolgozási szerződés él.
 - **Kommunikáció:** ügyfélnek te nem írsz. Levelet, ajánlatot, kiadási jegyzetet a tulajdonosnak készíts elő.
-- **Árajánlat és szerződés:** az ár az admin.yardly.hu kalkulátorából és árajánlataiból jön, a szerződés a
-  csomagból. Díjat ne találj ki.
+- **Árajánlat és szerződés:** az ár az admin.yardly.hu kalkulátorából és árajánlataiból jön, a megbízási szerződés,
+  a titoktartási megállapodás és az adatfeldolgozási szerződés a mintákból (4. pont). Díjat ne találj ki.
 - **ADR (teszt.yardly.hu):** külön ügyfél, külön chat. Jelenleg a mi szerverünkön fut, a `flotta_management`
-  `staging` ágáról; a tervek szerint az ADR saját szerverére költözik. Addig rá a felhős üzemeltetés (3.
-  melléklet) és az adatfeldolgozás (5. melléklet) szabályai vonatkoznak.
+  `staging` ágáról; a tervek szerint az ADR saját szerverére költözik. Addig rá a felhős üzemeltetés szabályai
+  vonatkoznak, a megbízási és az adatfeldolgozási szerződés szerint.
   - Az ADR chatje csak a `flotta_management` repót (`staging`, `main`) és az ADR rendszerét módosítja. A többi
     rendszerhez (1. pont) és a közös Caddy más oldalaihoz nem nyúl.
   - A költözés után az ADR szerverén a `main` ágról készült aláírt kiadás fut, és SSH-n frissítjük, a fenti
