@@ -42,13 +42,13 @@ export const legalHub = {
 </ul>
 
 <h2>Szerződéseink</h2>
-<p>Kattintással elfogadható, nyilvános szerződési feltételeink nincsenek: minden ügyféllel a bemutató és az ajánlat után, egyedileg szerződünk. A szerződés részei:</p>
+<p>Kattintással elfogadható, nyilvános szerződési feltételeink nincsenek: minden ügyféllel a bemutató után, egyedileg szerződünk.</p>
 <ul>
-<li><strong>keretszerződés:</strong> az általános feltételek, például a titoktartás, a szellemi tulajdon, a szavatosság és a felelősség;</li>
-<li><strong>megrendelő:</strong> a telepítés módja, a modulok, a díjak, a szolgáltatási szint és az egyedileg megbeszélt feltételek;</li>
-<li><strong>mellékletek, amelyek az adott ügyfélnél szükségesek:</strong> licenc (saját szerveres telepítésnél), támogatás és karbantartás, felhős üzemeltetés, bevezetés és testreszabás, adatfeldolgozás.</li>
+<li><strong>árajánlat:</strong> a telepítés módja, a díjak, a fizetés és az elvégzendő munka. Az ajánlat írásos elfogadásával rendelhetnek;</li>
+<li><strong>titoktartási megállapodás:</strong> kölcsönös; egyik fél sem adja tovább a másik üzleti információit;</li>
+<li><strong>adatfeldolgozási szerződés:</strong> hogyan kezeljük a cég személyes adatait (GDPR 28. cikk).</li>
 </ul>
-<p>A szerződés tervezetét aláírás előtt PDF-ben elküldjük, hogy meg tudják őrizni.</p>
+<p>A két megállapodás tervezetét aláírás előtt PDF-ben elküldjük, hogy meg tudják őrizni. Ha saját mintát használnának, azt is átnézzük.</p>
 
 <h2>Kapcsolat</h2>
 <p>Jogi és adatvédelmi kérdéseiket a(z) <a href="mailto:{email}">{email}</a> címre küldhetik.</p>`,
