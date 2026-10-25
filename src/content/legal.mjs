@@ -11,7 +11,8 @@ const table = (head, rows) => `<div class="prose-table"><table>
 ${rows.map((r) => `<tr>${r.map((c) => `<td>${c}</td>`).join("")}</tr>`).join("\n")}
 </tbody>
 </table></div>`;
-const effective = `<p class="legal-meta">Hatályos: ${ph("dátum")}</p>`;
+const EFFECTIVE_DATE = "2026. október 30."; // the go-live date of these pages
+const effective = `<p class="legal-meta">Hatályos: ${EFFECTIVE_DATE}</p>`;
 const company = `${ph("Cégnév")}, ${ph("székhely")}`;
 
 // The form the Yardly app serves for notices of illegal content (handled in admin.yardly.hu).
@@ -192,7 +193,7 @@ ${table(["Szolgáltató", "Mit végez", "Az adatok helye", "Továbbítás az EU-
   [
     "<strong>Google Ireland Ltd.</strong><br>Gordon House, Barrow Street, Dublin 4, Írország",
     "Google Workspace: az alkalmazás értesítő e-mailjeinek kiküldése, valamint a támogatási levelezés",
-    ph("a Google Workspace adattárolási helye"),
+    "A Google globális adatközpontjai, az EU-n kívül is",
     "Az amerikai anyavállalat (Google LLC) részt vesz az EU–USA adatvédelmi keretrendszerben; ezt az Európai Bizottság általános adatvédelmi kikötései egészítik ki.",
   ],
 ])}
@@ -213,7 +214,7 @@ ${table(["Szolgáltató", "Mit végez", "Az adatok helye", "Továbbítás az EU-
 <p>A részletes szabályokat az ügyféllel kötött adatfeldolgozási szerződés tartalmazza.</p>
 
 <h2>A lista változásai</h2>
-${table(["Dátum", "Változás"], [[ph("dátum"), "A lista első közzététele"]])}
+${table(["Dátum", "Változás"], [[EFFECTIVE_DATE, "A lista első közzététele"]])}
 ${effective}`,
 };
 
