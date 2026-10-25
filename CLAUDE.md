@@ -112,7 +112,7 @@ szövegét ne változtasd meg; eltérés csak a tulajdonos jóváhagyásával le
 | Alfeldolgozók | AWS (Frankfurt, EU) és Google Workspace; újat legalább 30 nappal előre jelezni kell (adatfeldolgozási szerződés 6. pont), és frissíteni a yardly.hu/alfeldolgozok oldalt | ügyféladatot kapó új külső szolgáltatást ne vezess be jóváhagyás nélkül |
 | Adatok helye | felhőben csak az EU-ban (eu-central-1) | más régiót ne használj |
 | Adatexport és szolgáltatóváltás (Data Act) | díjmentes; felfüggesztéskor is elérhető; kérésre 30 napon belül, titkosítva | az exportfunkciót soha ne vedd el és ne korlátozd |
-| Megszűnés után | az adatok 90 napig exportálhatók, utána törlődnek (adatfeldolgozási szerződés 9. pont) | a törlési és megőrzési feladatokat ne kapcsold ki |
+| Megszűnés után (felhő) | legfeljebb 30 napos átmeneti időszak, utána legalább 30 napig kérhető az adatok átadása, majd törlés; a mentésekből 30 napon belül tűnnek el (adatfeldolgozási szerződés 9. pont) | a törlési és megőrzési feladatokat ne kapcsold ki |
 | Naplók megőrzése | a weboldal hozzáférési naplója 90 nap; a többi az adatkezelési tájékoztató szerint | megőrzési időt ne hosszabbíts |
 | Titoktartás | az együttműködés vége után 5 évig; üzleti titok és forráskód addig, amíg titok marad (titoktartási megállapodás) | ügyfélinformációt ne adj tovább, és ne vigyél át másik ügyfélhez |
 | Licenc | az ügyfél konténerképet kap, forráskódot nem | forráskódot ne adj ki |
