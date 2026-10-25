@@ -775,7 +775,6 @@ const legal = (l) => ({
   <div class="container container--narrow">
     <h1 class="h1" id="page-title">${l.heading}</h1>
     <p class="lead">${l.intro}</p>
-    <p class="notice">${ui.draft}</p>
     <div class="prose">${withEmail(l.body)}</div>
   </div>
 </section>`,

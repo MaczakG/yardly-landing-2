@@ -1,7 +1,7 @@
 // The legal pages: the hub, privacy notice, imprint, sub-processors, data export and switching
-// (Data Act), vulnerability reporting (CRA) and illegal content notices (DSA). Values marked
-// <mark class="ph"> still need real data (company details) and render as highlighted placeholders;
-// every page also shows the draft notice until a lawyer has reviewed the texts.
+// (Data Act), vulnerability reporting (CRA) and illegal content notices (DSA). The provider is a sole
+// trader (egyéni vállalkozó); his details live in SELLER, once. ph() marks a value still to be filled
+// in, rendered as a highlighted placeholder.
 import { route } from "../routes.mjs";
 
 const ph = (text) => `<mark class="ph">[${text}]</mark>`;
@@ -13,7 +13,14 @@ ${rows.map((r) => `<tr>${r.map((c) => `<td>${c}</td>`).join("")}</tr>`).join("\n
 </table></div>`;
 const EFFECTIVE_DATE = "2026. október 30."; // the go-live date of these pages
 const effective = `<p class="legal-meta">Hatályos: ${EFFECTIVE_DATE}</p>`;
-const company = `${ph("Cégnév")}, ${ph("székhely")}`;
+const SELLER = {
+  name: "Maczák Gergő egyéni vállalkozó",
+  address: "1188 Budapest, Kőrisfa utca 5 1/4",
+  regNumber: "58998386",
+  taxNumber: "49314366-1-43",
+  euVatNumber: "HU49314366",
+};
+const company = `${SELLER.name}, ${SELLER.address}`;
 
 // The form the Yardly app serves for notices of illegal content (handled in admin.yardly.hu).
 const noticeForm = "https://app.yardly.hu/jogserto-tartalom.html";
@@ -54,7 +61,7 @@ export const privacy = {
   intro: "Ez a tájékoztató azt írja le, milyen személyes adatokat kezelünk saját célra, adatkezelőként: a weboldal látogatóiét, az érdeklődőkét, a bemutatók résztvevőiét, valamint ügyfeleink és partnereink kapcsolattartóiét. Az ügyfeleink Yardly-példányában tárolt adatokról a 3. pont szól.",
   body: `
 <h2>1. Az adatkezelő</h2>
-<p>${ph("Cégnév")}<br>Székhely: ${ph("székhely")}<br>Cégjegyzékszám: ${ph("cégjegyzékszám")}<br>Adószám: ${ph("adószám")}<br>E-mail: <a href="mailto:{email}">{email}</a></p>
+<p>${SELLER.name}<br>Székhely: ${SELLER.address}<br>Nyilvántartási szám: ${SELLER.regNumber}<br>Adószám: ${SELLER.taxNumber}<br>E-mail: <a href="mailto:{email}">{email}</a></p>
 <p>Adatvédelmi tisztviselő kijelölésére nem vagyunk kötelesek. Adatvédelmi kérdéseit a fenti e-mail-címre küldheti.</p>
 
 <h2>2. Milyen adatokat, miért és meddig kezelünk</h2>
@@ -125,7 +132,6 @@ ${table(["Mikor", "Milyen adatok", "Cél és jogalap", "Meddig"], [
 <li><strong>Amazon Web Services EMEA SARL</strong> (38 Avenue John F. Kennedy, L-1855 Luxembourg): a weboldal és az alkalmazások tárhelye, a frankfurti (EU-s) adatközpontban.</li>
 <li><strong>Google Ireland Ltd.</strong> (Gordon House, Barrow Street, Dublin 4, Írország): Google Workspace, az e-mailek fogadása, tárolása és küldése.</li>
 <li><strong>Billingo Technologies Zrt.</strong> (1133 Budapest, Árbóc utca 6.): számlakiállítás.</li>
-<li><strong>${ph("könyvelő neve, székhelye")}</strong>: könyvelés.</li>
 </ul>
 <p>Hatóságnak vagy bíróságnak csak jogszabályban meghatározott esetben, a megkeresésben megjelölt adatokat adjuk ki.</p>
 
@@ -153,13 +159,12 @@ export const imprint = {
   body: `
 <h2>Szolgáltató</h2>
 <dl class="legal-dl">
-<div><dt>Cégnév</dt><dd>${ph("cégnév")}</dd></div>
-<div><dt>Székhely</dt><dd>${ph("székhely")}</dd></div>
-<div><dt>Cégjegyzékszám</dt><dd>${ph("cégjegyzékszám")}</dd></div>
-<div><dt>Nyilvántartó bíróság</dt><dd>${ph("cégbíróság")}</dd></div>
-<div><dt>Adószám</dt><dd>${ph("adószám")}</dd></div>
-<div><dt>Közösségi adószám</dt><dd>${ph("közösségi adószám")}</dd></div>
-<div><dt>Képviselő</dt><dd>${ph("képviselő neve")}</dd></div>
+<div><dt>Név</dt><dd>${SELLER.name}</dd></div>
+<div><dt>Székhely</dt><dd>${SELLER.address}</dd></div>
+<div><dt>Nyilvántartási szám</dt><dd>${SELLER.regNumber}</dd></div>
+<div><dt>Nyilvántartó</dt><dd>Belügyminisztérium, egyéni vállalkozók nyilvántartása</dd></div>
+<div><dt>Adószám</dt><dd>${SELLER.taxNumber}</dd></div>
+<div><dt>Közösségi adószám</dt><dd>${SELLER.euVatNumber}</dd></div>
 <div><dt>E-mail</dt><dd><a href="mailto:{email}">{email}</a></dd></div>
 </dl>
 <p>Szolgáltatásainkat kizárólag vállalkozásoknak és más szervezeteknek nyújtjuk.</p>
