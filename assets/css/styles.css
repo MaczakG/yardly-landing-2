@@ -3269,6 +3269,12 @@ mark.ph {
   color: var(--accent);
 }
 
+/* The animated walk-through of a builder (e.g. the inspection checklist editor), centred and not wider than it needs. */
+.sol-builder {
+  max-width: 900px;
+  margin: clamp(32px, 4vw, 48px) auto 0;
+}
+
 .sol-shots {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

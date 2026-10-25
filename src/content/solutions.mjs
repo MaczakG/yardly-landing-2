@@ -187,6 +187,11 @@ export const solutions = [
       { img: "allapotfelmeres-telefon", alt: "A kitöltő űrlap a sofőr telefonján", phone: true },
       { img: "allapotfelmeres", alt: "Az állapotfelmérések a jármű adatlapján, eredménnyel és előzményekkel" },
     ],
+    builder: {
+      title: "Az ellenőrzőlistát húzással állítja össze",
+      lead: "A mezőtípust a bal oldali listából a sablonba húzza, beírja a kérdést és a válaszlehetőségeket. A sorrendet a mezők áthúzásával rendezi. Fejlesztő nélkül, néhány perc alatt.",
+      shot: { img: "allapotfelmeres-sablon", alt: "Ellenőrzőlista-sablon szerkesztése: egy legördülő lista és egy jelölőnégyzet kerül húzással a furgon heti ellenőrzőlistájába" },
+    },
     related: ["jarmunyilvantartas", "riasztasok", "folyamatok"],
     cta: "Az Önök ellenőrzőlistája, a sofőrök telefonján.",
   },

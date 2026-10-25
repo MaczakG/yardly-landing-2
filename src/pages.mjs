@@ -422,7 +422,14 @@ export const solution = (s) => {
     ${desktops.length || phones.length ? `<div class="sol-shots${phones.length ? " sol-shots--phones" : ""}">${[...desktops, ...phones].map((x) => shot(x)).join("")}</div>` : ""}
   </div>
 </section>
-
+${s.builder ? `
+<section class="section section--band" id="osszeallitas" aria-labelledby="builder-title">
+  <div class="container">
+    <div class="section-head section-head--single"><div><p class="eyebrow">${s.menuTitle}</p><h2 class="h2" id="builder-title">${s.builder.title}</h2><p class="lead">${s.builder.lead}</p></div></div>
+    <div class="sol-builder">${screenshot(s.builder.shot)}</div>
+  </div>
+</section>
+` : ""}
 ${(s.extra || [])
   .map(
     (e, i) => `<section class="section${i % 2 === 0 ? " section--band" : ""}" id="${e.id}" aria-labelledby="${e.id}-title">

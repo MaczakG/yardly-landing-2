@@ -125,13 +125,17 @@ export const SHOTS = {
   riasztasok: [1600, 900], eszkozok: [1600, 900], "eszkoz-adatlap": [1600, 900], koltsegek: [1600, 900],
   riportok: [1600, 900], analitika: [1600, 900], csereajanlas: [1600, 900], jogosultsagok: [1600, 900],
   naplo: [1600, 900], folyamatszerkeszto: [1600, 900], "folyamat-futas": [1600, 900], bejelentes: [1600, 900],
-  dkv: [1600, 900],
+  dkv: [1600, 900], "allapotfelmeres-sablon": [1280, 1020],
   "leltar-telefon": [540, 1169], "leltar-osszesites": [540, 1169], "allapotfelmeres-telefon": [540, 1169], mobil: [540, 1169],
 };
 
+// Animated screenshots (an animated WebP) and the still frame shown to visitors who asked for less motion.
+const STILLS = { "allapotfelmeres-sablon": "allapotfelmeres-sablon-allo" };
+
 const imgTag = (name, alt, eager) => {
   const [w, h] = SHOTS[name];
-  return `<img src="/assets/img/app/${name}.webp" width="${w}" height="${h}" alt="${esc(alt)}"${eager ? ' fetchpriority="high"' : ' loading="lazy"'} decoding="async">`;
+  const img = `<img src="/assets/img/app/${name}.webp" width="${w}" height="${h}" alt="${esc(alt)}"${eager ? ' fetchpriority="high"' : ' loading="lazy"'} decoding="async">`;
+  return STILLS[name] ? `<picture><source srcset="/assets/img/app/${STILLS[name]}.webp" media="(prefers-reduced-motion: reduce)">${img}</picture>` : img;
 };
 
 // A desktop screenshot in a browser frame. Every customer gets an instance of its own, so the
