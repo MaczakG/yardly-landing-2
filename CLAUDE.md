@@ -17,9 +17,10 @@ app.yardly.hu csak bemutató.
 | admin.yardly.hu | belső admin: ügyfelek, árajánlatok, kalkulátor, telepítések, demó cégek | `yardly-saas`, `main` | a tulajdonos | jóváhagyás és előtte mentés |
 | tesztapp.yardly.hu, tesztadmin.yardly.hu | **a tulajdonos fejlesztési kipróbáló felülete** | `yardly-saas`, `staging` | csak a tulajdonos | zöld CI után szabadon telepíthető; nem demó, ügyfél nem kap hozzáférést, valós ügyféladat nem kerülhet rá |
 | teszt.yardly.hu, api.teszt.yardly.hu | **az ADR ügyfél éles rendszere** | `flotta_management`, `staging` | az ADR | külön kezelendő ügyfélrendszer: jóváhagyás és előtte mentés; később az ADR saját szerverére költözik |
-| az ügyfelek saját szerverei | a `flotta_management` aláírt kiadásai | `flotta_management`, `v*` címkék | az ügyfél | csak ügyfélenkénti chatben, az ügyfél engedélyével (5. pont) |
+| az ügyfelek saját szerverei | a `flotta_management` aláírt kiadásai | `flotta_management`, `main`, `v*` címkék | az ügyfél | csak ügyfélenkénti chatben, az ügyfél engedélyével (5. pont) |
 
-A `flotta_management` repóban a munka a `staging` ágon folyik; a `main` ág régi, nem települ sehova.
+A `flotta_management` repóban a fejlesztés a `staging` ágon folyik. A `main` ágra az kerül, amit az ügyfelek saját
+szerverére kiadunk: a `v*` címkék a `main`-ről készülnek. A `main` automatikusan nem települ sehova.
 
 **Szerver:** `flotta-app`, egy EC2 t3.micro (1 GB RAM) az `eu-central-1` régióban (`i-0010e698685154699`). Rajta
 fut minden fenti rendszer, kivéve az ügyfelek saját szervereit.
@@ -29,9 +30,11 @@ fut minden fenti rendszer, kivéve az ügyfelek saját szervereit.
 - Telepítés:
   - `yardly-saas`: a `/opt/yardly-saas/deploy.sh` kétpercenként húzza le az ágakat; naplója a
     `/var/log/yardly-saas-deploy.log` („`<env>: <sha> is live`”).
-  - `flotta_management` `staging`: a GitHub Actions `deploy.yml`, csak `backend/` vagy `frontend/` változásra.
+  - `flotta_management` `staging`: a GitHub Actions `deploy.yml`, csak `backend/` vagy `frontend/` változásra
+    (a `.md` fájlok kivételével). SSH-val lép be, a GitHub `EC2_SSH_KEY` titkával.
   - yardly.hu: a `yardly-landing-rebuild.service`.
-- Belépés a szerverre csak AWS SSM-mel (`aws ssm send-command`, `AWS-RunShellScript`), a 7. pont szerint.
+- Az ügynök a szerverre csak AWS SSM-mel lép be (`aws ssm send-command`, `AWS-RunShellScript`), a 7. pont
+  szerint. Az `EC2_SSH_KEY` kulcsot csak a GitHub Actions használja.
 - A gépen 1 GB memória van: **egyszerre csak egy nehéz feladat futhat** (docker build, migráció, `pg_dump`).
 
 ## 2. Jóváhagyás: mi mehet kérdés nélkül
@@ -45,6 +48,7 @@ A tulajdonos kifejezett jóváhagyása kell ezekhez (egy korábbi jóváhagyás 
 - app.yardly.hu és admin.yardly.hu (`yardly-saas` `main`): előtte adatbázismentés;
 - yardly.hu élesítése: „mehet élesre”;
 - teszt.yardly.hu (`flotta_management` `staging`): előtte adatbázismentés;
+- beolvasztás a `flotta_management` `main` ágába és kiadás (`v*` címke) készítése;
 - bármilyen művelet egy ügyfél szerverén vagy ügyfélpéldányon;
 - adat törlése vagy felülírása, romboló adatbázis-művelet;
 - jogosultság, IAM-szerepkör, kulcs vagy bizalmi szabály (trust policy) módosítása;
@@ -72,7 +76,8 @@ A Bographic Kft. cég az app.yardly.hu-n nem törölhető.
   használj (EUB C-683/21). A demó cégei kitalált adatokat tartalmaznak (például Minta Logisztika).
 - A meglévő védelmeket (ahol az adott repóban megvannak) ne kapcsold ki és ne gyengítsd:
   - titkosított lemez és KMS-sel titkosított mezők;
-  - szigorú CSP (`unsafe-inline` nélkül);
+  - a CSP: ahol nincs benne `unsafe-inline`, ne kerüljön bele. A teszt.yardly.hu felületén a lapok saját inline
+    szkriptjei miatt még benne van; ott se lazíts tovább rajta;
   - a jelszóhash erőssége;
   - a bérlők elkülönítését ellenőrző tesztek;
   - EXIF-törlés a feltöltött képekből;
@@ -148,6 +153,10 @@ Egy chat egy ügyféllel foglalkozik. Az ügyfél rövid azonosítója (példáu
 - **ADR (teszt.yardly.hu):** külön ügyfél, külön chat. Jelenleg a mi szerverünkön fut, a `flotta_management`
   `staging` ágáról; a tervek szerint az ADR saját szerverére költözik. Addig rá a felhős üzemeltetés (3.
   melléklet) és az adatfeldolgozás (5. melléklet) szabályai vonatkoznak.
+  - Az ADR chatje csak a `flotta_management` repót (`staging`, `main`) és az ADR rendszerét módosítja. A többi
+    rendszerhez (1. pont) és a közös Caddy más oldalaihoz nem nyúl.
+  - A költözés után az ADR szerverén a `main` ágról készült aláírt kiadás fut, és SSH-n frissítjük, a fenti
+    feltételekkel. A kulcs csak a munka idejére kerül a munkamenet környezeti beállításaiba, chatbe soha.
 
 ## 6. Munkamódszer
 
