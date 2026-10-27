@@ -171,7 +171,7 @@ export const home = {
     items: [
       { q: "Kell telepíteni valamit?", a: "Nem. A Yardly böngészőben fut, számítógépen és telefonon is." },
       { q: "Hogyan kerülnek be a meglévő adataink?", a: "Excel-sablonnal, egyszerre. A rendszer soronként jelzi, ha valamit javítani kell." },
-      { q: "Mi történik a próbaidő végén?", a: "A regisztrációkor választott csomag díját terheljük a bankkártyájára, havonta vagy évente; előtte 3 és 1 nappal e-mailben emlékeztetjük. A próbaidő végéig a csomagot módosíthatja, vagy lemondhatja a folytatást: ekkor a fiók csak olvasható lesz, az adatokat 90 napig megőrizzük és letöltheti, utána véglegesen töröljük." },
+      { q: "Mi történik a próbaidő végén?", a: "A regisztrációkor választott csomag díját terheljük a bankkártyájára, havonta vagy évente; előtte 7, 3 és 1 nappal e-mailben szólunk, mennyit és mikor vonunk le. A próbaidő végéig a csomagot módosíthatja, vagy lemondhatja a folytatást: ekkor a fiók csak olvasható lesz, az adatokat 90 napig megőrizzük és letöltheti, utána véglegesen töröljük." },
       { q: "Össze tudják kötni a meglévő rendszereinkkel?", a: "A DKV-kártyás tankolások maguktól bekerülnek. Más rendszerekkel Excel- és CSV-fájlokon keresztül cserél adatot, az automatizálások e-mailt küldenek PDF-ekkel, akár külső címre is, a Prémium csomagban pedig a csapat Teams- vagy Slack-csatornájára is írnak." },
       { q: "Csak a flottához vagy csak az eszközökhöz is használható?", a: "Igen. Minden csomagban mindkét modul benne van, azt használja, amire szüksége van." },
       { q: "Hol tárolódnak az adataink?", a: "Az Amazon Web Services frankfurti (EU-s) adatközpontjában. Titkosított kapcsolaton érhetők el, és minden cég csak a saját adatait látja." },
