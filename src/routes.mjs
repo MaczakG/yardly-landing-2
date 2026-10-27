@@ -5,8 +5,6 @@ export const ROUTES = {
   home: "/",
   solutions: "/megoldasaink/",
   pricing: "/arak/",
-  process: "/hogyan-dolgozunk/",
-  hosting: "/uzemeltetes/",
   contact: "/kapcsolat/",
   blog: "/blog/",
   legal: "/jogi/",
@@ -30,7 +28,10 @@ export const REDIRECTS = {
   "/blog/karbantartas-nyilvantartasa-excel-helyett/": "/blog/flottakezeles-excelben/",
   "/blog/kiegeszites-vagy-csere/": "/blog/",
   "/rolunk/": "/",
-  "/vallalati-megoldas/": "/uzemeltetes/",
+  // The pages of the former custom-installation offer (rollout, hosting, enterprise).
+  "/hogyan-dolgozunk/": "/",
+  "/uzemeltetes/": "/megoldasaink/csapat-biztonsag/#biztonsag",
+  "/vallalati-megoldas/": "/arak/",
 
   "/en/": "/",
   "/en/solutions/": "/megoldasaink/",

@@ -1178,15 +1178,6 @@ body.nav-open .site-header {
   opacity: 0.45;
 }
 
-/* Four stations: the track ends at the last one. */
-.stations--4 {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
-.stations--4::before {
-  right: calc((100% - 96px) / 4 - 10px);
-}
-
 .station {
   position: relative;
   display: grid;
@@ -1224,26 +1215,10 @@ body.nav-open .site-header {
   color: var(--on-deep-2);
 }
 
-@media (max-width: 1099px) {
-  .stations--4 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    row-gap: 48px;
-  }
-
-  .stations--4::before {
-    display: none;
-  }
-}
-
 @media (max-width: 899px) {
-  .stations,
-  .stations--4 {
+  .stations {
     grid-template-columns: minmax(0, 1fr);
     gap: 36px;
-  }
-
-  .stations--4::before {
-    display: block;
   }
 
   .stations::before {
@@ -2199,27 +2174,6 @@ mark.ph {
   white-space: nowrap;
 }
 
-.soon-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 2px 9px 2px 7px;
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--warn-fill) 16%, transparent);
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--warn);
-  white-space: nowrap;
-}
-
-.soon-tag .icon {
-  width: 13px;
-  height: 13px;
-}
-
 .btn--teal {
   background: var(--teal);
   color: var(--navy);
@@ -2328,46 +2282,6 @@ mark.ph {
   background: var(--accent-fill);
 }
 
-.spec-card {
-  padding: clamp(24px, 3vw, 32px);
-  background: var(--deep-2);
-  border: 1px solid var(--deep-line);
-  border-radius: 16px;
-}
-
-.spec-card__title {
-  margin-bottom: 8px;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--on-deep-2);
-}
-
-.spec-card dl > div {
-  display: grid;
-  grid-template-columns: 110px minmax(0, 1fr);
-  gap: 12px;
-  padding-block: 14px;
-  border-bottom: 1px solid var(--deep-line);
-}
-
-.spec-card dl > div:last-child {
-  border-bottom: 0;
-  padding-bottom: 0;
-}
-
-.spec-card dt {
-  font-size: 0.875rem;
-  color: var(--on-deep-2);
-}
-
-.spec-card dd {
-  font-weight: 600;
-  color: var(--on-deep);
-}
-
 .nav-login {
   font-size: 0.9875rem;
   font-weight: 600;
@@ -2429,7 +2343,6 @@ mark.ph {
 .mega__icon,
 .sol-card__icon,
 .feature-card__icon,
-.option-card__icon,
 .eyebrow__icon {
   display: inline-flex;
   align-items: center;
@@ -2780,11 +2693,11 @@ mark.ph {
   width: 100%;
 }
 
-/* Home: the systems Yardly is connected to, round the Yardly tile in the middle. */
+/* Home: what Yardly connects to, round the Yardly tile in the middle (3 x 3). */
 .hub {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
   width: 100%;
   max-width: 600px;
@@ -2816,7 +2729,6 @@ mark.ph {
 }
 
 .hub__core {
-  grid-column: span 2;
   display: grid;
   place-items: center;
   padding: 18px 12px;
@@ -3549,22 +3461,6 @@ mark.ph {
   margin-top: 0;
 }
 
-.plan-card__soon {
-  display: grid;
-  gap: 10px;
-  padding-top: 16px;
-  border-top: 1px dashed var(--line-2);
-  font-size: 0.875rem;
-  color: var(--ink-3);
-}
-
-.plan-card__soon li {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-}
-
 .plans__note {
   max-width: 52em;
   margin: 28px auto 0;
@@ -3847,22 +3743,6 @@ mark.ph {
   color: var(--ink-2);
 }
 
-.cmp td .soon-tag + .cmp-text {
-  display: block;
-  margin-top: 4px;
-}
-
-.cmp-notify {
-  display: block;
-  width: fit-content;
-  margin-top: 4px;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--accent);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
 .cmp-title {
   margin: clamp(48px, 6vw, 72px) 0 24px;
 }
@@ -3870,21 +3750,6 @@ mark.ph {
 .cmp-note {
   margin-top: 16px;
   font-size: 0.875rem;
-}
-
-.quote,
-.team {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 24px 80px;
-  align-items: end;
-}
-
-.quote > div,
-.team > div {
-  display: grid;
-  gap: 24px;
-  justify-items: start;
 }
 
 @media (max-width: 999px) {
@@ -3904,14 +3769,6 @@ mark.ph {
   }
 }
 
-@media (max-width: 899px) {
-  .quote,
-  .team {
-    grid-template-columns: minmax(0, 1fr);
-    align-items: start;
-  }
-}
-
 @media (max-width: 479px) {
   .cycle__btn {
     padding: 0 12px;
@@ -3927,79 +3784,6 @@ mark.ph {
   }
 
   .calc__checks {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-
-
-/* Hosting options and customization levels -------------------------------- */
-
-.options {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
-  align-items: stretch;
-}
-
-.option-card,
-.level {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 32px 28px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 18px;
-}
-
-.option-card__icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 11px;
-  margin-bottom: 4px;
-}
-
-.option-card__name {
-  font-size: 1.5rem;
-  font-weight: 750;
-  line-height: 1.2;
-  letter-spacing: -0.025em;
-}
-
-.option-card__tagline,
-.level > p {
-  font-size: 0.9375rem;
-  line-height: 1.5;
-  color: var(--ink-2);
-}
-
-.option-card .ticks,
-.level .ticks {
-  align-self: stretch;
-  margin-top: 4px;
-}
-
-.options + .center,
-.benefit-row + .center {
-  margin-top: 32px;
-}
-
-.levels {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
-  align-items: stretch;
-}
-
-@media (max-width: 999px) {
-  .levels {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-
-@media (max-width: 899px) {
-  .options {
     grid-template-columns: minmax(0, 1fr);
   }
 }

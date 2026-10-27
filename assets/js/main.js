@@ -392,7 +392,6 @@
     var success = document.getElementById("enquiry-success");
     var submitBtn = form.querySelector('button[type="submit"]');
     var topic = form.querySelector("#f-topic");
-    var hosting = form.querySelector("#f-hosting");
 
     // Links such as /kapcsolat/?tema=demo#enquiry pick the topic.
     var params = new URLSearchParams(window.location.search);
@@ -446,7 +445,6 @@
         phone: get("phone"),
         vehicles: get("vehicles"),
         equipment: get("equipment"),
-        hosting: hosting && hosting.value ? hosting.options[hosting.selectedIndex].text : "",
         message: get("message"),
         website: get("website"),
         page: window.location.pathname,
@@ -478,7 +476,6 @@
         line("phone", payload.phone),
         line("vehicles", payload.vehicles),
         line("equipment", payload.equipment),
-        line("hosting", payload.hosting),
         "",
         payload.message,
       ].filter(function (l) {

@@ -38,8 +38,6 @@ export const ui = {
 export const nav = [
   { key: "solutions", label: "Megoldásaink" },
   { key: "pricing", label: "Árak" },
-  { key: "process", label: "Hogyan dolgozunk" },
-  { key: "hosting", label: "Üzemeltetés" },
   { key: "blog", label: "Blog" },
   { key: "contact", label: "Kapcsolat" },
 ];
@@ -62,12 +60,12 @@ export const megamenu = {
   },
   bottom: {
     all: "Az összes funkció egy oldalon",
-    note: "Mindegyik az Önök szabályaihoz igazítható. A meglévő nyilvántartást mi hozzuk át.",
+    note: "Excel-import: a meglévő nyilvántartása percek alatt átkerül.",
   },
 };
 
 export const footer = {
-  desc: "Flotta- és eszközüzemeltetési rendszer, a cég folyamataira szabva. Az Önök szerverén vagy általunk üzemeltetve a felhőben.",
+  desc: "Flotta- és eszközkezelő rendszer magyar cégeknek. A rendszer szól, mielőtt valami lejár.",
   colFleet: "Flotta",
   colOps: "Eszközpark és működés",
   colLead: "Vezetés",

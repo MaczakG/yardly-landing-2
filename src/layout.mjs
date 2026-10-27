@@ -134,8 +134,6 @@ const footer = () => {
         <h2>${f.colCompany}</h2>
         <ul>
           <li><a href="${route("pricing")}">Árak</a></li>
-          <li><a href="${route("process")}">Hogyan dolgozunk</a></li>
-          <li><a href="${route("hosting")}">Üzemeltetés</a></li>
           <li><a href="${route("blog")}">Blog</a></li>
           <li><a href="${route("contact")}">Kapcsolat</a></li>
           <li><a href="${APP.login}">${ui.login}</a></li>

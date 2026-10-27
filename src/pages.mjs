@@ -6,7 +6,7 @@ import { APP, ui } from "./content/site.mjs";
 import { home as h } from "./content/home.mjs";
 import { overview, groups, solutions, solutionBySlug } from "./content/solutions.mjs";
 import { pricing as pr, plans, comparison, limits, huf, num, SELF_SERVICE_MAX_VEHICLES, ANNUAL_FREE_MONTHS, EQUIPMENT_ADDON, CALC_FEATURES, TRIAL_DAYS } from "./content/pricing.mjs";
-import { contact as co, process as pc, hosting as ho, hostingOptions } from "./content/pages.mjs";
+import { contact as co } from "./content/pages.mjs";
 import * as lg from "./content/legal.mjs";
 import { blog as bl, categories, posts } from "./content/posts.mjs";
 
@@ -109,22 +109,8 @@ const numbered = (items) => `<ol class="benefit-row">
       ${items.map((b, i) => `<li><span class="benefit-row__num">0${i + 1}</span><h3 class="h3">${b.title}</h3><p>${b.text}</p></li>`).join("")}
     </ol>`;
 
-// The two ways the Yardly runs, side by side.
-const optionCards = () => `<div class="options">
-      ${hostingOptions
-        .map(
-          (o) => `<article class="option-card">
-        <span class="option-card__icon">${icon(o.icon)}</span>
-        <h3 class="option-card__name">${o.name}</h3>
-        <p class="option-card__tagline">${o.tagline}</p>
-        ${ticks(o.points)}
-      </article>`
-        )
-        .join("")}
-    </div>`;
-
-// The rollout steps along a track, on a dark band.
-const stationList = (items) => `<ol class="stations stations--4">
+// The first steps along a track, on a dark band.
+const stationList = (items) => `<ol class="stations">
       ${items
         .map(
           (s, i) => `<li class="station">
@@ -208,34 +194,7 @@ export const home = () => {
   </div>
 </section>
 
-<section class="section" aria-labelledby="tailor-title">
-  <div class="container">
-    ${sectionHead(h.tailor, "tailor-title")}
-    ${numbered(h.tailor.items)}
-    <p class="center"><a class="btn btn--ghost" href="${route("process")}">${h.tailor.link}${arrow()}</a></p>
-  </div>
-</section>
-
-<section class="section section--deep" aria-labelledby="integration-title">
-  <div class="container split">
-    <div class="split__text">
-      <p class="eyebrow">${h.integrations.eyebrow}</p>
-      <h2 class="h2" id="integration-title">${g(h.integrations.title)}</h2>
-      <p class="lead">${h.integrations.lead}</p>
-      ${ticks(h.integrations.points)}
-      <a class="text-link" href="${route("process")}#integracio">${h.integrations.link}${arrow("text-link__arrow")}</a>
-    </div>
-    <div class="split__art">
-      <ul class="hub" aria-label="${h.integrations.hubLabel}">
-        ${h.integrations.hub.slice(0, 5).map((x) => `<li class="hub__node">${icon(x.icon)}<span>${x.label}</span></li>`).join("")}
-        <li class="hub__core"><img src="/assets/brand/yardly-vizszintes-szines.svg" width="131" height="36" alt="Yardly"></li>
-        ${h.integrations.hub.slice(5).map((x) => `<li class="hub__node">${icon(x.icon)}<span>${x.label}</span></li>`).join("")}
-      </ul>
-    </div>
-  </div>
-</section>
-
-<section class="section section--band" aria-labelledby="modules-title">
+<section class="section" aria-labelledby="modules-title">
   <div class="container">
     ${sectionHead(h.modules, "modules-title")}
     <div class="duo">
@@ -255,7 +214,7 @@ export const home = () => {
   </div>
 </section>
 
-<section class="section" aria-labelledby="alerts-title">
+<section class="section section--band" aria-labelledby="alerts-title">
   <div class="container split">
     <div class="split__text">
       <p class="eyebrow">${a.eyebrow}</p>
@@ -268,7 +227,26 @@ export const home = () => {
   </div>
 </section>
 
-<section class="section section--band" aria-labelledby="features-title">
+<section class="section section--deep" aria-labelledby="integration-title">
+  <div class="container split">
+    <div class="split__text">
+      <p class="eyebrow">${h.integrations.eyebrow}</p>
+      <h2 class="h2" id="integration-title">${g(h.integrations.title)}</h2>
+      <p class="lead">${h.integrations.lead}</p>
+      ${ticks(h.integrations.points)}
+      <a class="text-link" href="${solutionRoute(h.integrations.slug)}">${h.integrations.link}${arrow("text-link__arrow")}</a>
+    </div>
+    <div class="split__art">
+      <ul class="hub" aria-label="${h.integrations.hubLabel}">
+        ${h.integrations.hub.slice(0, 4).map((x) => `<li class="hub__node">${icon(x.icon)}<span>${x.label}</span></li>`).join("")}
+        <li class="hub__core"><img src="/assets/brand/yardly-vizszintes-szines.svg" width="131" height="36" alt="Yardly"></li>
+        ${h.integrations.hub.slice(4).map((x) => `<li class="hub__node">${icon(x.icon)}<span>${x.label}</span></li>`).join("")}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="features-title">
   <div class="container">
     ${sectionHead(h.features, "features-title")}
     <div class="feature-grid">
@@ -287,19 +265,11 @@ export const home = () => {
   </div>
 </section>
 
-<section class="section" aria-labelledby="hosting-title">
-  <div class="container">
-    ${sectionHead(h.hosting, "hosting-title")}
-    ${optionCards()}
-    <p class="center"><a class="btn btn--ghost" href="${route("hosting")}">${h.hosting.link}${arrow()}</a></p>
-  </div>
-</section>
-
 <section class="section section--deep" aria-labelledby="steps-title">
   <div class="container">
     ${sectionHead(h.steps, "steps-title")}
     ${stationList(h.steps.items)}
-    <p class="steps__close">${h.steps.close} <a class="text-link text-link--light" href="${route("process")}">${h.steps.link}${arrow("text-link__arrow")}</a></p>
+    <p class="steps__close">${h.steps.close}</p>
   </div>
 </section>
 
@@ -698,113 +668,6 @@ ${ctaSection({ title: `Próbálja ki ${TRIAL_DAYS} napig ingyen.` })}`,
 };
 
 // ---------------------------------------------------------------------------
-// Hogyan dolgozunk
-
-export const process = () => ({
-  title: pc.title,
-  description: pc.description,
-  jsonLd: faqJsonLd(pc.faq.items),
-  body: `
-${pageHero(pc, ctaButtons())}
-
-<section class="section section--deep" aria-labelledby="steps-title">
-  <div class="container">
-    <div class="section-head section-head--single"><div><p class="eyebrow">${pc.steps.eyebrow}</p><h2 class="h2" id="steps-title">${g(pc.steps.title)}</h2></div></div>
-    ${stationList(pc.steps.items)}
-  </div>
-</section>
-
-<section class="section" id="testreszabas" aria-labelledby="tailor-title">
-  <div class="container">
-    ${sectionHead(pc.tailor, "tailor-title")}
-    <div class="levels">
-      ${pc.tailor.levels
-        .map(
-          (l) => `<article class="level">
-        <span class="option-card__icon">${icon(l.icon)}</span>
-        <h3 class="h3-lg">${l.title}</h3>
-        <p>${l.text}</p>
-        ${ticks(l.points)}
-      </article>`
-        )
-        .join("")}
-    </div>
-  </div>
-</section>
-
-<section class="section section--band" id="integracio" aria-labelledby="integration-title">
-  <div class="container">
-    ${sectionHead(pc.integrations, "integration-title")}
-    ${featureList(pc.integrations.items)}
-  </div>
-</section>
-
-<section class="section" aria-labelledby="deliver-title">
-  <div class="container basics">
-    <div>
-      <p class="eyebrow">${pc.deliver.eyebrow}</p>
-      <h2 class="h2" id="deliver-title">${pc.deliver.title}</h2>
-    </div>
-    ${ticks(pc.deliver.points)}
-  </div>
-</section>
-
-${faqBlock(pc.faq, "gyik")}
-
-${ctaSection(pc.cta)}`,
-});
-
-// ---------------------------------------------------------------------------
-// Üzemeltetés
-
-export const hosting = () => ({
-  title: ho.title,
-  description: ho.description,
-  jsonLd: faqJsonLd(ho.faq.items),
-  body: `
-${pageHero(ho, ctaButtons())}
-
-<section class="section section--flush" aria-label="A két üzemeltetési mód">
-  <div class="container">
-    ${optionCards()}
-  </div>
-</section>
-
-<section class="section section--band" aria-labelledby="same-title">
-  <div class="container">
-    <div class="section-head section-head--single"><div><p class="eyebrow">${ho.same.eyebrow}</p><h2 class="h2" id="same-title">${ho.same.title}</h2></div></div>
-    ${featureList(ho.same.items)}
-  </div>
-</section>
-
-<section class="section section--deep" id="sajat-szerver" aria-labelledby="specs-title">
-  <div class="container split">
-    <div class="split__text">
-      <p class="eyebrow">${ho.specs.eyebrow}</p>
-      <h2 class="h2" id="specs-title">${g(ho.specs.title)}</h2>
-      <p class="lead">${ho.specs.lead}</p>
-    </div>
-    <div class="split__art">
-      <div class="spec-card">
-        <dl>${ho.specs.items.map((x) => `<div><dt>${x.k}</dt><dd>${x.v}</dd></div>`).join("")}</dl>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section" aria-labelledby="fit-title">
-  <div class="container">
-    <div class="section-head section-head--single"><div><p class="eyebrow">${ho.fit.eyebrow}</p><h2 class="h2" id="fit-title">${ho.fit.title}</h2></div></div>
-    <ul class="personas">${ho.fit.items.map((p) => `<li class="persona"><h3 class="h3">${p.title}</h3><p>${p.text}</p></li>`).join("")}</ul>
-  </div>
-</section>
-
-${faqBlock(ho.faq, "gyik")}
-
-${ctaSection(ho.cta)}`,
-});
-
-// ---------------------------------------------------------------------------
 // Kapcsolat
 
 export const contact = () => {
@@ -834,6 +697,7 @@ export const contact = () => {
         ${co.direct.map((d) => `<div><dt>${d.k}</dt><dd>${d.email ? `<a href="mailto:${config.email}">${config.email}</a>` : d.v}</dd></div>`).join("")}
       </dl>
       <p class="muted contact__customer">${co.customer}</p>
+      <a class="text-link" href="${APP.login}">${co.loginLink}${arrow("text-link__arrow")}</a>
       <h2 class="contact__steps-title">${co.stepsTitle}</h2>
       <ol class="next-steps">
         ${co.steps.map((s) => `<li><span>${s}</span></li>`).join("")}
@@ -864,12 +728,6 @@ export const contact = () => {
           ${field("phone", f.phone, text("phone", "tel", "tel", false), { hint: f.phoneHint })}
           ${field("vehicles", f.vehicles, text("vehicles", "number", "off", false, ' min="0" inputmode="numeric"'), { hint: f.vehiclesHint })}
           ${field("equipment", f.equipment, text("equipment", "number", "off", false, ' min="0" inputmode="numeric"'), { hint: f.equipmentHint })}
-          ${field(
-            "hosting",
-            f.hosting,
-            `<select class="input" id="f-hosting" name="hosting">${f.hostingOptions.map((o) => `<option value="${o.value}">${o.label}</option>`).join("")}</select>`,
-            { hint: f.hostingHint, full: true }
-          )}
           <div class="field field--full">
             <label for="f-message">${f.message}</label>
             <textarea class="input" id="f-message" name="message" rows="4" placeholder="${esc(f.placeholder)}"></textarea>
