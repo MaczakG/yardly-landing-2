@@ -2,6 +2,35 @@
 // its date: build.mjs publishes the posts dated up to the build day (see posts.mjs), and the
 // server rebuilds the site every morning. Facts were checked against the sources named in the
 // text (njt.jog.gov.hu, kormany.hu, nav.gov.hu); figures marked "a cikk írásakor" are dated.
+// Yardly's own prices and limits come from pricing.mjs.
+
+import { plans, huf, num, priceFacts, DKV_ADDON, ANNUAL_FREE_MONTHS, NO_VAT, TRIAL_DAYS, TRIAL_PLAN } from "./pricing.mjs";
+
+// "az Alap", "az Üzleti", "a Prémium".
+const the = (name) => (/^[aeiouáéíóöőúüű]/i.test(name) ? "az " : "a ") + name;
+
+// The price guide's worked example: a made-up company with 30 cars saving 72 000 Ft a month
+// on admin. Its fee is the cheapest plan for 30 active vehicles, computed from today's prices.
+const EXAMPLE_CARS = 30;
+const EXAMPLE_SAVING = 72000;
+const example = plans
+  .filter((p) => EXAMPLE_CARS <= p.ceiling)
+  .map((p) => ({ plan: p, over: Math.max(0, EXAMPLE_CARS - p.included) }))
+  .map((x) => ({ ...x, total: x.plan.monthly + x.over * x.plan.extra }))
+  .reduce((a, b) => (b.total < a.total ? b : a));
+const exampleText = () => {
+  const { plan, over, total } = example;
+  const parts = over
+    ? `${the(plan.name)} csomag ${plan.included} autót tartalmaz, a további ${over} autó ${over} × ${huf(plan.extra)}. A havidíj így ${huf(total)}`
+    : `${the(plan.name)} csomag mind a ${EXAMPLE_CARS} autót tartalmazza, a havidíj ${huf(total)}`;
+  const compare =
+    total * 2 < EXAMPLE_SAVING
+      ? `a példában számolt ${huf(EXAMPLE_SAVING)}-os megtakarítás kevesebb mint fele`
+      : total < EXAMPLE_SAVING
+        ? `kevesebb, mint a példában számolt ${huf(EXAMPLE_SAVING)}-os megtakarítás`
+        : `több, mint a példában számolt ${huf(EXAMPLE_SAVING)}-os megtakarítás, így itt az elkerült hibák döntenek`;
+  return `${parts}, ami ${compare}.`;
+};
 
 export const guides = [
   {
@@ -122,7 +151,7 @@ export const guides = [
 <h2>Mikor nem elég már a táblázat?</h2>
 <p>Tíz autóig egy táblázat jól bírja. Harminc autónál a gumicsere viszont már időpontokból, sofőrökből, garnitúrákból és tárolási helyekből álló feladat, és ha a táblázat nem szól, a tavaszi visszacsere ugyanúgy elcsúszik. Ha több telephely van, és a sofőröknek is rögzíteniük kellene, érdemes rendszerben gondolkodni.</p>
 <h2>Hogyan segít a Yardly?</h2>
-<p>A Yardlyban a szezonális gumicseréhez ismétlődő emlékeztetőt köthet minden járműhöz, és a rendszer e-mailben szól, mielőtt esedékes. A cserét a <a href="/megoldasaink/szerviz-karbantartas/">szerviznaplóba</a> rögzíti dátummal, km-rel, költséggel és szervizpartnerrel, a téli garnitúrát pedig tartozékként tarthatja nyilván gyári számmal és megjegyzéssel. A téli ellenőrzőlistát a sofőrök a telefonjukon tölthetik ki: a <a href="/megoldasaink/allapotfelmeres/">telefonos állapotfelmérés</a> a cég saját listáját küldi ki linkben, bejelentkezés nélkül, az eredmény pedig a jármű adatlapján jelenik meg.</p>`,
+<p>A Yardlyban a szezonális gumicseréhez ismétlődő emlékeztetőt köthet minden járműhöz, és a rendszer e-mailben szól, mielőtt esedékes. A cserét a <a href="/megoldasaink/szerviz-karbantartas/">szerviznaplóba</a> rögzíti dátummal, km-rel, költséggel és szervizpartnerrel, a téli garnitúrát pedig tartozékként tarthatja nyilván gyári számmal és megjegyzéssel. A téli ellenőrzőlistát a sofőrök a telefonjukon tölthetik ki: a <a href="/megoldasaink/allapotfelmeres/">telefonos állapotfelmérés</a> (Üzleti csomagtól) a cég saját listáját küldi ki linkben, bejelentkezés nélkül, az eredmény pedig a jármű adatlapján jelenik meg.</p>`,
   },
   {
     slug: "kgfb-evfordulo-flottabiztositas",
@@ -256,7 +285,7 @@ export const guides = [
 <li>Év közben senki nem frissíti a fájlt, így decemberben a tavalyi állapotot leltározzák.</li>
 </ul>
 <h2>Így segít a Yardly az év végi leltárban</h2>
-<p>A Yardly <a href="/megoldasaink/leltar/">telefonos leltárában</a> kiválasztja az eszközöket és a járműtartozékokat kategória, típus, állapot, telephely, raktár vagy helyiség szerint, és elküldi a leltárt egy kollégának. Ő e-mailben kap egy 14 napig érvényes linket, amely a telefonon megnyitja a kamerát; bejelentkezni és alkalmazást telepíteni nem kell. A QR-kódot és a vonalkódot is beolvassa, a telefon pedig nem mutatja előre a listát. A végén látszik, mi került elő és mi nem, a hiányzókhoz megjegyzés írható, az eredmény PDF-ben letölthető. A meglévő eszközlistát Excelből töltheti fel.</p>`,
+<p>A Yardly <a href="/megoldasaink/leltar/">telefonos leltárában</a> kiválasztja az eszközöket és a járműtartozékokat kategória, típus, állapot, telephely, raktár vagy helyiség szerint, és elküldi a leltárt egy kollégának. Ő e-mailben kap egy 14 napig érvényes linket, amely a telefonon megnyitja a kamerát; bejelentkezni és alkalmazást telepíteni nem kell. A QR-kódot és a vonalkódot is beolvassa, a telefon pedig nem mutatja előre a listát. A végén látszik, mi került elő és mi nem, a hiányzókhoz megjegyzés írható, az eredmény PDF-ben letölthető. A funkció az Üzleti csomagtól érhető el, a meglévő eszközlistát Excelből töltheti fel.</p>`,
   },
   {
     slug: "leltarozasi-szabalyzat",
@@ -459,7 +488,7 @@ export const guides = [
 <li>A végén látszik, mi került elő és mi nem. A hiányzókhoz megjegyzés írható, majd a leltár rögzíthető. Ha közben megszakad, a haladás a telefonon megmarad.</li>
 <li>Ön a Leltár előzményekben látja az eredményt, és PDF-ben letöltheti.</li>
 </ol>
-<p>A folyamatos leltárhoz a folyamatok között időzítve is indíthat leltárt, például negyedévente. A címkézés alapjairól a <a href="/blog/qr-kodos-leltar/">QR-kódos leltárról szóló cikkünkben</a> olvashat.</p>`,
+<p>A folyamatos leltárhoz a folyamatok között időzítve is indíthat leltárt, például negyedévente. A címkézés alapjairól a <a href="/blog/qr-kodos-leltar/">QR-kódos leltárról szóló cikkünkben</a> olvashat. A funkció az Üzleti csomagtól érhető el.</p>`,
   },
   {
     slug: "flottakezelo-szoftver-ara",
@@ -487,7 +516,6 @@ export const guides = [
 <li><strong>Felhasználók és telephelyek:</strong> egyes rendszerek ezek számát is korlátozzák vagy külön számlázzák.</li>
 <li><strong>Integrációk:</strong> az üzemanyagkártya-kapcsolat lehet alapfunkció vagy fizetős kiegészítő.</li>
 <li><strong>Eszközök:</strong> ha targoncát, szerszámot, IT-eszközt is nyilván tartana, nézze meg, beleférnek-e a keretbe.</li>
-<li><strong>Üzemeltetés:</strong> felhőben, a szolgáltató üzemeltetésével, vagy a saját szerveren? Saját szervernél a szerver és az üzemeltetés költsége is a cégnél jelentkezik.</li>
 <li><strong>Támogatás:</strong> csak e-mailes támogatás vagy kijelölt kapcsolattartó, és milyen válaszidővel.</li>
 <li><strong>Havi vagy éves előfizetés:</strong> éves előfizetésnél sok szolgáltató kedvezményt ad.</li>
 </ul>
@@ -512,9 +540,25 @@ export const guides = [
 <p class="formula">havi megtakarítás = megspórolt órák × óraköltség = 12 óra × 6 000 Ft = 72 000 Ft</p>
 <p>Ha a szoftver havidíja ennél kevesebb, az adminisztráció már önmagában kifizeti. A példában nem számoltunk az elkerült hibák árával: egy lejárt műszaki miatt kieső munkanappal, egy elmaradt szerviz utáni drágább javítással, vagy egy olyan számlával, amelyet egy jóváhagyási lépés kiszűrt volna. Ezek nehezebben mérhetők, de gyakran nagyobbak. A saját számításához ezt a képletet használja:</p>
 <p class="formula">havi haszon = (megspórolt órák × óraköltség) + elkerült hibák becsült költsége − a szoftver havidíja</p>
-<h2>Mennyibe kerül a Yardly?</h2>
-<p>A Yardlyt nem dobozos csomagként adjuk: minden cégnek a saját folyamataira szabjuk, és a saját szerverükre telepítjük, vagy mi üzemeltetjük a felhőben. Ezért nincs nyilvános árlista. A felmérés után tételes ajánlatot adunk, ahogy fent javasoltuk: külön sorban a testreszabással és a bevezetéssel, az üzemeltetéssel és a támogatással.</p>
-<p>Az ár a járművek és eszközök számától, a testreszabás és az integrációk mértékétől és az üzemeltetés módjától függ. A meglévő adatok áthozása a bevezetés része, és a rendszerből bármikor teljes adatexport készíthető Excelben. A bevezetés lépéseit a <a href="/hogyan-dolgozunk/">Hogyan dolgozunk</a> oldalon írjuk le, a két üzemeltetési módot az <a href="/uzemeltetes/">Üzemeltetés</a> oldalon. Ha még a szempontokat gyűjti, a <a href="/blog/flottakezelo-szoftver-valasztas/">kiválasztási ellenőrzőlistánk</a> segít.</p>`,
+<h2>A Yardly árai</h2>
+<p>A Yardly sávos csomagokkal dolgozik, nyilvános árral. ${NO_VAT} Éves fizetésnél ${ANNUAL_FREE_MONTHS} hónap ingyenes, ezt mutatja a második sor.</p>
+<table>
+<thead>
+<tr><th></th>${plans.map((p) => `<th>${p.name}</th>`).join("")}</tr>
+</thead>
+<tbody>
+<tr><td>Havidíj</td>${plans.map((p) => `<td>${huf(p.monthly)}</td>`).join("")}</tr>
+<tr><td>Éves fizetésnél havonta</td>${plans.map((p) => `<td>${huf(p.annualMonthly)}</td>`).join("")}</tr>
+<tr><td>Aktív jármű a díjban</td>${plans.map((p) => `<td>${p.included}</td>`).join("")}</tr>
+<tr><td>További jármű</td>${plans.map((p) => `<td>${huf(p.extra)}/hó, legfeljebb ${p.ceiling}-ig</td>`).join("")}</tr>
+<tr><td>Eszköz</td>${plans.map((p) => `<td>${p.equipment === null ? "korlátlan" : num(p.equipment)}</td>`).join("")}</tr>
+<tr><td>Felhasználó</td>${plans.map((p) => `<td>${p.users === null ? "korlátlan" : num(p.users)}</td>`).join("")}</tr>
+<tr><td>Telephely</td>${plans.map((p) => `<td>${p.sites === null ? "korlátlan" : num(p.sites)}</td>`).join("")}</tr>
+<tr><td>DKV-integráció</td>${plans.map((p) => `<td>${p.key === DKV_ADDON.plan ? `kiegészítő: +${huf(DKV_ADDON.monthly)}/hó` : "benne van"}</td>`).join("")}</tr>
+</tbody>
+</table>
+<p>Az Excel-import és -export minden csomagban benne van. Az Üzleti csomagtól elérhető a telefonos állapotfelmérés és a QR-leltár, a Prémiumban az analitika és a csereajánlások. Eszközből az Alap és az Üzleti csomag keretén felül ${priceFacts.equipmentAddOn} bővítés vehető. A kivont járművek nem számítanak bele a keretbe, és hűségidő nincs.</p>
+<p>A fenti ${EXAMPLE_CARS} autós példában ${exampleText()} A kalkulátort és a csomagok részleteit az <a href="/arak/">árak oldalán</a> találja; a ${TRIAL_DAYS} napos próbaidő alatt ${the(TRIAL_PLAN)} csomag minden funkciója kipróbálható. Ha még a szempontokat gyűjti, a <a href="/blog/flottakezelo-szoftver-valasztas/">kiválasztási ellenőrzőlistánk</a> segít.</p>`,
   },
   {
     slug: "qr-cimke-eszkozokre",
@@ -731,7 +775,7 @@ export const guides = [
 </ol>
 <p>Ha az év végi leltárt is az operatív nyilvántartásból indítja, a mennyiségi felvétel eredménye közvetlenül összevethető a könyvelés adataival. Hogy a cég leltározási szabályzata szerint mi fogadható el, azt a könyvelővel egyeztesse. A leltár menetéről az <a href="/blog/ev-vegi-eszkozleltar/">év végi eszközleltárról szóló cikkünkben</a> írtunk részletesen.</p>
 <h2>Mit csinál és mit nem a Yardly?</h2>
-<p>A Yardly operatív eszköznyilvántartó, nem könyvelőprogram. Nem számol értékcsökkenést, nem könyvel, és nem helyettesíti a tárgyi eszköz analitikát. Abban segít, ami a könyvelésből kimarad. Az <a href="/megoldasaink/eszkoznyilvantartas/">eszköznyilvántartásban</a> minden eszköznek van leltári száma, gyári száma, belső azonosítója és vonalkódja, pontos helye a polcig, felelőse és használója, saját állapota, szerviznaplója és ütemterve. A beszerzés dátumát, értékét, helyét és számlaszámát is rögzítheti, így az egyeztetéshez megvan a közös alap. Az eszközlistát bármikor exportálhatja Excelben, a leltárt pedig telefonnal, QR- vagy vonalkóddal végezheti (<a href="/megoldasaink/leltar/">leltár telefonnal</a>).</p>`,
+<p>A Yardly operatív eszköznyilvántartó, nem könyvelőprogram. Nem számol értékcsökkenést, nem könyvel, és nem helyettesíti a tárgyi eszköz analitikát. Abban segít, ami a könyvelésből kimarad. Az <a href="/megoldasaink/eszkoznyilvantartas/">eszköznyilvántartásban</a> minden eszköznek van leltári száma, gyári száma, belső azonosítója és vonalkódja, pontos helye a polcig, felelőse és használója, saját állapota, szerviznaplója és ütemterve. A beszerzés dátumát, értékét, helyét és számlaszámát is rögzítheti, így az egyeztetéshez megvan a közös alap. Az eszközlistát bármikor exportálhatja Excelben, a leltárt pedig telefonnal, QR- vagy vonalkóddal végezheti (<a href="/megoldasaink/leltar/">leltár telefonnal</a>, Üzleti csomagtól).</p>`,
   },
   {
     slug: "abroncsnyilvantartas-flotta",
@@ -802,7 +846,7 @@ export const guides = [
 <h2>Mikor nem elég már az Excel?</h2>
 <p>A minta néhány tucat autóig jól működik. Gond akkor van, ha a cserét a szerviz végzi, az autót a sofőr viszi, a gumihotel listája pedig e-mailben jön: a táblázat ilyenkor mindig a valóság mögött jár. Akkor is érdemes váltani, ha a szezonális cseréről emlékeztető kell, vagy ha a raktárban tárolt garnitúrákat időnként le is kell leltározni.</p>
 <h2>Hogyan segít a Yardly?</h2>
-<p>A Yardlyban nincs külön abroncsmodul, de a gumicsere nyilvántartás a meglévő funkciókkal jól vezethető. A garnitúrákat <a href="/megoldasaink/karugyek-biztositas-tartozekok/">tartozékként</a> rögzítheti a járműhöz, saját kategóriában (például „Téli gumi”), névvel, gyári számmal, beszerzési dátummal és értékkel; a méretet, a DOT-ot, a profilt és a tárolási helyet a megjegyzésbe írhatja. A tartozékok a telefonos leltárban is számba vehetők, így a raktárban álló garnitúrák is ellenőrizhetők. A cserét a <a href="/megoldasaink/szerviz-karbantartas/">szerviznaplóba</a> rögzíti dátummal, km-rel, költséggel és szervizpartnerrel, a következő szezonális cseréről pedig ismétlődő emlékeztető szól e-mailben.</p>`,
+<p>A Yardlyban nincs külön abroncsmodul, de a gumicsere nyilvántartás a meglévő funkciókkal jól vezethető. A garnitúrákat <a href="/megoldasaink/karugyek-biztositas-tartozekok/">tartozékként</a> rögzítheti a járműhöz, saját kategóriában (például „Téli gumi”), névvel, gyári számmal, beszerzési dátummal és értékkel; a méretet, a DOT-ot, a profilt és a tárolási helyet a megjegyzésbe írhatja. A tartozékok a telefonos leltárban (Üzleti csomagtól) is számba vehetők, így a raktárban álló garnitúrák is ellenőrizhetők. A cserét a <a href="/megoldasaink/szerviz-karbantartas/">szerviznaplóba</a> rögzíti dátummal, km-rel, költséggel és szervizpartnerrel, a következő szezonális cseréről pedig ismétlődő emlékeztető szól e-mailben.</p>`,
   },
   {
     slug: "flottakezelo-szoftver-valasztas",
@@ -848,7 +892,7 @@ export const guides = [
 <h3>Biztonság és adatvédelem</h3>
 <ul>
 <li>Van-e kétlépcsős belépés?</li>
-<li>Hogyan különítik el a cégek adatait egymástól? Telepíthető-e a rendszer a saját szerverükre, ha az adatoknak a cégen belül kell maradniuk?</li>
+<li>Hogyan különítik el a cégek adatait egymástól?</li>
 <li>A rendszer személyes adatokat is kezel (a sofőrök nevét, jogosítványát, bírságait). Kérje el az adatfeldolgozásra vonatkozó szerződést, kérdezze meg, hol tárolják az adatokat, és a GDPR szerinti teendőket egyeztesse az adatvédelmi felelősükkel.</li>
 <li>Kilépéskor megkapja-e az összes adatát, olvasható formátumban?</li>
 </ul>
@@ -856,10 +900,10 @@ export const guides = [
 <ul>
 <li>Van-e nyilvános ár, és pontosan mi van a csomagban? Az árazási modellekről a <a href="/blog/flottakezelo-szoftver-ara/">flottakezelő szoftver áráról</a> szóló cikk szól.</li>
 <li>Mi történik, ha a flotta nő? Van-e hűségidő?</li>
-<li>Van-e próbaidő vagy bemutató, és a saját folyamataikat is meg tudják-e nézni benne?</li>
+<li>Van-e ingyenes próbaidő, és milyen funkciókkal?</li>
 </ul>
 <h2>Teszt-forgatókönyv a próbaidőre</h2>
-<p>A demó azt mutatja meg, mit tud a rendszer. A próbaidő vagy egy próbatelepítés azt, hogy a saját adataikkal is működik-e. Egy-két hét alatt az alábbi lépéseken érdemes végigmenni:</p>
+<p>A demó azt mutatja meg, mit tud a rendszer. A próbaidő azt, hogy a saját adataikkal is működik-e. Egy-két hét alatt az alábbi lépéseken érdemes végigmenni:</p>
 <ol>
 <li><strong>Import:</strong> töltse fel a meglévő Excel-listát, legalább 10 járművel. Mennyi kézi javítás kellett utána?</li>
 <li><strong>Lejárat:</strong> vegyen fel egy dokumentumot néhány napon belüli lejárattal, és nézze meg, megérkezik-e a riasztás.</li>
@@ -887,10 +931,10 @@ export const guides = [
 <li>a karbantartás km vagy idő szerint ütemezhető, amelyik hamarabb teljesül,</li>
 <li>az üzemanyagkártyák közül a DKV-tranzakciókat húzza be automatikusan, 6 óránként,</li>
 <li>van Excel-import sablonnal és teljes adatexport Excelben,</li>
-<li>a felület telefonra szabott és magyar nyelvű; a szerepkörök és a jogosultsági mátrix a cég szervezetére szabhatók,</li>
-<li>kétlépcsős belépés, és minden cégnek saját, elkülönített példány, a saját szerverén vagy az általunk üzemeltetett felhőben.</li>
+<li>a felület telefonra szabott és magyar nyelvű; szerepkörök vannak, az Üzleti csomagtól saját szerepkörökkel és jogosultsági mátrixszal,</li>
+<li>kétlépcsős belépés és cégenként elkülönített adatok.</li>
 </ul>
-<p>A fenti forgatókönyv lépéseit egy bemutatón egy kitalált cég adataival végigvesszük, a bevezetésnél pedig a saját adataikkal és folyamataikkal állítjuk be a rendszert. Részletek a <a href="/megoldasaink/jarmunyilvantartas/">járműnyilvántartás</a>, illetve a <a href="/megoldasaink/csapat-biztonsag/">jogosultságok és biztonság</a> oldalán, a bevezetésről pedig a <a href="/hogyan-dolgozunk/">Hogyan dolgozunk</a> oldalon.</p>`,
+<p>A ${TRIAL_DAYS} napos próbaidő alatt ${the(TRIAL_PLAN)} csomag minden funkciója elérhető, így a fenti forgatókönyv lépései is kipróbálhatók. Részletek a <a href="/megoldasaink/jarmunyilvantartas/">járműnyilvántartás</a>, illetve a <a href="/megoldasaink/csapat-biztonsag/">jogosultságok és biztonság</a> oldalán.</p>`,
   },
   {
     slug: "nav-uzemanyagar-flotta",
@@ -1199,7 +1243,7 @@ export const guides = [
 </ul>
 <h2>Hogyan segít a Yardly?</h2>
 <p>A Yardly <a href="/megoldasaink/allapotfelmeres/">telefonos állapotfelmérésében</a> összeállíthatja a saját átadás-átvételi ellenőrzőlistáját húzással, hat mezőtípussal (címke, szöveg, jelölőnégyzet, rádiógomb, legördülő lista, választó). Az átadáskor a linket kézzel is kiküldheti a jármű új sofőrjének: ő e-mailben kapja, és a telefonján tölti ki, bejelentkezés és alkalmazás nélkül. A link 30 napig érvényes. A kitöltés tartalmazza az eredményt (Rendben vagy Hibát találtunk), a km-óraállást, a megjegyzést és a lista válaszait. Az előzmények a jármű Állapotfelmérés fülén látszanak, és minden kitöltés PDF-ben letölthető. A fotókat a jármű dokumentumai közé töltheti fel JPG vagy PNG formátumban, a károkat pedig fotóval együtt kárügyként rögzítheti.</p>
-<p>A <a href="/megoldasaink/folyamatok/">folyamatok</a> elindulhatnak, amikor egy jármű sofőrje változik, és automatikus lépésként átadás-átvételi elismervényt is készíthetnek PDF-ben. A bírságoknál a rendszer a jármű sofőrváltásaiból, a bírság időpontja alapján keresi meg a sofőrt.</p>`,
+<p>A <a href="/megoldasaink/folyamatok/">folyamatok</a> elindulhatnak, amikor egy jármű sofőrje változik, és automatikus lépésként átadás-átvételi elismervényt is készíthetnek PDF-ben. A bírságoknál a rendszer a jármű sofőrváltásaiból, a bírság időpontja alapján keresi meg a sofőrt. Az állapotfelmérés az Üzleti csomagtól érhető el.</p>`,
   },
   {
     slug: "it-eszkoz-laptop-nyilvantartas",
@@ -1250,7 +1294,7 @@ export const guides = [
 <h2>Kilépő dolgozó: így ne vesszen el a laptop</h2>
 <p>Az IT-eszközök szempontjából a kilépés az egyik legkockázatosabb pillanat. Ritkán rossz szándék a gond, inkább az, hogy senki nem kéri vissza a gépeket időben. Ha a nyilvántartásban a használó név szerint szerepel, a kilépés előtt egy szűréssel megvan a teljes lista: laptop, telefon, monitor, dokkoló, töltők. Érdemes ezt a kilépési folyamat kötelező lépésévé tenni: a HR értesítése automatikusan jusson el az informatikushoz is, aki a fiókok letiltását és az eszközök visszavételét egy listán, egy időben intézi.</p>
 <h2>Laptop nyilvántartás a Yardlyban</h2>
-<p>A Yardly <a href="/megoldasaink/eszkoznyilvantartas/">eszköznyilvántartásában</a> az IT-eszközöknek külön kategóriát hozhat létre saját jellemzőkkel (például processzor, memória, garancia), amelyek oszlopként jelennek meg, és kereshetők. Minden gépnek van gyári száma, leltári száma, vonalkódja, beszerzési adata, felelőse és használója, a kolléga adatlapján pedig látszik, mi van nála. A garancialevelet dokumentumként, lejárattal csatolhatja, és a <a href="/megoldasaink/riasztasok/">riasztások</a> a beállított napokkal előtte e-mailt küldenek. Egy folyamat elindulhat, amikor egy kolléga távozik, vagy amikor egy eszköz gazdát cserél. Az éves leltárhoz a gépek QR- vagy vonalkódos címkéit telefonnal olvashatja be. A címkézésről a <a href="/blog/qr-cimke-eszkozokre/">QR-címkékről szóló cikkünkben</a> olvashat.</p>`,
+<p>A Yardly <a href="/megoldasaink/eszkoznyilvantartas/">eszköznyilvántartásában</a> az IT-eszközöknek külön kategóriát hozhat létre saját jellemzőkkel (például processzor, memória, garancia), amelyek oszlopként jelennek meg, és kereshetők. Minden gépnek van gyári száma, leltári száma, vonalkódja, beszerzési adata, felelőse és használója, a kolléga adatlapján pedig látszik, mi van nála. A garancialevelet dokumentumként, lejárattal csatolhatja, és a <a href="/megoldasaink/riasztasok/">riasztások</a> a beállított napokkal előtte e-mailt küldenek. Egy folyamat elindulhat, amikor egy kolléga távozik, vagy amikor egy eszköz gazdát cserél. Az éves leltárhoz a gépek QR- vagy vonalkódos címkéit telefonnal olvashatja be (Üzleti csomagtól). A címkézésről a <a href="/blog/qr-cimke-eszkozokre/">QR-címkékről szóló cikkünkben</a> olvashat.</p>`,
   },
   {
     slug: "soforok-okmanyainak-lejarata",
@@ -1323,7 +1367,7 @@ export const guides = [
 <h2>Mikor nem elég már az Excel?</h2>
 <p>Öt sofőr és két okmánytípus mellett egy táblázat elég. Húsz sofőrnél, négy-öt okmánytípussal és eltérő előrejelzési időkkel viszont valakinek minden héten végig kell néznie a listát, és ha szabadságon van, a figyelés is szünetel. A táblázat ráadásul nem korlátozza, ki látja a többiek adatait.</p>
 <h2>Hogyan segít a Yardly?</h2>
-<p>A Yardlyban a <a href="/megoldasaink/dokumentumok/">dokumentumokat</a> közvetlenül a kollégához csatolhatja, lejárati dátummal: a jogosítvány és a sofőrkártya mellé saját dokumentumtípusként a GKI-t vagy az ADR-bizonyítványt is felveheti. A <a href="/megoldasaink/riasztasok/">riasztás</a> a beállított napokon e-mailt küld a flottavezetőnek, az érintett kollégának vagy mindkettőnek, naponta egy összesített levélben; a hosszabb előkészítést igénylő tételekhez, például a GKI-továbbképzéshez, személyhez kötött emlékeztetőt is beállíthat. A felhasználói adatlapon egy helyen látszanak a kolléga jogosítvány-kategóriái és dokumentumai, a <a href="/megoldasaink/csapat-biztonsag/">jogosultsági mátrixszal</a> pedig beállíthatja, ki láthatja ezeket. A fájlok csak bejelentkezve tölthetők le.</p>`,
+<p>A Yardlyban a <a href="/megoldasaink/dokumentumok/">dokumentumokat</a> közvetlenül a kollégához csatolhatja, lejárati dátummal: a jogosítvány és a sofőrkártya mellé saját dokumentumtípusként a GKI-t vagy az ADR-bizonyítványt is felveheti. A <a href="/megoldasaink/riasztasok/">riasztás</a> a beállított napokon e-mailt küld a flottavezetőnek, az érintett kollégának vagy mindkettőnek, naponta egy összesített levélben; a hosszabb előkészítést igénylő tételekhez, például a GKI-továbbképzéshez, személyhez kötött emlékeztetőt is beállíthat. A felhasználói adatlapon egy helyen látszanak a kolléga jogosítvány-kategóriái és dokumentumai, a <a href="/megoldasaink/csapat-biztonsag/">jogosultsági mátrixszal</a> (Üzleti csomagtól) pedig beállíthatja, ki láthatja ezeket. A fájlok csak bejelentkezve tölthetők le.</p>`,
   },
   {
     slug: "gepjarmu-hasznalati-szabalyzat",
@@ -1413,7 +1457,7 @@ export const guides = [
 </ul>
 <p>Erről részletesebben a <a href="/blog/flottakezeles-excelben/">flottakezelés Excelben</a> cikkünk szól.</p>
 <h2>Ebben segít a Yardly</h2>
-<p>A Yardly a szabályzat több pontját le tudja képezni. A sofőr hozzárendelése és az előzményei a járműnél vannak; egy bírságnál a rendszer a bírság időpontja alapján megkeresi, ki vezette az autót, és értesítést is küldhet neki. A jogosítvány a kollégához csatolható, lejárati riasztással. A sofőr a jármű adatlapján jelentheti a hibát vagy a kárt, sürgősséggel, és ebből javítási folyamat indulhat összeghatáros jóváhagyással. Sofőrváltáskor elindulhat egy folyamat, amely átadás-átvételi elismervényt készít PDF-ben, a telefonos állapotfelméréssel pedig a rendszeres ellenőrzés is ütemezhető. A szerepkörökkel beállítható, hogy a sofőr csak a saját autóját lássa. Részletek a <a href="/megoldasaink/folyamatok/">folyamatok és automatizálás</a> oldalon.</p>`,
+<p>A Yardly a szabályzat több pontját le tudja képezni. A sofőr hozzárendelése és az előzményei a járműnél vannak; egy bírságnál a rendszer a bírság időpontja alapján megkeresi, ki vezette az autót, és értesítést is küldhet neki. A jogosítvány a kollégához csatolható, lejárati riasztással. A sofőr a jármű adatlapján jelentheti a hibát vagy a kárt, sürgősséggel, és ebből javítási folyamat indulhat összeghatáros jóváhagyással. Sofőrváltáskor elindulhat egy folyamat, amely átadás-átvételi elismervényt készít PDF-ben, a telefonos állapotfelméréssel (Üzleti csomagtól) pedig a rendszeres ellenőrzés is ütemezhető. A szerepkörökkel beállítható, hogy a sofőr csak a saját autóját lássa. Részletek a <a href="/megoldasaink/folyamatok/">folyamatok és automatizálás</a> oldalon.</p>`,
   },
   {
     slug: "szerszamnyilvantartas",
@@ -1479,7 +1523,7 @@ export const guides = [
 <li>Egy szerszám előéletét (kiadások, javítások, költségek) nem lehet visszakeresni.</li>
 </ul>
 <h2>Szerszámnyilvántartás a Yardlyban</h2>
-<p>A Yardly <a href="/megoldasaink/eszkoznyilvantartas/">eszköznyilvántartásában</a> a szerszámok saját kategóriát kaphatnak saját jellemzőkkel, és minden szerszámnál megadható a pontos hely, a felelős és a használó. A változások a változásnaplóban visszakövethetők, a birtokos változása pedig elindíthat egy folyamatot, például egy átadás-átvételi elismervény elkészítését PDF-ben. A felülvizsgálati jegyzőkönyvet lejárattal csatolhatja, és a lejárat előtt e-mail érkezik. A hibát a kolléga az eszköz adatlapján jelentheti be, az éves leltárt pedig telefonnal, a címkék beolvasásával végezheti (<a href="/megoldasaink/leltar/">leltár telefonnal</a>). A Yardly analitikája jelzi azt az eszközt, amely 4-nél többször volt szervizben, vagy amelynek javítása már többe került, mint a beszerzése.</p>`,
+<p>A Yardly <a href="/megoldasaink/eszkoznyilvantartas/">eszköznyilvántartásában</a> a szerszámok saját kategóriát kaphatnak saját jellemzőkkel, és minden szerszámnál megadható a pontos hely, a felelős és a használó. A változások a változásnaplóban visszakövethetők (Üzleti csomagtól), a birtokos változása pedig elindíthat egy folyamatot, például egy átadás-átvételi elismervény elkészítését PDF-ben. A felülvizsgálati jegyzőkönyvet lejárattal csatolhatja, és a lejárat előtt e-mail érkezik. A hibát a kolléga az eszköz adatlapján jelentheti be, az éves leltárt pedig telefonnal, a címkék beolvasásával végezheti (<a href="/megoldasaink/leltar/">leltár telefonnal</a>, Üzleti csomagtól). A Prémium csomag analitikája jelzi azt az eszközt, amely 4-nél többször volt szervizben, vagy amelynek javítása már többe került, mint a beszerzése.</p>`,
   },
   {
     slug: "sofor-indulas-elotti-ellenorzes",
@@ -1553,7 +1597,7 @@ export const guides = [
 <p>Amíg öt autó van, egy papírlista is működhet. Ha viszont nem látszik, ki töltötte ki ma és ki nem, a hibajelzések SMS-ben és szóban érkeznek, és senki nem tudja visszakeresni, mikor jelezték először a kopó fékbetétet, akkor a lista már csak papíron létezik.</p>
 <h2>Hogyan segít a Yardly?</h2>
 <p>A Yardly <a href="/megoldasaink/allapotfelmeres/">telefonos állapotfelmérésében</a> a fenti listát a saját ellenőrzőlistájaként építheti fel, húzással, hat mezőtípussal. Járművenként ütemezheti: naponta, hetente, havonta, a hónap N-edik munkanapján vagy a hét egy adott napján. A sofőr e-mailben kap egy linket, és a telefonján tölti ki, bejelentkezés és alkalmazás nélkül; a link 30 napig érvényes. A kitöltésben szerepel az eredmény (Rendben vagy Hibát találtunk), a km-óraállás és a megjegyzés. Az előzmények a jármű adatlapján látszanak, minden kitöltés PDF-ben letölthető, a késedelmes felmérés pedig az irányítópulton és a riasztásokban is megjelenik.</p>
-<p>Egy rögzített állapotfelmérés <a href="/megoldasaink/folyamatok/">folyamatot</a> is indíthat, például egy feladatot a flottavezetőnek, a javítást lezáró lépés pedig beírja a munkát a <a href="/megoldasaink/szerviz-karbantartas/">szerviznaplóba</a>. A bejelentkezett sofőr a jármű adatlapján bejelentést is tehet sürgősséggel (Ráér, Normál, Sürgős). A téli időszak teendőiről a <a href="/blog/teli-felkeszules-ceges-flotta/">téli felkészülésről szóló cikkünkben</a> olvashat.</p>`,
+<p>Egy rögzített állapotfelmérés <a href="/megoldasaink/folyamatok/">folyamatot</a> is indíthat, például egy feladatot a flottavezetőnek, a javítást lezáró lépés pedig beírja a munkát a <a href="/megoldasaink/szerviz-karbantartas/">szerviznaplóba</a>. A bejelentkezett sofőr a jármű adatlapján bejelentést is tehet sürgősséggel (Ráér, Normál, Sürgős). Az állapotfelmérés az Üzleti csomagtól érhető el. A téli időszak teendőiről a <a href="/blog/teli-felkeszules-ceges-flotta/">téli felkészülésről szóló cikkünkben</a> olvashat.</p>`,
   },
   {
     slug: "raktarprogram-vagy-eszkoznyilvantarto",
@@ -1619,7 +1663,7 @@ export const guides = [
 <h2>Ha mindkettő kell</h2>
 <p>Egy villanyszerelő cégnél a kábel, a kötőelem és a kismegszakító készlet, a fúrókalapács, a mérőműszer és a létra eszköz. Egy logisztikai cégnél a raklapfólia készlet, a targonca és a kézi vonalkódolvasó eszköz. Ilyenkor ne erőltesse a kettőt egy rendszerbe. Egy készletkezelőben az egyedi eszközök elvesznek a mennyiségek között, egy eszköznyilvántartóban pedig a fogyóanyag darabszámai nem követhetők rendesen. Ami közös lehet: ugyanazok a telephely- és raktárnevek, és ugyanaz a címkézési logika.</p>
 <h2>Hol áll ebben a Yardly?</h2>
-<p>A Yardly eszköznyilvántartó, nem raktári készletkezelő. Nincs benne cikkszámos, mennyiségi készlet, sem bevételezés és kivételezés, ezért fogyóanyagra és árukészletre nem ajánljuk. Az egyedi eszközöknél viszont ebben erős: az <a href="/megoldasaink/eszkoznyilvantartas/">eszköznyilvántartásban</a> kategóriánként saját jellemzőket adhat meg, és minden eszköznek van pontos helye a polcig, felelőse, használója, saját állapota, szerviznaplója és ütemterve. A leltárt telefonnal végezheti, QR- vagy vonalkóddal (<a href="/megoldasaink/leltar/">leltár telefonnal</a>). Ha a szerszámai miatt keres megoldást, olvassa el a <a href="/blog/szerszamnyilvantartas/">szerszámnyilvántartásról szóló cikkünket</a>. Ha pedig a könyveléshez való viszony a kérdés, az <a href="/blog/eszkoznyilvantartas-vagy-targyi-eszkoz-konyveles/">eszköznyilvántartás és a tárgyi eszköz könyvelés különbségéről</a> is írtunk.</p>`,
+<p>A Yardly eszköznyilvántartó, nem raktári készletkezelő. Nincs benne cikkszámos, mennyiségi készlet, sem bevételezés és kivételezés, ezért fogyóanyagra és árukészletre nem ajánljuk. Az egyedi eszközöknél viszont ebben erős: az <a href="/megoldasaink/eszkoznyilvantartas/">eszköznyilvántartásban</a> kategóriánként saját jellemzőket adhat meg, és minden eszköznek van pontos helye a polcig, felelőse, használója, saját állapota, szerviznaplója és ütemterve. A leltárt telefonnal végezheti, QR- vagy vonalkóddal (<a href="/megoldasaink/leltar/">leltár telefonnal</a>, Üzleti csomagtól). Ha a szerszámai miatt keres megoldást, olvassa el a <a href="/blog/szerszamnyilvantartas/">szerszámnyilvántartásról szóló cikkünket</a>. Ha pedig a könyveléshez való viszony a kérdés, az <a href="/blog/eszkoznyilvantartas-vagy-targyi-eszkoz-konyveles/">eszköznyilvántartás és a tárgyi eszköz könyvelés különbségéről</a> is írtunk.</p>`,
   },
   {
     slug: "targonca-idoszakos-vizsgalat",

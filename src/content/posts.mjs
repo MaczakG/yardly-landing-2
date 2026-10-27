@@ -1,6 +1,8 @@
 // Blog posts. `solution` is the related solution page (content/solutions.mjs). Old URLs of
 // removed posts are redirected in routes.mjs. The guides (guides.mjs) come out on their dates.
+// Prices come from pricing.mjs.
 import { guides } from "./guides.mjs";
+import { priceFacts, TRIAL_DAYS, TRIAL_PLAN } from "./pricing.mjs";
 
 export const blog = {
   title: "Blog – flotta- és eszközkezelés a gyakorlatban",
@@ -11,7 +13,7 @@ export const blog = {
   all: "Összes",
   postCta: {
     title: "Ezt a Yardly magától csinálja.",
-    text: "Egy 30 perces online bemutatón megmutatjuk, hogyan működne az Önök folyamataival.",
+    text: `Próbálja ki ${TRIAL_DAYS} napig ingyen, a ${TRIAL_PLAN} csomag minden funkciójával.`,
     more: "Részletek",
   },
   relatedTitle: "Kapcsolódó cikkek",
@@ -44,7 +46,9 @@ const written = [
 <li>Az AdBlue, az olaj és a mosás nem számít tankolásnak, az elektromos töltés külön jelölést kap.</li>
 </ul>
 <h2>Hogyan kapcsolja be?</h2>
-<p>A Beállítások → Integrációk fülön adja meg a DKV-tól kapott API-hozzáférést, és egy gombbal próbálja ki a kapcsolatot. A titkos kulcsokat a rendszer titkosítva tárolja. Megadhatja azt is, melyik naptól hívja le a korábbi tranzakciókat.</p>`,
+<p>A Beállítások → Integrációk fülön adja meg a DKV-tól kapott API-hozzáférést, és egy gombbal próbálja ki a kapcsolatot. A titkos kulcsokat a rendszer titkosítva tárolja. Megadhatja azt is, melyik naptól hívja le a korábbi tranzakciókat.</p>
+<h2>Melyik csomagban érhető el?</h2>
+<p>Az Üzleti és a Prémium csomag tartalmazza, ${priceFacts.dkvAddOn}.</p>`,
   },
   {
     slug: "flottakezeles-excelben",
@@ -208,7 +212,7 @@ const written = [
 </ul>
 <h2>Ugyanez targoncákra és gépekre</h2>
 <p>Az eszközöknél a legjobb jel az, ha a javítási költség már meghaladta a beszerzési árat, vagy ha egy gép 4-nél többször volt szervizben. Ilyenkor ritkán éri meg tovább javítani.</p>
-<p>A Yardly ezeket a szabályokat magától alkalmazza: a csereajánlások mellett az „Indoklás” oszlop megmondja, miért került egy jármű vagy eszköz a listára.</p>`,
+<p>A Yardly Prémium csomagja ezeket a szabályokat magától alkalmazza: a csereajánlások mellett az „Indoklás” oszlop megmondja, miért került egy jármű vagy eszköz a listára.</p>`,
   },
   {
     slug: "javitasok-jovahagyasa",
