@@ -18,6 +18,21 @@
     return null;
   }
 
+  // "29 990 Ft": thousands grouped with a non-breaking space (Intl leaves 4-digit numbers ungrouped).
+  function num(n) {
+    return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, "\u00a0");
+  }
+
+  function huf(n) {
+    return num(n) + "\u00a0Ft";
+  }
+
+  function fill(template, values) {
+    return template.replace(/\{(\w+)\}/g, function (m, key) {
+      return key in values ? values[key] : m;
+    });
+  }
+
   /* Header hairline once the page scrolls */
   var header = document.querySelector(".site-header");
   function onScroll() {
@@ -112,6 +127,185 @@
       if (mq.matches) setNav(false);
     });
   }
+
+  /* Pricing: monthly or annual payment, and the calculator for vehicles, equipment, users and features */
+  var cycle = "monthly";
+  var calc = document.querySelector("[data-calc]");
+  var updateCalc = function () {};
+
+  if (calc) {
+    var plans = JSON.parse(calc.getAttribute("data-plans"));
+    var addon = JSON.parse(calc.getAttribute("data-addon"));
+    var text = JSON.parse(calc.getAttribute("data-text"));
+    var features = JSON.parse(calc.getAttribute("data-features") || "[]");
+    var checks = calc.querySelectorAll("[data-calc-feature]");
+    var max = Number(calc.getAttribute("data-max")) || 300;
+    var range = document.getElementById("calc-range");
+    var number = document.getElementById("calc-n");
+    var eRange = document.getElementById("calc-e-range");
+    var eNumber = document.getElementById("calc-e");
+    var eMaxInput = Number(eNumber.getAttribute("max")) || 100000;
+    var uRange = document.getElementById("calc-u-range");
+    var uNumber = document.getElementById("calc-u");
+    var uMaxInput = Number(uNumber.getAttribute("max")) || 100000;
+    var out = {
+      plans: calc.querySelector("[data-calc-plans]"),
+      note: calc.querySelector("[data-calc-note]"),
+      tier: calc.querySelector("[data-calc-tier]"),
+      amount: calc.querySelector("[data-calc-amount]"),
+      lines: calc.querySelector("[data-calc-lines]"),
+      cta: calc.querySelector("[data-calc-cta]"),
+    };
+
+    // Same rules as planQuote in src/pages.mjs: vehicles up to the plan's ceiling, equipment
+    // above the plan's limit in "+250 eszköz" packs (Prémium: no limit); too many users or a
+    // ticked feature the plan lacks rules it out, unless the plan can buy that feature as an extra.
+    var yearly = function (monthly) {
+      return cycle === "annual" ? (monthly * (12 - addon.freeMonths)) / 12 : monthly;
+    };
+    var addonMonthly = function () {
+      return yearly(addon.monthly);
+    };
+    var maxEquipment = function (plan) {
+      return plan.equipment === null ? Infinity : plan.equipment + addon.size * addon.maxQuantity;
+    };
+    var rank = function (key) {
+      for (var i = 0; i < plans.length; i++) if (plans[i].key === key) return i;
+      return -1;
+    };
+    var quote = function (plan, n, e, u, wanted) {
+      if (n > plan.ceiling) return { plan: plan, off: fill(text.max, { n: plan.ceiling }) };
+      if (e > maxEquipment(plan)) return { plan: plan, off: fill(text.maxEquipment, { n: num(maxEquipment(plan)) }) };
+      if (plan.users !== null && u > plan.users) return { plan: plan, off: fill(text.maxUsers, { n: plan.users }) };
+      var extras = [];
+      for (var i = 0; i < wanted.length; i++) {
+        var f = wanted[i];
+        if (rank(plan.key) >= rank(f.plan)) continue;
+        if (!f.addOn || f.addOn.plan !== plan.key) return { plan: plan, off: fill(text.missing, { feature: f.label }) };
+        extras.push({ name: f.addOn.name, monthly: yearly(f.addOn.monthly) });
+      }
+      var base = cycle === "annual" ? plan.annualMonthly : plan.monthly;
+      var over = Math.max(0, n - plan.included);
+      var packs = plan.equipment === null ? 0 : Math.ceil(Math.max(0, e - plan.equipment) / addon.size);
+      var extra = packs * addonMonthly();
+      var total = base + over * plan.extra + extra;
+      extras.forEach(function (x) {
+        total += x.monthly;
+      });
+      return { plan: plan, base: base, over: over, packs: packs, addon: extra, extras: extras, total: total };
+    };
+
+    var item = function (tag, cls, parts) {
+      var li = document.createElement(tag);
+      if (cls) li.className = cls;
+      parts.forEach(function (p) {
+        var el = document.createElement(p[0]);
+        el.textContent = p[1];
+        li.appendChild(el);
+      });
+      return li;
+    };
+
+    var clamp = function (value, low, high, fallback) {
+      var v = Math.round(Number(value));
+      if (!isFinite(v)) v = fallback;
+      return Math.min(high, Math.max(low, v));
+    };
+
+    updateCalc = function () {
+      var n = clamp(number.value, 1, max, 1);
+      var e = clamp(eNumber.value, 0, eMaxInput, 0);
+      var u = clamp(uNumber.value, 1, uMaxInput, 1);
+      var ticked = {};
+      checks.forEach(function (c) {
+        if (c.checked) ticked[c.value] = true;
+      });
+      var wanted = features.filter(function (f) {
+        return ticked[f.key];
+      });
+
+      var quotes = plans.map(function (p) {
+        return quote(p, n, e, u, wanted);
+      });
+      var best = quotes
+        .filter(function (q) {
+          return !q.off;
+        })
+        .reduce(function (a, b) {
+          return b.total < a.total ? b : a;
+        });
+
+      out.plans.replaceChildren.apply(
+        out.plans,
+        quotes.map(function (q) {
+          if (q.off) return item("li", "is-off", [["b", q.plan.name], ["span", q.off]]);
+          return item("li", q === best ? "is-on" : "", [["b", q.plan.name], ["span", huf(q.total) + " " + text.unit]]);
+        })
+      );
+
+      var plan = best.plan;
+      var lines = [[fill(text.base, { plan: plan.name, included: plan.included, equipment: plan.equipment === null ? text.unlimited : num(plan.equipment) }), huf(best.base)]];
+      if (best.over) lines.push([fill(text.extra, { n: best.over, price: huf(plan.extra) }), huf(best.over * plan.extra)]);
+      if (best.packs) lines.push([fill(text.equipment, { packs: best.packs, price: huf(addonMonthly()) }), huf(best.addon)]);
+      best.extras.forEach(function (x) {
+        lines.push([fill(text.addOn, { name: x.name }), huf(x.monthly)]);
+      });
+      out.lines.replaceChildren.apply(
+        out.lines,
+        lines.map(function (l) {
+          return item("li", "", [["span", l[0]], ["b", l[1]]]);
+        })
+      );
+
+      out.tier.textContent = fill(text.tier, { plan: plan.name, n: n, e: num(e), u: num(u) });
+      out.amount.textContent = huf(best.total);
+      out.note.textContent = calc.getAttribute(cycle === "annual" ? "data-note-annual" : "data-note-monthly");
+      // The sign-up link preselects the plan the calculator found.
+      if (out.cta) out.cta.setAttribute("href", fill(text.register, { plan: plan.key }));
+    };
+
+    // A slider and a number field per count: either one moves the other.
+    var pair = function (slider, field, low, high) {
+      slider.addEventListener("input", function () {
+        field.value = slider.value;
+        updateCalc();
+      });
+      field.addEventListener("input", function () {
+        if (field.value === "") return;
+        slider.value = clamp(field.value, low, Number(slider.max), low);
+        updateCalc();
+      });
+      field.addEventListener("change", function () {
+        var v = clamp(field.value, low, high, low);
+        field.value = v;
+        slider.value = Math.min(v, Number(slider.max));
+        updateCalc();
+      });
+    };
+    pair(range, number, 1, max);
+    pair(eRange, eNumber, 0, eMaxInput);
+    pair(uRange, uNumber, 1, uMaxInput);
+    checks.forEach(function (c) {
+      c.addEventListener("change", updateCalc);
+    });
+    updateCalc();
+  }
+
+  var cycleButtons = document.querySelectorAll(".cycle__btn");
+  cycleButtons.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      cycle = btn.getAttribute("data-cycle");
+      cycleButtons.forEach(function (b) {
+        var on = b === btn;
+        b.classList.toggle("is-on", on);
+        b.setAttribute("aria-pressed", String(on));
+      });
+      document.querySelectorAll("[data-cycle-root] [data-monthly]").forEach(function (el) {
+        el.textContent = el.getAttribute("data-" + cycle);
+      });
+      updateCalc();
+    });
+  });
 
   /* Blog: category filters */
   var filters = document.querySelector("[data-filters]");

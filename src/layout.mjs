@@ -1,11 +1,10 @@
 import { config } from "./config.mjs";
 import { route, solutionRoute } from "./routes.mjs";
 import { esc, logo, socialLinks, arrow, icon } from "./components.mjs";
-import { ui, nav, megamenu, footer as f } from "./content/site.mjs";
+import { APP, ui, nav, megamenu, footer as f } from "./content/site.mjs";
 import { solutionBySlug } from "./content/solutions.mjs";
 
 const abs = (path) => `${config.siteUrl}${path}`;
-const contactHref = (topic) => `${route("contact")}?tema=${topic}#enquiry`;
 
 const chevron = `<svg class="nav__chevron" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
@@ -71,7 +70,8 @@ const header = (current) => {
       <ul class="nav__links">${nav.map(item).join("")}</ul>
     </nav>
     <div class="site-header__actions">
-      <a class="btn btn--primary btn--sm" href="${contactHref("demo")}">${ui.demo}</a>
+      <a class="nav-login" href="${APP.login}">${ui.login}</a>
+      <a class="btn btn--primary btn--sm" href="${APP.register}">${ui.trial}</a>
     </div>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">
       <span class="nav-toggle__lines" aria-hidden="true"></span>
@@ -100,8 +100,8 @@ const header = (current) => {
     </ul>
   </nav>
   <div class="mobile-nav__foot">
-    <a class="btn btn--ghost" href="${contactHref("quote")}">${ui.quote}</a>
-    <a class="btn btn--primary" href="${contactHref("demo")}">${ui.demo}</a>
+    <a class="btn btn--ghost" href="${APP.login}">${ui.login}</a>
+    <a class="btn btn--primary" href="${APP.register}">${ui.trial}</a>
   </div>
 </div>`;
 };
@@ -133,10 +133,12 @@ const footer = () => {
       <div class="footer-col">
         <h2>${f.colCompany}</h2>
         <ul>
+          <li><a href="${route("pricing")}">Árak</a></li>
           <li><a href="${route("process")}">Hogyan dolgozunk</a></li>
           <li><a href="${route("hosting")}">Üzemeltetés</a></li>
           <li><a href="${route("blog")}">Blog</a></li>
           <li><a href="${route("contact")}">Kapcsolat</a></li>
+          <li><a href="${APP.login}">${ui.login}</a></li>
         </ul>
         <h2 class="footer-col__second">${f.colLegal}</h2>
         <ul>
@@ -171,7 +173,7 @@ const consentBanner = () =>
 /**
  * Render a full HTML document.
  * @param {object} page { key, path, title, description, body, type?, noindex?, jsonLd? }
- *   key is the page's menu key ("home", "process", "solution:<slug>", "post" …).
+ *   key is the page's menu key ("home", "pricing", "solution:<slug>", "post" …).
  */
 export const layout = (page) => {
   const canonical = abs(page.path);

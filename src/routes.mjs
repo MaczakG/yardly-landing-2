@@ -4,6 +4,7 @@
 export const ROUTES = {
   home: "/",
   solutions: "/megoldasaink/",
+  pricing: "/arak/",
   process: "/hogyan-dolgozunk/",
   hosting: "/uzemeltetes/",
   contact: "/kapcsolat/",
@@ -29,8 +30,6 @@ export const REDIRECTS = {
   "/blog/karbantartas-nyilvantartasa-excel-helyett/": "/blog/flottakezeles-excelben/",
   "/blog/kiegeszites-vagy-csere/": "/blog/",
   "/rolunk/": "/",
-  // No public prices: the former pricing page and the former self-hosted offer.
-  "/arak/": "/hogyan-dolgozunk/",
   "/vallalati-megoldas/": "/uzemeltetes/",
 
   "/en/": "/",

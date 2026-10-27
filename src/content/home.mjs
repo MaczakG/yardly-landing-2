@@ -3,6 +3,8 @@
 // follow the visitor's questions: what is it, is it for me, what does it do, how is it made to
 // fit, how does it connect to the systems they already use, where does it run, how do we start.
 
+import { ANNUAL_FREE_MONTHS, NO_VAT } from "./pricing.mjs";
+
 export const home = {
   title: "Flotta- és eszközüzemeltetési rendszer a cég folyamataira szabva – Yardly",
   description: "Járművek, eszközök, határidők és jóváhagyások egy rendszerben, a cége szabályaira szabva és a többi céges rendszerrel összekötve. Az Önök szerverére telepítve, vagy általunk üzemeltetve a felhőben.",
@@ -176,6 +178,13 @@ export const home = {
     text: "A Yardly böngészőben fut, telefonon is teljes értékű, a kollégáknak semmit nem kell telepíteniük. Az adatokat kétlépcsős belépés, titkosított kapcsolat és a cég saját, elkülönített példánya védi. Minden változás visszakövethető.",
     link: "Biztonság részletesen",
     phoneAlt: "A leltár összesítése telefonon",
+  },
+
+  pricing: {
+    eyebrow: "Árak",
+    title: "Átlátható árak, a flottája méretéhez",
+    note: `Éves fizetéssel ${ANNUAL_FREE_MONTHS} hónap ingyen. ${NO_VAT}`,
+    button: "Összes ár és kalkulátor",
   },
 
   faq: {

@@ -2,12 +2,17 @@
 import { config } from "./config.mjs";
 import { route, solutionRoute, postRoute } from "./routes.mjs";
 import { esc, glue as g, arrow, icon, board, ctaCard, screenshot, phoneShot } from "./components.mjs";
-import { ui } from "./content/site.mjs";
+import { APP, ui } from "./content/site.mjs";
 import { home as h } from "./content/home.mjs";
 import { overview, groups, solutions, solutionBySlug } from "./content/solutions.mjs";
+import { pricing as pr, plans, comparison, limits, huf, num, SELF_SERVICE_MAX_VEHICLES, ANNUAL_FREE_MONTHS, EQUIPMENT_ADDON, CALC_FEATURES, TRIAL_DAYS } from "./content/pricing.mjs";
 import { contact as co, process as pc, hosting as ho, hostingOptions } from "./content/pages.mjs";
 import * as lg from "./content/legal.mjs";
 import { blog as bl, categories, posts } from "./content/posts.mjs";
+
+// The equipment and user sliders' top ends; the number fields next to them take any count.
+const CALC_EQUIPMENT_RANGE = 2000;
+const CALC_USERS_RANGE = 100;
 
 const withEmail = (html) => html.replaceAll("{email}", config.email);
 const contactHref = (topic) => `${route("contact")}?tema=${topic}#enquiry`;
@@ -22,10 +27,10 @@ const sectionHead = (s, id) => `<div class="section-head">
 
 const ticks = (items) => `<ul class="ticks">${items.map((i) => `<li>${i}</li>`).join("")}</ul>`;
 
-// Every call to action asks for a demo or a quote: the site sells no self-service plan.
-const ctaButtons = (note = "") => `<div class="cta-row">
-  <a class="btn btn--primary" href="${contactHref("demo")}">${ui.demo}${arrow()}</a>
-  <a class="btn btn--ghost" href="${contactHref("quote")}">${ui.quote}</a>
+// The trial first, a presentation second.
+const ctaButtons = (note = ui.trialNote) => `<div class="cta-row">
+  <a class="btn btn--primary" href="${APP.register}">${ui.trial}${arrow()}</a>
+  <a class="btn btn--ghost" href="${contactHref("demo")}">${ui.demo}</a>
 </div>
 ${note ? `<p class="cta-note cta-note--block">${note}</p>` : ""}`;
 
@@ -45,12 +50,12 @@ const pageHero = (p, extra = "") => `<section class="page-hero" aria-labelledby=
 const ctaSection = (c) => `<section class="section section--cta" aria-labelledby="cta-title">
   <div class="container">
     ${ctaCard({
-      eyebrow: c.eyebrow || "Beszéljünk",
+      eyebrow: c.eyebrow || "Kezdje el",
       title: g(c.title),
-      lead: c.lead || ui.demoNote,
-      button: ui.demo,
-      href: contactHref("demo"),
-      secondary: { label: ui.quote, href: contactHref("quote") },
+      lead: c.lead || ui.trialNote,
+      button: ui.trial,
+      href: APP.register,
+      secondary: { label: ui.demo, href: contactHref("demo") },
     })}
   </div>
 </section>`;
@@ -82,7 +87,6 @@ const faqJsonLd = (items) => ({
   mainEntity: items.map((q) => ({ "@type": "Question", name: q.q, acceptedAnswer: { "@type": "Answer", text: q.a } })),
 });
 
-// No offers: there are no public prices.
 const softwareJsonLd = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
@@ -90,6 +94,13 @@ const softwareJsonLd = {
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web",
   url: config.siteUrl,
+  offers: {
+    "@type": "AggregateOffer",
+    priceCurrency: "HUF",
+    lowPrice: Math.min(...plans.map((p) => p.monthly)),
+    highPrice: Math.max(...plans.map((p) => p.monthly)),
+    offerCount: plans.length,
+  },
 };
 
 const shot = (s, eager = false) => (s.phone ? phoneShot({ ...s, eager }) : screenshot({ ...s, eager }));
@@ -316,6 +327,28 @@ export const home = () => {
   </div>
 </section>
 
+<section class="section" aria-labelledby="price-title">
+  <div class="container">
+    ${sectionHead(h.pricing, "price-title")}
+    <div class="mini-plans">
+      ${plans
+        .map(
+          (p) => `<a class="mini-plan${p.recommended ? " is-recommended" : ""}" href="${route("pricing")}">
+        <span class="mini-plan__name">${p.name}${p.recommended ? ` <span class="badge">${pr.recommended}</span>` : ""}</span>
+        <span class="mini-plan__price">${huf(p.monthly)}</span>
+        <span class="mini-plan__unit">${pr.perMonth}</span>
+        <span class="mini-plan__tag">${p.tagline}</span>
+      </a>`
+        )
+        .join("")}
+    </div>
+    <div class="mini-plans__foot">
+      <p class="muted">${h.pricing.note}</p>
+      <a class="btn btn--ghost" href="${route("pricing")}">${h.pricing.button}${arrow()}</a>
+    </div>
+  </div>
+</section>
+
 ${faqBlock({ ...h.faq })}
 
 ${ctaSection(h.cta)}`,
@@ -453,6 +486,214 @@ ${(s.extra || [])
 </section>
 
 ${ctaSection({ title: s.cta })}`,
+  };
+};
+
+// ---------------------------------------------------------------------------
+// Árak
+
+const cell = (v) =>
+  v === true
+    ? `<span class="cmp-yes">${icon("check")}<span class="visually-hidden">Benne van</span></span>`
+    : v === false
+      ? `<span class="cmp-no" role="img" aria-label="Nincs benne">—</span>`
+      : `<span class="cmp-text">${v}</span>`;
+
+// The calculator's answer for n active vehicles, e pieces of equipment, u users and the ticked
+// features: the cheapest plan that can take them all. Vehicles above the plan's included number
+// cost the per-vehicle fee, up to the plan's vehicle ceiling; equipment above the plan's limit
+// needs "+250 eszköz" packs (at most EQUIPMENT_ADDON.maxQuantity; Prémium has no equipment
+// limit). Users above the plan's limit, or a feature the plan lacks, rule the plan out — the
+// answer jumps to the next plan — unless the plan can buy that feature as an extra (DKV on Alap).
+// assets/js/main.js does the same in the browser; this renders the starting state so the page
+// reads right without JavaScript.
+const yearly = (monthly, cycle) => (cycle === "annual" ? (monthly * (12 - ANNUAL_FREE_MONTHS)) / 12 : monthly);
+const addonMonthly = (cycle) => yearly(EQUIPMENT_ADDON.monthly, cycle);
+const maxEquipment = (p) => (p.equipment === null ? Infinity : p.equipment + EQUIPMENT_ADDON.size * EQUIPMENT_ADDON.maxQuantity);
+const rank = (key) => plans.findIndex((p) => p.key === key);
+
+const planQuote = (p, n, e, cycle, u = 1, features = []) => {
+  if (n > p.ceiling) return { plan: p, off: pr.calc.max(p.ceiling) };
+  if (e > maxEquipment(p)) return { plan: p, off: pr.calc.maxEquipment(num(maxEquipment(p))) };
+  if (p.users !== null && u > p.users) return { plan: p, off: pr.calc.maxUsers(p.users) };
+  const extras = [];
+  for (const f of features) {
+    if (rank(p.key) >= rank(f.plan)) continue;
+    if (f.addOn?.plan !== p.key) return { plan: p, off: pr.calc.missing(f.label) };
+    extras.push({ name: f.addOn.name, monthly: yearly(f.addOn.monthly, cycle) });
+  }
+  const base = cycle === "annual" ? p.annualMonthly : p.monthly;
+  const over = Math.max(0, n - p.included);
+  const packs = p.equipment === null ? 0 : Math.ceil(Math.max(0, e - p.equipment) / EQUIPMENT_ADDON.size);
+  const addon = packs * addonMonthly(cycle);
+  const total = base + over * p.extra + addon + extras.reduce((sum, x) => sum + x.monthly, 0);
+  return { plan: p, base, over, packs, addon, extras, total };
+};
+
+const calcQuote = (n, e, u, cycle = "monthly") =>
+  plans
+    .map((p) => planQuote(p, n, e, cycle, u))
+    .filter((q) => !q.off)
+    .reduce((a, b) => (b.total < a.total ? b : a));
+
+const calcLines = (q, cycle = "monthly") => {
+  const c = pr.calc;
+  const lines = [[c.lineBase(q.plan.name, q.plan.included, q.plan.equipment === null ? c.unlimited : num(q.plan.equipment)), huf(q.base)]];
+  if (q.over) lines.push([c.lineExtra(q.over, huf(q.plan.extra)), huf(q.over * q.plan.extra)]);
+  if (q.packs) lines.push([c.lineEquipment(q.packs, huf(addonMonthly(cycle))), huf(q.addon)]);
+  for (const x of q.extras) lines.push([c.lineAddOn(x.name), huf(x.monthly)]);
+  return lines.map(([k, v]) => `<li><span>${k}</span><b>${v}</b></li>`).join("");
+};
+
+const calcPlans = (n, e, u, best) =>
+  plans
+    .map((p) => planQuote(p, n, e, "monthly", u))
+    .map((q) =>
+      q.off
+        ? `<li class="is-off"><b>${q.plan.name}</b><span>${q.off}</span></li>`
+        : `<li${q.plan === best.plan ? ' class="is-on"' : ""}><b>${q.plan.name}</b><span>${huf(q.total)} ${pr.perMonth}</span></li>`
+    )
+    .join("");
+
+export const pricing = () => {
+  const calcData = plans.map((p) => ({
+    key: p.key, name: p.name, monthly: p.monthly, annualMonthly: p.annualMonthly, included: p.included, extra: p.extra, ceiling: p.ceiling,
+    equipment: p.equipment, users: p.users,
+  }));
+  const START = 30;
+  const START_EQUIPMENT = 50;
+  const START_USERS = 5;
+  const q = calcQuote(START, START_EQUIPMENT, START_USERS);
+  // Text templates for the browser: the copy functions called with {placeholders}.
+  const t = {
+    tier: pr.calc.resultTier("{plan}", "{n}", "{e}", "{u}"),
+    base: pr.calc.lineBase("{plan}", "{included}", "{equipment}"),
+    extra: pr.calc.lineExtra("{n}", "{price}"),
+    equipment: pr.calc.lineEquipment("{packs}", "{price}"),
+    unlimited: pr.calc.unlimited,
+    max: pr.calc.max("{n}"),
+    maxEquipment: pr.calc.maxEquipment("{n}"),
+    maxUsers: pr.calc.maxUsers("{n}"),
+    missing: pr.calc.missing("{feature}"),
+    addOn: pr.calc.lineAddOn("{name}"),
+    unit: pr.perMonth,
+    register: APP.registerPlan("{plan}"),
+  };
+  const addon = { ...EQUIPMENT_ADDON, freeMonths: ANNUAL_FREE_MONTHS };
+  return {
+    title: pr.title,
+    description: pr.description,
+    jsonLd: [softwareJsonLd, faqJsonLd(pr.faq.items)],
+    body: `
+${pageHero(pr)}
+
+<section class="section section--flush" aria-label="Csomagok">
+  <div class="container">
+    <div class="cycle" role="group" aria-label="Fizetési gyakoriság">
+      <button type="button" class="cycle__btn is-on" data-cycle="monthly" aria-pressed="true">${pr.toggle.monthly}</button>
+      <button type="button" class="cycle__btn" data-cycle="annual" aria-pressed="false">${pr.toggle.annual} <span class="cycle__free">${pr.toggle.free}</span></button>
+    </div>
+    <div class="plans" data-cycle-root>
+      ${plans
+        .map(
+          (p) => `<article class="plan-card${p.recommended ? " is-recommended" : ""}">
+        ${p.recommended ? `<span class="plan-card__tag">${pr.recommended}</span>` : ""}
+        <h2 class="plan-card__name">${p.name}</h2>
+        <p class="plan-card__tagline">${p.tagline}</p>
+        <p class="plan-card__price"><span data-monthly="${huf(p.monthly)}" data-annual="${huf(p.annualMonthly)}">${huf(p.monthly)}</span> <small>${pr.perMonth}</small></p>
+        <p class="plan-card__sub" data-monthly="${esc(pr.monthlyNote(huf(p.annualMonthly)))}" data-annual="${esc(pr.annualNote(huf(p.annualMonthly * 12)))}">${pr.monthlyNote(huf(p.annualMonthly))}</p>
+        <a class="btn ${p.recommended ? "btn--primary" : "btn--ghost"} plan-card__btn" href="${APP.registerPlan(p.key)}">${ui.trial}</a>
+        <ul class="ticks">${p.highlights.map((x) => `<li>${x}</li>`).join("")}</ul>
+      </article>`
+        )
+        .join("")}
+    </div>
+    <p class="plans__note">${pr.trialNote}</p>
+  </div>
+</section>
+
+<section class="section section--band" id="kalkulator" aria-labelledby="calc-title">
+  <div class="container">
+    ${sectionHead({ eyebrow: pr.calc.eyebrow, title: pr.calc.title }, "calc-title")}
+    <div class="calc" data-calc data-plans="${esc(JSON.stringify(calcData))}" data-addon="${esc(JSON.stringify(addon))}" data-text="${esc(JSON.stringify(t))}"
+      data-features="${esc(JSON.stringify(CALC_FEATURES))}"
+      data-max="${SELF_SERVICE_MAX_VEHICLES}"
+      data-note-monthly="${esc(pr.calc.noteMonthly)}" data-note-annual="${esc(pr.calc.noteAnnual)}">
+      <div class="calc__input">
+        <div class="calc__field">
+          <label class="calc__label" for="calc-n">${pr.calc.label}</label>
+          <div class="calc__row">
+            <input type="range" id="calc-range" min="1" max="${SELF_SERVICE_MAX_VEHICLES}" value="${START}" aria-label="${esc(pr.calc.label)}">
+            <input class="input calc__number" type="number" id="calc-n" min="1" max="${SELF_SERVICE_MAX_VEHICLES}" value="${START}" inputmode="numeric">
+          </div>
+        </div>
+        <div class="calc__field">
+          <label class="calc__label" for="calc-e">${pr.calc.equipmentLabel}</label>
+          <p class="calc__hint" id="calc-e-hint">${pr.calc.equipmentHint}</p>
+          <div class="calc__row">
+            <input type="range" id="calc-e-range" min="0" max="${CALC_EQUIPMENT_RANGE}" step="10" value="${START_EQUIPMENT}" aria-label="${esc(pr.calc.equipmentLabel)}" aria-describedby="calc-e-hint">
+            <input class="input calc__number" type="number" id="calc-e" min="0" max="100000" value="${START_EQUIPMENT}" inputmode="numeric" aria-describedby="calc-e-hint">
+          </div>
+        </div>
+        <div class="calc__field">
+          <label class="calc__label" for="calc-u">${pr.calc.usersLabel}</label>
+          <p class="calc__hint" id="calc-u-hint">${pr.calc.usersHint}</p>
+          <div class="calc__row">
+            <input type="range" id="calc-u-range" min="1" max="${CALC_USERS_RANGE}" value="${START_USERS}" aria-label="${esc(pr.calc.usersLabel)}" aria-describedby="calc-u-hint">
+            <input class="input calc__number" type="number" id="calc-u" min="1" max="100000" value="${START_USERS}" inputmode="numeric" aria-describedby="calc-u-hint">
+          </div>
+        </div>
+        <fieldset class="calc__field calc__features" aria-describedby="calc-f-hint">
+          <legend class="calc__label">${pr.calc.featuresLabel}</legend>
+          <p class="calc__hint" id="calc-f-hint">${pr.calc.featuresHint}</p>
+          <div class="calc__checks">
+            ${CALC_FEATURES.map((f) => `<label class="calc__check"><input type="checkbox" value="${f.key}" data-calc-feature><span>${f.label}</span></label>`).join("")}
+          </div>
+        </fieldset>
+        <ul class="calc__plans" data-calc-plans>${calcPlans(START, START_EQUIPMENT, START_USERS, q)}</ul>
+        <p class="calc__note muted" data-calc-note>${pr.calc.noteMonthly}</p>
+        <p class="calc__note muted">${pr.calc.equipmentNote}</p>
+      </div>
+      <div class="calc__result" aria-live="polite">
+        <p class="calc__tier" data-calc-tier>${pr.calc.resultTier(q.plan.name, START, START_EQUIPMENT, START_USERS)}</p>
+        <p class="calc__amount"><span data-calc-amount>${huf(q.total)}</span> <small>${pr.perMonth}</small></p>
+        <ul class="calc__lines" data-calc-lines>${calcLines(q)}</ul>
+        <a class="btn btn--teal" href="${APP.registerPlan(q.plan.key)}" data-calc-cta>${ui.trial}${arrow()}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="limits-title">
+  <div class="container">
+    ${sectionHead({ eyebrow: "Összehasonlítás", title: pr.limitsTitle }, "limits-title")}
+    <div class="table-wrap">
+      <table class="cmp">
+        <thead><tr><th scope="col"><span class="visually-hidden">Keret</span></th>${plans.map((p) => `<th scope="col"${p.recommended ? ' class="is-recommended"' : ""}>${p.name}</th>`).join("")}</tr></thead>
+        <tbody>${limits.map((r) => `<tr><th scope="row">${r.label}</th>${r.cells.map((c) => `<td>${cell(c)}</td>`).join("")}</tr>`).join("")}</tbody>
+      </table>
+    </div>
+    <h2 class="h3-lg cmp-title" id="cmp-title">${pr.comparisonTitle}</h2>
+    <div class="table-wrap">
+      <table class="cmp" aria-labelledby="cmp-title">
+        <thead><tr><th scope="col"><span class="visually-hidden">Funkció</span></th>${plans.map((p) => `<th scope="col"${p.recommended ? ' class="is-recommended"' : ""}>${p.name}</th>`).join("")}</tr></thead>
+        <tbody>${comparison.map((r) => `<tr><th scope="row">${r.label}</th>${r.cells.map((c) => `<td>${cell(c)}</td>`).join("")}</tr>`).join("")}</tbody>
+      </table>
+    </div>
+    <p class="muted cmp-note">${pr.comparisonNote}</p>
+  </div>
+</section>
+
+<section class="section section--band" id="fizetes" aria-labelledby="payment-title">
+  <div class="container">
+    <div class="section-head section-head--single"><div><p class="eyebrow">${pr.payment.eyebrow}</p><h2 class="h2" id="payment-title">${g(pr.payment.title)}</h2></div></div>
+    ${numbered(pr.payment.items)}
+  </div>
+</section>
+
+${faqBlock(pr.faq, "gyik")}
+
+${ctaSection({ title: `Próbálja ki ${TRIAL_DAYS} napig ingyen.` })}`,
   };
 };
 
@@ -653,7 +894,7 @@ export const contact = () => {
         <span class="form-success__mark" aria-hidden="true"></span>
         <h2 class="h3-lg" data-success-title>${f.successTitle}</h2>
         <p data-success-text>${f.successText}</p>
-        <a class="btn btn--ghost" href="${route("solutions")}">Megoldásaink${arrow()}</a>
+        <a class="btn btn--primary" href="${APP.register}">${ui.trialShort}${arrow()}</a>
       </div>
     </div>
   </div>
@@ -697,7 +938,7 @@ ${pageHero(bl)}
   </div>
 </section>
 
-${ctaSection({ title: "Nézze meg egy bemutatón." })}`,
+${ctaSection({ title: "Próbálja ki a saját flottájával." })}`,
 });
 
 export const post = (p) => {
@@ -748,7 +989,7 @@ export const post = (p) => {
       <h2 class="h3-lg">${bl.postCta.title}</h2>
       <p>${bl.postCta.text}</p>
       <div class="cta-row">
-        <a class="btn btn--primary" href="${contactHref("demo")}">${ui.demo}${arrow()}</a>
+        <a class="btn btn--primary" href="${APP.register}">${ui.trialShort}${arrow()}</a>
         <a class="text-link" href="${solutionRoute(sol.slug)}">${sol.menuTitle}${arrow("text-link__arrow")}</a>
       </div>
     </aside>
