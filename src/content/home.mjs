@@ -11,7 +11,7 @@ export const home = {
 
   hero: {
     eyebrow: "Flotta- és eszközkezelés magyar cégeknek",
-    title: "Flottakezelő szoftver és eszköznyilvántartás, egy rendszerben.",
+    title: "Flottakezelő szoftver és eszköz&shy;nyilvántartás, egy rendszerben.",
     lead: "A Yardly számon tartja a lejáratokat, Ön pedig saját folyamatokat hozhat létre benne, és jogosultsági mátrixszal automatizálhatja őket. A DKV-kártyás tankolások maguktól bekerülnek, az adatok Excelben mennek tovább.",
     shotAlt: "A Yardly irányítópultja: elöl a közelgő és lejárt határidők, alatta a fő mutatók",
     phoneAlt: "A telefonos állapotfelmérő űrlap",

@@ -628,6 +628,7 @@ ${pageHero(pr)}
         <p class="calc__tier" data-calc-tier>${pr.calc.resultTier(q.plan.name, START, START_EQUIPMENT, START_USERS)}</p>
         <p class="calc__amount"><span data-calc-amount>${huf(q.total)}</span> <small>${pr.perMonth}</small></p>
         <ul class="calc__lines" data-calc-lines>${calcLines(q)}</ul>
+        <p class="calc__fine">${pr.trialNote}</p>
         <a class="btn btn--teal" href="${APP.registerPlan(q.plan.key)}" data-calc-cta>${ui.trial}${arrow()}</a>
       </div>
     </div>

@@ -3677,6 +3677,11 @@ mark.ph {
   white-space: nowrap;
 }
 
+.calc__fine {
+  font-size: 0.875rem;
+  color: var(--on-deep-2);
+}
+
 .calc__result .btn {
   margin-top: auto;
 }
