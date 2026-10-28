@@ -160,11 +160,10 @@ export const vulnerabilities = {
   body: `
 <h2>Mire vonatkozik</h2>
 <ul>
-<li>a Yardly szoftver, a saját szerveres kiadásokkal együtt;</li>
-<li>a felhőben általunk üzemeltetett ügyfélpéldányok;</li>
-<li>a bemutató-rendszer (app.yardly.hu), az admin.yardly.hu és a yardly.hu.</li>
+<li>a Yardly-alkalmazás (app.yardly.hu) és a hozzá tartozó szolgáltatások;</li>
+<li>az admin.yardly.hu és a yardly.hu.</li>
 </ul>
-<p>Ügyfeleink saját szerverei az ügyfeleink tulajdonában vannak: ezeket ne tesztelje. Ha egy ilyen telepítésen talál hibát, a szoftver hibáját nekünk, a szerver beállításait érintőt az adott cégnek jelezze.</p>
+<p>Csak a saját fiókjával és a saját adataival próbálkozzon: más cégek fiókjához és adataihoz ne férjen hozzá, és ne terhelje túl a szolgáltatást.</p>
 
 <h2>Hogyan jelezze</h2>
 <p>Írjon a(z) <a href="mailto:{email}?subject=Biztons%C3%A1gi%20hiba">{email}</a> címre „Biztonsági hiba” tárggyal. Ha tudja, írja meg:</p>
@@ -199,9 +198,9 @@ export const illegalContent = {
   title: "Jogsértő tartalom bejelentése | Yardly",
   description: "Hogyan jelezheti, ha a Yardly által tárolt tartalom jogsértő, mi történik a bejelentéssel, és kik a kapcsolattartóink a digitális szolgáltatásokról szóló rendelet szerint.",
   heading: "Jogsértő tartalom bejelentése",
-  intro: "A felhőben általunk üzemeltetett, ügyfelenként külön Yardly-példányokban ügyfeleink tárolnak tartalmat: dokumentumokat, fotókat és szöveget. Ha úgy látja, hogy ezek közül valami jogsértő, itt jelezheti. A digitális szolgáltatásokról szóló rendelet ((EU) 2022/2065, DSA) szerinti tájékoztatás.",
+  intro: "A Yardly-alkalmazásban (app.yardly.hu) ügyfeleink tárolnak tartalmat: dokumentumokat, fotókat és szöveget. Ha úgy látja, hogy ezek közül valami jogsértő, itt jelezheti. A digitális szolgáltatásokról szóló rendelet ((EU) 2022/2065, DSA) szerinti tájékoztatás.",
   body: `
-<p>Ezek a tartalmak nem nyilvánosak: csak az adott cég felhasználói látják őket. A saját szerveres telepítéseken mi semmit nem tárolunk; az ott tárolt tartalom miatt a szervert üzemeltető céghez forduljon.</p>
+<p>Ezek a tartalmak nem nyilvánosak: csak az adott cég felhasználói látják őket.</p>
 
 <h2>Hogyan jelezze</h2>
 <p>Töltse ki a <a href="${noticeForm}" rel="noopener">bejelentőlapot</a>, vagy írjon a(z) <a href="mailto:{email}?subject=Jogs%C3%A9rt%C5%91%20tartalom">{email}</a> címre. A bejelentésben adja meg:</p>
