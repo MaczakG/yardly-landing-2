@@ -83,12 +83,13 @@ export const home = {
     },
   },
 
-  // What the app connects to today: the DKV fuel card, Excel and CSV files, e-mail and, in
-  // Prémium, Teams and Slack messages from an automation. Nothing it doesn't do.
+  // The data and notification channels built into the app, which the company switches on itself:
+  // the DKV fuel card, Excel and CSV files, e-mail and, in Prémium, Teams and Slack messages from an
+  // automation. No custom connection to the company's other systems: we do not build those.
   integrations: {
-    eyebrow: "Kapcsolatok",
-    title: "Nem egy újabb sziget a cégben",
-    lead: "A Yardly ott kapcsolódik a cég többi rendszeréhez, ahol a legtöbb kézi munka van: a tankolások maguktól jönnek, az adatok Excelben és CSV-ben mennek tovább, az értesítések pedig e-mailben és a csapat csatornáján érkeznek.",
+    eyebrow: "Adatok és értesítések",
+    title: "Az adat bejön, kimegy, és szól, ha kell",
+    lead: "A beépített csatornákat Ön kapcsolja be a Beállításokban, fejlesztés nélkül: a DKV-kártyás tankolások maguktól bejönnek, az adatok Excelben és CSV-ben vihetők ki, az értesítések pedig e-mailben és a csapat csatornáján érkeznek.",
     points: [
       "DKV üzemanyagkártya: a tankolások 6 óránként maguktól a járművekhez kerülnek",
       "Excel-import sablonnal, Excel- és CSV-export, teljes adatexport bármikor",
@@ -97,7 +98,7 @@ export const home = {
     ],
     link: "Folyamatok és automatizálás",
     slug: "folyamatok",
-    hubLabel: "A Yardly középen, körülötte, amivel összekapcsolódik",
+    hubLabel: "A Yardly középen, körülötte a beépített adat- és értesítési csatornák",
     // Eight tiles round the Yardly tile: four before it, four after (3 × 3 on a wide screen).
     hub: [
       { icon: "fuel", label: "DKV-kártya" },
@@ -172,7 +173,7 @@ export const home = {
       { q: "Kell telepíteni valamit?", a: "Nem. A Yardly böngészőben fut, számítógépen és telefonon is." },
       { q: "Hogyan kerülnek be a meglévő adataink?", a: "Excel-sablonnal, egyszerre. A rendszer soronként jelzi, ha valamit javítani kell." },
       { q: "Mi történik a próbaidő végén?", a: "A regisztrációkor választott csomag díját terheljük a bankkártyájára, havonta vagy évente; előtte 7, 3 és 1 nappal e-mailben szólunk, mennyit és mikor vonunk le. A próbaidő végéig a csomagot módosíthatja, vagy lemondhatja a folytatást: ekkor a fiók csak olvasható lesz, az adatokat 90 napig megőrizzük és letöltheti, utána véglegesen töröljük." },
-      { q: "Össze tudják kötni a meglévő rendszereinkkel?", a: "A DKV-kártyás tankolások maguktól bekerülnek. Más rendszerekkel Excel- és CSV-fájlokon keresztül cserél adatot, az automatizálások e-mailt küldenek PDF-ekkel, akár külső címre is, a Prémium csomagban pedig a csapat Teams- vagy Slack-csatornájára is írnak." },
+      { q: "Milyen más programokkal cserél adatot?", a: "A DKV-kártyás tankolásokat a Yardly maga hívja le, ha a Beállításokban megadja a DKV-hozzáférését. Más programokkal Excel- és CSV-fájlokon keresztül cserél adatot, az automatizálások e-mailt küldenek PDF-ekkel, akár külső címre is, a Prémium csomagban pedig a csapat Teams- vagy Slack-csatornájára is írnak. Egyedi rendszerösszekötést nem készítünk." },
       { q: "Csak a flottához vagy csak az eszközökhöz is használható?", a: "Igen. Minden csomagban mindkét modul benne van, azt használja, amire szüksége van." },
       { q: "Hol tárolódnak az adataink?", a: "Az Amazon Web Services frankfurti (EU-s) adatközpontjában. Titkosított kapcsolaton érhetők el, és minden cég csak a saját adatait látja." },
       { q: "Megnézhetjük előbb?", a: `Igen. ${TRIAL_DAYS} napig a saját adataival kipróbálhatja, vagy egy 30 perces online bemutatón végigmegyünk Önnel a rendszeren.` },
