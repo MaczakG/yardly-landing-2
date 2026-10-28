@@ -31,7 +31,7 @@ export const REDIRECTS = {
   "/blog/kiegeszites-vagy-csere/": "/blog/",
   "/rolunk/": "/",
   // The pages of the former custom-installation offer (rollout, hosting, enterprise).
-  "/hogyan-dolgozunk/": "/",
+  "/hogyan-dolgozunk/": "/#indulas",
   "/uzemeltetes/": "/megoldasaink/csapat-biztonsag/#biztonsag",
   "/vallalati-megoldas/": "/arak/",
 

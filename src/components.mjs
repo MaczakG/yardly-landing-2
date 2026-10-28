@@ -23,15 +23,15 @@ const SOCIAL_ICONS = {
 };
 const SOCIAL_NAMES = { linkedin: "LinkedIn", instagram: "Instagram", facebook: "Facebook", tiktok: "TikTok" };
 
-export const socialLinks = (social, soonLabel) =>
-  `<ul class="social">${Object.keys(SOCIAL_ICONS)
-    .map((key) => {
-      const svg = `<svg viewBox="0 0 24 24" aria-hidden="true">${SOCIAL_ICONS[key]}</svg>`;
-      return social[key]
-        ? `<li><a class="social__link" href="${esc(social[key])}" rel="noopener" target="_blank" aria-label="${SOCIAL_NAMES[key]}">${svg}</a></li>`
-        : `<li><span class="social__link is-soon" title="${esc(`${SOCIAL_NAMES[key]} · ${soonLabel}`)}"><span class="visually-hidden">${SOCIAL_NAMES[key]} (${esc(soonLabel)})</span>${svg}</span></li>`;
-    })
-    .join("")}</ul>`;
+// Only the profiles that exist (config.social); nothing while there are none.
+export const socialLinks = (social) => {
+  const keys = Object.keys(SOCIAL_ICONS).filter((key) => social[key]);
+  return keys.length
+    ? `<ul class="social">${keys
+        .map((key) => `<li><a class="social__link" href="${esc(social[key])}" rel="noopener" target="_blank" aria-label="${SOCIAL_NAMES[key]}"><svg viewBox="0 0 24 24" aria-hidden="true">${SOCIAL_ICONS[key]}</svg></a></li>`)
+        .join("")}</ul>`
+    : "";
+};
 
 // ---------------------------------------------------------------------------
 // Icons: the same Lucide line icons as the Yardly app (ISC licence), inlined.

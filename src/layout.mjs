@@ -21,7 +21,7 @@ const megaPanel = (current) => {
         </a></li>`;
   };
   const fe = megamenu.featured;
-  // The featured card fills the short Eszközpark column.
+  // The featured card fills the short column that asks for it (Eszközpark).
   const feature = `<a class="mega__feature" href="${solutionRoute(fe.slug)}">
           <span class="mega__tag">${fe.tag}</span>
           <b>${fe.title}</b>
@@ -32,10 +32,10 @@ const megaPanel = (current) => {
   <div class="container mega__inner">
     ${megamenu.columns
       .map(
-        (c, i) => `<div class="mega__col">
+        (c) => `<div class="mega__col">
       <p class="mega__title">${c.title}</p>
       <ul>${c.items.map(link).join("")}</ul>
-      ${i === 1 ? feature : ""}
+      ${c.feature ? feature : ""}
     </div>`
       )
       .join("")}
@@ -108,7 +108,8 @@ const header = (current) => {
 
 const footer = () => {
   const links = (slugs) => slugs.map((slug) => `<li><a href="${solutionRoute(slug)}">${solutionBySlug[slug].menuTitle}</a></li>`).join("");
-  const [fleet, equipment, daily, lead] = megamenu.columns.map((c) => c.items);
+  const col = (key) => megamenu.columns.find((c) => c.key === key).items;
+  const [fleet, equipment, daily, lead] = ["fleet", "equipment", "daily", "lead"].map(col);
   return `<footer class="site-footer">
   <div class="container">
     <div class="site-footer__grid">
@@ -116,7 +117,7 @@ const footer = () => {
         ${logo(route("home"), ui.homeLabel)}
         <p>${f.desc}</p>
         <p><a class="site-footer__mail" href="mailto:${config.email}">${config.email}</a></p>
-        ${socialLinks(config.social, f.soon)}
+        ${socialLinks(config.social)}
       </div>
       <div class="footer-col">
         <h2>${f.colFleet}</h2>

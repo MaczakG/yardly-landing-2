@@ -5,11 +5,11 @@ import { guides } from "./guides.mjs";
 import { priceFacts, TRIAL_DAYS, TRIAL_PLAN } from "./pricing.mjs";
 
 export const blog = {
-  title: "Blog – flotta- és eszközkezelés a gyakorlatban",
-  description: "Tippek, számolások és ellenőrzőlisták flottavezetőknek és raktárvezetőknek.",
+  title: "Blog: flotta, eszközpark és folyamatok a gyakorlatban – Yardly",
+  description: "Határidők, költségszámítások, ellenőrzőlisták és folyamatminták flottavezetőknek, raktárvezetőknek és pénzügyi vezetőknek.",
   eyebrow: "Blog",
-  h1: "Flotta- és eszközkezelés a gyakorlatban",
-  lead: "Tippek, számolások és ellenőrzőlisták flottavezetőknek, raktárvezetőknek és mindenkinek, akinek elege van a táblázatokból.",
+  h1: "Flotta, eszközpark és folyamatok a gyakorlatban",
+  lead: "Határidők, költségszámítások, ellenőrzőlisták és folyamatminták flottavezetőknek, raktár- és telephelyvezetőknek és a pénzügynek.",
   all: "Összes",
   postCta: {
     title: "Ezt a Yardly magától csinálja.",
@@ -24,6 +24,7 @@ export const categories = {
   equipment: "Eszközpark és leltár",
   deadlines: "Határidők és dokumentumok",
   costs: "Költségek",
+  processes: "Folyamatok és automatizálás",
   news: "Termékújdonságok",
 };
 
@@ -218,7 +219,7 @@ const written = [
     slug: "javitasok-jovahagyasa",
     date: "2026-10-20",
     minutes: 5,
-    category: "fleet",
+    category: "processes",
     solution: "folyamatok",
     title: "Jóváhagyás a javításokra: így tartsa kordában a szervizköltséget",
     excerpt: "Nem kell minden olajcserét jóváhagyni. De a 300 000 Ft-os javítást igen. Egy jól beállított folyamat ezt magától eldönti.",

@@ -5,7 +5,7 @@ import { esc, glue as g, arrow, icon, board, ctaCard, screenshot, phoneShot } fr
 import { APP, ui } from "./content/site.mjs";
 import { home as h } from "./content/home.mjs";
 import { overview, groups, solutions, solutionBySlug } from "./content/solutions.mjs";
-import { pricing as pr, plans, comparison, limits, huf, TRIAL_DAYS } from "./content/pricing.mjs";
+import { pricing as pr, plans, comparison, limits, huf } from "./content/pricing.mjs";
 import { contact as co } from "./content/pages.mjs";
 import * as lg from "./content/legal.mjs";
 import { blog as bl, categories, posts } from "./content/posts.mjs";
@@ -179,19 +179,32 @@ export const home = () => {
   <div class="container">
     <div class="section-head section-head--single">
       <div>
-        <p class="eyebrow">Ismerős helyzetek</p>
-        <h2 class="h2" id="pain-title">${h.problems.title}</h2>
+        <p class="eyebrow">${h.problems.eyebrow}</p>
+        <h2 class="h2" id="pain-title">${g(h.problems.title)}</h2>
       </div>
     </div>
     <div class="pains">
       ${h.problems.items.map((p) => `<article class="pain"><p class="pain__quote">${p.quote}</p><p>${p.text}</p></article>`).join("")}
     </div>
-    <p class="pains__close">${h.problems.close}</p>
+    ${h.problems.close ? `<p class="pains__close">${h.problems.close}</p>` : ""}
     <p class="center pains__cta"><a class="btn btn--primary" href="${route("solutions")}">${h.problems.button}${arrow()}</a></p>
   </div>
 </section>
 
-<section class="section" aria-labelledby="modules-title">
+<section class="section" aria-labelledby="automation-title">
+  <div class="container split">
+    <div class="split__text">
+      <p class="eyebrow">${h.automation.eyebrow}</p>
+      <h2 class="h2" id="automation-title">${g(h.automation.title)}</h2>
+      <p class="lead">${h.automation.text}</p>
+      ${ticks(h.automation.points)}
+      <a class="text-link" href="${solutionRoute(h.automation.slug)}">${h.automation.link}${arrow("text-link__arrow")}</a>
+    </div>
+    <div class="split__art">${screenshot({ img: h.automation.img, alt: h.automation.alt })}</div>
+  </div>
+</section>
+
+<section class="section section--band" aria-labelledby="modules-title">
   <div class="container">
     ${sectionHead(h.modules, "modules-title")}
     <div class="duo">
@@ -211,7 +224,7 @@ export const home = () => {
   </div>
 </section>
 
-<section class="section section--band" aria-labelledby="alerts-title">
+<section class="section" aria-labelledby="alerts-title">
   <div class="container split">
     <div class="split__text">
       <p class="eyebrow">${a.eyebrow}</p>
@@ -262,11 +275,11 @@ export const home = () => {
   </div>
 </section>
 
-<section class="section section--deep" aria-labelledby="steps-title">
+<section class="section section--deep" id="indulas" aria-labelledby="steps-title">
   <div class="container">
     ${sectionHead(h.steps, "steps-title")}
     ${stationList(h.steps.items)}
-    <p class="steps__close">${h.steps.close}</p>
+    ${h.steps.close ? `<p class="steps__close">${h.steps.close}</p>` : ""}
   </div>
 </section>
 
@@ -380,7 +393,7 @@ export const solution = (s) => {
     body: `
 <section class="page-hero page-hero--solution" aria-labelledby="page-title">
   <div class="container">
-    <p class="crumbs"><a href="${route("solutions")}">Megoldásaink</a><span aria-hidden="true">/</span>${groups[s.group]}</p>
+    <p class="crumbs"><a href="${route("solutions")}">Megoldásaink</a><span aria-hidden="true">/</span>${s.crumb || groups[s.group]}</p>
     <div class="page-hero__grid">
       <div>
         <p class="eyebrow"><span class="eyebrow__icon">${icon(s.icon)}</span>${s.eyebrow}${s.badge ? ` <span class="badge">${s.badge}</span>` : ""}</p>
@@ -452,7 +465,7 @@ ${(s.extra || [])
   </div>
 </section>
 
-${ctaSection({ title: s.cta })}`,
+${ctaSection({ title: s.cta, lead: s.ctaLead })}`,
   };
 };
 
@@ -528,7 +541,7 @@ ${pageHero(pr)}
 
 ${faqBlock(pr.faq, "gyik")}
 
-${ctaSection({ title: `Próbálja ki ${TRIAL_DAYS} napig ingyen.` })}`,
+${ctaSection(pr.cta)}`,
   };
 };
 

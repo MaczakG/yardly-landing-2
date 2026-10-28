@@ -1,58 +1,76 @@
-// Főoldal. One promise: automated operations for equipment and vehicles — deadlines kept,
-// workflows of one's own, automation under a permission matrix. Sections follow the visitor's
-// questions: what is it, is it for me, what does it do, how does it connect to what we use, what
-// does it cost, how do I start.
+// Főoldal. One promise: a record of the fleet and the equipment from which the company's own
+// processes start by themselves — record, watch, process. Sections follow the visitor's
+// questions: what is it, where does the time go now, what starts the processes, what is kept on
+// record, how do deadlines and data flow, how do I start, is it for me, what does it cost.
 
 import { ANNUAL_FREE_MONTHS, NO_VAT, TRIAL_DAYS, TRIAL_PLAN } from "./pricing.mjs";
 
+// The ready-made processes in the app (AutomationTemplates in yardly-saas).
+const TEMPLATES = 44;
+
 export const home = {
-  title: "Flottakezelő és eszköznyilvántartó szoftver cégeknek – Yardly",
-  description: `Flottakezelő és eszköznyilvántartó szoftver: járművek, eszközök, dokumentumok és határidők egy helyen. A Yardly szól, mielőtt valami lejár. ${TRIAL_DAYS} nap ingyen.`,
+  title: "Flotta- és eszköznyilvántartás folyamatautomatizálással – Yardly",
+  description: `Járművek, eszközök, határidők és a hozzájuk tartozó jóváhagyások egy rendszerben. A rögzített adatból maguktól indulnak a folyamatok. ${TRIAL_DAYS} nap ingyen.`,
 
   hero: {
-    eyebrow: "Flotta- és eszközkezelés magyar cégeknek",
-    title: "Flottakezelő szoftver és eszköz&shy;nyilvántartás, egy rendszerben.",
-    lead: "A Yardly számon tartja a lejáratokat, Ön pedig saját folyamatokat hozhat létre benne, és jogosultsági mátrixszal automatizálhatja őket. A DKV-kártyás tankolások maguktól bekerülnek, az adatok Excelben mennek tovább.",
+    eyebrow: "Üzemeltetési rendszer flottához és eszközparkhoz",
+    title: "Nyilvántartás, amelyből a folyamatok maguktól elindulnak",
+    lead: "A Yardly nyilvántartja a járműveket és az eszközöket, figyeli a határidőket, és egy tankolás, szerviz vagy kárügy rögzítésekor elindítja a jóváhagyást, az értesítést és a PDF-et. A folyamatokat Ön állítja össze, a cég saját szabályai szerint.",
     shotAlt: "A Yardly irányítópultja: elöl a közelgő és lejárt határidők, alatta a fő mutatók",
     phoneAlt: "A telefonos állapotfelmérő űrlap",
   },
 
   trust: [
-    { icon: "upload", text: "Excel-import: a meglévő nyilvántartás percek alatt átkerül" },
+    { icon: "upload", text: "Excel-import sablonnal, a meglévő nyilvántartásból" },
     { icon: "eye", text: "Böngészőben és telefonon, telepítés nélkül" },
-    { icon: "lock", text: "Kétlépcsős belépés, titkosított kapcsolat" },
+    { icon: "lock", text: "Kétlépcsős belépés, titkosított kapcsolat, EU-s adatközpont" },
     { icon: "flag", text: "Magyar felület, magyar támogatás" },
   ],
 
   problems: {
-    eyebrow: "Ismerős?",
-    title: "Ismerős?",
+    eyebrow: "Ismerős helyzetek",
+    title: "Ahol a legtöbb idő elmegy",
     items: [
-      { quote: "„Bonyolult folyamatok Excelben vezetve, háromféleképpen?”", text: "Csak egy valaki szerkesztheti őket, és minden lépés egy 1,5 órás rémálom." },
-      { quote: "„Sosincs pontos összképünk az eszközeink költségéről.”", text: "Ekkora mennyiségnél a költségeik mindig magasak, de sosem tudjuk, melyik eszköz viszi a legtöbbet, vagy mennyibe kerül a flotta." },
-      { quote: "„Minden leltárkor a jelenlegi programunk összevissza dobja be a tételeket.”", text: "A jelenleg használt leltárprogramunk mindig olyan eszközöket dob fel következőnek, amelyek a telephely túloldalán vannak, és legalább tízszer megyek körbe." },
+      { quote: "A folyamat egy Excel-táblában él.", text: "Egy jóváhagyáshoz több fájlt kell egyeztetni, és csak egy kolléga tudja, melyik az érvényes. A Yardlyban a lépések, a felelősök és a határidők egy helyen vannak, a következő lépés magától indul." },
+      { quote: "Nem látszik, melyik eszköz kerül a legtöbbe.", text: "A teljes költség ismert, eszközönként nem. A Yardly a tankolást, a szervizt, a biztosítást és a bérleti díjat járművenként és eszközönként összesíti, Ft/km-ben is." },
+      { quote: "A leltár többször bejárja a telephelyet.", text: "A lista sorrendje nem követi a raktár elrendezését, így a leltározó oda-vissza jár. Telefonos leltárnál a kolléga abban a sorrendben olvassa be a címkéket, ahogy halad, a végén pedig látszik, mi hiányzik." },
     ],
-    close: "A Yardly ezt a három gondot is megoldja egyszerre.",
     button: "Megoldásaink",
   },
 
+  automation: {
+    eyebrow: "Folyamatautomatizálás",
+    title: "Egy bejegyzés elindítja a folyamatot",
+    text: "Egy tankolás, szerviz, kárügy, bírság vagy új kolléga rögzítése után a Yardly végigviszi a cég által meghatározott lépéseket. Minden lépés a felelőse Teendőim listájában vár, határidővel.",
+    points: [
+      "Indulhat bejegyzésre, időpontra vagy feltételre, például 200 000 km felett vagy keretátlépéskor",
+      "Szabály összeghatárral: 100 000 Ft felett vezetői jóváhagyás kell",
+      "Automatikus lépések: PDF, e-mail akár a könyvelőnek, állapotváltás, új bejelentés",
+      `${TEMPLATES} kész folyamatsablon, vizuális szerkesztőben módosítható`,
+    ],
+    link: "Folyamatok és automatizálás",
+    slug: "folyamatok",
+    img: "folyamatszerkeszto",
+    alt: "A folyamatszerkesztő: árajánlat, vezetői jóváhagyás összeghatárral, javítás",
+  },
+
   modules: {
-    eyebrow: "Két modul, egy rendszer",
-    title: "A teljes flotta és eszközpark, egy helyen",
-    lead: "Minden csomagban mindkettő benne van. Azt használja, amire szüksége van.",
+    eyebrow: "Nyilvántartás",
+    title: "A flotta és az eszközpark egy rendszerben",
+    lead: "Minden csomagban mindkét modul benne van, ugyanazzal az irányítópulttal, riasztással és folyamatkezeléssel. Azt használja, amelyikre szüksége van.",
     items: [
       {
         name: "Flotta",
-        text: "Járművek és minden, ami hozzájuk tartozik: szerviz, tankolás, kárügyek, biztosítás, tartozékok és dokumentumok. Minden autónak saját adatlapja van, amelyen az egész előélete egy kattintásra van.",
-        link: "Flotta megoldások",
+        text: "Járművek szervizzel, tankolással, kárügyekkel, biztosítással, tartozékokkal és dokumentumokkal. Minden járműnek adatlapja van, rajta a teljes előélet.",
+        link: "Flotta",
         slug: "jarmunyilvantartas",
         img: "jarmu-adatlap",
         alt: "Egy jármű adatlapja",
       },
       {
         name: "Eszközpark",
-        text: "Targoncától a laptopig bármi, amit nyilván kell tartani. Kategóriánként saját jellemzők, pontos hely a polcig, szerviz és ütemterv. A leltárt telefonnal végezheti.",
-        link: "Eszközpark megoldások",
+        text: "Targoncától a laptopig minden, amit nyilván kell tartani. Kategóriánként saját jellemzők, hely a polcig, felelős, szerviz és karbantartási ütemterv. A leltár telefonnal készül.",
+        link: "Eszközpark",
         slug: "eszkoznyilvantartas",
         img: "eszkozok",
         alt: "Az eszközpark egy kategóriája a saját jellemzőkkel",
@@ -61,12 +79,12 @@ export const home = {
   },
 
   alerts: {
-    eyebrow: "Riasztások",
-    title: "A rendszer szól, nem Önnek kell emlékeznie",
-    text: "A Yardly figyeli a forgalmik, műszakik, biztosítások, jogosítványok és szervizek határidejét. Ön dönti el, hány nappal előtte szóljon, és kinek. Naponta egy összesített e-mailt kap, nem tíz külön levelet.",
+    eyebrow: "Határidők",
+    title: "A rendszer szól, mielőtt valami lejár",
+    text: "A Yardly figyeli a forgalmik, műszakik, biztosítások, jogosítványok és szervizek határidejét. Ön dönti el, hány nappal előtte és kinek szóljon. A címzettek naponta egy összesített e-mailt kapnak.",
     points: [
-      "30, 14, 7 és 1 nappal előtte, vagy amikor Ön szeretné",
-      "a km-alapú szerviznél a km-óra állása alapján",
+      "30, 14, 7 és 1 nappal előtte, vagy egyedi ütemezés szerint",
+      "km-alapú szerviznél a km-óra állása alapján",
       "a flottavezetőnek és az érintett kollégának is",
     ],
     link: "Riasztások és emlékeztetők",
@@ -84,17 +102,17 @@ export const home = {
   },
 
   // The data and notification channels built into the app, which the company switches on itself:
-  // the DKV fuel card, Excel and CSV files, e-mail and, in Prémium, Teams and Slack messages from an
-  // automation. No custom connection to the company's other systems: we do not build those.
+  // the DKV fuel card, Excel and CSV files, e-mail and, in Prémium, Teams and Slack messages from a
+  // process. No custom connection to the company's other systems: we do not build those.
   integrations: {
     eyebrow: "Adatok és értesítések",
-    title: "Az adat bejön, kimegy, és szól, ha kell",
-    lead: "A beépített csatornákat Ön kapcsolja be a Beállításokban, fejlesztés nélkül: a DKV-kártyás tankolások maguktól bejönnek, az adatok Excelben és CSV-ben vihetők ki, az értesítések pedig e-mailben és a csapat csatornáján érkeznek.",
+    title: "Adat be, adat ki, értesítés a megfelelő helyre",
+    lead: "A beépített csatornákat a Beállításokban kapcsolja be, fejlesztés nélkül. A tankolások maguktól bejönnek, az adatok Excelben és CSV-ben vihetők tovább, az értesítések e-mailben és a csapat csatornáján érkeznek.",
     points: [
       "DKV üzemanyagkártya: a tankolások 6 óránként maguktól a járművekhez kerülnek",
       "Excel-import sablonnal, Excel- és CSV-export, teljes adatexport bármikor",
-      "Automatikus e-mail PDF-ekkel, akár külső címre is, például a könyvelőnek",
-      "Teams- és Slack-üzenet a csapat csatornájára, automatizálásból (Prémium)",
+      "Automatikus e-mail PDF-ekkel, akár külső címre, például a könyvelőnek",
+      "Teams- és Slack-üzenet a csapat csatornájára, folyamatból (Prémium)",
     ],
     link: "Folyamatok és automatizálás",
     slug: "folyamatok",
@@ -113,54 +131,55 @@ export const home = {
   },
 
   features: {
-    eyebrow: "Amit a Yardly tud",
-    title: "Minden, ami a napi munkához kell",
+    eyebrow: "Funkciók",
+    title: "Amit a Yardly a napi munkában elvégez",
     items: [
-      { slug: "iranyitopult", title: "Irányítópult", text: "Belépés után az látszik először, ami figyelmet igényel, hátralévő napokkal és kilométerekkel." },
+      { slug: "folyamatok", title: "Folyamatok és automatizálás", text: "Egy tankolás, szerviz, kárügy vagy bírság rögzítése elindítja a jóváhagyást, az értesítést és a PDF-et." },
+      { slug: "iranyitopult", title: "Irányítópult", text: "Belépéskor elöl a lejárt és közelgő határidők, hátralévő napokkal és kilométerekkel." },
       { slug: "dokumentumok", title: "Dokumentumok", text: "Forgalmi, műszaki, casco és jogosítvány egy helyen, lejárattal és verziókkal." },
-      { slug: "szerviz-karbantartas", title: "Szerviz és ütemterv", text: "Km vagy idő szerinti karbantartás, „ami előbb jön”, és egy kattintással rögzített szerviz." },
-      { slug: "allapotfelmeres", title: "Állapotfelmérés telefonról", text: "A sofőr egy linkről tölti ki a cég saját ellenőrzőlistáját, belépés nélkül." },
-      { slug: "leltar", title: "Leltár kamerával", text: "A kolléga végigmegy a raktáron, és beolvassa a címkéket. A lista nem látszik előre, így a számlálás valós." },
-      { slug: "folyamatok", title: "Folyamatok és automatizálás", text: "Egy tankolás, szerviz, kárügy vagy bírság rögzítése elindítja a folyamatot: jóváhagyás, értesítés, PDF, e-mail." },
-      { slug: "tankolas-dkv", title: "DKV-integráció", text: "A kártyás tankolások 6 óránként maguk kerülnek a járművekhez." },
-      { slug: "koltsegek-riportok", title: "Költségek és analitika", text: "Ft/km autónként, vezetői összefoglaló PDF-ben, és azok az autók, amelyeket már érdemes lecserélni." },
+      { slug: "szerviz-karbantartas", title: "Szerviz és ütemterv", text: "Km vagy idő szerinti karbantartás, amelyik előbb esedékes. Az elvégzett szerviz egy kattintással rögzíthető." },
+      { slug: "allapotfelmeres", title: "Állapotfelmérés telefonról", text: "A sofőr egy linkről tölti ki a cég ellenőrzőlistáját, belépés nélkül." },
+      { slug: "leltar", title: "Leltár kamerával", text: "A kolléga beolvassa a címkéket. A lista nem látszik előre, így a számlálás valós." },
+      { slug: "tankolas-dkv", title: "DKV-integráció", text: "A kártyás tankolások 6 óránként a megfelelő járműhöz kerülnek." },
+      { slug: "koltsegek-riportok", title: "Költségek és analitika", text: "Ft/km járművenként, vezetői összefoglaló PDF-ben, és azok az autók, amelyeket már érdemes lecserélni." },
     ],
     all: "Az összes funkció",
   },
 
+  // id="indulas": /hogyan-dolgozunk/ redirects here.
   steps: {
     eyebrow: "Hogyan kezdjen bele",
-    title: "Három lépés, és a rendszer már dolgozik is",
+    title: "Három lépés az első éles folyamatig",
     items: [
       { title: "Regisztrál.", text: `Két perc, a cégadatokkal és egy bankkártyával. ${TRIAL_DAYS} napig minden funkciót kipróbálhat, a próbaidő alatt nem terhelünk semmit.` },
-      { title: "Áthozza a meglévő adatokat.", text: "Töltse le az Excel-sablont, másolja bele a listáját, és töltse fel. A hiányzó telephelyek, típusok és kategóriák maguk létrejönnek." },
-      { title: "Meghívja a kollégákat.", text: "Mindenki a saját szerepkörével lép be. A sofőr csak a saját autóját látja, a pénzügy a költségeket." },
+      { title: "Áthozza a meglévő adatokat.", text: "Letölti az Excel-sablont, bemásolja a listáját, és feltölti. A hiányzó telephelyek, típusok és kategóriák maguktól létrejönnek." },
+      { title: "Meghívja a kollégákat, és élesít egy folyamatot.", text: `Mindenki a saját szerepkörével lép be: a sofőr csak a saját autóját látja, a pénzügy a költségeket. A ${TEMPLATES} kész sablon közül kiválasztja az elsőt, átnézi és élesíti.` },
     ],
-    close: "Onnantól a Yardly figyel Ön helyett.",
   },
 
   personas: {
     eyebrow: "Kinek szól",
-    title: "Mindenkinek az, amire szüksége van",
+    title: "Kinek mit ad a Yardly",
     items: [
-      { title: "Flottavezetőknek", text: "Minden autó, határidő és szerviz egy listában, és kevesebb telefon." },
-      { title: "Raktár- és telephelyvezetőknek", text: "Pontos hely a polcig, leltár telefonnal, eszközszerviz ütemtervvel." },
-      { title: "Ügyvezetőknek és pénzügynek", text: "Havi és éves költség, Ft/km, vezetői összefoglaló, csereajánlások." },
-      { title: "Sofőröknek és kollégáknak", text: "Tankolás, kár, hibabejelentés és ellenőrzőlista telefonról, néhány koppintással." },
+      { title: "Flottavezetőknek", text: "Minden jármű, határidő és szerviz egy listában; a jóváhagyások a Teendőim között várnak." },
+      { title: "Raktár- és telephelyvezetőknek", text: "Hely a polcig, leltár telefonnal, eszközszerviz ütemterv szerint." },
+      { title: "Ügyvezetőknek és a pénzügynek", text: "Havi és éves költség, Ft/km, vezetői összefoglaló PDF-ben, csereajánlások." },
+      { title: "Az IT-nak", text: "Kétlépcsős belépés, jogosultsági mátrix, változásnapló, EU-s adatközpont." },
+      { title: "Sofőröknek és kollégáknak", text: "Tankolás, kár, hibabejelentés és ellenőrzőlista telefonról." },
     ],
   },
 
   mobile: {
     eyebrow: "Mobilon és biztonságosan",
     title: "Az irodában és a telephelyen is",
-    text: "A Yardly böngészőben fut, telefonon is teljes értékű. Az adatokat kétlépcsős belépés, titkosított kapcsolat és cégenként elkülönített tárolás védi. Minden változás visszakövethető.",
+    text: "A Yardly böngészőben fut, telefonon is teljes funkcionalitással, a kollégáknak nem kell semmit telepíteniük. Az adatokat kétlépcsős belépés, titkosított kapcsolat és cégenként elkülönített tárolás védi. Minden módosítás naplózva van.",
     link: "Biztonság részletesen",
     phoneAlt: "A leltár összesítése telefonon",
   },
 
   pricing: {
     eyebrow: "Árak",
-    title: "Átlátható árak, a flottája méretéhez",
+    title: "Három csomag, a flotta méretéhez",
     note: `Éves fizetéssel ${ANNUAL_FREE_MONTHS} hónap ingyen. ${NO_VAT}`,
     button: "Összes ár és csomag",
   },
@@ -168,21 +187,22 @@ export const home = {
   faq: {
     eyebrow: "Gyakori kérdések",
     title: "Gyakori kérdések",
-    lead: "Nem találja a választ? Írjon nekünk, egy munkanapon belül válaszolunk.",
+    lead: "Ha nem találja a választ, írjon nekünk; egy munkanapon belül válaszolunk.",
     items: [
       { q: "Kell telepíteni valamit?", a: "Nem. A Yardly böngészőben fut, számítógépen és telefonon is." },
+      { q: "Miben más, mint egy flottakezelő program?", a: "A Yardly a nyilvántartás mellett a hozzá tartozó folyamatokat is kezeli: egy bejegyzésből a cég szabályai szerint jóváhagyás, értesítés, PDF és e-mail lesz. Ugyanebben a rendszerben a flotta mellett az eszközpark és a leltár is kezelhető." },
       { q: "Hogyan kerülnek be a meglévő adataink?", a: "Excel-sablonnal, egyszerre. A rendszer soronként jelzi, ha valamit javítani kell." },
-      { q: "Mi történik a próbaidő végén?", a: "A regisztrációkor választott csomag díját terheljük a bankkártyájára, havonta vagy évente; előtte 7, 3 és 1 nappal e-mailben szólunk, mennyit és mikor vonunk le. A próbaidő végéig a csomagot módosíthatja, vagy lemondhatja a folytatást: ekkor a fiók csak olvasható lesz, az adatokat 90 napig megőrizzük és letöltheti, utána véglegesen töröljük." },
-      { q: "Milyen más programokkal cserél adatot?", a: "A DKV-kártyás tankolásokat a Yardly maga hívja le, ha a Beállításokban megadja a DKV-hozzáférését. Más programokkal Excel- és CSV-fájlokon keresztül cserél adatot, az automatizálások e-mailt küldenek PDF-ekkel, akár külső címre is, a Prémium csomagban pedig a csapat Teams- vagy Slack-csatornájára is írnak. Egyedi rendszerösszekötést nem készítünk." },
-      { q: "Csak a flottához vagy csak az eszközökhöz is használható?", a: "Igen. Minden csomagban mindkét modul benne van, azt használja, amire szüksége van." },
-      { q: "Hol tárolódnak az adataink?", a: "Az Amazon Web Services frankfurti (EU-s) adatközpontjában. Titkosított kapcsolaton érhetők el, és minden cég csak a saját adatait látja." },
+      { q: "Mi történik a próbaidő végén?", a: "A regisztrációkor választott csomag díját terheljük a bankkártyára, havonta vagy évente. Előtte 7, 3 és 1 nappal e-mailben jelezzük az összeget és az időpontot. A próbaidő végéig a csomag módosítható, vagy a folytatás lemondható: ekkor a fiók csak olvasható lesz, az adatokat 90 napig megőrizzük és letölthetők, utána véglegesen töröljük." },
+      { q: "Milyen más programokkal cserél adatot?", a: "A DKV-kártyás tankolásokat a Yardly maga hívja le, ha a Beállításokban megadja a DKV-hozzáférést. Más programokkal Excel- és CSV-fájlokon keresztül cserél adatot. A folyamatok PDF-eket küldenek e-mailben, akár külső címre, a Prémium csomagban pedig a csapat Teams- vagy Slack-csatornájára is írnak. Egyedi rendszerösszekötést nem készítünk." },
+      { q: "Csak a flottához vagy csak az eszközökhöz is használható?", a: "Igen. Minden csomagban mindkét modul benne van; azt használja, amelyikre szüksége van." },
+      { q: "Hol tárolódnak az adataink?", a: "Az Amazon Web Services frankfurti adatközpontjában, az EU-ban. Titkosított kapcsolaton érhetők el, és minden cég csak a saját adatait látja." },
       { q: "Megnézhetjük előbb?", a: `Igen. ${TRIAL_DAYS} napig a saját adataival kipróbálhatja, vagy egy 30 perces online bemutatón végigmegyünk Önnel a rendszeren.` },
     ],
   },
 
   cta: {
     eyebrow: "Kezdje el",
-    title: "Próbálja ki a saját flottájával.",
-    lead: `${TRIAL_DAYS} nap ingyen, a ${TRIAL_PLAN} csomag minden funkciójával. Ha elakad, szívesen végigmegyünk Önnel egy rövid bemutatón.`,
+    title: "Próbálja ki a saját flottájával",
+    lead: `${TRIAL_DAYS} nap ingyen, a ${TRIAL_PLAN} csomag minden funkciójával. Ha elakad, egy rövid online bemutatón végigmegyünk Önnel a rendszeren.`,
   },
 };
