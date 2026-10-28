@@ -12,9 +12,10 @@ export const config = {
   // Leave empty to ship the site without analytics and without a cookie banner.
   gaId: process.env.YARDLY_GA_ID ?? "",
 
-  // URL that receives the contact form as a JSON POST (see aws/contact-form).
-  // Leave empty to fall back to opening the visitor's e-mail program.
-  formEndpoint: process.env.YARDLY_FORM_ENDPOINT ?? "",
+  // Where the contact form posts its JSON: the site's own /api/kapcsolat, which Caddy forwards to
+  // the app API (POST /api/public/contact) that e-mails it to hello@yardly.hu. An empty value
+  // falls back to opening the visitor's e-mail program.
+  formEndpoint: process.env.YARDLY_FORM_ENDPOINT ?? "/api/kapcsolat",
 
   // Google Search Console: the content of the HTML-tag verification
   // (<meta name="google-site-verification" content="…">). Also YARDLY_GSC at build time.

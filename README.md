@@ -54,13 +54,12 @@ src/
   build.mjs           static site generator
 assets/
   css/styles.css      all styles; design tokens at the top
-  js/main.js          mega menu, mobile menu, pricing toggle and calculator, blog filters,
+  js/main.js          mega menu, mobile menu, pricing toggle, blog filters,
                       cookie consent, contact form
   img/app/            product screenshots (demo company, see below)
   brand/              official logo and the social sharing image
   fonts/              self-hosted Manrope and Geist Mono (SIL OFL)
 public/               favicons and web manifest, copied to the site root
-aws/contact-form/     Lambda function that e-mails contact form submissions
 ```
 
 To change copy, edit the matching file in `src/content/` and rebuild. To add a blog post, add an entry to `written` in `src/content/posts.mjs` (or to `guides` in `src/content/guides.mjs`).
@@ -131,14 +130,7 @@ The repository is connected to Cloudflare Workers Builds. `wrangler.jsonc` tells
 
 ### Contact form
 
-By default the form opens the visitor's e-mail program with the message pre-filled, addressed to `hello@yardly.hu`. To deliver it directly:
-
-1. Verify `yardly.hu` (or a sender address) in Amazon SES in `eu-central-1`.
-2. Create a Lambda function from `aws/contact-form/index.mjs` (Node.js 20) with an IAM role allowed to call `ses:SendEmail`. Set `TO_EMAIL=hello@yardly.hu`, `FROM_EMAIL` to a verified sender, and `ALLOWED_ORIGIN=https://yardly.hu`.
-3. Add a function URL (auth type NONE) and build the site with it:
-   ```sh
-   YARDLY_FORM_ENDPOINT="https://….lambda-url.eu-central-1.on.aws/" npm run build
-   ```
+The form posts JSON to `/api/kapcsolat` on the site's own address. Caddy forwards it to the app API (`POST /api/public/contact` in yardly-saas), which e-mails the enquiry to `hello@yardly.hu` through the app's SMTP, with the visitor as Reply-To, and stores nothing. `YARDLY_FORM_ENDPOINT` overrides the address; an empty value makes the form open the visitor's e-mail program instead.
 
 ### Analytics
 

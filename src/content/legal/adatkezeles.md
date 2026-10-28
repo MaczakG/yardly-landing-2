@@ -72,9 +72,9 @@ Ahol a jogalap a jogos érdekünk, kérésre ismertetjük az érdekmérlegelés 
 
 ### 4.2. Megkeresés e-mailben
 
-A weboldal kapcsolatfelvételi űrlapja az Ön levelezőprogramját nyitja meg; az üzenet e-mailben érkezik hozzánk, a weboldal nem tárolja.
+A weboldal kapcsolatfelvételi űrlapján küldött üzenetet szerverünk e-mailben továbbítja a hello@yardly.hu postafiókunkba; sem a weboldal, sem a szerver nem tárolja. Ugyanígy kezeljük a közvetlenül e-mailben küldött megkeresést.
 
-- **Milyen adatok:** név, cégnév, e-mail-cím, telefonszám, az üzenet és a további levelezés.
+- **Milyen adatok:** név, cégnév, e-mail-cím, telefonszám, a járművek és az eszközök becsült száma, az üzenet és a további levelezés.
 - **Cél:** a megkeresés megválaszolása, ajánlatadás, bemutató szervezése.
 - **Jogalap:** ha Ön a leendő szerződő fél (például egyéni vállalkozó), a szerződéskötést megelőző lépések (b); ha egy cég nevében ír, jogos érdekünk az üzleti kapcsolatfelvételhez (f).
 - **Meddig:** az utolsó kapcsolatfelvételtől számított 1 évig. Ha szerződést kötünk, a 4.11. pont szerint.
