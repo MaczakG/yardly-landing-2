@@ -150,7 +150,7 @@ export const home = {
     eyebrow: "Hogyan kezdjen bele",
     title: "Három lépés az első éles folyamatig",
     items: [
-      { title: "Regisztrál.", text: `Két perc, a cégadatokkal és egy bankkártyával. ${TRIAL_DAYS} napig minden funkciót kipróbálhat, a próbaidő alatt nem terhelünk semmit.` },
+      { title: "Regisztrál.", text: `Két perc, a cégadatokkal és egy bankkártyával. ${TRIAL_DAYS} napig minden funkciót kipróbálhat, a próbaidő alatt nem terhelünk semmit (a kártya ellenőrzéséhez levont 100 Ft-ot visszatérítjük).` },
       { title: "Áthozza a meglévő adatokat.", text: "Letölti az Excel-sablont, bemásolja a listáját, és feltölti. A hiányzó telephelyek, típusok és kategóriák maguktól létrejönnek." },
       { title: "Meghívja a kollégákat, és élesít egy folyamatot.", text: `Mindenki a saját szerepkörével lép be: a sofőr csak a saját autóját látja, a pénzügy a költségeket. A ${TEMPLATES} kész sablon közül kiválasztja az elsőt, átnézi és élesíti.` },
     ],
