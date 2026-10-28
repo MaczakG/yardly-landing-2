@@ -569,19 +569,13 @@ export const contact = () => {
     <div class="contact__intro">
       <p class="eyebrow">${co.eyebrow}</p>
       <h1 class="h1" id="page-title">${g(co.h1)}</h1>
-      <p class="lead">${co.lead}</p>
     </div>
 
     <div class="contact__aside">
       <dl class="direct">
         ${co.direct.map((d) => `<div><dt>${d.k}</dt><dd>${d.email ? `<a href="mailto:${config.email}">${config.email}</a>` : d.v}</dd></div>`).join("")}
       </dl>
-      <p class="muted contact__customer">${co.customer}</p>
       <a class="text-link" href="${APP.login}">${co.loginLink}${arrow("text-link__arrow")}</a>
-      <h2 class="contact__steps-title">${co.stepsTitle}</h2>
-      <ol class="next-steps">
-        ${co.steps.map((s) => `<li><span>${s}</span></li>`).join("")}
-      </ol>
     </div>
 
     <div class="form-card" id="enquiry">
@@ -623,7 +617,6 @@ export const contact = () => {
         </div>
         <div class="form-actions">
           <button class="btn btn--primary" type="submit">${f.submit}${arrow()}</button>
-          <span class="cta-note">${f.note}</span>
         </div>
         <p class="form-error" role="alert" hidden></p>
       </form>
@@ -635,13 +628,6 @@ export const contact = () => {
         <a class="btn btn--primary" href="${APP.register}">${ui.trialShort}${arrow()}</a>
       </div>
     </div>
-  </div>
-</section>
-
-<section class="section section--band" aria-labelledby="contact-faq-title">
-  <div class="container">
-    <h2 class="h3-lg" id="contact-faq-title">Rövid GYIK</h2>
-    <dl class="mini-faq">${co.faq.map((q) => `<div><dt>${q.q}</dt><dd>${q.a}</dd></div>`).join("")}</dl>
   </div>
 </section>`,
   };

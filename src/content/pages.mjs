@@ -1,25 +1,14 @@
 // Kapcsolat. The legal pages are in legal.mjs.
-import { route } from "../routes.mjs";
-import { plans, priceFacts } from "./pricing.mjs";
-
 export const contact = {
   title: "Kapcsolat: bemutató, árak, segítség – Yardly",
-  description: "Kérjen 30 perces online bemutatót, kérdezzen az árakról, vagy írjon bármiről. Egy munkanapon belül válaszolunk.",
+  description: "Kérdése esetén vegye fel velünk a kapcsolatot: írjon nekünk az űrlapon vagy e-mailben.",
   eyebrow: "Kapcsolat",
-  h1: "Kérjen bemutatót, vagy kérdezzen az árakról",
-  lead: "Ha bármi másban segíthetünk, azt is itt írja meg. Egy munkanapon belül válaszolunk.",
+  h1: "Kérdése esetén vegye fel velünk a kapcsolatot!",
   direct: [
     { k: "E-mail", email: true },
     { k: "Székhely", v: "Budapest" },
   ],
-  customer: `Ha már ügyfelünk, a támogatást a csomagja szerint adjuk: ${plans.map((p) => `${p.name} ${p.support}`).join(", ")}.`,
   loginLink: "Már használja? Bejelentkezés",
-  stepsTitle: "Mi történik utána?",
-  steps: [
-    "Egy munkanapon belül válaszolunk e-mailben vagy telefonon. Bemutatókérésnél Maczák Gergő, a Yardly alapítója személyesen keresi.",
-    "Egyeztetünk egy 30 perces online bemutatót, ahol az Ön kérdéseire koncentrálunk.",
-    "Ha szeretné, segítünk az Excel-importban, hogy a próbaidőben már a saját adataival dolgozhasson.",
-  ],
   form: {
     title: "Írjon nekünk",
     intro: "A csillaggal jelölt mezők kötelezők.",
@@ -45,9 +34,8 @@ export const contact = {
     consentLink: "Adatkezelési tájékoztatót",
     submit: "Elküldöm",
     sending: "Küldés…",
-    note: "Egy munkanapon belül válaszolunk.",
     successTitle: "Köszönjük, megkaptuk az üzenetét.",
-    successText: "Egy munkanapon belül keressük a megadott e-mail-címen vagy telefonszámon.",
+    successText: "Hamarosan jelentkezünk a megadott e-mail-címen vagy telefonszámon.",
     mailSubject: "Megkeresés a yardly.hu-ról",
     mailtoTitle: "Már csak el kell küldeni",
     mailtoText: "Megnyitottuk a levelezőprogramját a kitöltött üzenettel. Ha nem nyílt meg, írjon nekünk közvetlenül: {email}.",
@@ -60,9 +48,4 @@ export const contact = {
       consent: "A küldéshez kérjük, fogadja el az adatkezelési tájékoztatót.",
     },
   },
-  faq: [
-    { q: "Mennyi ideig tart egy bemutató?", a: "30 perc, online." },
-    { q: "Mennyibe kerül a Yardly?", a: `Három csomag van, ${priceFacts.from}. A részleteket az <a href="${route("pricing")}">Árak</a> oldalon találja.` },
-    { q: "Segítenek az adatok áthozásában?", a: "Igen. Az Excel-sablon a legtöbb esetben elég; ha elakad, ránézünk a fájljára." },
-  ],
 };

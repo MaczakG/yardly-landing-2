@@ -183,7 +183,7 @@ const written = [
 <ol>
 <li>Kiválasztja az eszközöket, és elküldi a leltárt egy kollégának.</li>
 <li>Ő e-mailben kap egy linket, amely a telefonon azonnal megnyitja a kamerát. Bejelentkezni nem kell.</li>
-<li>Végigmegy a raktáron, és beolvassa a címkéket. Címke nélküli tételhez kézi beírás, sötét helyen lámpa is van.</li>
+<li>Végigmegy a raktáron, és beolvassa a címkéket. Címke nélküli tételhez kézi beírás, sötét helyen a vaku közvetlenül bekapcsolható.</li>
 <li>A végén rögzíti a leltárt, Ön pedig látja az eredményt.</li>
 </ol>`,
   },

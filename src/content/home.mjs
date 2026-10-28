@@ -186,7 +186,7 @@ export const home = {
   faq: {
     eyebrow: "Gyakori kérdések",
     title: "Gyakori kérdések",
-    lead: "Ha nem találja a választ, írjon nekünk; egy munkanapon belül válaszolunk.",
+    lead: "Ha nem találja a választ, írjon nekünk.",
     items: [
       { q: "Kell telepíteni valamit?", a: "Nem. A Yardly böngészőben fut, számítógépen és telefonon is." },
       { q: "Miben más, mint egy flottakezelő program?", a: "A Yardly a nyilvántartás mellett a hozzá tartozó folyamatokat is kezeli: egy bejegyzésből a cég szabályai szerint jóváhagyás, értesítés, PDF és e-mail lesz. Ugyanebben a rendszerben a flotta mellett az eszközpark és a leltár is kezelhető." },
