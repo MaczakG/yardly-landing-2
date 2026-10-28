@@ -252,7 +252,7 @@ A Szolgáltató a nyilatkozatot a változatszámmal, az időponttal, a Felhaszn�
 
 15.1. A Szolgáltató e-mailben, a hello@yardly.hu címen, magyar nyelven ad támogatást.
 
-15.2. Az első érdemi válasz ideje a Csomag szerint, az Árlapon feltüntetett támogatási szint: az Alap Csomagban meghatározott válaszidő nélkül, az Üzleti Csomagban 1 Munkanapon belül, a Prémium Csomagban 4 Munkaórán belül, kijelölt kapcsolattartóval. A válaszidő Munkaidőben számít, és az első érdemi válaszra vonatkozik, nem a hiba elhárítására.
+15.2. A támogatás minden Csomagban azonos. A Szolgáltató a megkeresésekre Munkaidőben válaszol; meghatározott válaszidőt nem vállal.
 
 15.3. A támogatás nem terjed ki egyedi fejlesztésre, az Ügyfél adatainak karbantartására és harmadik fél rendszereinek hibáira.
 
