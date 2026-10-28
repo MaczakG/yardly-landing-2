@@ -36,12 +36,13 @@ const render = (key, path, page, lastmod) => {
 render("home", ROUTES.home, pages.home());
 render("solutions", ROUTES.solutions, pages.solutionsIndex());
 for (const s of pages.solutions) render(`solution:${s.slug}`, solutionRoute(s.slug), pages.solution(s));
-render("process", ROUTES.process, pages.process());
-render("hosting", ROUTES.hosting, pages.hosting());
+render("pricing", ROUTES.pricing, pages.pricing());
 render("contact", ROUTES.contact, pages.contact());
 render("blog", ROUTES.blog, pages.blog(), pages.posts[0]?.date);
 for (const p of pages.posts) render("post", postRoute(p), pages.post(p), p.updated || p.date);
 render("legal", ROUTES.legal, pages.legalHub());
+render("terms", ROUTES.terms, pages.terms());
+render("dpa", ROUTES.dpa, pages.dpa());
 render("privacy", ROUTES.privacy, pages.privacy());
 render("imprint", ROUTES.imprint, pages.imprint());
 render("subprocessors", ROUTES.subprocessors, pages.subprocessors());

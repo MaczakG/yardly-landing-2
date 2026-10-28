@@ -1,6 +1,6 @@
 # yardly.hu
 
-Marketing site for Yardly, the fleet and equipment operations system that is tailored to each company's own processes and runs on the company's own server or in the cloud, run by us. The site shows no prices: every call to action asks for a demo or a quote. `app.yardly.hu` is the demo instance used in presentations; the site does not link to it.
+Marketing site for Yardly, the fleet and equipment management system for Hungarian companies, sold as subscriptions (Alap, Üzleti, Prémium) with a 14-day trial. The app is at `app.yardly.hu`: the calls to action open its sign-up (`login.html?mode=register`) and its login (`login.html`).
 
 The site is static and Hungarian only. The former English and German pages, and the pages the old site had but this one does not, forward to their nearest Hungarian page (see Redirects below).
 
@@ -11,12 +11,10 @@ The site is static and Hungarian only. The former English and German pages, and 
 | Home | `/` |
 | Solutions overview (Megoldásaink) | `/megoldasaink/` |
 | 14 solution pages, one per area of the app | `/megoldasaink/<slug>/` |
-| Hogyan dolgozunk: the rollout (survey, customization, install, support), the three levels of customization and the integrations | `/hogyan-dolgozunk/` |
-| Üzemeltetés: the two ways the Yardly runs (own server, or cloud run by us) and the technical details | `/uzemeltetes/` |
+| Pricing: the plans, the calculator for vehicles, equipment, users and features, how paying works | `/arak/` |
 | Contact | `/kapcsolat/` |
 | Blog (filterable by category; posts appear on their dates) | `/blog/`, `/blog/<slug>/` |
-| Privacy notice | `/adatkezeles/` |
-| Imprint | `/impresszum/` |
+| Legal pages (`src/content/legal.mjs`): overview, privacy notice, imprint, sub-processors, data export, vulnerability reports, illegal content | `/jogi/`, `/adatkezeles/`, `/impresszum/`, `/alfeldolgozok/`, `/adatexport/`, `/biztonsagi-hibak/`, `/jogserto-tartalom/` |
 
 The Megoldásaink menu item opens a mega menu with all solution pages in four groups (Flotta, Eszközpark, Napi működés, Vezetés). On phones the same list is an accordion in the menu.
 
@@ -24,7 +22,7 @@ The build also writes `sitemap.xml`, `robots.txt` and `404.html`.
 
 ### Redirects
 
-`REDIRECTS` in `src/routes.mjs` maps old addresses (`/en/…`, `/de/…`, `/megoldasok/`, `/esettanulmanyok/`, the former `/arak/` and `/vallalati-megoldas/`, renamed blog posts) to new ones. On yardly.hu Caddy answers them with real 301s: the build writes them to `dist/redirects.caddy`, and the same lines are in the `yardly.hu` block of the server's Caddyfile (update both when the list changes). Each old address also gets a small page with a meta refresh and a canonical link, for hosts without the 301s. The site's Content-Security-Policy allows scripts from files only, so the forward cannot be an inline script.
+`REDIRECTS` in `src/routes.mjs` maps old addresses (`/en/…`, `/de/…`, `/megoldasok/`, `/esettanulmanyok/`, the pages of the former custom-installation offer: `/hogyan-dolgozunk/`, `/uzemeltetes/` and `/vallalati-megoldas/`, renamed blog posts) to new ones. On yardly.hu Caddy answers them with real 301s: the build writes them to `dist/redirects.caddy`, and the same lines are in the `yardly.hu` block of the server's Caddyfile (update both when the list changes). Each old address also gets a small page with a meta refresh and a canonical link, for hosts without the 301s. The site's Content-Security-Policy allows scripts from files only, so the forward cannot be an inline script.
 
 ## Build and preview
 
@@ -41,11 +39,14 @@ npm run serve    # serves dist/ on http://localhost:4173
 src/
   config.mjs          site URL, e-mail, GA4 ID, form endpoint, social links
   content/
-    site.mjs          menu, mega menu, footer, shared labels
+    site.mjs          menu, mega menu, footer, shared labels, app links
+    pricing.mjs       every price: plans, limits, comparison table, pricing FAQ
     home.mjs          home page copy
     solutions.mjs     solutions overview and the 14 solution pages
-    pages.mjs         contact, Hogyan dolgozunk, Üzemeltetés (and the two hosting options), privacy notice, imprint
+    pages.mjs         contact
+    legal.mjs         the legal pages
     posts.mjs         blog categories and posts
+    guides.mjs        the guides, published on their dates
   routes.mjs          URLs and redirects
   pages.mjs           page templates
   layout.mjs          <head>, header with mega menu, mobile menu, footer, cookie banner
@@ -53,7 +54,8 @@ src/
   build.mjs           static site generator
 assets/
   css/styles.css      all styles; design tokens at the top
-  js/main.js          mega menu, mobile menu, blog filters, cookie consent, contact form
+  js/main.js          mega menu, mobile menu, pricing toggle and calculator, blog filters,
+                      cookie consent, contact form
   img/app/            product screenshots (demo company, see below)
   brand/              official logo and the social sharing image
   fonts/              self-hosted Manrope and Geist Mono (SIL OFL)
@@ -68,9 +70,15 @@ To change copy, edit the matching file in `src/content/` and rebuild. To add a b
 - A post is published from its `date` on: the build leaves out posts dated after the build day (Budapest time) and turns links to them into plain text. `YARDLY_BUILD_DATE=2027-01-31 npm run build` previews a later day. On the server a timer rebuilds the site every morning (see below), so a post comes out on its day without a deploy.
 - Google Search Console: put the HTML-tag verification code in `googleSiteVerification` in `src/config.mjs` (or `YARDLY_GSC` at build time); every page then carries `<meta name="google-site-verification">`. The sitemap is `https://yardly.hu/sitemap.xml`, with `lastmod` for the blog and the posts.
 
+### Prices
+
+Every price on the site lives in `src/content/pricing.mjs`: the price page, the calculator, the home page, the solution pages, the posts and the guides all take their numbers from there. It is a copy of the app's price list (`pricing.json` in the yardly-saas repository); the site does not read it from the app, so update both together. The seller is VAT-exempt (alanyi adómentes): the prices are the amounts paid, and the site shows no VAT.
+
+The calculator takes the number of vehicles, equipment and users and the features ticked (`CALC_FEATURES`, each with the smallest plan that has it) and picks the cheapest plan that can hold them all: the per-vehicle fee above the included vehicles (up to the plan's ceiling), and "+250 eszköz" packs above the plan's equipment limit (at most 20; Prémium has no limit; on annual billing a pack costs 10 months for 12). Too many users or a ticked feature the plan lacks rules the plan out, so the answer jumps to the next plan; a feature a smaller plan can buy as an extra (DKV on Alap) is added there as a line instead. Its sign-up button preselects the plan it found (`&plan=alap|uzleti|premium`). The same logic runs in `src/pages.mjs` (the starting state) and `assets/js/main.js` (when the visitor changes a number).
+
 ### Contact form links
 
-Links can preselect the form's topic: `/kapcsolat/?tema=demo#enquiry` (also `quote`, `onprem`, `integration`, `support`, `other`). The "Bemutatót kérek" and "Ajánlatot kérek" buttons use `demo` and `quote`.
+Links can preselect the form's topic: `/kapcsolat/?tema=demo#enquiry` (also `price`, `support`, `other`). The "Bemutatót kérek" buttons use `demo`.
 
 ## Brand
 
@@ -144,6 +152,7 @@ YARDLY_GA_ID="G-XXXXXXX" npm run build
 
 - **Company details.** The privacy notice and the imprint contain highlighted placeholders (company name, registered office, registration and tax numbers, representative, retention periods, e-mail provider) that must be filled in once the company is registered. Both texts are drafts and need legal review. Remove the "draft" notice in `src/pages.mjs` (`legal()`) afterwards.
 - **Mailbox.** The site shows `config.email` (`hello@yardly.hu`) everywhere. Make sure the mailbox exists, or change the address in `src/config.mjs`.
-- **Prices.** The site shows the new price list. Publish it once the app at `app.yardly.hu` charges the same prices.
+- **Prices and payment.** The site shows the price list in `pricing.mjs`, no VAT, and says a bank card is registered (Barion) at sign-up. Publish it once the app at `app.yardly.hu` charges the same prices, without VAT, and asks for the card (`CardPayments` in `pricing.json`).
+- **Redirects on the server.** The Caddyfile's `yardly.hu` block must get the lines of `dist/redirects.caddy`: `/arak/` must no longer forward anywhere, and the three pages of the former custom-installation offer forward as listed.
 - **Social profiles.** The LinkedIn, Instagram, Facebook and TikTok icons render without links until the URLs are set in `src/config.mjs`.
 - **Screenshots.** Images in `assets/img/app/` are real screens of the app filled with a made-up company (Minta Logisztika Kft.) and made-up people.

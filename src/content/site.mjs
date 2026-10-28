@@ -1,13 +1,25 @@
 // Site-wide copy: navigation, the Megoldásaink mega menu, footer and shared UI strings.
 // Page copy lives next to this file, one module per page.
 
+import { TRIAL_DAYS, TRIAL_PLAN } from "./pricing.mjs";
+
+// Where the app lives. Registration starts the trial: a bank card is registered first and
+// nothing is charged during the trial. ?plan= preselects the plan to continue with afterwards.
+export const APP = {
+  login: "https://app.yardly.hu/login.html",
+  register: "https://app.yardly.hu/login.html?mode=register",
+  registerPlan: (key) => `https://app.yardly.hu/login.html?mode=register&plan=${key}`,
+};
+
 export const ui = {
   skip: "Ugrás a tartalomra",
   homeLabel: "Yardly – kezdőlap",
   menu: "Menü",
+  login: "Bejelentkezés",
+  trial: `Kipróbálom ${TRIAL_DAYS} napig`,
+  trialShort: "Kipróbálom",
   demo: "Bemutatót kérek",
-  quote: "Ajánlatot kérek",
-  demoNote: "Egy 30 perces online bemutatón megmutatjuk, hogyan működne az Önök folyamataival.",
+  trialNote: `${TRIAL_DAYS} nap ingyen, a ${TRIAL_PLAN} csomag minden funkciójával.`,
   readMore: "Tovább olvasom",
   minutes: (n) => `${n} perc olvasás`,
   backToBlog: "Vissza a bloghoz",
@@ -25,8 +37,7 @@ export const ui = {
 // Header menu, in order. "solutions" opens the mega menu; "highlight" sets an item off a little.
 export const nav = [
   { key: "solutions", label: "Megoldásaink" },
-  { key: "process", label: "Hogyan dolgozunk" },
-  { key: "hosting", label: "Üzemeltetés" },
+  { key: "pricing", label: "Árak" },
   { key: "blog", label: "Blog" },
   { key: "contact", label: "Kapcsolat" },
 ];
@@ -49,19 +60,20 @@ export const megamenu = {
   },
   bottom: {
     all: "Az összes funkció egy oldalon",
-    note: "Mindegyik az Önök szabályaihoz igazítható. A meglévő nyilvántartást mi hozzuk át.",
+    note: "Excel-import: a meglévő nyilvántartása percek alatt átkerül.",
   },
 };
 
 export const footer = {
-  desc: "Flotta- és eszközüzemeltetési rendszer, a cég folyamataira szabva. Az Önök szerverén vagy általunk üzemeltetve a felhőben.",
+  desc: "Flotta- és eszközkezelő rendszer magyar cégeknek. A rendszer szól, mielőtt valami lejár.",
   colFleet: "Flotta",
   colOps: "Eszközpark és működés",
   colLead: "Vezetés",
   colCompany: "Cég",
   colLegal: "Jogi",
   legal: "Jogi információk",
-  privacy: "Adatvédelmi tájékoztató",
+  terms: "ÁSZF",
+  privacy: "Adatkezelési tájékoztató",
   imprint: "Impresszum",
   illegalContent: "Jogsértő tartalom bejelentése",
   security: "Biztonság",
