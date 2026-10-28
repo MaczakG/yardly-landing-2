@@ -48,7 +48,7 @@ export const plans = [
     users: null,
     sites: null,
     workflows: 10,
-    support: "1 munkanapon belül",
+    support: "e-mailben",
   },
   {
     key: "premium",
@@ -63,7 +63,7 @@ export const plans = [
     users: null,
     sites: null,
     workflows: null,
-    support: "4 munkaórán belül, kijelölt kapcsolattartóval",
+    support: "e-mailben",
   },
 ];
 
@@ -97,7 +97,6 @@ uzleti.highlights = [
   "Változásnapló (az utolsó 90 nap)",
   "Vezetői összefoglaló PDF",
   "DKV-integráció",
-  `Támogatás ${uzleti.support}`,
 ];
 premium.highlights = [
   `${premium.included} aktív jármű a díjban, felette ${huf(premium.extra)}/jármű/hó (legfeljebb ${premium.ceiling})`,
@@ -107,7 +106,6 @@ premium.highlights = [
   "Analitika, előrejelzés, csereajánlások",
   "Változásnapló exporttal, állítható megőrzéssel",
   "Beállítások átadása szerepköröknek",
-  `Támogatás ${premium.support}`,
 ];
 
 
