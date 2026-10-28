@@ -1,8 +1,8 @@
 // Page templates. Each returns { title, description, body, jsonLd? }; layout.mjs wraps them.
 import { config } from "./config.mjs";
 import { route, solutionRoute, postRoute } from "./routes.mjs";
-import { esc, glue as g, arrow, icon, board, ctaCard, screenshot, phoneShot } from "./components.mjs";
-import { APP, ui } from "./content/site.mjs";
+import { esc, glue as g, arrow, icon, board, ctaCard, screenshot, phoneShot, paymentBanner } from "./components.mjs";
+import { APP, ui, footer } from "./content/site.mjs";
 import { home as h } from "./content/home.mjs";
 import { overview, groups, solutions, solutionBySlug } from "./content/solutions.mjs";
 import { pricing as pr, plans, comparison, limits, huf } from "./content/pricing.mjs";
@@ -536,6 +536,7 @@ ${pageHero(pr)}
   <div class="container">
     <div class="section-head section-head--single"><div><p class="eyebrow">${pr.payment.eyebrow}</p><h2 class="h2" id="payment-title">${g(pr.payment.title)}</h2></div></div>
     ${numbered(pr.payment.items)}
+    ${paymentBanner(footer.payment)}
   </div>
 </section>
 

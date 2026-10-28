@@ -1,6 +1,6 @@
 import { config } from "./config.mjs";
 import { route, solutionRoute } from "./routes.mjs";
-import { esc, logo, socialLinks, arrow, icon } from "./components.mjs";
+import { esc, logo, socialLinks, paymentBanner, arrow, icon } from "./components.mjs";
 import { APP, ui, nav, megamenu, footer as f } from "./content/site.mjs";
 import { solutionBySlug } from "./content/solutions.mjs";
 
@@ -118,6 +118,7 @@ const footer = () => {
         <p>${f.desc}</p>
         <p><a class="site-footer__mail" href="mailto:${config.email}">${config.email}</a></p>
         ${socialLinks(config.social)}
+        ${paymentBanner(f.payment)}
       </div>
       <div class="footer-col">
         <h2>${f.colFleet}</h2>
@@ -204,6 +205,7 @@ export const layout = (page) => {
   <link rel="manifest" href="/site.webmanifest">
   <link rel="preload" href="/assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/manrope-latin-ext-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  ${config.barionPixelId ? `<script src="/assets/js/barion-pixel.js" data-pixel-id="${esc(config.barionPixelId)}"></script>` : ""}
   <link rel="stylesheet" href="/assets/css/styles.css">
   <script src="/assets/js/main.js" defer></script>
   ${json}
