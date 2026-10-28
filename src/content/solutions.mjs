@@ -273,7 +273,7 @@ export const solutions = [
     steps: [
       "Kiválasztja az eszközöket és a járműtartozékokat kategória, típus, állapot, telephely, raktár vagy helyiség szerint, és kiküldi a leltárt egy kollégának.",
       "A kolléga e-mailben 14 napig érvényes linket kap, amely a telefonon megnyitja a kamerát.",
-      "Minden beolvasott kód kipipál egy tételt. A címke nélküli tételek kézzel is beírhatók, sötét helyen a lámpa bekapcsolható.",
+      "Minden beolvasott kód kipipál egy tételt. A címke nélküli tételek kézzel is beírhatók, sötét helyen a vaku közvetlenül bekapcsolható.",
       "A végén látszik, mi került elő és mi nem. A hiányzókhoz megjegyzés írható, majd a leltár lezárható.",
       "Az eredmény a Leltár előzményekben látszik és PDF-ben letölthető. A lezárás elindíthatja a cég folyamatát, például a hiányzó tételek kivizsgálását.",
     ],
@@ -424,7 +424,6 @@ export const solutions = [
       { title: "Címzettek", text: "A flottavezetők, az érintett felhasználó, vagy mindkettő." },
       { title: "Km-küszöb", text: "Km-alapú karbantartásnál megadható, hány km-rel előtte jelezzen." },
       { title: "Riasztások oldal", text: "A következő 60 nap határidői és a kiküldött riasztások előzménye. Az ellenőrzés kézzel is lefuttatható." },
-      { title: "Teszt e-mail", text: "Egy gombbal ellenőrizhető, megérkezik-e a levél." },
       { title: "Emlékeztetők", text: "Egyszeri vagy ismétlődő (1–60 havonta), például téligumi-csere vagy tachográf-kalibrálás." },
       { title: "Emlékeztető bármihez", text: "Járműhöz, személyhez vagy eszközhöz köthető, „Teljesítve” gombbal és előzményekkel." },
     ],

@@ -484,7 +484,7 @@ export const guides = [
 <ol>
 <li>Kiválasztja az eszközöket és a járműtartozékokat, kategória, típus, állapot, telephely, raktár vagy helyiség szerint szűrve, és elküldi a leltárt egy kollégának.</li>
 <li>A kolléga e-mailben 14 napig érvényes linket kap, amely a telefonon azonnal megnyitja a kamerát. Bejelentkezni és alkalmazást telepíteni nem kell, iPhone-on és Androidon is működik.</li>
-<li>Minden beolvasott QR-kód vagy vonalkód kipipálja a tételt. A címke nélküli tételekhez kézi beírás van, sötét helyen bekapcsolható a lámpa.</li>
+<li>Minden beolvasott QR-kód vagy vonalkód kipipálja a tételt. A címke nélküli tételekhez kézi beírás van, sötét helyen a vaku közvetlenül bekapcsolható.</li>
 <li>A végén látszik, mi került elő és mi nem. A hiányzókhoz megjegyzés írható, majd a leltár rögzíthető. Ha közben megszakad, a haladás a telefonon megmarad.</li>
 <li>Ön a Leltár előzményekben látja az eredményt, és PDF-ben letöltheti.</li>
 </ol>
@@ -634,7 +634,7 @@ export const guides = [
 <li>Ha egy helyen rendszeresen sérül a címke, ott váltson tartósabb anyagra vagy más elhelyezésre.</li>
 </ul>
 <h2>Hogyan kapcsolódik ez a Yardlyhoz?</h2>
-<p>A Yardly <a href="/megoldasaink/eszkoznyilvantartas/">eszköznyilvántartásában</a> minden eszközhöz rögzíthető gyári szám, leltári szám, belső azonosító és vonalkód, a meglévő lista pedig Excel-sablonnal tölthető fel. A <a href="/megoldasaink/leltar/">telefonos leltár</a> a telefon kamerájával olvassa a QR-kódot és a vonalkódot, és a leltári számot, a vonalkódot, a gyári számot és a belső azonosítót is felismeri, így a meglévő címkéket is használhatja. A címke nélküli tételekhez kézi beírás van, sötét helyen bekapcsolható a lámpa. A címkéket bármilyen címkenyomtatóval vagy nyomdával elkészítheti; a lényeg, hogy a kódban ugyanaz az azonosító álljon, mint a Yardlyban. Hogy miért érdemes a leltárt vakon végezni, arról a <a href="/blog/vak-leltar/">vak leltárról</a> szóló cikkünkben írtunk.</p>`,
+<p>A Yardly <a href="/megoldasaink/eszkoznyilvantartas/">eszköznyilvántartásában</a> minden eszközhöz rögzíthető gyári szám, leltári szám, belső azonosító és vonalkód, a meglévő lista pedig Excel-sablonnal tölthető fel. A <a href="/megoldasaink/leltar/">telefonos leltár</a> a telefon kamerájával olvassa a QR-kódot és a vonalkódot, és a leltári számot, a vonalkódot, a gyári számot és a belső azonosítót is felismeri, így a meglévő címkéket is használhatja. A címke nélküli tételekhez kézi beírás van, sötét helyen a vaku közvetlenül bekapcsolható. A címkéket bármilyen címkenyomtatóval vagy nyomdával elkészítheti; a lényeg, hogy a kódban ugyanaz az azonosító álljon, mint a Yardlyban. Hogy miért érdemes a leltárt vakon végezni, arról a <a href="/blog/vak-leltar/">vak leltárról</a> szóló cikkünkben írtunk.</p>`,
   },
   {
     slug: "karugyintezes-ceges-flotta",
