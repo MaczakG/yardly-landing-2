@@ -43,31 +43,33 @@ export const nav = [
 ];
 
 // The mega menu's four columns list every solution page (slugs from content/solutions.mjs).
+// Processes come first: they are what sets Yardly apart from a register. The footer picks the
+// columns by key.
 export const megamenu = {
   label: "Megoldásaink",
   columns: [
-    { title: "Flotta", items: ["jarmunyilvantartas", "szerviz-karbantartas", "tankolas-dkv", "karugyek-biztositas-tartozekok", "allapotfelmeres"] },
-    { title: "Eszközpark", items: ["eszkoznyilvantartas", "leltar"] },
-    { title: "Napi működés", items: ["iranyitopult", "dokumentumok", "riasztasok", "folyamatok"] },
-    { title: "Vezetés", items: ["koltsegek-riportok", "analitika", "csapat-biztonsag"] },
+    { key: "daily", title: "Folyamatok és napi működés", items: ["folyamatok", "iranyitopult", "dokumentumok", "riasztasok"] },
+    { key: "fleet", title: "Flotta", items: ["jarmunyilvantartas", "szerviz-karbantartas", "tankolas-dkv", "karugyek-biztositas-tartozekok", "allapotfelmeres"] },
+    { key: "equipment", title: "Eszközpark", items: ["eszkoznyilvantartas", "leltar"], feature: true },
+    { key: "lead", title: "Vezetés", items: ["koltsegek-riportok", "analitika", "csapat-biztonsag"] },
   ],
   featured: {
     tag: "Új",
-    title: "Folyamatok, amelyek egy bejegyzésre maguktól elindulnak",
-    text: "Tankolás, szerviz, kárügy vagy bírság után: jóváhagyás, értesítés, PDF, e-mail.",
+    title: "Folyamatok, amelyek egy bejegyzésre elindulnak",
+    text: "Tankolás, szerviz, kárügy vagy bírság rögzítése után a rendszer jóváhagyást kér, értesít, PDF-et készít és e-mailt küld.",
     link: "Megnézem",
     slug: "folyamatok",
   },
   bottom: {
     all: "Az összes funkció egy oldalon",
-    note: "Excel-import: a meglévő nyilvántartása percek alatt átkerül.",
+    note: "Excel-import sablonnal: a meglévő nyilvántartás egyszerre átkerül.",
   },
 };
 
 export const footer = {
-  desc: "Flotta- és eszközkezelő rendszer magyar cégeknek. A rendszer szól, mielőtt valami lejár.",
+  desc: "Flotta- és eszköznyilvántartás folyamatautomatizálással, magyar cégeknek. A rendszer szól, mielőtt valami lejár, és elindítja, ami utána következik.",
   colFleet: "Flotta",
-  colOps: "Eszközpark és működés",
+  colOps: "Eszközpark és napi működés",
   colLead: "Vezetés",
   colCompany: "Cég",
   colLegal: "Jogi",
@@ -79,9 +81,8 @@ export const footer = {
   security: "Biztonság",
   cookies: "Süti-beállítások",
   rights: "© 2026 Yardly. Minden jog fenntartva.",
-  madeIn: "Készült Magyarországon.",
+  madeIn: "Magyarországon fejlesztve.",
   top: "Vissza az oldal tetejére",
-  soon: "hamarosan",
 };
 
 export const notFound = {

@@ -1674,10 +1674,6 @@ a.social__link:hover {
   color: var(--ink);
 }
 
-.social__link.is-soon {
-  opacity: 0.55;
-}
-
 .social__link svg {
   width: 18px;
   height: 18px;

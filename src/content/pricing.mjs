@@ -84,14 +84,14 @@ const extraVehicle = (p) => `${huf(p.extra)}/hó, legfeljebb ${p.ceiling}-ig`;
 alap.highlights = [
   `${alap.included} aktív jármű a díjban, felette ${huf(alap.extra)}/jármű/hó (legfeljebb ${alap.ceiling})`,
   `${num(alap.equipment)} eszköz, ${alap.users} felhasználó, ${alap.sites} telephely`,
-  "1 aktív saját folyamat, sablonból",
+  "1 aktív folyamat, sablonból",
   `DKV-integráció kiegészítőként: +${huf(DKV_ADDON.monthly)}/hó`,
   `Támogatás ${alap.support}`,
 ];
 uzleti.highlights = [
   `${uzleti.included} aktív jármű a díjban, felette ${huf(uzleti.extra)}/jármű/hó (legfeljebb ${uzleti.ceiling})`,
   `${num(uzleti.equipment)} eszköz, korlátlan felhasználó és telephely`,
-  `${uzleti.workflows} aktív saját folyamat`,
+  `${uzleti.workflows} aktív folyamat`,
   "Telefonos állapotfelmérés és QR-leltár",
   "Saját szerepkörök és jogosultsági mátrix",
   "Változásnapló (az utolsó 90 nap)",
@@ -102,10 +102,10 @@ uzleti.highlights = [
 premium.highlights = [
   `${premium.included} aktív jármű a díjban, felette ${huf(premium.extra)}/jármű/hó (legfeljebb ${premium.ceiling})`,
   "Korlátlan eszköz, felhasználó és telephely",
-  "Korlátlan saját folyamat",
+  "Korlátlan számú folyamat",
   "Minden, ami az Üzletiben",
   "Analitika, előrejelzés, csereajánlások",
-  "Teams- és Slack-üzenet automatizálásból",
+  "Teams- és Slack-üzenet folyamatból",
   "Változásnapló exporttal, állítható megőrzéssel",
   "Beállítások átadása szerepköröknek",
   `Támogatás ${premium.support}`,
@@ -122,7 +122,7 @@ export const comparison = [
   { label: "Változásnapló", cells: [false, "az utolsó 90 nap", "állítható megőrzés + export"] },
   { label: "Vezetői összefoglaló PDF", cells: [false, true, true] },
   { label: "Analitika, előrejelzés, csereajánlások", cells: [false, false, true] },
-  { label: "Teams- és Slack-üzenet automatizálásból", cells: [false, false, true] },
+  { label: "Teams- és Slack-üzenet folyamatból", cells: [false, false, true] },
   { label: "Beállítások átadása szerepköröknek", cells: [false, false, true] },
   { label: "DKV üzemanyagkártya-integráció", cells: [`kiegészítő: +${huf(DKV_ADDON.monthly)}/hó`, true, true] },
   { label: `+${EQUIPMENT_ADDON.size} eszköz`, cells: [`+${huf(EQUIPMENT_ADDON.monthly)}/hó`, `+${huf(EQUIPMENT_ADDON.monthly)}/hó`, "nem szükséges"] },
@@ -135,7 +135,7 @@ export const limits = [
   { label: "Eszköz", cells: plans.map((p) => count(p.equipment)) },
   { label: "Felhasználó", cells: plans.map((p) => count(p.users)) },
   { label: "Telephely", cells: plans.map((p) => count(p.sites)) },
-  { label: "Saját folyamat", cells: ["1 aktív, sablonból", `${uzleti.workflows} aktív`, "korlátlan"] },
+  { label: "Aktív folyamat", cells: ["1 aktív, sablonból", `${uzleti.workflows} aktív`, "korlátlan"] },
   { label: "Támogatás", cells: plans.map((p) => p.support) },
 ];
 
@@ -147,11 +147,11 @@ export const priceFacts = {
 };
 
 export const pricing = {
-  title: "Flottakezelő szoftver árak 2026: csomagok és díjak – Yardly",
-  description: `Három csomag havi ${huf(alap.monthly)}-tól, éves fizetéssel ${ANNUAL_FREE_MONTHS} hónap ingyen. ${TRIAL_DAYS} napos próbaidő a ${TRIAL_PLAN} csomag minden funkciójával.`,
+  title: `Yardly árak 2026: három csomag, ${TRIAL_DAYS} nap ingyen`,
+  description: `Három csomag havi ${huf(alap.monthly)}-tól, éves fizetéssel ${ANNUAL_FREE_MONTHS} hónap ingyen. ${TRIAL_DAYS} napos próba a ${TRIAL_PLAN} csomag minden funkciójával.`,
   eyebrow: "Árak",
-  h1: "Flottakezelő szoftver árak: három csomag a flotta méretéhez",
-  lead: `Minden csomagban benne van a Flotta és az Eszközpark modul. A díj a csomagban foglalt aktív járművekig fix, felette járművenként számolunk. ${TRIAL_DAYS} napig díjmentesen kipróbálhatja a ${TRIAL_PLAN} csomag minden funkciójával. A regisztrációhoz bankkártya kell, de a próbaidő alatt nem terhelünk semmit.`,
+  h1: "Három csomag, a flotta és az eszközpark méretéhez",
+  lead: `Minden csomagban benne van a Flotta és az Eszközpark modul, és a folyamatautomatizálás is. A díj a csomagban foglalt aktív járművekig fix, felette járművenként számolunk. ${TRIAL_DAYS} napig díjmentesen kipróbálhatja a ${TRIAL_PLAN} csomag minden funkciójával; a regisztrációhoz bankkártya kell, de a próbaidő alatt nem terhelünk semmit.`,
   toggle: { monthly: "Havi fizetés", annual: "Éves fizetés", free: `${ANNUAL_FREE_MONTHS} hónap ingyen` },
   perMonth: "/ hó",
   annualNote: (total) => `évente ${total} egy összegben`,
@@ -168,21 +168,22 @@ export const pricing = {
     title: "Így indul, és így fizet",
     items: [
       { title: "Regisztrál, és megad egy bankkártyát", text: "A kártyát a Barion biztonságos oldalán adja meg; a kártyaadatokat a Yardly nem látja és nem tárolja. Itt választja ki azt is, melyik csomaggal folytatná." },
-      { title: `${TRIAL_DAYS} napig ingyen próbálja`, text: `A próbaidő alatt a ${TRIAL_PLAN} csomag minden funkciója az Öné, és semmit nem terhelünk. A terhelés előtt 7, 3 és 1 nappal e-mailben szólunk, mennyit és mikor vonunk le.` },
-      { title: "Utána a választott csomagot fizeti", text: "A próbaidő végén a választott csomag díját terheljük a kártyára, havonta vagy évente. Az Üzleti és a Prémium éves díja díjbekérő alapján, átutalással is fizethető. Az elektronikus számlát a Billingo állítja ki." },
+      { title: `${TRIAL_DAYS} napig ingyen próbálja`, text: `A próbaidő alatt a ${TRIAL_PLAN} csomag minden funkciója elérhető, és nem terhelünk semmit. A terhelés előtt 7, 3 és 1 nappal e-mailben jelezzük az összeget és az időpontot.` },
+      { title: "Utána a választott csomagot fizeti", text: "Havonta vagy évente a kártyáról. Az Üzleti és a Prémium éves díja díjbekérő alapján, átutalással is fizethető. Az elektronikus számlát a Billingo állítja ki." },
     ],
   },
+  cta: { eyebrow: "Kezdje el", title: `Próbálja ki ${TRIAL_DAYS} napig ingyen`, lead: `A ${TRIAL_PLAN} csomag minden funkciójával, a saját adataival.` },
   faq: {
     eyebrow: "Gyakori kérdések",
     title: "Gyakori kérdések az árakról",
     items: [
       { q: "Mi számít aktív járműnek?", a: "Minden jármű, amely nincs kivont állapotban. A kivont járművek adatai megmaradnak, de nem számítanak bele a keretbe és a díjba." },
-      { q: "Mi történik, ha elérem a csomag keretét?", a: `A keret 80%-ánál figyelmeztetünk. A csomagban foglalt járműszám felett minden további aktív jármű havidíjas (${plans.map((p) => `${p.name} ${huf(p.extra)}`).join(", ")}); ezt a jármű felvételekor jóváhagyja. A járműplafon felett, vagy ha elfogy az eszköz-, felhasználó- vagy telephelykeret, nagyobb csomagra válthat; eszközből +${EQUIPMENT_ADDON.size}-es bővítést is vásárolhat. A keret elérése miatt semmilyen adat nem törlődik.` },
-      { q: "Hogyan számolják el a többletjárműveket?", a: "Utólag, a legmagasabb aktív járműszám alapján: havi fizetésnél havonta, éves fizetésnél negyedévente. Ha egy hónapban csak pár napig volt több jármű, az is számít, ezért a kivont járművet érdemes kivontra állítani." },
-      { q: "Válthatok csomagot? Lemondhatom?", a: "Nagyobb csomagra azonnal válthat, a hátralévő időszakra időarányosan számolunk. Kisebb csomagra a következő számlázási időszaktól vált. Nincs hűségidő: a havi előfizetés a hónap végével, az éves az év végével mondható le. Kisebb csomagra váltáskor semmi nem törlődik, a keret feletti adatok olvashatók maradnak. Lemondás után a fiók 90 napig csak olvasható, ezalatt minden adat letölthető; utána véglegesen töröljük, előtte 30 és 7 nappal e-mailben szólunk." },
+      { q: "Mi történik, ha elérem a csomag keretét?", a: `A keret 80%-ánál figyelmeztetünk. A díjban foglalt járműszám felett minden további aktív jármű havidíjas (${plans.map((p) => `${p.name} ${huf(p.extra)}`).join(", ")}); ezt a jármű felvételekor jóváhagyja. A járműplafon felett, vagy ha elfogy az eszköz-, felhasználó- vagy telephelykeret, nagyobb csomagra válthat; eszközből ${EQUIPMENT_ADDON.size}-es bővítés is vehető. Adat ilyenkor sem törlődik.` },
+      { q: "Hogyan számolják el a többletjárműveket?", a: "Utólag, a hónap legmagasabb aktív járműszáma alapján: havi fizetésnél havonta, éves fizetésnél negyedévente. A néhány napig aktív jármű is beszámít, ezért a használaton kívüli járművet érdemes kivontra állítani." },
+      { q: "Válthatok csomagot? Lemondhatom?", a: "Nagyobb csomagra azonnal válthat, időarányos elszámolással; kisebbre a következő számlázási időszaktól. Hűségidő nincs: a havi előfizetés a hónap végével, az éves az év végével mondható le. Lemondás után a fiók 90 napig csak olvasható, és minden adat letölthető. Utána véglegesen töröljük, előtte 30 és 7 nappal e-mailben jelezzük." },
       { q: "Kell áfát fizetni?", a: `Nem. ${NO_VAT} A feltüntetett ár a teljes fizetendő összeg.` },
-      { q: "Hogyan fizethetek?", a: "Bankkártyával, havonta vagy évente: a kártyát a regisztrációkor adja meg a Barion oldalán, és a díjat erről terheljük. Az Üzleti és a Prémium csomag éves díja díjbekérő alapján, átutalással is fizethető. Az elektronikus számlát a Billingo állítja ki. Csomagot váltani, kiegészítőt venni és a számlákat letölteni az appban, a Beállítások → Előfizetés & számlázás fülön tudja." },
-      { q: "Mi a helyzet a próbaidővel?", a: `${TRIAL_DAYS} napig díjmentesen kipróbálhatja a ${TRIAL_PLAN} csomag összes funkciójával. A regisztrációkor megad egy bankkártyát, és kiválasztja, melyik csomaggal folytatná; a próbaidő alatt semmit nem terhelünk. A próbaidő végén ennek a csomagnak a díját terheljük a kártyára, előtte 7, 3 és 1 nappal e-mailben szólunk, mennyit és mikor vonunk le. A próbaidő végéig a csomagot bármikor módosíthatja, vagy lemondhatja a folytatást: ekkor a fiók csak olvasható lesz, az adatokat pedig 90 napig megőrizzük, utána véglegesen töröljük.` },
+      { q: "Hogyan fizethetek?", a: "Bankkártyával, havonta vagy évente, a Barion oldalán megadott kártyáról. Az Üzleti és a Prémium éves díja díjbekérő alapján, átutalással is fizethető. A számlát a Billingo állítja ki. Csomagot váltani, kiegészítőt venni és számlát letölteni az appban, a Beállítások → Előfizetés & számlázás fülön lehet." },
+      { q: "Mi a helyzet a próbaidővel?", a: `${TRIAL_DAYS} napig díjmentesen használhatja a ${TRIAL_PLAN} csomag összes funkcióját. A regisztrációkor megadott kártyát a próbaidő alatt nem terheljük; a végén a választott csomag díját vonjuk le, előtte 7, 3 és 1 nappal e-mailben szólunk. A próbaidő végéig a csomag módosítható, vagy a folytatás lemondható: ekkor a fiók csak olvasható lesz, és az adatokat 90 napig megőrizzük.` },
     ],
   },
 };

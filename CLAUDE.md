@@ -95,11 +95,11 @@ lehet csak olvasható, és csak kitalált adat lehet benne.
 
 ## 4. Kötelezettségek a szerződésből és a jogszabályokból
 
-**Előfizetők (app.yardly.hu):** a regisztrációkor elfogadott ÁSZF 3.0 és az 1. melléklete, az Adatfeldolgozási
-feltételek (yardly.hu/aszf, yardly.hu/adatfeldolgozas), valamint a 27. pont kikötéseinek külön elfogadása. A szövegek
-forrása a [jogi dokumentum](https://claude.ai/artifact/WzanE1iWjJ2kVJxJKBCn4u), a weboldalon szó szerint a
-`yardly-landing-2` `src/content/legal/*.md` fájljai; a 27. pont rövid listája az appban (`Legal/aszf-27.json`), a
-hatályos változat a `Legal__*` beállításokban. A díjak forrása az app `pricing.json`-ja és a weboldal
+**Előfizetők (app.yardly.hu):** a regisztrációkor egyetlen jelölőnégyzettel elfogadott ÁSZF 3.0 és az 1. melléklete, az
+Adatfeldolgozási feltételek (yardly.hu/aszf, yardly.hu/adatfeldolgozas); a jelölőnégyzet szövege a 27. pont
+kikötéseit kifejezetten megnevezi. A szövegek forrása a [jogi dokumentum](https://claude.ai/artifact/WzanE1iWjJ2kVJxJKBCn4u),
+a weboldalon szó szerint a `yardly-landing-2` `src/content/legal/*.md` fájljai, a hatályos változat a `Legal__*`
+beállításokban. A díjak forrása az app `pricing.json`-ja és a weboldal
 `src/content/pricing.mjs`-e: a kettő mindig egyezzen. A szolgáltató alanyi adómentes (AAM): áfát nem számítunk fel.
 
 **Egyedi szerződéses ügyfél (ADR):** a [megbízási szerződés](https://claude.ai/artifact/8cxseanW6UjhkmX9fkiUR3), a
