@@ -25,7 +25,7 @@ Adatvédelmi tisztviselő kijelölésére nem vagyunk kötelesek. Adatvédelmi k
 - Adatkezelők vagyunk a weboldal, a megkeresések, a regisztráció és a felhasználói fiókok, a belépés, az előfizetés és a számlázás, a támogatás, a naplók és a tőlünk küldött értesítések adatainál. Ezekről szól ez a tájékoztató.
 - Adatfeldolgozók vagyunk azoknál az adatoknál, amelyeket ügyfeleink visznek fel a Yardlyba. Ezekről az ügyfél, vagyis a munkáltató vagy megbízó tájékoztatja Önt (3. pont).
 - Az adatokat az Európai Unióban, az Amazon Web Services frankfurti adatközpontjában tároljuk.
-- A weboldal és az alkalmazás nem használ sütit és látogatottságmérést, és nem tölt be tartalmat harmadik féltől (6. pont).
+- Látogatottságmérést és hirdetési követést nem használunk. Az alkalmazás nem használ sütit; a weboldalon csak a Barion csalásmegelőzési kódja (Barion Pixel) helyez el sütit (6. pont).
 - Bankkártyaadatot nem kezelünk: azt a Barion Payment Zrt. kezeli.
 - Hírlevelet és reklámlevelet nem küldünk.
 
@@ -201,9 +201,18 @@ Név, e-mail-cím és jelszó nélkül nem hozható létre fiók, és a kétlép
 
 ## 6. Sütik és a böngészőben tárolt adatok
 
-- **A weboldal (yardly.hu)** nem helyez el sütit, nem mér látogatottságot, nem használ követőkódot, és nem tölt be betűtípust, szkriptet vagy más tartalmat harmadik féltől.
-- **Az alkalmazás (app.yardly.hu)** sem használ sütit és látogatottságmérést, és nem tölt be tartalmat harmadik féltől. A belépés után a bejelentkezési azonosítót (tokent) az Ön böngészője tárolja, a helyi tárolóban (localStorage); a munkamenet idejére (sessionStorage) néhány felületi beállítást is tárolunk, például hogy melyik csomagot választotta. Ezek a szolgáltatás nyújtásához feltétlenül szükségesek, ezért hozzájárulást nem kérünk hozzájuk (az elektronikus hírközlésről szóló 2003. évi C. törvény 155. § (4) bekezdése). A bejelentkezési azonosító kijelentkezéskor törlődik.
+- **A weboldal (yardly.hu)** nem mér látogatottságot, és nem használ hirdetési vagy marketingcélú követőkódot. Egyetlen külső szkriptet tölt be: a Barion Payment Zrt. csalásmegelőzési kódjának alap változatát (Barion Pixel); erről lent olvashat.
+- **Az alkalmazás (app.yardly.hu)** nem használ sütit és látogatottságmérést, és nem tölt be tartalmat harmadik féltől. A belépés után a bejelentkezési azonosítót (tokent) az Ön böngészője tárolja, a helyi tárolóban (localStorage); a munkamenet idejére (sessionStorage) néhány felületi beállítást is tárolunk, például hogy melyik csomagot választotta. Ezek a szolgáltatás nyújtásához feltétlenül szükségesek, ezért hozzájárulást nem kérünk hozzájuk (az elektronikus hírközlésről szóló 2003. évi C. törvény 155. § (4) bekezdése). A bejelentkezési azonosító kijelentkezéskor törlődik.
 - **A Barion fizetési oldala** a Barion Payment Zrt. weboldala; az ott használt sütikről a Barion cookie-tájékoztatója szól.
+
+**A Barion Pixel a weboldalon.** A Barion minden kártyás fizetést elfogadó kereskedő weboldalán megköveteli csalásmegelőzési kódjának alap változatát.
+
+- **Mit gyűjt:** a kód a pixel.barion.com címről töltődik be, és a látogatásáról (a megnyitott oldalak, a kattintások, az IP-cím, a böngésző és az eszköz jellemzői, valamint az ezekből képzett eszköz-ujjlenyomat) közvetlenül a Barionnak küld adatot. Mi ezeket az adatokat nem kapjuk meg és nem tároljuk.
+- **Sütik:** a Barion ba_vid és ba_vid.xxx nevű sütije az utolsó látogatástól számított 1,5 évig, a ba_sid és ba_sid.xxx nevű 30 percig marad az eszközén.
+- **Cél és jogalap:** a bankkártyás visszaélések megelőzése, a Barion jogos érdeke alapján (f). A kód beágyazásáért és az adatok Barionhoz továbbításáért mi felelünk, a további adatkezelésért a Barion mint önálló adatkezelő. A Barion ezeket a sütiket a működéshez szükséges sütik közé sorolja, ezért elhelyezésükhöz nem kérünk hozzájárulást.
+- **Marketing:** a Barion Pixel marketingcélú, teljes változatát nem használjuk.
+- **Részletek:** a Barion cookie-tájékoztatója (secure.barion.com/Contract/GetDocument?key=cookiepolicy) és adatkezelési tájékoztatójának 5.4. pontja (secure.barion.com/Contract/GetDocument?key=akt).
+- **Letiltás:** a sütiket a böngészője beállításaiban bármikor törölheti vagy letilthatja; a weboldal enélkül is használható.
 
 ## 7. Kik férnek hozzá az adatokhoz
 
@@ -219,7 +228,7 @@ Munkatársaink csak annyiban férnek hozzá az adatokhoz, amennyire a feladatukh
 
 **Önálló adatkezelőként kapják meg az adatokat:**
 
-- a Barion Payment Zrt. (1117 Budapest, Irinyi József utca 4-20. B épület 2. emelet; cégjegyzékszám: Cg. 01-10-048552): a kártyás fizetéshez (4.9. pont); adatkezelési tájékoztatója: secure.barion.com/Contract/GetDocument?key=akt;
+- a Barion Payment Zrt. (1117 Budapest, Irinyi József utca 4-20. B épület 2. emelet; cégjegyzékszám: Cg. 01-10-048552): a kártyás fizetéshez (4.9. pont), valamint a weboldalon elhelyezett csalásmegelőzési kódjának (Barion Pixel) adataihoz (6. pont); adatkezelési tájékoztatója: secure.barion.com/Contract/GetDocument?key=akt;
 - a Nemzeti Adó- és Vámhivatal: a számlák adatai, jogszabály alapján;
 - a számlavezető bankunk (GRÁNIT Bank Zrt.): az átutalások teljesítéséhez;
 - hatóságok és bíróságok: kizárólag jogszabályon alapuló, kötelező megkeresés esetén, a megkeresésben megjelölt adatok.

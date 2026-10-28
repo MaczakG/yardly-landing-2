@@ -18,10 +18,10 @@ export const config = {
   formEndpoint: process.env.YARDLY_FORM_ENDPOINT ?? "/api/kapcsolat",
 
   // The base Barion Pixel's id (BP-…, from the Barion shop settings). Barion requires the pixel on
-  // the acceptance point's website (yardly.hu) for fraud prevention; empty leaves it out. Turning it
-  // on also needs pixel.barion.com in the site's CSP (script-src, frame-src, img-src) and the
-  // privacy notice's cookie section updated. Also YARDLY_BARION_PIXEL at build time.
-  barionPixelId: process.env.YARDLY_BARION_PIXEL ?? "",
+  // the acceptance point's website (yardly.hu) for fraud prevention; empty leaves it out. It needs
+  // pixel.barion.com in the site's CSP (script-src, frame-src) and the privacy notice's cookie
+  // section (legal/adatkezeles.md, 6.). Also YARDLY_BARION_PIXEL at build time.
+  barionPixelId: process.env.YARDLY_BARION_PIXEL ?? "BP-lcz1FpkMMX-8D",
 
   // Google Search Console: the content of the HTML-tag verification
   // (<meta name="google-site-verification" content="…">). Also YARDLY_GSC at build time.
