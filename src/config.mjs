@@ -12,9 +12,16 @@ export const config = {
   // Leave empty to ship the site without analytics and without a cookie banner.
   gaId: process.env.YARDLY_GA_ID ?? "",
 
-  // URL that receives the contact form as a JSON POST (see aws/contact-form).
-  // Leave empty to fall back to opening the visitor's e-mail program.
-  formEndpoint: process.env.YARDLY_FORM_ENDPOINT ?? "",
+  // Where the contact form posts its JSON: the site's own /api/kapcsolat, which Caddy forwards to
+  // the app API (POST /api/public/contact) that e-mails it to hello@yardly.hu. An empty value
+  // falls back to opening the visitor's e-mail program.
+  formEndpoint: process.env.YARDLY_FORM_ENDPOINT ?? "/api/kapcsolat",
+
+  // The base Barion Pixel's id (BP-…, from the Barion shop settings). Barion requires the pixel on
+  // the acceptance point's website (yardly.hu) for fraud prevention; empty leaves it out. Turning it
+  // on also needs pixel.barion.com in the site's CSP (script-src, frame-src, img-src) and the
+  // privacy notice's cookie section updated. Also YARDLY_BARION_PIXEL at build time.
+  barionPixelId: process.env.YARDLY_BARION_PIXEL ?? "",
 
   // Google Search Console: the content of the HTML-tag verification
   // (<meta name="google-site-verification" content="…">). Also YARDLY_GSC at build time.

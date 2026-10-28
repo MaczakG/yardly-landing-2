@@ -1651,6 +1651,27 @@ fieldset.field legend {
   margin-top: 12px;
 }
 
+/* Barion's payment banner: the official file, unmodified, at its own aspect ratio, with room around it. */
+.pay-banner {
+  margin-top: 24px;
+  padding: 8px 0;
+}
+
+.pay-banner img {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+}
+
+#fizetes .pay-banner {
+  margin-top: 32px;
+}
+
+#fizetes .pay-banner img {
+  max-width: 360px;
+}
+
 .social {
   display: flex;
   gap: 8px;

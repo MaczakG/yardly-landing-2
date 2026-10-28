@@ -285,6 +285,7 @@
         vehicles: get("vehicles"),
         equipment: get("equipment"),
         message: get("message"),
+        consent: data.get("consent") !== null,
         website: get("website"),
         page: window.location.pathname,
       };

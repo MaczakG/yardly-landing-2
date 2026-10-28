@@ -5,6 +5,9 @@
 
 import { planByKey, priceFacts, num, huf, DKV_ADDON, TRIAL_DAYS, TRIAL_PLAN } from "./pricing.mjs";
 
+// The ready-made processes in the app (AutomationTemplates in yardly-saas).
+export const PROCESS_TEMPLATES = 43;
+
 export const overview = {
   title: "Megoldásaink: flotta, eszközpark és folyamatautomatizálás – Yardly",
   description: "Folyamatok, flotta, eszközpark, leltár, dokumentumok, riasztások, költségek és analitika: a Yardly összes funkciója egy oldalon.",
@@ -295,7 +298,7 @@ export const solutions = [
     description: "Jóváhagyások, értesítések, PDF-ek és e-mailek, amelyek egy tankolás, szerviz, kárügy vagy bírság rögzítésekor, időzítve vagy feltételre maguktól indulnak.",
     eyebrow: "Folyamatautomatizálás",
     h1: "Folyamatok, amelyek egy bejegyzésre elindulnak",
-    lead: "Megadja, mikor induljon a folyamat: egy bejegyzés rögzítésekor, egy adott napon vagy egy feltétel teljesülésekor. A Yardly végigviszi a lépéseket: feladatot ad ki, jóváhagyást kér, értesít, PDF-et készít és e-mailt küld. A folyamatot a vizuális szerkesztőben rajzolja meg, vagy a 44 kész sablon közül indul.",
+    lead: `Megadja, mikor induljon a folyamat: egy bejegyzés rögzítésekor, egy adott napon vagy egy feltétel teljesülésekor. A Yardly végigviszi a lépéseket: feladatot ad ki, jóváhagyást kér, értesít, PDF-et készít és e-mailt küld. A folyamatot a vizuális szerkesztőben rajzolja meg, vagy a ${PROCESS_TEMPLATES} kész sablon közül indul.`,
     benefits: [
       { title: "Magától indul", text: "Egy tankolás, szerviz, kárügy, bírság, új dokumentum vagy új kolléga rögzítése elindítja a hozzá tartozó folyamatot." },
       { title: "A cég szabályai szerint", text: "100 000 Ft felett vezetői jóváhagyás kell, 50 000 Ft feletti tankolásnál a flottavezető értesítést kap. A határokat Önök adják meg." },
@@ -308,8 +311,7 @@ export const solutions = [
       { title: "Szabályok", text: "Összeg, liter, tankméret, az átlagtól eltérő fogyasztás, hétvégi, éjszakai vagy külföldi tankolás, rossz üzemanyag, visszatekert km-óra, havi keret, telephely, járműtípus, eszközkategória, kártípus és további feltételek." },
       { title: "Ismétlés korlátja", text: "Ugyanarra a járműre, eszközre vagy személyre legfeljebb naponta, hetente, havonta, negyedévente vagy évente egyszer, vagy amíg az előző fut." },
       { title: "Automatikus lépések", text: "PDF (vezetői összefoglaló, költségriport, adatlap, átadás-átvételi elismervény, bírságértesítő), eszközlista Excelben, e-mail a csatolmányokkal akár külső címre (például a könyvelésnek), állapotváltás, bejelentés, másik folyamat vagy leltár indítása, várakozás." },
-      { title: "Teams- és Slack-üzenet", text: "Egy lépés üzenetet küld a csapat Teams- vagy Slack-csatornájára (Prémium)." },
-      { title: "44 kész folyamatsablon", text: "Tankolás, költség és jóváhagyás, határidők és km, kollégák és sofőrök, eszközök, leltár, automatikus PDF-ek. Kiválasztja, átnézi, élesíti." },
+      { title: `${PROCESS_TEMPLATES} kész folyamatsablon`, text: "Tankolás, költség és jóváhagyás, határidők és km, kollégák és sofőrök, eszközök, leltár, automatikus PDF-ek. Kiválasztja, átnézi, élesíti." },
       { title: "Vizuális szerkesztő", text: "A lépéseket egy vásznon köti össze: Indítás, Feladat, Jóváhagyás, Feltétel, Értesítés, automatikus lépés, Lezárás." },
       { title: "Kézi indítás", text: "Kézzel, esedékes ütemtervből vagy bejelentésből is indítható. Jármű- és eszköztípusonként megadható, melyik folyamat induljon." },
       { title: "Felelősök", text: "Személy, szerepkör, az indító, a jármű vagy eszköz felelőse, a sofőr vagy az előző birtokos. Lépésenként határidő napokban." },
@@ -328,7 +330,7 @@ export const solutions = [
       { img: "bejelentes", alt: "Bejelentések a jármű adatlapján" },
     ],
     related: ["tankolas-dkv", "szerviz-karbantartas", "karugyek-biztositas-tartozekok"],
-    cta: "Kapcsolja be az első folyamatot a 44 kész sablon közül",
+    cta: `Kapcsolja be az első folyamatot a ${PROCESS_TEMPLATES} kész sablon közül`,
     ctaLead: `${TRIAL_DAYS} nap ingyen, a ${TRIAL_PLAN} csomag minden funkciójával, korlátlan számú folyamattal.`,
   },
   {

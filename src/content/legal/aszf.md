@@ -16,6 +16,7 @@
 | Adószám | 49314366-1-43 |
 | Közösségi adószám | HU49314366 |
 | E-mail | hello@yardly.hu |
+| Telefon | +36 20 629 1318 |
 | Weboldal | yardly.hu; a Szolgáltatás címe: app.yardly.hu |
 | Tárhelyszolgáltató | Amazon Web Services EMEA SARL, 38 Avenue John F. Kennedy, L-1855 Luxembourg |
 
@@ -97,6 +98,8 @@ A Szolgáltató a nyilatkozatot a változatszámmal, az időponttal, a Felhaszn�
 
 5.5. Önkiszolgáló rendelést a magyar adószámmal és számlázási címmel rendelkező Ügyfél adhat le; ezeket a cégadatok között kell megadni. Külföldi székhelyű szervezet a hello@yardly.hu címen egyeztethet.
 
+5.6. Teljesítés. A Szolgáltatás online, szállítás nélkül vehető igénybe. A Fiók a regisztráció után azonnal elérhető; teljes körűen attól kezdve használható, hogy a Barion a kártya megadását visszaigazolta, ami rendszerint néhány percen belül megtörténik (7.2. pont).
+
 ## 6. A Szolgáltatás
 
 6.1. A Szolgáltatás a Csomagtól függően, az Árlap szerint tartalmazza többek között a járművek és eszközök nyilvántartását, a dokumentumok tárolását és lejáratuk e-mailes figyelését, a szerviz-, karbantartási és tankolási nyilvántartást, a költségek, kárügyek, biztosítások és bírságok kezelését, a telefonos állapotfelmérést és leltárt, a munkafolyamatokat és automatizálásokat, a szerepköröket és jogosultságokat, a változásnaplót, az Excel-importot és -exportot, valamint a teljes adatexportot (17. pont).
@@ -108,8 +111,7 @@ A Szolgáltató a nyilatkozatot a változatszámmal, az időponttal, a Felhaszn�
 6.4. Külső szolgáltatások:
 
 - a) A DKV üzemanyagkártya-integráció az Ügyfél saját DKV API-hozzáférésével működik; a Szolgáltatás a tranzakciókat 6 óránként kéri le. A DKV-val kötött szerződésért és a hozzáférésért az Ügyfél felel; a DKV által adott adatok helyességéért a Szolgáltató nem felel.
-- b) A Teams- és Slack-üzeneteket (webhookokat) a Szolgáltatás az Ügyfél által megadott címre küldi; az oda küldött adatokért az Ügyfél felel.
-- c) Az értesítő e-mailek kézbesítése a címzett levelezőrendszerén is múlik.
+- b) Az értesítő e-mailek kézbesítése a címzett levelezőrendszerén is múlik.
 
 6.5. A Szolgáltatás a bírságot a rögzített sofőrváltások időpontja alapján rendeli sofőrhöz, az analitika és a jelzések előre megadott szabályok szerint működnek. Ezek annyira pontosak, amennyire a rögzített adatok. Az Ügyfél az eredményt ellenőrzi, mielőtt arra döntést alapoz (például költség áthárítását vagy munkajogi intézkedést).
 
@@ -182,7 +184,7 @@ A Szolgáltató a nyilatkozatot a változatszámmal, az időponttal, a Felhaszn�
 
 11.1. Az előfizetési díj a Számlázási időszak elején, előre esedékes. A Többletjármű-díj utólag esedékes (9.4. pont).
 
-11.2. Bankkártyás fizetés (Barion). Bankkártyával minden Csomag és fizetési gyakoriság fizethető. A kártyás fizetést a Barion Payment Zrt. bonyolítja; a kártyaadatokat csak a Barion kezeli. A kártya megadásakor, illetve a kártyás fizetéskor az Ügyfél felhatalmazza a Szolgáltatót, hogy a Barion útján a megadott kártyára – a kártyabirtokos közreműködése nélkül – automatikusan terhelje a Próbaidő végi díjat (7.5. pont), a megújuló előfizetési díjakat (22.1. pont) és a Többletjármű-díjat (9.4. pont). Ha az Adminisztrátor az alkalmazásban új fizetést indít a Barion fizetési oldalán, az ott megadott kártya felváltja a korábban tárolt kártyát. A fizetési oldalon elfogadandó Barion adattovábbítási nyilatkozat szövege a fizetési oldalon olvasható.
+11.2. Bankkártyás fizetés (Barion). Bankkártyával minden Csomag és fizetési gyakoriság fizethető. A kártyás fizetést a Barion Payment Zrt. bonyolítja; a kártyaadatokat csak a Barion kezeli. A kártya megadásakor, illetve a kártyás fizetéskor az Ügyfél felhatalmazza a Szolgáltatót, hogy a Barion útján a megadott kártyára – a kártyabirtokos közreműködése nélkül – automatikusan terhelje a Próbaidő végi díjat (7.5. pont), a megújuló előfizetési díjakat (22.1. pont) és a Többletjármű-díjat (9.4. pont). Ha az Adminisztrátor az alkalmazásban új fizetést indít a Barion fizetési oldalán, az ott megadott kártya felváltja a korábban tárolt kártyát. A fizetési oldalon elfogadandó Barion adattovábbítási nyilatkozat szövege a fizetési oldalon olvasható. Az ismétlődő terhelés a Szerződés felmondásával szüntethető meg, a 22.3. pont szerint (Beállítások → Előfizetés & számlázás). Az online bankkártyás és egyéb fizetési módok a Barion rendszerén keresztül valósulnak meg. A bankkártya, illetve egyéb fizetéssel kapcsolatos adatok a kereskedőhöz nem jutnak el. A szolgáltatást nyújtó Barion Payment Zrt. a Magyar Nemzeti Bank felügyelete alatt álló intézmény, engedélyének száma: H-EN-I-1064/2013. A kártyás terheléseknél a kártyabirtokos bankszámlakivonatán a Barion Payment Zrt. szerepel.
 
 11.3. Átutalás Díjbekérő alapján. Az Üzleti és a Prémium Csomag éves díja átutalással is fizethető, Díjbekérő alapján. A Díjbekérőt a Billingo számlázó rendszer állítja ki, és a Szolgáltató e-mailben megküldi az Adminisztrátoroknak; az alkalmazásban is letölthető. A fizetési határidő a Díjbekérő kiállításától számított 8 nap. Átutalásos rendelésnél a Csomag a rendeléssel azonnal életbe lép. A megújuló éves díjról és az átutalással fizető Ügyfél Többletjármű-díjáról is Díjbekérő készül. Az átutalás közleményében a Díjbekérő számát kell feltüntetni.
 
@@ -190,7 +192,7 @@ A Szolgáltató a nyilatkozatot a változatszámmal, az időponttal, a Felhaszn�
 
 11.5. Az átutalás banki költségei az Ügyfelet terhelik.
 
-11.6. Előre megfizetett díj csak az ÁSZF-ben kifejezetten meghatározott esetekben jár vissza (22.4. pont), az eredeti fizetési módon vagy átutalással.
+11.6. Előre megfizetett díj csak az ÁSZF-ben kifejezetten meghatározott esetekben jár vissza (22.4. pont), az eredeti fizetési módon vagy átutalással. Kártyás fizetésnél a visszatérítés a Barion útján az eredeti kártyára történik; a jóváírás a kártyát kibocsátó banktól függően 1–30 munkanapot vehet igénybe.
 
 ## 12. Fizetési késedelem, Türelmi idő, Csak olvasható állapot
 

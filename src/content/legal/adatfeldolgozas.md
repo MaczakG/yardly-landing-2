@@ -39,7 +39,7 @@ Az Általános Szerződési Feltételek (ÁSZF) 1. melléklete · **Verzió:** 3
 
 - a DKV üzemanyagkártya-tranzakciók 6 óránkénti lekérése az Ügyfél saját DKV-hozzáférésével;
 - a bírság sofőrhöz rendelése a rögzített sofőrváltások időpontja alapján;
-- a dokumentumok lejáratáról, a karbantartásról és a munkafolyamatokról szóló e-mailes értesítések, valamint az Ügyfél által beállított Teams- vagy Slack-üzenetek küldése;
+- a dokumentumok lejáratáról, a karbantartásról és a munkafolyamatokról szóló e-mailes értesítések küldése;
 - az Ügyfél által beállított, szabályalapú automatizálások és jelzések (például a szokatlan időpontú tankolás jelzése) és az analitika.
 
 A Szolgáltatás nem végez GPS-alapú vagy más telematikai követést.
@@ -89,7 +89,7 @@ A Szolgáltatás nem végez GPS-alapú vagy más telematikai követést.
 6.2. Az Ügyfél dokumentált utasításának minősül:
 
 - a) a Feltételek és az ÁSZF;
-- b) mindaz, amit az Ügyfél vagy a Felhasználók a Szolgáltatásban tesznek vagy beállítanak: adatok felvitele, importja, módosítása, exportja és törlése, fájlok feltöltése, szerepkörök és jogosultságok, értesítések és automatizálások, a DKV-kapcsolat, a webhookok, a változásnapló megőrzési ideje, a support-hozzáférés megadása;
+- b) mindaz, amit az Ügyfél vagy a Felhasználók a Szolgáltatásban tesznek vagy beállítanak: adatok felvitele, importja, módosítása, exportja és törlése, fájlok feltöltése, szerepkörök és jogosultságok, értesítések és automatizálások, a DKV-kapcsolat, a változásnapló megőrzési ideje, a support-hozzáférés megadása;
 - c) az Ügyfél Adminisztrátorának írásbeli utasítása, amelyet e-mailben küld a hello@yardly.hu címre.
 
 6.3. Ha a Szolgáltató úgy ítéli meg, hogy egy utasítás sérti a GDPR-t vagy más adatvédelmi rendelkezést, erről haladéktalanul tájékoztatja az Ügyfelet, és az utasítás végrehajtását az Ügyfél megerősítéséig vagy módosításáig felfüggesztheti. Ha egy 6.2. c) pont szerinti utasítás túlmegy a Szolgáltatás ÁSZF szerinti tartalmán, annak végrehajtásáról a felek külön állapodnak meg.
@@ -146,7 +146,7 @@ A naprakész lista a yardly.hu/alfeldolgozok oldalon olvasható. A Barion Paymen
 
 9.5. **Kifogás és díjmentes felmondás.** Az értesítéstől számított 30 napon belül az Ügyfél adatvédelmi okból, indokolással kifogást emelhet a hello@yardly.hu címen. A Szolgáltató jóhiszeműen megpróbálja a kifogást orvosolni. Ha ez a változás hatálybalépéséig nem sikerül, az Ügyfél a Szerződést a változás hatálybalépésének napjára, felmondási idő és díj nélkül felmondhatja, és az ÁSZF 22.4. pontja szerint visszakapja az előre kifizetett díj arányos részét. A felmondás nem érinti az export és a törlés jogát (15. pont). Ha 30 napon belül nem érkezik kifogás, a változást elfogadottnak kell tekinteni.
 
-9.6. **Nem alfeldolgozók.** A DKV az Ügyfél saját DKV-hozzáférésével, az Ügyfél utasítására szolgáltat adatot a Szolgáltatásba; a Teams, a Slack és más webhookok az Ügyfél által választott címzettek. Ezek nem a Szolgáltató alfeldolgozói; az Ügyfél és e szolgáltatók jogviszonyára a köztük lévő szerződés irányadó.
+9.6. **Nem alfeldolgozó.** A DKV az Ügyfél saját DKV-hozzáférésével, az Ügyfél utasítására szolgáltat adatot a Szolgáltatásba. A DKV nem a Szolgáltató alfeldolgozója; az Ügyfél és a DKV jogviszonyára a köztük lévő szerződés irányadó.
 
 ## 10. Továbbítás az Európai Unión kívülre
 
@@ -233,7 +233,7 @@ Ezek az eszközök Csak olvasható állapotban is működnek.
 - e) meghatározza a megőrzési időket, és törli a szükségtelenné vált adatokat;
 - f) kezeli a Felhasználókat és a jogosultságokat, letiltja a távozó munkatársak hozzáférését, és gondoskodik a Felhasználók e-mail-fiókjainak védelméről;
 - g) nem hoz az érintettre hátrányos döntést a Szolgáltatás automatikus hozzárendelései és jelzései alapján anélkül, hogy azokat ember ellenőrizné;
-- h) jogszerű utasításokat ad, és jogszerűen állítja be a DKV-kapcsolatot és a webhookokat.
+- h) jogszerű utasításokat ad, és jogszerűen állítja be a DKV-kapcsolatot.
 
 ## 17. Felelősség
 
