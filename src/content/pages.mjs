@@ -42,7 +42,7 @@ export const contact = {
     message: "Üzenet",
     placeholder: "Mit szeretne megoldani? Mit használ most?",
     consent: "Elolvastam az",
-    consentLink: "Adatvédelmi tájékoztatót",
+    consentLink: "Adatkezelési tájékoztatót",
     submit: "Elküldöm",
     sending: "Küldés…",
     note: "Egy munkanapon belül válaszolunk.",
@@ -57,7 +57,7 @@ export const contact = {
       name: "Adja meg a nevét.",
       company: "Adja meg a cége nevét.",
       email: "Adjon meg egy érvényes e-mail-címet.",
-      consent: "A küldéshez fogadja el az adatvédelmi tájékoztatót.",
+      consent: "A küldéshez fogadja el az adatkezelési tájékoztatót.",
     },
   },
   faq: [

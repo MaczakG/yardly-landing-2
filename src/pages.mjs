@@ -881,6 +881,8 @@ const legal = (l) => ({
 });
 
 export const legalHub = () => legal(lg.legalHub);
+export const terms = () => legal(lg.terms);
+export const dpa = () => legal(lg.dpa);
 export const privacy = () => legal(lg.privacy);
 export const imprint = () => legal(lg.imprint);
 export const subprocessors = () => legal(lg.subprocessors);

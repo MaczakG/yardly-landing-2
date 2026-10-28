@@ -41,6 +41,8 @@ render("contact", ROUTES.contact, pages.contact());
 render("blog", ROUTES.blog, pages.blog(), pages.posts[0]?.date);
 for (const p of pages.posts) render("post", postRoute(p), pages.post(p), p.updated || p.date);
 render("legal", ROUTES.legal, pages.legalHub());
+render("terms", ROUTES.terms, pages.terms());
+render("dpa", ROUTES.dpa, pages.dpa());
 render("privacy", ROUTES.privacy, pages.privacy());
 render("imprint", ROUTES.imprint, pages.imprint());
 render("subprocessors", ROUTES.subprocessors, pages.subprocessors());

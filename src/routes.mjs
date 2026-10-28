@@ -8,6 +8,8 @@ export const ROUTES = {
   contact: "/kapcsolat/",
   blog: "/blog/",
   legal: "/jogi/",
+  terms: "/aszf/",
+  dpa: "/adatfeldolgozas/",
   privacy: "/adatkezeles/",
   imprint: "/impresszum/",
   subprocessors: "/alfeldolgozok/",
