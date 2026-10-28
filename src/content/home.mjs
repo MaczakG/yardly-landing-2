@@ -4,9 +4,8 @@
 // record, how do deadlines and data flow, how do I start, is it for me, what does it cost.
 
 import { ANNUAL_FREE_MONTHS, NO_VAT, TRIAL_DAYS, TRIAL_PLAN } from "./pricing.mjs";
+import { PROCESS_TEMPLATES as TEMPLATES } from "./solutions.mjs";
 
-// The ready-made processes in the app (AutomationTemplates in yardly-saas).
-const TEMPLATES = 44;
 
 export const home = {
   title: "Flotta- és eszköznyilvántartás folyamatautomatizálással – Yardly",
@@ -102,17 +101,17 @@ export const home = {
   },
 
   // The data and notification channels built into the app, which the company switches on itself:
-  // the DKV fuel card, Excel and CSV files, e-mail and, in Prémium, Teams and Slack messages from a
-  // process. No custom connection to the company's other systems: we do not build those.
+  // the DKV fuel card, Excel and CSV files, e-mail, the daily alert digest and the Teendőim list.
+  // No custom connection to the company's other systems: we do not build those.
   integrations: {
     eyebrow: "Adatok és értesítések",
     title: "Adat be, adat ki, értesítés a megfelelő helyre",
-    lead: "A beépített csatornákat a Beállításokban kapcsolja be, fejlesztés nélkül. A tankolások maguktól bejönnek, az adatok Excelben és CSV-ben vihetők tovább, az értesítések e-mailben és a csapat csatornáján érkeznek.",
+    lead: "A beépített csatornákat a Beállításokban kapcsolja be, fejlesztés nélkül. A tankolások maguktól bejönnek, az adatok Excelben és CSV-ben vihetők tovább, az értesítések e-mailben és a Teendőim listában érkeznek.",
     points: [
       "DKV üzemanyagkártya: a tankolások 6 óránként maguktól a járművekhez kerülnek",
       "Excel-import sablonnal, Excel- és CSV-export, teljes adatexport bármikor",
       "Automatikus e-mail PDF-ekkel, akár külső címre, például a könyvelőnek",
-      "Teams- és Slack-üzenet a csapat csatornájára, folyamatból (Prémium)",
+      "Napi összesített riasztás e-mailben, a feladatok a felelős Teendőim listájában",
     ],
     link: "Folyamatok és automatizálás",
     slug: "folyamatok",
@@ -125,8 +124,8 @@ export const home = {
       { icon: "file-text", label: "CSV-riportok" },
       { icon: "file-check", label: "PDF-riportok" },
       { icon: "mail", label: "E-mail" },
-      { icon: "message-square", label: "Teams" },
-      { icon: "message-square", label: "Slack" },
+      { icon: "bell", label: "Riasztások" },
+      { icon: "list-checks", label: "Teendőim" },
     ],
   },
 
@@ -193,7 +192,7 @@ export const home = {
       { q: "Miben más, mint egy flottakezelő program?", a: "A Yardly a nyilvántartás mellett a hozzá tartozó folyamatokat is kezeli: egy bejegyzésből a cég szabályai szerint jóváhagyás, értesítés, PDF és e-mail lesz. Ugyanebben a rendszerben a flotta mellett az eszközpark és a leltár is kezelhető." },
       { q: "Hogyan kerülnek be a meglévő adataink?", a: "Excel-sablonnal, egyszerre. A rendszer soronként jelzi, ha valamit javítani kell." },
       { q: "Mi történik a próbaidő végén?", a: "A regisztrációkor választott csomag díját terheljük a bankkártyára, havonta vagy évente. Előtte 7, 3 és 1 nappal e-mailben jelezzük az összeget és az időpontot. A próbaidő végéig a csomag módosítható, vagy a folytatás lemondható: ekkor a fiók csak olvasható lesz, az adatokat 90 napig megőrizzük és letölthetők, utána véglegesen töröljük." },
-      { q: "Milyen más programokkal cserél adatot?", a: "A DKV-kártyás tankolásokat a Yardly maga hívja le, ha a Beállításokban megadja a DKV-hozzáférést. Más programokkal Excel- és CSV-fájlokon keresztül cserél adatot. A folyamatok PDF-eket küldenek e-mailben, akár külső címre, a Prémium csomagban pedig a csapat Teams- vagy Slack-csatornájára is írnak. Egyedi rendszerösszekötést nem készítünk." },
+      { q: "Milyen más programokkal cserél adatot?", a: "A DKV-kártyás tankolásokat a Yardly maga hívja le, ha a Beállításokban megadja a DKV-hozzáférést. Más programokkal Excel- és CSV-fájlokon keresztül cserél adatot. A folyamatok PDF-eket küldenek e-mailben, akár külső címre. Egyedi rendszerösszekötést nem készítünk." },
       { q: "Csak a flottához vagy csak az eszközökhöz is használható?", a: "Igen. Minden csomagban mindkét modul benne van; azt használja, amelyikre szüksége van." },
       { q: "Hol tárolódnak az adataink?", a: "Az Amazon Web Services frankfurti adatközpontjában, az EU-ban. Titkosított kapcsolaton érhetők el, és minden cég csak a saját adatait látja." },
       { q: "Megnézhetjük előbb?", a: `Igen. ${TRIAL_DAYS} napig a saját adataival kipróbálhatja, vagy egy 30 perces online bemutatón végigmegyünk Önnel a rendszeren.` },

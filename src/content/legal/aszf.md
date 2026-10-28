@@ -108,8 +108,7 @@ A Szolgáltató a nyilatkozatot a változatszámmal, az időponttal, a Felhaszn�
 6.4. Külső szolgáltatások:
 
 - a) A DKV üzemanyagkártya-integráció az Ügyfél saját DKV API-hozzáférésével működik; a Szolgáltatás a tranzakciókat 6 óránként kéri le. A DKV-val kötött szerződésért és a hozzáférésért az Ügyfél felel; a DKV által adott adatok helyességéért a Szolgáltató nem felel.
-- b) A Teams- és Slack-üzeneteket (webhookokat) a Szolgáltatás az Ügyfél által megadott címre küldi; az oda küldött adatokért az Ügyfél felel.
-- c) Az értesítő e-mailek kézbesítése a címzett levelezőrendszerén is múlik.
+- b) Az értesítő e-mailek kézbesítése a címzett levelezőrendszerén is múlik.
 
 6.5. A Szolgáltatás a bírságot a rögzített sofőrváltások időpontja alapján rendeli sofőrhöz, az analitika és a jelzések előre megadott szabályok szerint működnek. Ezek annyira pontosak, amennyire a rögzített adatok. Az Ügyfél az eredményt ellenőrzi, mielőtt arra döntést alapoz (például költség áthárítását vagy munkajogi intézkedést).
 

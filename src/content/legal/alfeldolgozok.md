@@ -21,7 +21,6 @@ A Szolgáltatás működtetéséhez két szakosodott szolgáltatót, úgynevezet
 
 - **Barion Payment Zrt.** (kártyás fizetés) és **Billingo Technologies Zrt.** (díjbekérők és számlák kiállítása): a mi számlázási adatainkat kezelik az ügyfélről (cégnév, adószám, számlázási cím, a fizető e-mail-címe, összegek), az ügyfél által a Yardlyba felvitt adatokhoz nem férnek hozzá. A Barion önálló adatkezelő, a Billingo a mi adatfeldolgozónk; róluk az adatkezelési tájékoztatónk szól (yardly.hu/adatkezeles).
 - **DKV:** az üzemanyagkártya-tranzakciókat az ügyfél a saját DKV-hozzáférésével kapcsolja a Yardlyhoz, és a Yardly az ügyfél utasítására kérdezi le őket a DKV-tól.
-- **Microsoft Teams, Slack és más webhookok:** ha az ügyfél egy automatizálásban webhookot állít be, az értesítést az általa megadott címre küldjük. Ezeket a szolgáltatásokat az ügyfél választja, és a velük kötött szerződése szerint használja.
 
 ## Ha a lista változik
 
