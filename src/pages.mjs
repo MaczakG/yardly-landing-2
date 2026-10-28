@@ -617,7 +617,6 @@ export const contact = () => {
         </div>
         <div class="form-actions">
           <button class="btn btn--primary" type="submit">${f.submit}${arrow()}</button>
-          <span class="cta-note">${f.note}</span>
         </div>
         <p class="form-error" role="alert" hidden></p>
       </form>

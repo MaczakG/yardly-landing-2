@@ -1624,7 +1624,7 @@ fieldset.field legend {
 .pay-banner img {
   display: block;
   width: 100%;
-  max-width: 300px;
+  max-width: 247px;
   height: auto;
 }
 
@@ -1633,7 +1633,7 @@ fieldset.field legend {
 }
 
 #fizetes .pay-banner img {
-  max-width: 360px;
+  max-width: 296px;
 }
 
 /* Under the banner: transfer, invoices, the bank statement and Apple Pay (not for recurring payments). */
