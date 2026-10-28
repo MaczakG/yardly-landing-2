@@ -62,7 +62,7 @@ export const contact = {
   },
   faq: [
     { q: "Mennyi ideig tart egy bemutató?", a: "Általában 30 perc, online." },
-    { q: "Mennyibe kerül a Yardly?", a: `Három csomag van, ${priceFacts.from}. A csomagokat és a kalkulátort az <a href="${route("pricing")}">Árak</a> oldalon találja.` },
+    { q: "Mennyibe kerül a Yardly?", a: `Három csomag van, ${priceFacts.from}. A csomagokat és a díjakat az <a href="${route("pricing")}">Árak</a> oldalon találja.` },
     { q: "Segítenek az adatok áthozásában?", a: "Igen. Az Excel-sablon a legtöbb esetben elég, de szívesen ránézünk a fájljára." },
   ],
 };

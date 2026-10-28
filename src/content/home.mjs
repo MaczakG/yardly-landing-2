@@ -162,7 +162,7 @@ export const home = {
     eyebrow: "Árak",
     title: "Átlátható árak, a flottája méretéhez",
     note: `Éves fizetéssel ${ANNUAL_FREE_MONTHS} hónap ingyen. ${NO_VAT}`,
-    button: "Összes ár és kalkulátor",
+    button: "Összes ár és csomag",
   },
 
   faq: {
