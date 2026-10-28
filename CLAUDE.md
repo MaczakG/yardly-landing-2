@@ -4,18 +4,19 @@ Ez a fájl minden Yardly-chatre vonatkozik, amely ezen a repón dolgozik: a fejl
 ügyfélenkénti chatekre is. Ugyanez a fájl van a `yardly-saas`, a `flotta_management` és a `yardly-landing-2`
 repóban; ha módosítod, mindhárom helyen módosítsd.
 
-A Yardly flotta- és eszközüzemeltetési szoftver, amelyet egyedi telepítésként értékesítünk. A telepítés vagy az
-ügyfél saját szerverén fut, vagy az általunk üzemeltetett, ügyfélenként külön felhős példányon. **Nem SaaS:** az
-app.yardly.hu csak bemutató.
+A Yardly flotta- és eszközüzemeltetési szoftver. **Előfizetéses szolgáltatásként (SaaS) értékesítjük** az
+app.yardly.hu-n: a cégek maguk regisztrálnak, a kártyát a 14 napos Prémium-próbaidő előtt adják meg (Barion), utána havi
+vagy éves díjat fizetnek; éves Üzleti és Prémium díjnál átutalás is lehet. A számlát a Billingo állítja ki. Egyedi
+telepítést már nem értékesítünk; a meglévő egyedi szerződéses ügyfél, az ADR, marad (`flotta_management`).
 
 ## 1. Rendszerek
 
 | Cím | Mi ez | Repó, ág | Ki használja | Szabály |
 |---|---|---|---|---|
-| yardly.hu | marketingoldal | `yardly-landing-2`, `main` | nyilvános | élesre csak a tulajdonos „mehet élesre” jóváhagyása után |
-| app.yardly.hu, api.app.yardly.hu | **bemutató (demó)** kitalált adatokkal | `yardly-saas`, `main` | érdeklődők, a tulajdonos vezetésével | jóváhagyás és előtte adatbázismentés; valós ügyféladat nem kerülhet bele |
-| admin.yardly.hu | belső admin: ügyfelek, árajánlatok, kalkulátor, telepítések, demó cégek | `yardly-saas`, `main` | a tulajdonos | jóváhagyás és előtte mentés |
-| tesztapp.yardly.hu, tesztadmin.yardly.hu | **a tulajdonos fejlesztési kipróbáló felülete** | `yardly-saas`, `staging` | csak a tulajdonos | zöld CI után szabadon telepíthető; nem demó, ügyfél nem kap hozzáférést, valós ügyféladat nem kerülhet rá |
+| yardly.hu | marketingoldal, árlap, jogi oldalak (ÁSZF) | `yardly-landing-2`, `main` | nyilvános | élesre csak a tulajdonos „mehet élesre” jóváhagyása után |
+| app.yardly.hu, api.app.yardly.hu | **éles SaaS** az előfizetők valós adataival | `yardly-saas`, `main` | az előfizető cégek | jóváhagyás és előtte adatbázismentés |
+| admin.yardly.hu | belső admin: előfizetők, pénzügy, egyedi ügyfelek (Ügyfelek, Telepítések, Szerződések), rendszer | `yardly-saas`, `main` | a tulajdonos | jóváhagyás és előtte mentés |
+| tesztapp.yardly.hu, tesztadmin.yardly.hu | **a tulajdonos fejlesztési kipróbáló felülete** | `yardly-saas`, `staging` | csak a tulajdonos | zöld CI után szabadon telepíthető; ügyfél nem kap hozzáférést, valós ügyféladat nem kerülhet rá; a Barionnál csak tesztkulcs |
 | teszt.yardly.hu, api.teszt.yardly.hu | **az ADR ügyfél éles rendszere** | `flotta_management`, `staging` | az ADR | külön kezelendő ügyfélrendszer: jóváhagyás és előtte mentés; később az ADR saját szerverére költözik |
 | az ügyfelek saját szerverei | a `flotta_management` aláírt kiadásai | `flotta_management`, `main`, `v*` címkék | az ügyfél | csak ügyfélenkénti chatben, az ügyfél engedélyével (5. pont) |
 
@@ -55,14 +56,15 @@ A tulajdonos kifejezett jóváhagyása kell ezekhez (egy korábbi jóváhagyás 
 - új külső szolgáltatás, amely ügyféladatot kap (a 4. pont szerint ez alfeldolgozó);
 - bármi, ami ügyfélnek vagy kívülállónak megy (e-mail, üzenet, szerződés, számla).
 
-A Bographic Kft. cég az app.yardly.hu-n nem törölhető.
+A Bographic.kft az app.yardly.hu-n díjmentes belső Prémium-fiók (a bemutatókhoz, 2099-ig aktív): nem törölhető, nem
+lehet csak olvasható, és csak kitalált adat lehet benne.
 
 ## 3. Informatikai biztonság
 
 - **Never print secrets. Credentials only via env/server; never print, log, commit or store them.**
   Titok nem kerülhet chatbe, repóba, PR-ba, naplóba vagy dokumentumba.
 - Titkok helye: AWS SSM Parameter Store (SecureString), illetve a szerveren a `/opt/flotta/deploy/.env.*`
-  fájlok (600-as jogosultság). A Billingo API-kulcs csak a Parameter Store-ba kerül.
+  fájlok (600-as jogosultság). A Barion- és a Billingo-kulcs csak a Parameter Store-ba kerül.
 - Az ügyfél hozzáférési adatait (VPN, szerverjelszó, kulcs) soha ne tárold. Az ügyfél a saját csatornáján adja
   meg őket, a munka idejére.
 - Legkisebb jogosultság: ne hozz létre új felhasználót, kulcsot vagy szerepkört, és ne bővíts meglévőt. A
@@ -72,8 +74,9 @@ A Bographic Kft. cég az app.yardly.hu-n nem törölhető.
   IAM-felhasználót ne hozz létre.
 - **Mentés minden éles módosítás előtt:** `pg_dump -Fc` a `/opt/flotta/backups/<időbélyeg>-<név>/` könyvtárba,
   600-as jogosultsággal (7. pont). Éjszakánként automatikus mentés is fut S3-ba, objektumzárral.
-- Személyes adat nem kerülhet naplóba. Teszthez, demóhoz és tesztapphoz csak kitalált vagy anonimizált adatot
-  használj (EUB C-683/21). A demó cégei kitalált adatokat tartalmaznak (például Minta Logisztika).
+- Személyes adat nem kerülhet naplóba. Teszthez, bemutatóhoz és a tesztapphoz csak kitalált vagy anonimizált adatot
+  használj (EUB C-683/21), például Minta Logisztika. Az app.yardly.hu előfizetőinek adatait csak a feladathoz szükséges
+  mértékben nézd meg, és ne másold ki.
 - A meglévő védelmeket (ahol az adott repóban megvannak) ne kapcsold ki és ne gyengítsd:
   - titkosított lemez és KMS-sel titkosított mezők;
   - a CSP: ahol nincs benne `unsafe-inline`, ne kerüljön bele. A teszt.yardly.hu felületén a lapok saját inline
@@ -92,17 +95,32 @@ A Bographic Kft. cég az app.yardly.hu-n nem törölhető.
 
 ## 4. Kötelezettségek a szerződésből és a jogszabályokból
 
-Ügyfelenként három dokumentumot írunk alá:
-- a [megbízási szerződést](https://claude.ai/artifact/8cxseanW6UjhkmX9fkiUR3), amely melléklet nélkül mindent
-  tartalmaz: felhasználási jog, bevezetés és átadás-átvétel, támogatás és SLA, felhős üzemeltetés, fizetés,
-  szavatosság, felelősség, megszűnés;
-- a kétoldalú titoktartási megállapodást és az adatfeldolgozási szerződést
-  ([Yardly – titoktartás és adatfeldolgozás 2.0](https://claude.ai/artifact/DsPjkxQU4EzsxvBxF435mT)).
+**Előfizetők (app.yardly.hu):** a regisztrációkor elfogadott ÁSZF 3.0 és az 1. melléklete, az Adatfeldolgozási
+feltételek (yardly.hu/aszf, yardly.hu/adatfeldolgozas), valamint a 27. pont kikötéseinek külön elfogadása. A szövegek
+forrása a [jogi dokumentum](https://claude.ai/artifact/WzanE1iWjJ2kVJxJKBCn4u), a weboldalon szó szerint a
+`yardly-landing-2` `src/content/legal/*.md` fájljai; a 27. pont rövid listája az appban (`Legal/aszf-27.json`), a
+hatályos változat a `Legal__*` beállításokban. A díjak forrása az app `pricing.json`-ja és a weboldal
+`src/content/pricing.mjs`-e: a kettő mindig egyezzen. A szolgáltató alanyi adómentes (AAM): áfát nem számítunk fel.
 
-A díjat és a megrendelt szolgáltatásokat az admin.yardly.hu-n készült, írásban elfogadott árajánlat adja; az árajánlat
-a megbízási szerződés része. A PDF-ek az admin.yardly.hu Szerződések oldalán vannak. A korábbi szerződéscsomag 1.0-t
-(keretszerződés, megrendelő, mellékletek) nem használjuk. A szerződések szövegét ne változtasd meg; eltérés csak a
-tulajdonos jóváhagyásával lehet.
+**Egyedi szerződéses ügyfél (ADR):** a [megbízási szerződés](https://claude.ai/artifact/8cxseanW6UjhkmX9fkiUR3), a
+kétoldalú titoktartási megállapodás és az adatfeldolgozási szerződés
+([Yardly – titoktartás és adatfeldolgozás 2.0](https://claude.ai/artifact/DsPjkxQU4EzsxvBxF435mT)), a díj az írásban
+elfogadott árajánlatából. A PDF-ek az admin.yardly.hu Szerződések oldalán vannak. Új egyedi szerződést nem kötünk.
+
+A szerződések és az ÁSZF szövegét ne változtasd meg; eltérés csak a tulajdonos jóváhagyásával lehet. Az ÁSZF
+módosítását 30 nappal, díjemelést 60 nappal előre jelezni kell az előfizetőknek (ÁSZF 24. pont).
+
+Az előfizetőkre az ÁSZF szabályai érvényesek; a legfontosabbak:
+- **próbaidő:** 14 nap Prémium, a kártyát előtte kell megadni; a terhelés előtt 7, 3 és 1 nappal e-mailes értesítés;
+- **nemfizetés:** 30 nap türelmi idő, utána csak olvasható fiók, 90 nap után törlés, előtte 30 és 7 nappal
+  figyelmeztetés;
+- **lemondás:** bármikor, a folyó számlázási időszak végére; előre fizetett díj csak az ÁSZF 22.4. pontja szerint jár
+  vissza;
+- **felelősség:** legfeljebb az előző 12 havi díj, adatvédelmi kárnál a kétszerese; a díjmentes próbaidő alatt 0 Ft;
+- **adatexport:** bármikor, díjmentesen; szolgáltatóváltásnál átadás 30 napon belül.
+
+A lenti táblázat SLA-, felhős üzemeltetési és megszűnési sorai az egyedi szerződéses ügyfélre (ADR) vonatkoznak; a
+többi mindenkire.
 
 | Mit vállaltunk | Határidő vagy mérték | Mit jelent neked |
 |---|---|---|
@@ -115,7 +133,7 @@ tulajdonos jóváhagyásával lehet.
 | Felhős üzemeltetés | vállalati SLA mellett havi 99,5%; napi mentés, 30 napig őrizve, egy nem törölhető másolattal; legfeljebb 24 óra adatvesztés, helyreállítás 1 munkanapon belül (megbízási szerződés 6. pont) | a mentés és a helyreállítás mindig működjön |
 | Tervezett karbantartás | legalább 3 munkanappal előre jelezve, munkaidőn kívül, havonta legfeljebb 4 óra (megbízási szerződés 6.3. pont) | éles leállást ne tervezz munkaidőre |
 | Biztonsági frissítések (CRA) | késedelem nélkül, díjmentesen; saját szerveren az ügyfél a P1-et 3 munkanapon, a többit 30 napon belül telepíti (megbízási szerződés 5.7. pont) | a kiadási jegyzetben jelöld, melyik biztonsági frissítés |
-| Alfeldolgozók | AWS (Frankfurt, EU) és Google Workspace; újat legalább 30 nappal előre jelezni kell (adatfeldolgozási szerződés 6. pont), és frissíteni a yardly.hu/alfeldolgozok oldalt | ügyféladatot kapó új külső szolgáltatást ne vezess be jóváhagyás nélkül |
+| Alfeldolgozók | AWS (Frankfurt, EU) és Google Workspace; újat legalább 30 nappal előre jelezni kell (adatfeldolgozási szerződés 6. pont, Adatfeldolgozási feltételek 9.4. pont), és frissíteni a yardly.hu/alfeldolgozok oldalt. A Barion (önálló adatkezelő) és a Billingo (a saját számlázásunk adatfeldolgozója) nem alfeldolgozó | ügyféladatot kapó új külső szolgáltatást ne vezess be jóváhagyás nélkül |
 | Adatok helye | felhőben csak az EU-ban (eu-central-1) | más régiót ne használj |
 | Adatexport és szolgáltatóváltás (Data Act) | díjmentes; felfüggesztéskor is elérhető; kérésre 30 napon belül, titkosítva | az exportfunkciót soha ne vedd el és ne korlátozd |
 | Felmondás | bármelyik fél bármikor, írásban (Ptk. 6:278. §); ha mi mondunk fel, még 60 napig szolgáltatunk (megbízási szerződés 13. pont) | felmondást csak a tulajdonos küldhet |
@@ -133,12 +151,13 @@ Más jogszabályok:
 
 ## 5. Ügyfélenkénti chatek
 
-Egy chat egy ügyféllel foglalkozik. Az ügyfél rövid azonosítója (például `adr`) a chat elején derüljön ki.
+Ez a pont az egyedi szerződéses ügyfélre (ADR) vonatkozik; az előfizetők ügyeit az admin.yardly.hu-n
+intézzük. Egy chat egy ügyféllel foglalkozik. Az ügyfél rövid azonosítója (például `adr`) a chat elején derüljön ki.
 
 - **Elkülönítés:** másik ügyfél nevét, adatát, beállítását vagy kódját ne használd, ne említsd és ne másold át.
   Ha a feladathoz másik ügyfél kellene, állj meg, és kérdezd meg a tulajdonost.
-- **Adatforrás:** az ügyfél szerződéses és telepítési adatai az admin.yardly.hu-ban vannak (Ügyfelek,
-  Árajánlatok, Telepítések). A repóba legfeljebb nem titkos, személyes adatot nem tartalmazó telepítési
+- **Adatforrás:** az ügyfél szerződéses és telepítési adatai az admin.yardly.hu-ban vannak (Ügyfelek, Telepítések,
+  Szerződések). A repóba legfeljebb nem titkos, személyes adatot nem tartalmazó telepítési
   jegyzet kerülhet: `docs/ugyfelek/<azonosító>.md`.
 - **Testreszabás:**
   - Az első választás a beállítás, nem a kód.
@@ -159,8 +178,8 @@ Egy chat egy ügyféllel foglalkozik. Az ügyfél rövid azonosítója (példáu
   - Az ügyfél által küldött adatot a feladat után töröld, a levelezésből is.
   - Saját szerveres ügyfélnél ilyenkor az adatfeldolgozási szerződés él.
 - **Kommunikáció:** ügyfélnek te nem írsz. Levelet, ajánlatot, kiadási jegyzetet a tulajdonosnak készíts elő.
-- **Árajánlat és szerződés:** az ár az admin.yardly.hu kalkulátorából és árajánlataiból jön, a megbízási szerződés,
-  a titoktartási megállapodás és az adatfeldolgozási szerződés a mintákból (4. pont). Díjat ne találj ki.
+- **Díj és szerződés:** az egyedi ügyfél díja az elfogadott árajánlatából jön, a szerződései a 4. pont szerintiek. Új
+  egyedi szerződést nem kötünk. Díjat ne találj ki.
 - **ADR (teszt.yardly.hu):** külön ügyfél, külön chat. Jelenleg a mi szerverünkön fut, a `flotta_management`
   `staging` ágáról; a tervek szerint az ADR saját szerverére költözik. Addig rá a felhős üzemeltetés szabályai
   vonatkoznak, a megbízási és az adatfeldolgozási szerződés szerint.
