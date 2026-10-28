@@ -1672,6 +1672,15 @@ fieldset.field legend {
   max-width: 360px;
 }
 
+/* Under the banner: transfer, invoices, the bank statement and Apple Pay (not for recurring payments). */
+.pay-note {
+  max-width: 720px;
+  margin-top: 8px;
+  color: var(--ink-2);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
 .social {
   display: flex;
   gap: 8px;

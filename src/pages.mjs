@@ -537,6 +537,7 @@ ${pageHero(pr)}
     <div class="section-head section-head--single"><div><p class="eyebrow">${pr.payment.eyebrow}</p><h2 class="h2" id="payment-title">${g(pr.payment.title)}</h2></div></div>
     ${numbered(pr.payment.items)}
     ${paymentBanner(footer.payment)}
+    ${pr.payment.note ? `<p class="pay-note">${esc(pr.payment.note)}</p>` : ""}
   </div>
 </section>
 
