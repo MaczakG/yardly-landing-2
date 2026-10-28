@@ -558,7 +558,7 @@ export const guides = [
 </tbody>
 </table>
 <p>Az Excel-import és -export minden csomagban benne van. Az Üzleti csomagtól elérhető a telefonos állapotfelmérés és a QR-leltár, a Prémiumban az analitika és a csereajánlások. Eszközből az Alap és az Üzleti csomag keretén felül ${priceFacts.equipmentAddOn} bővítés vehető. A kivont járművek nem számítanak bele a keretbe, és hűségidő nincs.</p>
-<p>A fenti ${EXAMPLE_CARS} autós példában ${exampleText()} A kalkulátort és a csomagok részleteit az <a href="/arak/">árak oldalán</a> találja; a ${TRIAL_DAYS} napos próbaidő alatt ${the(TRIAL_PLAN)} csomag minden funkciója kipróbálható. Ha még a szempontokat gyűjti, a <a href="/blog/flottakezelo-szoftver-valasztas/">kiválasztási ellenőrzőlistánk</a> segít.</p>`,
+<p>A fenti ${EXAMPLE_CARS} autós példában ${exampleText()} A csomagok részleteit az <a href="/arak/">árak oldalán</a> találja; a ${TRIAL_DAYS} napos próbaidő alatt ${the(TRIAL_PLAN)} csomag minden funkciója kipróbálható. Ha még a szempontokat gyűjti, a <a href="/blog/flottakezelo-szoftver-valasztas/">kiválasztási ellenőrzőlistánk</a> segít.</p>`,
   },
   {
     slug: "qr-cimke-eszkozokre",

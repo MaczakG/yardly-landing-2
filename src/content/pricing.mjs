@@ -1,12 +1,11 @@
 // Árak. The numbers mirror the app's catalog (yardly-saas: backend/src/Flotta.Api/pricing.json).
 // When a price, limit or feature changes there, change it here: every price on the site (the
-// price page and its calculator, the home page, the solution pages, posts and guides) comes from
+// price page, the home page, the solution pages, posts and guides) comes from
 // this file. Prices are per month, in HUF. The seller is VAT-exempt (alanyi adómentes), so a
 // price is the amount paid: no VAT is added and none is shown.
 
 export const TRIAL_DAYS = 14;
 export const ANNUAL_FREE_MONTHS = 2;
-export const SELF_SERVICE_MAX_VEHICLES = 300;
 export const NO_VAT = "Alanyi adómentes vállalkozásként áfát nem számítunk fel.";
 
 // "29 990 Ft": thousands grouped with a non-breaking space, so a price never wraps.
@@ -112,23 +111,6 @@ premium.highlights = [
   `Támogatás ${premium.support}`,
 ];
 
-// The calculator's feature checkboxes: the smallest plan each one is in (a plan key). A feature
-// a smaller plan can buy as an extra names that plan and its monthly price in addOn.
-export const CALC_FEATURES = [
-  { key: "sites", label: "Több telephely", plan: "uzleti" },
-  { key: "workflows", label: `Több saját folyamat és automatizálás (legfeljebb ${uzleti.workflows})`, plan: "uzleti" },
-  { key: "inspections", label: "Telefonos állapotfelmérés", plan: "uzleti" },
-  { key: "inventory", label: "Leltár telefonnal (QR, vonalkód)", plan: "uzleti" },
-  { key: "roles", label: "Saját szerepkörök és jogosultsági mátrix", plan: "uzleti" },
-  { key: "audit", label: "Változásnapló", plan: "uzleti" },
-  { key: "summary", label: "Vezetői összefoglaló PDF", plan: "uzleti" },
-  { key: "dkv", label: "DKV üzemanyagkártya-integráció", plan: "uzleti", addOn: DKV_ADDON },
-  { key: "analytics", label: "Analitika, előrejelzés, csereajánlások", plan: "premium" },
-  { key: "webhooks", label: "Teams- és Slack-üzenet automatizálásból", plan: "premium" },
-  { key: "unlimitedWorkflows", label: "Korlátlan saját folyamat és automatizálás", plan: "premium" },
-  { key: "auditExport", label: "Változásnapló exporttal, állítható megőrzéssel", plan: "premium" },
-  { key: "delegation", label: "Beállítások átadása szerepköröknek", plan: "premium" },
-];
 
 // "Mi van az egyes csomagokban": one row per feature, cells for Alap / Üzleti / Prémium.
 // true = included, false = not included, a string = shown as written.
@@ -166,7 +148,7 @@ export const priceFacts = {
 
 export const pricing = {
   title: "Flottakezelő szoftver árak 2026: csomagok és díjak – Yardly",
-  description: `Három csomag havi ${huf(alap.monthly)}-tól, éves fizetéssel ${ANNUAL_FREE_MONTHS} hónap ingyen. ${TRIAL_DAYS} napos próbaidő a ${TRIAL_PLAN} csomag minden funkciójával. Kalkulátor a járművei, eszközei, felhasználói és a szükséges funkciók alapján.`,
+  description: `Három csomag havi ${huf(alap.monthly)}-tól, éves fizetéssel ${ANNUAL_FREE_MONTHS} hónap ingyen. ${TRIAL_DAYS} napos próbaidő a ${TRIAL_PLAN} csomag minden funkciójával.`,
   eyebrow: "Árak",
   h1: "Flottakezelő szoftver árak: három csomag a flotta méretéhez",
   lead: `Minden csomagban benne van a Flotta és az Eszközpark modul. A díj a csomagban foglalt aktív járművekig fix, felette járművenként számolunk. ${TRIAL_DAYS} napig díjmentesen kipróbálhatja a ${TRIAL_PLAN} csomag minden funkciójával. A regisztrációhoz bankkártya kell, de a próbaidő alatt nem terhelünk semmit.`,
@@ -179,30 +161,6 @@ export const pricing = {
   limitsTitle: "Keretek",
   comparisonTitle: "Mi van az egyes csomagokban",
   comparisonNote: `${NO_VAT} Éves fizetésnél a csomagra és a kiegészítőkre is ${ANNUAL_FREE_MONTHS} hónap ingyenes.`,
-  calc: {
-    eyebrow: "Kalkulátor",
-    title: "Mennyibe kerül az Ön flottájának?",
-    label: "Aktív járművek száma",
-    equipmentLabel: "Eszközök száma",
-    equipmentHint: "Targoncák, laptopok, szerszámok, gépek: minden, amit nyilván szeretne tartani.",
-    usersLabel: "Felhasználók száma",
-    usersHint: "Akik bejelentkeznek a Yardlyba: flottavezetők, sofőrök, raktárosok.",
-    featuresLabel: "Milyen funkciókra van szüksége?",
-    featuresHint: "Az alapok (járművek, eszközök, dokumentumok, lejárat-riasztás, szerviz, tankolás, költségek, kárügyek) minden csomagban benne vannak. A kalkulátor azt a legkisebb csomagot választja, amelyben minden kiválasztott funkció megvan.",
-    resultTier: (plan, n, e, u) => `${plan} csomag · ${n} jármű · ${e} eszköz · ${u} felhasználó`,
-    lineBase: (plan, included, equipment) => `${plan} csomag (${included} jármű, ${equipment} eszköz benne)`,
-    lineExtra: (n, price) => `${n} többletjármű × ${price}`,
-    lineEquipment: (packs, price) => `${packs} × ${EQUIPMENT_ADDON.size} eszköz bővítés × ${price}`,
-    unlimited: "korlátlan",
-    max: (n) => `legfeljebb ${n} jármű`,
-    maxEquipment: (n) => `legfeljebb ${n} eszköz`,
-    maxUsers: (n) => `legfeljebb ${n} felhasználó`,
-    missing: (feature) => `nincs benne: ${feature}`,
-    lineAddOn: (name) => `${name} kiegészítő`,
-    equipmentNote: `Eszközből a csomag kerete felett ${priceFacts.equipmentAddOn} bővítést vásárolhat (Alap, Üzleti). A Prémiumban korlátlan az eszköz.`,
-    noteMonthly: "A többletjárművet havonta utólag számoljuk, a hónap legmagasabb aktív járműszáma alapján.",
-    noteAnnual: "Éves fizetésnél a csomag díját egy összegben, előre fizeti. A többletjárművet negyedévente utólag számoljuk, a negyedév havi csúcsai alapján.",
-  },
   // How paying works, in three steps (the card is registered at sign-up, nothing is charged
   // during the trial, then the chosen plan is charged).
   payment: {
