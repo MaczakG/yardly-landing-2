@@ -84,7 +84,7 @@ A Szolgáltató a nyilatkozatot a változatszámmal, az időponttal, a Felhaszn�
 5.1. A szerződéskötés technikai lépései (Ekertv. 5. §):
 
 - a) Az app.yardly.hu oldalon a „Céges fiók létrehozása” lapon meg kell adni a cég nevét és adószámát (magyar adószám vagy uniós közösségi adószám), a regisztráló vezeték- és keresztnevét, e-mail-címét és egy legalább 8 karakteres jelszót.
-- b) Jelölőnégyzettel meg kell tenni a 4.2. pont szerinti nyilatkozatot; jelölőnégyzettel el kell fogadni az ÁSZF-et és az Adatfeldolgozási feltételeket, amelyek a jelölőnégyzet mellől megnyithatók; és külön jelölőnégyzettel kifejezetten el kell fogadni a 27. pontban felsorolt, a szokásostól eltérő kikötéseket, amelyeket a regisztrációs lap a jelölőnégyzet fölött felsorol.
+- b) Jelölőnégyzettel meg kell tenni a 4.2. pont szerinti nyilatkozatot, és jelölőnégyzettel el kell fogadni az ÁSZF-et – a 27. pontban felsorolt, a szokásostól eltérő kikötésekkel együtt – és az Adatfeldolgozási feltételeket, amelyek a jelölőnégyzet mellől megnyithatók.
 - c) A „Fiók létrehozása” gombbal a regisztráció elküldhető. Ezzel létrejön a Fiók és a Szerződés, a regisztráló pedig a Fiók első Adminisztrátora lesz.
 - d) Ezután az Adminisztrátor kiválasztja a Csomagot és a fizetés gyakoriságát (havi vagy éves), amellyel a Próbaidő után folytatja, és a Barion fizetési oldalán megadja a bankkártyáját (7.2. pont).
 - e) Minden belépéshez a jelszó és az e-mailben kapott, egyszer használatos kód kell.
@@ -453,7 +453,7 @@ Az alábbi kikötések eltérnek a jogszabályok diszpozitív rendelkezéseitől
 15. **Kézbesítési vélelem:** az e-mailes értesítés a küldést követő Munkanapon kézbesítettnek minősül (25.1. pont).
 16. **Illetékességi kikötés:** jogvitában a Szolgáltató székhelye szerint illetékes bíróság jár el (26.2. pont).
 
-**Az elfogadás módja.** A regisztrációs lapon, a „Fiók létrehozása” gomb előtt az ÁSZF és az Adatfeldolgozási feltételek a jelölőnégyzet mellől megnyithatók, és a regisztráló a jelölőnégyzet bejelölésével fogadja el őket. A fenti kikötéseket a regisztrációs lap a jelölőnégyzetek fölött felsorolja, és a regisztráló azokat külön jelölőnégyzettel, kifejezetten fogadja el; enélkül a regisztráció nem küldhető el. Az ÁSZF új változatát az Adminisztrátor az alkalmazásban megjelenő értesítésben fogadja el. A Szolgáltató minden elfogadást a változatszámmal, az időponttal, a Felhasználóval, az Ügyféllel és az IP-címmel együtt rögzít.
+**Az elfogadás módja.** A regisztrációs lapon, a „Fiók létrehozása” gomb előtt az ÁSZF és az Adatfeldolgozási feltételek a jelölőnégyzet mellől megnyithatók, és a regisztráló a jelölőnégyzet bejelölésével fogadja el őket. A jelölőnégyzet szövege a fenti kikötéseket kifejezetten megnevezi („Elfogadom az ÁSZF-et – a 27. pontjában felsorolt, a szokásostól eltérő kikötésekkel együtt – és az adatfeldolgozási feltételeket”), így a regisztráló a jelölőnégyzet bejelölésével e kikötéseket is kifejezetten elfogadja; enélkül a regisztráció nem küldhető el. Az ÁSZF új változatát az Adminisztrátor az alkalmazásban megjelenő értesítésben fogadja el. A Szolgáltató minden elfogadást a változatszámmal, az időponttal, a Felhasználóval, az Ügyféllel és az IP-címmel együtt rögzít.
 
 ---
 
