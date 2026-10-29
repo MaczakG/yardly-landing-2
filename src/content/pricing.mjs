@@ -147,7 +147,7 @@ export const pricing = {
   description: `Három csomag havi ${huf(alap.monthly)}-tól, éves fizetéssel ${ANNUAL_FREE_MONTHS} hónap ingyen. ${TRIAL_DAYS} napos próba a ${TRIAL_PLAN} csomag minden funkciójával.`,
   eyebrow: "Árak",
   h1: "Három csomag, a flotta és az eszközpark méretéhez",
-  lead: `Minden csomagban benne van a Flotta és az Eszközpark modul, és a folyamatautomatizálás is. A díj a csomagban foglalt aktív járművekig fix, felette járművenként számolunk. ${TRIAL_DAYS} napig díjmentesen kipróbálhatja a ${TRIAL_PLAN} csomag minden funkciójával; a regisztrációhoz bankkártya kell: az ellenőrzéséhez 100 Ft-ot terhelünk, amelyet automatikusan visszatérítünk, és a próbaidő alatt mást nem terhelünk.`,
+  lead: `Minden csomagban benne van a Flotta és az Eszközpark modul, és a folyamatautomatizálás is. A díj a csomagban foglalt aktív járművekig fix, felette járművenként számolunk. ${TRIAL_DAYS} napig díjmentesen kipróbálhatja a ${TRIAL_PLAN} csomag minden funkciójával; bankkártya nem kell.`,
   toggle: { monthly: "Havi fizetés", annual: "Éves fizetés", free: `${ANNUAL_FREE_MONTHS} hónap ingyen` },
   perMonth: "/ hó",
   annualNote: (total) => `évente ${total} egy összegben`,
@@ -157,17 +157,17 @@ export const pricing = {
   limitsTitle: "Keretek",
   comparisonTitle: "Mi van az egyes csomagokban",
   comparisonNote: `${NO_VAT} Éves fizetésnél a csomagra és a kiegészítőkre is ${ANNUAL_FREE_MONTHS} hónap ingyenes.`,
-  // How paying works, in three steps (the card is registered at sign-up, nothing is charged
-  // during the trial, then the chosen plan is charged).
+  // How paying works, in three steps (sign-up without a card, nothing is billed during the trial,
+  // then a payment request for the chosen plan, paid by transfer).
   payment: {
     eyebrow: "Fizetés",
     title: "Így indul, és így fizet",
     items: [
-      { title: "Regisztrál, és megad egy bankkártyát", text: "A kártyát a Barion biztonságos oldalán adja meg; a kártyaadatokat a Yardly nem látja és nem tárolja. Az ellenőrzéséhez 100 Ft-ot terhelünk, amelyet automatikusan visszatérítünk. Itt választja ki azt is, melyik csomaggal folytatná." },
-      { title: `${TRIAL_DAYS} napig ingyen próbálja`, text: `A próbaidő alatt a ${TRIAL_PLAN} csomag minden funkciója elérhető, és a kártyaellenőrzésen kívül nem terhelünk semmit. A terhelés előtt 7, 3 és 1 nappal e-mailben jelezzük az összeget és az időpontot.` },
-      { title: "Utána a választott csomagot fizeti", text: "Ismétlődő kártyás fizetéssel, havonta vagy évente, a számlázási időszak első napján; ehhez a kártya megadásakor külön hozzájárul. Éves díjnál a megújulás előtt 30 és 7 nappal e-mailben jelezzük az összeget. Bármikor lemondható, a folyó időszak végére." },
+      { title: "Regisztrál, kártya nélkül", text: "Elég megadni a cégadatokat; bankkártya nem kell. Az appban kiválasztja, melyik csomaggal folytatná a próbaidő után." },
+      { title: `${TRIAL_DAYS} napig ingyen próbálja`, text: `A próbaidő alatt a ${TRIAL_PLAN} csomag minden funkciója elérhető, és semmit nem számlázunk. A próbaidő vége előtt 7, 3 és 1 nappal e-mailben jelezzük, mi következik.` },
+      { title: "Utána díjbekérő alapján fizet", text: "A választott csomagról havonta vagy évente díjbekérőt küldünk, 8 napos fizetési határidővel, és átutalással fizet. A befizetés után a számlát a rendszer automatikusan kiállítja és elküldi. Éves díjnál a megújulás előtt 30 és 7 nappal e-mailben jelezzük az összeget. Bármikor lemondható, a folyó időszak végére." },
     ],
-    note: "Az Üzleti és a Prémium éves díja díjbekérő alapján, átutalással is fizethető. Az elektronikus számlát a Billingo állítja ki. A bankszámlakivonaton a Barion Payment Zrt. szerepel. Az ismétlődő fizetés miatt Apple Pay-jel nem lehet fizetni, Google Pay-jel igen.",
+    note: "A díjbekérőt és az elektronikus számlát a Billingo állítja ki. Ha egy díjbekérő a fizetési határidő után 30 nappal sincs kifizetve, a fiók zárolódik: ekkor csak a díjbekérők és a teljes adatexport érhetők el, amíg a befizetés be nem érkezik.",
   },
   cta: { eyebrow: "Kezdje el", title: `Próbálja ki ${TRIAL_DAYS} napig ingyen`, lead: `A ${TRIAL_PLAN} csomag minden funkciójával, a saját adataival.` },
   faq: {
@@ -179,8 +179,9 @@ export const pricing = {
       { q: "Hogyan számolják el a többletjárműveket?", a: "Utólag, a hónap legmagasabb aktív járműszáma alapján: havi fizetésnél havonta, éves fizetésnél negyedévente. A néhány napig aktív jármű is beszámít, ezért a használaton kívüli járművet érdemes kivontra állítani." },
       { q: "Válthatok csomagot? Lemondhatom?", a: "Nagyobb csomagra azonnal válthat, időarányos elszámolással; kisebbre a következő számlázási időszaktól. Hűségidő nincs: a havi előfizetés a hónap végével, az éves az év végével mondható le. Lemondás után a fiók 90 napig csak olvasható, és minden adat letölthető. Utána véglegesen töröljük, előtte 30 és 7 nappal e-mailben jelezzük." },
       { q: "Kell áfát fizetni?", a: `Nem. ${NO_VAT} A feltüntetett ár a teljes fizetendő összeg.` },
-      { q: "Hogyan fizethetek?", a: "Bankkártyával, havonta vagy évente, a Barion oldalán megadott kártyáról, ismétlődő terheléssel; a bankszámlakivonaton a Barion Payment Zrt. szerepel. Az ismétlődő fizetés miatt Apple Pay-jel nem lehet fizetni, Google Pay-jel igen. Az Üzleti és a Prémium éves díja díjbekérő alapján, átutalással is fizethető. A számlát a Billingo állítja ki. Csomagot váltani, kiegészítőt venni és számlát letölteni az appban, a Beállítások → Előfizetés & számlázás fülön lehet." },
-      { q: "Mi a helyzet a próbaidővel?", a: `${TRIAL_DAYS} napig díjmentesen használhatja a ${TRIAL_PLAN} csomag összes funkcióját. A regisztrációkor megadott kártya ellenőrzéséhez 100 Ft-ot terhelünk, amelyet automatikusan visszatérítünk; a próbaidő alatt mást nem vonunk le; a végén a választott csomag díját vonjuk le, előtte 7, 3 és 1 nappal e-mailben szólunk. A próbaidő végéig a csomag módosítható, vagy a folytatás lemondható: ekkor a fiók csak olvasható lesz, és az adatokat 90 napig megőrizzük.` },
+      { q: "Hogyan fizethetek?", a: "Díjbekérő alapján, banki átutalással, havonta vagy évente; bankkártyával nem lehet fizetni. A díjbekérőt e-mailben küldjük, és az appban is letölthető; a fizetési határidő 8 nap. A befizetés után a számlát a rendszer automatikusan kiállítja és elküldi; a díjbekérőket és a számlákat a Billingo állítja ki. Csomagot váltani, kiegészítőt venni és számlát letölteni az appban, a Beállítások → Előfizetés & számlázás fülön lehet." },
+      { q: "Mi történik, ha késik a fizetés?", a: "A fizetési határidő után még 30 napig minden funkció elérhető, közben e-mailben emlékeztetünk. Ha a díjbekérő a határidő után 30 nappal sincs kifizetve, a fiók zárolódik: csak a ki nem fizetett díjbekérők és a teljes adatexport érhetők el. A befizetés beérkezése után a zárolás magától feloldódik." },
+      { q: "Mi a helyzet a próbaidővel?", a: `${TRIAL_DAYS} napig díjmentesen használhatja a ${TRIAL_PLAN} csomag összes funkcióját, bankkártya nélkül. A végén a választott csomag első időszakáról díjbekérőt küldünk; előtte 7, 3 és 1 nappal e-mailben szólunk. A próbaidő végéig a csomag módosítható, vagy a folytatás lemondható: ekkor a fiók csak olvasható lesz, és az adatokat 90 napig megőrizzük.` },
     ],
   },
 };

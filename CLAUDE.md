@@ -5,8 +5,9 @@ Ez a fájl minden Yardly-chatre vonatkozik, amely ezen a repón dolgozik: a fejl
 repóban; ha módosítod, mindhárom helyen módosítsd.
 
 A Yardly flotta- és eszközüzemeltetési szoftver. **Előfizetéses szolgáltatásként (SaaS) értékesítjük** az
-app.yardly.hu-n: a cégek maguk regisztrálnak, a kártyát a 14 napos Prémium-próbaidő előtt adják meg (Barion), utána havi
-vagy éves díjat fizetnek; éves Üzleti és Prémium díjnál átutalás is lehet. A számlát a Billingo állítja ki. Egyedi
+app.yardly.hu-n: a cégek maguk regisztrálnak, kártya nélkül, 14 napos Prémium-próbaidővel; utána havi vagy éves díjat
+fizetnek, mindig a Billingo által kiállított díjbekérő alapján, átutalással. Kártyás fizetés nincs. Amint a befizetés
+rögzítésre kerül a Billingóban, az app automatikusan kiállítja a számlát. Egyedi
 telepítést már nem értékesítünk; a meglévő egyedi szerződéses ügyfél, az ADR, marad (`flotta_management`).
 
 ## 1. Rendszerek
@@ -16,7 +17,7 @@ telepítést már nem értékesítünk; a meglévő egyedi szerződéses ügyfé
 | yardly.hu | marketingoldal, árlap, jogi oldalak (ÁSZF) | `yardly-landing-2`, `main` | nyilvános | élesre csak a tulajdonos „mehet élesre” jóváhagyása után |
 | app.yardly.hu, api.app.yardly.hu | **éles SaaS** az előfizetők valós adataival | `yardly-saas`, `main` | az előfizető cégek | jóváhagyás és előtte adatbázismentés |
 | admin.yardly.hu | belső admin: előfizetők, pénzügy, egyedi ügyfelek (Ügyfelek, Telepítések, Szerződések), rendszer | `yardly-saas`, `main` | a tulajdonos | jóváhagyás és előtte mentés |
-| tesztapp.yardly.hu, tesztadmin.yardly.hu | **a tulajdonos fejlesztési kipróbáló felülete** | `yardly-saas`, `staging` | csak a tulajdonos | zöld CI után szabadon telepíthető; ügyfél nem kap hozzáférést, valós ügyféladat nem kerülhet rá; a Barionnál csak tesztkulcs |
+| tesztapp.yardly.hu, tesztadmin.yardly.hu | **a tulajdonos fejlesztési kipróbáló felülete** | `yardly-saas`, `staging` | csak a tulajdonos | zöld CI után szabadon telepíthető; ügyfél nem kap hozzáférést, valós ügyféladat nem kerülhet rá |
 | teszt.yardly.hu, api.teszt.yardly.hu | **az ADR ügyfél éles rendszere** | `flotta_management`, `staging` | az ADR | külön kezelendő ügyfélrendszer: jóváhagyás és előtte mentés; később az ADR saját szerverére költözik |
 | az ügyfelek saját szerverei | a `flotta_management` aláírt kiadásai | `flotta_management`, `main`, `v*` címkék | az ügyfél | csak ügyfélenkénti chatben, az ügyfél engedélyével (5. pont) |
 
@@ -64,7 +65,7 @@ lehet csak olvasható, és csak kitalált adat lehet benne.
 - **Never print secrets. Credentials only via env/server; never print, log, commit or store them.**
   Titok nem kerülhet chatbe, repóba, PR-ba, naplóba vagy dokumentumba.
 - Titkok helye: AWS SSM Parameter Store (SecureString), illetve a szerveren a `/opt/flotta/deploy/.env.*`
-  fájlok (600-as jogosultság). A Barion- és a Billingo-kulcs csak a Parameter Store-ba kerül.
+  fájlok (600-as jogosultság). A Billingo-kulcs (és a kikapcsolt kártyás fizetés Barion-kulcsa) csak a Parameter Store-ba kerül.
 - Az ügyfél hozzáférési adatait (VPN, szerverjelszó, kulcs) soha ne tárold. Az ügyfél a saját csatornáján adja
   meg őket, a munka idejére.
 - Legkisebb jogosultság: ne hozz létre új felhasználót, kulcsot vagy szerepkört, és ne bővíts meglévőt. A
@@ -95,7 +96,7 @@ lehet csak olvasható, és csak kitalált adat lehet benne.
 
 ## 4. Kötelezettségek a szerződésből és a jogszabályokból
 
-**Előfizetők (app.yardly.hu):** a regisztrációkor egyetlen jelölőnégyzettel elfogadott ÁSZF 3.0 és az 1. melléklete, az
+**Előfizetők (app.yardly.hu):** a regisztrációkor egyetlen jelölőnégyzettel elfogadott ÁSZF 3.1 és az 1. melléklete, az
 Adatfeldolgozási feltételek (yardly.hu/aszf, yardly.hu/adatfeldolgozas); a jelölőnégyzet szövege a 27. pont
 kikötéseit kifejezetten megnevezi. A szövegek forrása a [jogi dokumentum](https://claude.ai/artifact/WzanE1iWjJ2kVJxJKBCn4u),
 a weboldalon szó szerint a `yardly-landing-2` `src/content/legal/*.md` fájljai, a hatályos változat a `Legal__*`
@@ -111,9 +112,9 @@ A szerződések és az ÁSZF szövegét ne változtasd meg; eltérés csak a tul
 módosítását 30 nappal, díjemelést 60 nappal előre jelezni kell az előfizetőknek (ÁSZF 24. pont).
 
 Az előfizetőkre az ÁSZF szabályai érvényesek; a legfontosabbak:
-- **próbaidő:** 14 nap Prémium, a kártyát előtte kell megadni; a terhelés előtt 7, 3 és 1 nappal e-mailes értesítés;
-- **nemfizetés:** 30 nap türelmi idő, utána csak olvasható fiók, 90 nap után törlés, előtte 30 és 7 nappal
-  figyelmeztetés;
+- **próbaidő:** 14 nap Prémium, kártya nélkül; a vége előtt 7, 3 és 1 nappal e-mailes értesítés, utána díjbekérő;
+- **nemfizetés:** a díjbekérő 8 napos fizetési határideje után 30 nap türelmi idő, utána zárolt fiók (csak a díjbekérők
+  és az adatexport érhetők el), 90 nap után törlés, előtte 30 és 7 nappal figyelmeztetés;
 - **lemondás:** bármikor, a folyó számlázási időszak végére; előre fizetett díj csak az ÁSZF 22.4. pontja szerint jár
   vissza;
 - **felelősség:** legfeljebb az előző 12 havi díj, adatvédelmi kárnál a kétszerese; a díjmentes próbaidő alatt 0 Ft;
@@ -133,7 +134,7 @@ többi mindenkire.
 | Felhős üzemeltetés | vállalati SLA mellett havi 99,5%; napi mentés, 30 napig őrizve, egy nem törölhető másolattal; legfeljebb 24 óra adatvesztés, helyreállítás 1 munkanapon belül (megbízási szerződés 6. pont) | a mentés és a helyreállítás mindig működjön |
 | Tervezett karbantartás | legalább 3 munkanappal előre jelezve, munkaidőn kívül, havonta legfeljebb 4 óra (megbízási szerződés 6.3. pont) | éles leállást ne tervezz munkaidőre |
 | Biztonsági frissítések (CRA) | késedelem nélkül, díjmentesen; saját szerveren az ügyfél a P1-et 3 munkanapon, a többit 30 napon belül telepíti (megbízási szerződés 5.7. pont) | a kiadási jegyzetben jelöld, melyik biztonsági frissítés |
-| Alfeldolgozók | AWS (Frankfurt, EU) és Google Workspace; újat legalább 30 nappal előre jelezni kell (adatfeldolgozási szerződés 6. pont, Adatfeldolgozási feltételek 9.4. pont), és frissíteni a yardly.hu/alfeldolgozok oldalt. A Barion (önálló adatkezelő) és a Billingo (a saját számlázásunk adatfeldolgozója) nem alfeldolgozó | ügyféladatot kapó új külső szolgáltatást ne vezess be jóváhagyás nélkül |
+| Alfeldolgozók | AWS (Frankfurt, EU) és Google Workspace; újat legalább 30 nappal előre jelezni kell (adatfeldolgozási szerződés 6. pont, Adatfeldolgozási feltételek 9.4. pont), és frissíteni a yardly.hu/alfeldolgozok oldalt. A Billingo (a saját számlázásunk adatfeldolgozója) nem alfeldolgozó | ügyféladatot kapó új külső szolgáltatást ne vezess be jóváhagyás nélkül |
 | Adatok helye | felhőben csak az EU-ban (eu-central-1) | más régiót ne használj |
 | Adatexport és szolgáltatóváltás (Data Act) | díjmentes; felfüggesztéskor is elérhető; kérésre 30 napon belül, titkosítva | az exportfunkciót soha ne vedd el és ne korlátozd |
 | Felmondás | bármelyik fél bármikor, írásban (Ptk. 6:278. §); ha mi mondunk fel, még 60 napig szolgáltatunk (megbízási szerződés 13. pont) | felmondást csak a tulajdonos küldhet |

@@ -2,7 +2,7 @@
 
 **Adatfeldolgozási szerződés az általános adatvédelmi rendelet (GDPR) 28. cikke szerint**
 
-Az Általános Szerződési Feltételek (ÁSZF) 1. melléklete · **Verzió:** 3.0 · **Hatályos:** 2026. október 28-tól
+Az Általános Szerződési Feltételek (ÁSZF) 1. melléklete · **Verzió:** 3.1 · **Hatályos:** 2026. október 29-től
 
 ---
 
@@ -120,7 +120,7 @@ A Szolgáltatás nem végez GPS-alapú vagy más telematikai követést.
 | Mentés és helyreállítás | napi titkosított mentés az adatbázisról és a feltöltött fájlokról, 30 napos megőrzéssel, egy 30 napig nem törölhető és nem felülírható másolattal; helyreállítási cél: legfeljebb 24 óra adatvesztés, helyreállítás 1 Munkanapon belül |
 | Fejlesztés és ellátási lánc | titokkeresés, sérülékenycsomag-keresés és szoftver-anyagjegyzék (SBOM) minden kódváltozásnál; a tesztkörnyezetekben csak kitalált adat |
 | Sérülékenységkezelés | bejelentés és kezelés a yardly.hu/biztonsagi-hibak oldalon közzétett rend szerint |
-| Adattakarékosság | bankkártyaadatot a Szolgáltató nem kezel (azt a Barion kezeli); a változásnapló a titkok és a kártyaszámok értékét nem rögzíti |
+| Adattakarékosság | bankkártyaadatot a Szolgáltató nem kezel; a változásnapló a titkok és a kártyaszámok értékét nem rögzíti |
 | Szervezés | titoktartás; a feladathoz kötött hozzáférés; incidenskezelési rend (13. pont); megőrzési és törlési rend (15. pont) |
 
 8.2. A Szolgáltató az intézkedéseket a technológia fejlődésével összhangban módosíthatja, de a módosítás nem csökkentheti a Személyes Ügyféladatok védelmének szintjét.
@@ -136,7 +136,7 @@ A Szolgáltatás nem végez GPS-alapú vagy más telematikai követést.
 | Amazon Web Services EMEA SARL (38 Avenue John F. Kennedy, L-1855 Luxembourg) | szerverek, adatbázis, fájltárolás, mentések, kulcskezelés (KMS) | Európai Unió, Németország: Frankfurt (eu-central-1) |
 | Google Ireland Limited (Gordon House, Barrow Street, Dublin 4, Írország) – Google Workspace | az értesítő e-mailek kiküldése a Google levelezőrelén keresztül; a támogatási levelezés | a Google adatközpontjai, az EU-n kívül is (10. pont) |
 
-A naprakész lista a yardly.hu/alfeldolgozok oldalon olvasható. A Barion Payment Zrt. (kártyás fizetés) és a Billingo (számlázás) nem kap Személyes Ügyféladatot, csak a Szolgáltató saját számlázási adatait, ezért nem alfeldolgozó.
+A naprakész lista a yardly.hu/alfeldolgozok oldalon olvasható. A Billingo (számlázás) nem kap Személyes Ügyféladatot, csak a Szolgáltató saját számlázási adatait, ezért nem alfeldolgozó.
 
 9.2. **Szerződéses garanciák.** A Szolgáltató csak olyan alfeldolgozót vesz igénybe, amellyel írásbeli szerződést kötött, és amely legalább a Feltételekben foglaltakkal azonos adatvédelmi kötelezettségeket vállal, különösen a megfelelő technikai és szervezési intézkedésekre.
 
@@ -211,9 +211,9 @@ Ezek az eszközök Csak olvasható állapotban is működnek.
 
 15.1. A Szerződés alatt az Ügyfél a Személyes Ügyféladatokat a Szolgáltatásban bármikor törölheti, és a teljes adatexportot bármikor díjmentesen letöltheti (visszaadás). Kérésre a Szolgáltató az Ügyfél teljes adatállományát és a feltöltött fájlokat legkésőbb 30 napon belül, titkosítva, díjmentesen átadja.
 
-15.2. Ha a Szerződés megszűnik, vagy a Fiók az ÁSZF 23.1. pontja szerint Csak olvasható állapotba kerül:
+15.2. Ha a Szerződés megszűnik, vagy a Fiók az ÁSZF 23.1. pontja szerint Csak olvasható vagy Zárolt állapotba kerül:
 
-- a) a Fiók a Csak olvasható állapot kezdetétől **90 napig** Csak olvasható, és ez alatt a teljes adatexport díjmentesen letölthető;
+- a) a Fiók az állapot kezdetétől **90 napig** marad Csak olvasható, illetve Zárolt állapotban, és ez alatt a teljes adatexport díjmentesen letölthető;
 - b) a végleges törlés előtt **30 és 7 nappal** a Szolgáltató e-mailben figyelmezteti az Adminisztrátorokat; a törlés legkorábban 7 nappal az utolsó figyelmeztetés után történik;
 - c) a 90 nap leteltével a Szolgáltató a Személyes Ügyféladatokat az adatbázisból és a fájltárból véglegesen törli, és erről e-mailt küld az Adminisztrátoroknak;
 - d) a mentésekből az adatok legkésőbb **30 nap** alatt tűnnek el.

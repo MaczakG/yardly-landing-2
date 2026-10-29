@@ -1,6 +1,6 @@
 # Yardly – Általános Szerződési Feltételek
 
-**Verzió:** 3.0 · **Hatályos:** 2026. október 28-tól · A hatályos és a korábbi változatok: yardly.hu/aszf
+**Verzió:** 3.1 · **Hatályos:** 2026. október 29-től · A hatályos és a korábbi változatok: yardly.hu/aszf
 
 ---
 
@@ -58,9 +58,10 @@
 - **Járműplafon:** az Aktív járművek legnagyobb száma, amely a Csomagban tartható.
 - **Próbaidő:** a 7. pont szerinti 14 napos díjmentes időszak.
 - **Számlázási időszak:** a fizetős előfizetés kezdetétől számított egy hónap (havi díjfizetésnél) vagy egy év (éves díjfizetésnél), majd az ezt követő azonos hosszúságú időszakok. Nem naptári hónap vagy év.
-- **Díjbekérő:** átutalásos fizetéshez kiállított fizetési felszólítás; nem számla.
+- **Díjbekérő:** a díj átutalással történő megfizetéséhez a Billingo számlázó rendszerben kiállított fizetési felszólítás; nem számla.
 - **Türelmi idő:** a 12.1. pont szerinti 30 napos időszak.
 - **Csak olvasható állapot:** a Fiók olyan állapota, amelyben a Felhasználók beléphetnek és minden adatot megtekinthetnek, az Adminisztrátor a teljes adatexportot letöltheti, csomagot választhat és fizethet, de adatot rögzíteni, módosítani vagy törölni nem lehet (az érintetti kérelmek teljesítéséhez szükséges műveletek kivételével).
+- **Zárolt állapot:** a Fiók olyan állapota, amelyben a Szolgáltatás nem használható: a Felhasználók belépés után csak a fizetési elmaradásról szóló oldalt érik el, ahol a ki nem fizetett Díjbekérők láthatók és letölthetők, az Adminisztrátor pedig a teljes adatexportot letöltheti (17.2. pont).
 - **Ügyféladat:** minden adat, amelyet az Ügyfél vagy a Felhasználók a Szolgáltatásba felvisznek, feltöltenek vagy importálnak, amely az Ügyfél beállításai alapján érkezik a Szolgáltatásba (például a DKV-tranzakciók), és ami ezekből a Szolgáltatásban keletkezik.
 - **Adatfeldolgozási feltételek:** az ÁSZF 1. melléklete.
 - **Munkanap:** hétfőtől péntekig, a magyarországi munkaszüneti napok kivételével. **Munkaidő:** munkanapokon 8 és 17 óra között. **Munkaóra:** a munkaidő egy órája.
@@ -87,7 +88,7 @@ A Szolgáltató a nyilatkozatot a változatszámmal, az időponttal, a Felhaszn�
 - a) Az app.yardly.hu oldalon a „Céges fiók létrehozása” lapon meg kell adni a cég nevét és adószámát (magyar adószám vagy uniós közösségi adószám), a regisztráló vezeték- és keresztnevét, e-mail-címét és egy legalább 8 karakteres jelszót.
 - b) Jelölőnégyzettel meg kell tenni a 4.2. pont szerinti nyilatkozatot, és jelölőnégyzettel el kell fogadni az ÁSZF-et – a 27. pontban felsorolt, a szokásostól eltérő kikötésekkel együtt – és az Adatfeldolgozási feltételeket, amelyek a jelölőnégyzet mellől megnyithatók.
 - c) A „Fiók létrehozása” gombbal a regisztráció elküldhető. Ezzel létrejön a Fiók és a Szerződés, a regisztráló pedig a Fiók első Adminisztrátora lesz.
-- d) Ezután az Adminisztrátor kiválasztja a Csomagot és a fizetés gyakoriságát (havi vagy éves), amellyel a Próbaidő után folytatja, és a Barion fizetési oldalán megadja a bankkártyáját (7.2. pont).
+- d) Ezután az Adminisztrátor kiválasztja a Csomagot és a fizetés gyakoriságát (havi vagy éves), amellyel a Próbaidő után folytatja (7.3. pont). Bankkártya vagy más fizetési adat megadása nem szükséges.
 - e) Minden belépéshez a jelszó és az e-mailben kapott, egyszer használatos kód kell.
 
 5.2. Adatbeviteli hibák javítása. A regisztráció elküldése előtt minden mező ellenőrizhető és javítható; a hiányzó vagy hibás formátumú adatot a rendszer jelzi. A cégadatok és a számlázási adatok később a Beállítások → Cég → Cégadatok lapon javíthatók. A Próbaidő utáni Csomag a Próbaidő végéig módosítható (7.3. pont). Fizetős rendelés előtt a rendszer tételesen megmutatja, mit és mikor számláz (10.1. pont).
@@ -98,7 +99,7 @@ A Szolgáltató a nyilatkozatot a változatszámmal, az időponttal, a Felhaszn�
 
 5.5. Önkiszolgáló rendelést a magyar adószámmal és számlázási címmel rendelkező Ügyfél adhat le; ezeket a cégadatok között kell megadni. Külföldi székhelyű szervezet a hello@yardly.hu címen egyeztethet.
 
-5.6. Teljesítés. A Szolgáltatás online, szállítás nélkül vehető igénybe. A Fiók a regisztráció után azonnal elérhető; teljes körűen attól kezdve használható, hogy a Barion a kártya megadását visszaigazolta, ami rendszerint néhány percen belül megtörténik (7.2. pont).
+5.6. Teljesítés. A Szolgáltatás online, szállítás nélkül vehető igénybe. A Fiók a regisztráció után azonnal, teljes körűen használható.
 
 ## 6. A Szolgáltatás
 
@@ -121,17 +122,17 @@ A Szolgáltató a nyilatkozatot a változatszámmal, az időponttal, a Felhaszn�
 
 7.1. A Próbaidő 14 napig tart. Alatta a Szolgáltatás díjmentesen, a Prémium Csomag funkcióival és kereteivel használható; Többletjármű-díj nincs.
 
-7.2. A Próbaidő a bankkártya megadásával indul. A kártyát az Adminisztrátor a Barion Payment Zrt. fizetési oldalán adja meg; a kártyaadatokat a Barion kezeli, a Szolgáltató nem látja és nem tárolja őket. A kártya ellenőrzéséhez a Szolgáltató a kártya megadásakor 100 Ft-ot terhel, amelyet automatikusan visszatérít; a visszatérítés a kártyát kibocsátó banktól függően néhány munkanap alatt jelenik meg. Ezen kívül a kártya megadásakor és a Próbaidő alatt a Szolgáltató semmit nem terhel. A Próbaidő attól kezdve számít, hogy a Barion a kártya megadását visszaigazolta. Addig a Fiók Csak olvasható állapotban van; ha a kártyát nem adják meg, a 23. pont alkalmazandó.
+7.2. A Próbaidő a regisztrációval indul. Bankkártya vagy más fizetési adat megadása nem szükséges, és a Próbaidő alatt a Szolgáltató semmit nem számláz.
 
-7.3. A kártya megadásakor az Adminisztrátor kiválasztja, melyik Csomaggal és milyen gyakorisággal (havi vagy éves) folytatja a Próbaidő után. A választás a Próbaidő végéig a Beállítások → Előfizetés & számlázás fülön módosítható, és ott a folytatás le is mondható.
+7.3. Az Adminisztrátor a Próbaidő alatt kiválasztja, melyik Csomaggal és milyen gyakorisággal (havi vagy éves) folytatja a Próbaidő után. A választás a Próbaidő végéig a Beállítások → Előfizetés & számlázás fülön módosítható, és ott a folytatás le is mondható.
 
-7.4. A Próbaidő vége előtt 7, 3 és 1 nappal a Szolgáltató e-mailben értesíti az Adminisztrátorokat, és megírja, melyik napon, mekkora összeget és melyik Csomagért fog terhelni.
+7.4. A Próbaidő vége előtt 7, 3 és 1 nappal a Szolgáltató e-mailben értesíti az Adminisztrátorokat a Próbaidő végének napjáról, a választott Csomagról és annak díjáról.
 
-7.5. A Próbaidő végén a Szolgáltató a választott Csomag első Számlázási időszakának díját automatikusan terheli a megadott kártyára. A fizetős előfizetés és az első Számlázási időszak a sikeres terheléssel kezdődik.
+7.5. A Próbaidő végén a Szolgáltató a választott Csomag első Számlázási időszakának díjáról Díjbekérőt állít ki (11.2. pont). A fizetős előfizetés és az első Számlázási időszak a Próbaidő végével kezdődik.
 
-7.6. Ha a folytatást lemondták, vagy a Próbaidő végi terhelés sikertelen, a Fiók a Próbaidő végével Csak olvasható állapotba kerül. Az Adminisztrátor ezután bármikor választhat és fizethet Csomagot; ha ezt nem teszi meg, a 23. pont alkalmazandó.
+7.6. Ha a folytatást lemondták, vagy a Próbaidő végéig nem választottak Csomagot, a Fiók a Próbaidő végével Csak olvasható állapotba kerül. Az Adminisztrátor ezután bármikor rendelhet Csomagot; ha ezt nem teszi meg, a 23. pont alkalmazandó.
 
-7.7. Ha az Ügyfél a Próbaidő alatt az alkalmazásban fizetős Csomagot rendel és fizet (például éves díjat átutalással), a fizetős Számlázási időszak a rendeléssel azonnal kezdődik, és a Próbaidő hátralévő része megszűnik.
+7.7. Ha az Ügyfél a Próbaidő alatt az alkalmazásban fizetős Csomagot rendel, a fizetős Számlázási időszak a rendeléssel azonnal kezdődik, és a Próbaidő hátralévő része megszűnik.
 
 7.8. A teljes adatexport (17. pont) a Próbaidő alatt is elérhető.
 
@@ -166,7 +167,7 @@ A Szolgáltató a nyilatkozatot a változatszámmal, az időponttal, a Felhaszn�
 
 ## 10. Csomagváltás
 
-10.1. Csomagot váltani, Kiegészítőt venni vagy lemondani az Adminisztrátor a Beállítások → Előfizetés & számlázás fülön tud. A megerősítés előtt a rendszer megmutatja, mit terhel vagy számláz most, mikor lép életbe a változás, és milyen hatása lesz a keretekre és a funkciókra.
+10.1. Csomagot váltani, Kiegészítőt venni vagy lemondani az Adminisztrátor a Beállítások → Előfizetés & számlázás fülön tud. A megerősítés előtt a rendszer megmutatja, mit számláz most, mikor lép életbe a változás, és milyen hatása lesz a keretekre és a funkciókra.
 
 10.2. Nagyobb Csomagra vagy drágább Kiegészítő-összeállításra váltás azonos fizetési gyakoriság mellett azonnal életbe lép. A Szolgáltató a régi és az új díj különbözetét a folyamatban lévő Számlázási időszak hátralévő részére, időarányosan számlázza; a Számlázási időszak vége nem változik.
 
@@ -174,7 +175,7 @@ A Szolgáltató a nyilatkozatot a változatszámmal, az időponttal, a Felhaszn�
 
 10.4. Kisebb Csomagra vagy olcsóbb Kiegészítő-összeállításra váltás, valamint éves díjfizetésről havira váltás a folyamatban lévő Számlázási időszak végén lép életbe; addig semmi nem változik, és most nincs fizetnivaló. Az ütemezett változás az életbe lépéséig visszavonható.
 
-10.5. A Próbaidőből, a Próbaidő vége után, vagy a nemfizetés miatti Csak olvasható állapotból rendelt Csomag a rendeléssel (kártyás fizetésnél a sikeres fizetéssel) azonnal életbe lép, és új Számlázási időszakot indít, a teljes díjjal.
+10.5. A Próbaidőből vagy a Próbaidő vége után a Csak olvasható állapotból rendelt Csomag a rendeléssel azonnal életbe lép, és új Számlázási időszakot indít, a teljes díjjal.
 
 10.6. Kisebb Csomagra váltás után a kereten felüli rekordok Csak olvashatók lesznek: a Járműplafon feletti legutóbb felvett járművek, a kereten felüli legutóbb felvett eszközök, telephelyek és aktív munkafolyamatok, valamint a felhasználói kereten felül legutóbb csatlakozott, nem adminisztrátor Felhasználók. A Szolgáltató semmit nem töröl. A rekordok újra szerkeszthetők, ha az Ügyfél nagyobb Csomagra vált, vagy a kereten belülre kerül (például törléssel, a jármű kivonásával vagy a munkafolyamat piszkozattá alakításával). A kisebb Csomagban nem szereplő funkciók nem lesznek elérhetők; a hozzájuk tartozó adatok megmaradnak.
 
@@ -184,38 +185,29 @@ A Szolgáltató a nyilatkozatot a változatszámmal, az időponttal, a Felhaszn�
 
 11.1. Az előfizetési díj a Számlázási időszak elején, előre esedékes. A Többletjármű-díj utólag esedékes (9.4. pont).
 
-11.2. Bankkártyás fizetés (Barion), ismétlődő (tokenes) fizetéssel. Bankkártyával minden Csomag és fizetési gyakoriság fizethető. A kártyás fizetést a Barion Payment Zrt. bonyolítja; a kártyaadatokat csak a Barion kezeli.
+11.2. Fizetés Díjbekérő alapján, átutalással. Minden Csomag, Kiegészítő és fizetési gyakoriság díját, valamint a Többletjármű-díjat az Ügyfél Díjbekérő alapján, banki átutalással fizeti meg; bankkártyás fizetés nincs. A Díjbekérőt a Billingo számlázó rendszer állítja ki, és a Szolgáltató e-mailben megküldi az Adminisztrátoroknak; az alkalmazásban is letölthető. A fizetési határidő a Díjbekérő kiállításától számított 8 nap. Díjbekérő készül a Próbaidő végén (7.5. pont), a Számlázási időszakok megújulásakor (22.1. pont), díjköteles csomagváltáskor (10. pont) és a Többletjármű-díjról (9.4. pont). Az átutalás közleményében a Díjbekérő számát kell feltüntetni.
 
-- a) Mi az ismétlődő fizetés, és miért van rá szükség: az előfizetés díja Számlázási időszakonként ismétlődik, ezért a kártyás fizetés ismétlődő (tokenes) fizetés. A kártya első megadásakor (a Próbaidő előtt, illetve az első kártyás fizetéskor) a Barion a kártyához egy azonosítót (tokent) rendel, és a Szolgáltató a későbbi díjakat ezzel terheli, a kártyabirtokos közreműködése és a kártyaadatok újbóli megadása nélkül.
-- b) Hozzájárulás: a kártya megadásakor az Ügyfél a fizetési oldalon külön jelölőnégyzettel hozzájárul az ismétlődő terheléshez, és felhatalmazza a Szolgáltatót, hogy a Barion útján a megadott kártyára automatikusan terhelje a Próbaidő végi díjat (7.5. pont), a megújuló előfizetési díjakat (22.1. pont) és a Többletjármű-díjat (9.4. pont). A fizetési oldal a jelölőnégyzet előtt megmutatja, mikor és mekkora összeget terhel a Szolgáltató; a fizetési oldalon elfogadandó Barion adattovábbítási nyilatkozat szövege is ott olvasható.
-- c) Mikor és mennyit terhel a Szolgáltató: a kártya megadásakor a kártya ellenőrzéséhez 100 Ft-ot, amelyet automatikusan visszatérít (7.2. pont); a Próbaidő végén a választott Csomag első havi vagy éves díját; utána havi díjfizetésnél havonta, éves díjfizetésnél évente, a Számlázási időszak első napján a Csomag és a kiegészítők aktuális díját; a Többletjármű-díjat utólag, havi díjfizetésnél havonta, éves díjfizetésnél negyedévente.
-- d) Emlékeztető: a Próbaidő végi terhelés előtt 7, 3 és 1 nappal (7.4. pont), éves díjfizetésnél pedig a megújuló éves díj terhelése előtt 30 és 7 nappal a Szolgáltató e-mailben értesíti az Adminisztrátorokat a terhelés napjáról és összegéről, valamint arról, hogyan mondható le az előfizetés.
-- e) Lemondás: az ismétlődő terhelés a Szerződés felmondásával bármikor megszüntethető, a 22.3. pont szerint (Beállítások → Előfizetés & számlázás → Előfizetés lemondása). A felmondás a folyamatban lévő Számlázási időszak végén hatályosul; utána a Szolgáltató a kártyát nem terheli.
-- f) Kártyacsere: ha az Adminisztrátor az alkalmazásban új kártyát ad meg a Barion fizetési oldalán, az új kártya felváltja a korábban tárolt kártyát; az új kártya ellenőrzéséhez a Szolgáltató ilyenkor is 100 Ft-ot terhel, és automatikusan visszatéríti.
-- g) Az ismétlődő fizetés miatt az Apple Pay a Szolgáltatás kártyás fizetéseinél nem használható; a bankkártya és a Google Pay igen.
-- h) Az online bankkártyás és egyéb fizetési módok a Barion rendszerén keresztül valósulnak meg. A bankkártya, illetve egyéb fizetéssel kapcsolatos adatok a kereskedőhöz nem jutnak el. A szolgáltatást nyújtó Barion Payment Zrt. a Magyar Nemzeti Bank felügyelete alatt álló intézmény, engedélyének száma: H-EN-I-1064/2013. A kártyás terheléseknél a kártyabirtokos bankszámlakivonatán a Barion Payment Zrt. szerepel.
+11.3. Az éves díj megújulása előtt 30 és 7 nappal a Szolgáltató e-mailben jelzi a megújulás napját és összegét, valamint azt, hogyan mondható le az előfizetés.
 
-11.3. Átutalás Díjbekérő alapján. Az Üzleti és a Prémium Csomag éves díja átutalással is fizethető, Díjbekérő alapján. A Díjbekérőt a Billingo számlázó rendszer állítja ki, és a Szolgáltató e-mailben megküldi az Adminisztrátoroknak; az alkalmazásban is letölthető. A fizetési határidő a Díjbekérő kiállításától számított 8 nap. Átutalásos rendelésnél a Csomag a rendeléssel azonnal életbe lép. A megújuló éves díjról és az átutalással fizető Ügyfél Többletjármű-díjáról is Díjbekérő készül. Az éves díj megújulása előtt 30 és 7 nappal a Szolgáltató e-mailben jelzi a megújulás napját és összegét. Az átutalás közleményében a Díjbekérő számát kell feltüntetni.
-
-11.4. Számla. A díj megfizetése után (kártyás fizetésnél a sikeres terheléskor, átutalásnál a jóváírás rögzítésekor) a Szolgáltató a Billingo rendszerben elektronikus számlát állít ki, amelyet e-mailben megküldi az Adminisztrátoroknak; a számlák az alkalmazásban is letölthetők. Az Ügyfél az elektronikus számlát elfogadja. A számlák adatai a jogszabály szerint a NAV Online Számla rendszerébe kerülnek.
+11.4. Számla. A Szolgáltató a befizetéseket a Billingo rendszerben tartja nyilván. Amint egy Díjbekérő kifizetése ott rögzítésre kerül – rendszerint a jóváírást követő Munkanapon –, a Szolgáltatás automatikusan elektronikus számlát állít ki a Billingo rendszerben, és azt e-mailben megküldi az Adminisztrátoroknak; a számlák az alkalmazásban is letölthetők. Az Ügyfél az elektronikus számlát elfogadja. A számlák adatai a jogszabály szerint a NAV Online Számla rendszerébe kerülnek.
 
 11.5. Az átutalás banki költségei az Ügyfelet terhelik.
 
-11.6. Előre megfizetett díj csak az ÁSZF-ben kifejezetten meghatározott esetekben jár vissza (22.4. pont), az eredeti fizetési módon vagy átutalással. Kártyás fizetésnél a visszatérítés a Barion útján az eredeti kártyára történik; a jóváírás a kártyát kibocsátó banktól függően 1–30 munkanapot vehet igénybe.
+11.6. Előre megfizetett díj csak az ÁSZF-ben kifejezetten meghatározott esetekben jár vissza (22.4. pont), átutalással.
 
-## 12. Fizetési késedelem, Türelmi idő, Csak olvasható állapot
+## 12. Fizetési késedelem, Türelmi idő, Zárolt állapot
 
-12.1. Ha a megújuló díj vagy a Többletjármű-díj automatikus kártyás terhelése sikertelen, vagy a Díjbekérőt a határidőig nem fizetik meg, 30 napos Türelmi idő kezdődik: a sikertelen terheléstől, illetve a fizetési határidő lejártától. (A Próbaidő végi terhelés sikertelenségének következményét a 7.6. pont szabályozza.) A Türelmi idő alatt a Szolgáltatás teljes körűen használható; erről a Szolgáltatás figyelmeztető sávot mutat, és a Szolgáltató e-mailt küld az Adminisztrátoroknak.
+12.1. Ha a Díjbekérőt a fizetési határidőig nem fizetik meg, a határidő lejártától 30 napos Türelmi idő kezdődik. A Türelmi idő alatt a Szolgáltatás teljes körűen használható; erről a Szolgáltatás figyelmeztető sávot mutat, és a Szolgáltató e-mailben emlékezteti az Adminisztrátorokat arra is, hogy a Türelmi idő végén a hozzáférés zárolásra kerül.
 
-12.2. A díj a Türelmi idő alatt és utána is rendezhető a Beállítások → Előfizetés & számlázás fülön, kártyával vagy – az Üzleti és a Prémium Csomag éves díjánál – átutalással. Kártyás fizetésnél a teljes hozzáférés a Barion visszaigazolásával, átutalásnál a jóváírás rögzítésével, legkésőbb a beérkezést követő Munkanapon áll helyre.
+12.2. A díj a Türelmi idő alatt és utána is megfizethető a Díjbekérő szerinti átutalással. A teljes hozzáférés a befizetés Billingo-beli rögzítésével – rendszerint a jóváírást követő Munkanapon – automatikusan helyreáll.
 
-12.3. Ha a Türelmi idő eredménytelenül telik el, a Fiók Csak olvasható állapotba kerül; erről a Szolgáltató e-mailt küld. Adatot a Szolgáltató ilyenkor nem töröl.
+12.3. Ha a Türelmi idő eredménytelenül telik el, vagyis a fizetési határidő lejártát követő 30. napon, a Fiók Zárolt állapotba kerül; erről a Szolgáltató e-mailt küld. Zárolt állapotban a Szolgáltatás nem használható: belépés után csak a ki nem fizetett Díjbekérők és a teljes adatexport érhető el. Adatot a Szolgáltató ilyenkor nem töröl.
 
-12.4. A Csak olvasható állapot idejére díj nem jár. Ez nem érinti a már esedékes díjak megfizetésének kötelezettségét.
+12.4. A Zárolt állapot idejére díj nem jár. Ez nem érinti a már esedékes díjak megfizetésének kötelezettségét.
 
 12.5. Késedelmes fizetésnél a Szolgáltató a Ptk. 6:155. §-a szerinti késedelmi kamatot és a 2016. évi IX. törvény szerinti behajtási költségátalányt követelheti.
 
-12.6. A Csak olvasható Fiók adatait a Szolgáltató a 23. pont szerint 90 napig őrzi meg. Ha az Ügyfél addig nem rendezi a díjat, a Szerződés az adatok törlésével megszűnik; a ki nem fizetett díjak követelését ez nem érinti.
+12.6. A Zárolt Fiók adatait a Szolgáltató a 23. pont szerint 90 napig őrzi meg. Ha az Ügyfél addig nem rendezi a díjat, a Szerződés az adatok törlésével megszűnik; a ki nem fizetett díjak követelését ez nem érinti.
 
 ## 13. Az Ügyfél kötelezettségei és a megengedett használat
 
@@ -360,7 +352,7 @@ A Szolgáltató a nyilatkozatot a változatszámmal, az időponttal, a Felhaszn�
 
 ## 22. Időtartam, megújulás, felmondás
 
-22.1. A Szerződés határozatlan időre jön létre. A fizetős előfizetés Számlázási időszakonként (havonta vagy évente) automatikusan megújul, amíg fel nem mondják; a megújuló díjat a Szolgáltató a 11. pont szerint terheli vagy számlázza.
+22.1. A Szerződés határozatlan időre jön létre. A fizetős előfizetés Számlázási időszakonként (havonta vagy évente) automatikusan megújul, amíg fel nem mondják; a megújuló díjról a Szolgáltató a 11. pont szerint Díjbekérőt állít ki.
 
 22.2. A folyamatban lévő Számlázási időszakon túl hűségidő nincs.
 
@@ -379,16 +371,15 @@ A Szolgáltató a nyilatkozatot a változatszámmal, az időponttal, a Felhaszn�
 
 22.7. A Szerződés bármilyen megszűnése után a 23. pont alkalmazandó. A már esedékes díjak, a titoktartás és a felelősség a megszűnés után is fennmaradnak.
 
-## 23. Az adatok sorsa a Szerződés megszűnése és a Csak olvasható állapot után
+## 23. Az adatok sorsa a Szerződés megszűnése, a Csak olvasható és a Zárolt állapot után
 
-23.1. Ez a pont alkalmazandó, ha a Fiók Csak olvasható állapotba kerül, mert
+23.1. Ez a pont alkalmazandó, ha
 
-- a) a Szerződés bármely okból megszűnt (a 17.5. pont szerinti szolgáltatóváltásnál az átmeneti időszak végén);
-- b) a Próbaidő folytatás nélkül vagy sikertelen terheléssel ért véget (7.6. pont);
-- c) a bankkártyát a regisztráció után nem adták meg (7.2. pont);
-- d) a Türelmi idő eredménytelenül telt el (12.3. pont).
+- a) a Szerződés bármely okból megszűnt (a 17.5. pont szerinti szolgáltatóváltásnál az átmeneti időszak végén) – ilyenkor a Fiók Csak olvasható állapotba kerül;
+- b) a Próbaidő folytatás nélkül ért véget (7.6. pont) – ilyenkor a Fiók Csak olvasható állapotba kerül;
+- c) a Türelmi idő eredménytelenül telt el (12.3. pont) – ilyenkor a Fiók Zárolt állapotba kerül.
 
-23.2. A Fiók a Csak olvasható állapot kezdetétől 90 napig Csak olvasható: ez alatt minden adat megtekinthető, és a teljes adatexport díjmentesen letölthető (17.2. pont). A b)–d) esetben, valamint ha a Szerződés az Ügyfél felmondásával (22.3. pont) szűnt meg, a Fiók e 90 napon belül Csomag választásával és kifizetésével újra teljes körűen használhatóvá tehető; felmondás után ilyenkor a Szerződés az akkor hatályos ÁSZF szerint újra létrejön.
+23.2. A Fiók az a)–b) esetben a Csak olvasható, a c) esetben a Zárolt állapot kezdetétől 90 napig marad ebben az állapotban. Ez alatt a teljes adatexport díjmentesen letölthető (17.2. pont); Csak olvasható állapotban az adatok meg is tekinthetők. A b) esetben, valamint ha a Szerződés az Ügyfél felmondásával (22.3. pont) szűnt meg, a Fiók e 90 napon belül Csomag rendelésével újra teljes körűen használhatóvá tehető; felmondás után ilyenkor a Szerződés az akkor hatályos ÁSZF szerint újra létrejön. A c) esetben a Fiók a ki nem fizetett Díjbekérők megfizetésével automatikusan újra teljes körűen használható (12.2. pont).
 
 23.3. A végleges törlés előtt 30 és 7 nappal a Szolgáltató e-mailben figyelmezteti az Adminisztrátorokat a törlés napjára és az exportra; a törlés napja az alkalmazásban is látszik. A törlés legkorábban 7 nappal az utolsó figyelmeztetés elküldése után történik.
 
@@ -451,12 +442,12 @@ Az alábbi kikötések eltérnek a jogszabályok diszpozitív rendelkezéseitől
 2. **Az elmaradt haszon és a közvetett kár kizárása,** valamint a határidő-mulasztásból eredő bírságért, a külső szolgáltatásokért és az Ügyféladat hibájáért való felelősség kizárása (21.4. és 21.5. pont).
 3. **Adatvesztés:** elsősorban a legutolsó mentésből történő helyreállítás (21.6. pont), egyedi rekordok visszaállítása nélkül (14.4. pont).
 4. **Nincs rendelkezésre állási vállalás:** meghatározott rendelkezésre állási százalékot a Szolgáltató nem vállal (14.1. pont).
-5. **Automatikus megújulás és automatikus kártyaterhelés:** az előfizetés Számlázási időszakonként automatikusan megújul, és a Szolgáltató a Próbaidő végi díjat, a megújuló díjat és a Többletjármű-díjat a tárolt kártyára a kártyabirtokos közreműködése nélkül terheli (7.5., 11.2. és 22.1. pont).
+5. **Automatikus megújulás:** az előfizetés Számlázási időszakonként automatikusan megújul, és a Szolgáltató a megújuló díjról és a Többletjármű-díjról Díjbekérőt állít ki (11.2. és 22.1. pont).
 6. **Többletjármű-díj:** a díjban foglalt járműszám felett utólagos számlázás, a havi legmagasabb Aktív járműszám alapján (9. pont).
 7. **Éves díj:** az éves előfizetés rendes felmondással csak az év végével szűnik meg, és az előre megfizetett díj – a 22.4. pontban felsorolt eseteket kivéve – nem jár vissza (22.3. és 22.4. pont).
-8. **Csak olvasható állapot nemfizetéskor:** 30 napos Türelmi idő után a Fiók Csak olvasható lesz, és ha a díjat 90 napon belül nem rendezik, a Szerződés az adatok törlésével megszűnik (12.3. és 12.6. pont).
-9. **Csak olvasható állapot a Próbaidő után és kártya nélkül:** a Fiók Csak olvasható, ha a Próbaidő folytatás nélkül ér véget, vagy a kártyát nem adják meg (7.2. és 7.6. pont).
-10. **Az adatok végleges törlése:** a Csak olvasható állapot kezdetétől számított 90 nap után, 30 és 7 nappal előtte küldött figyelmeztetéssel (23. pont).
+8. **Zárolt állapot nemfizetéskor:** a fizetési határidő lejártát követő 30. naptól a Fiók zárolva van – csak a ki nem fizetett Díjbekérők és az adatexport érhetők el –, és ha a díjat 90 napon belül nem rendezik, a Szerződés az adatok törlésével megszűnik (12.3. és 12.6. pont).
+9. **Csak olvasható állapot a Próbaidő után:** a Fiók Csak olvasható, ha a Próbaidő folytatás nélkül ér véget (7.6. pont).
+10. **Az adatok végleges törlése:** a Csak olvasható, illetve a Zárolt állapot kezdetétől számított 90 nap után, 30 és 7 nappal előtte küldött figyelmeztetéssel (23. pont).
 11. **Kereten felüli rekordok:** kisebb Csomagra váltás után a kereten felüli rekordok Csak olvashatók (10.6. pont).
 12. **Azonnali korlátozás:** biztonsági ok vagy jogsértő használat esetén előzetes értesítés nélkül (18.9. pont).
 13. **Egyoldalú módosítás és díjemelés:** a felsorolt okokból, 30, díjemelésnél 60 napos értesítéssel; ha az Ügyfél nem mond fel, a módosítás elfogadottnak minősül (24. pont).

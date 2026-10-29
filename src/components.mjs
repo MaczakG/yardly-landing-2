@@ -23,11 +23,6 @@ const SOCIAL_ICONS = {
 };
 const SOCIAL_NAMES = { linkedin: "LinkedIn", instagram: "Instagram", facebook: "Facebook", tiktok: "TikTok" };
 
-// Barion's Smart Payment Banner, the official file unmodified (Barion requires it on the main page
-// and the payment pages of the acceptance point).
-export const paymentBanner = (alt) =>
-  `<p class="pay-banner"><img src="/assets/brand/barion-banner-light-no-applepay.svg" width="466" height="108" alt="${esc(alt)}" loading="lazy"></p>`;
-
 // Only the profiles that exist (config.social); nothing while there are none.
 export const socialLinks = (social) => {
   const keys = Object.keys(SOCIAL_ICONS).filter((key) => social[key]);
