@@ -13,7 +13,7 @@ export const home = {
 
   hero: {
     eyebrow: "Üzemeltetési rendszer flottához és eszközparkhoz",
-    title: "Nyilvántartás, amelyből a folyamatok maguktól elindulnak",
+    title: "Üzemeltetési automatizációk és nyilvántartás egyedi folyamatokkal",
     lead: "A Yardly nyilvántartja a járműveket és az eszközöket, figyeli a határidőket, és egy tankolás, szerviz vagy kárügy rögzítésekor elindítja a jóváhagyást, az értesítést és a PDF-et. A folyamatokat Ön állítja össze, a cég saját szabályai szerint.",
     shotAlt: "A Yardly irányítópultja: elöl a közelgő és lejárt határidők, alatta a fő mutatók",
     phoneAlt: "A telefonos állapotfelmérő űrlap",
