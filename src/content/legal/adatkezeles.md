@@ -1,6 +1,6 @@
 # Yardly – Adatkezelési tájékoztató
 
-**Verzió:** 3.1 · **Hatályos:** 2026. október 29-től
+**Verzió:** 3.2 · **Hatályos:** 2026. október 29-től
 
 Ez a tájékoztató azt írja le, milyen személyes adatokat kezelünk saját célra, adatkezelőként, amikor Ön a yardly.hu weboldalt látogatja, megkeres minket, regisztrál, belép az alkalmazásba (app.yardly.hu), előfizet, fizet, támogatást kér, vagy tőlünk értesítést kap. Az ügyfeleink által a Yardlyba felvitt adatokról (például a sofőrök adatairól) a 3. pont szól.
 
@@ -48,11 +48,11 @@ Adatvédelmi tisztviselő kijelölésére nem vagyunk kötelesek. Adatvédelmi k
 | 4.3. Ajánlatkérés és érdeklődés az alkalmazásban | jogos érdek, f) | 1 év; a fiókhoz kötött jelentkezés a cég adataival együtt |
 | 4.4. Regisztráció és cégfiók | szerződés, b), illetve jogos érdek, f) | a fiók megszűnéséig, majd a 4.4. pont szerint |
 | 4.5. A szerződési feltételek elfogadásának naplója | jogos érdek, f) | a cég adatainak törlésétől 5 év |
-| 4.6. Felhasználói fiókok és belépés | szerződés, b), illetve jogos érdek, f) | a fiók megszűnéséig; a belépési kód 10 percig érvényes |
+| 4.6. Felhasználói fiókok és belépés | szerződés, b), illetve jogos érdek, f) | a fiók megszűnéséig; a belépési kód 10 percig, a jelszó-visszaállító link 60 percig érvényes |
 | 4.7. Belépési napló | jogos érdek, f) | 180 nap |
 | 4.8. Rendszer- és biztonsági napló | jogos érdek, f) | 90 nap; a biztonsági események 1 év |
 | 4.9. Előfizetés, fizetés és számlázás | szerződés, b); a számláknál jogi kötelezettség, c) | előfizetési adatok: a cég adataival együtt; számlák és díjbekérők: 8 év |
-| 4.10. Értesítések e-mailben | szerződés, b), illetve jogos érdek, f) | a küldés naplója 90 nap |
+| 4.10. Értesítések e-mailben | szerződés, b), illetve jogos érdek, f) | a küldés naplója 90 nap; az újraküldésre váró levél legfeljebb 24 óra; a letiltólista a tiltás feloldásáig |
 | 4.11. Támogatás | szerződés, b), illetve jogos érdek, f) | a szerződés megszűnésétől 5 év |
 | 4.12. Ügyfélkapcsolati adatok | jogos érdek, f) | a cég adatainak törléséig |
 | 4.13. Jogsértő tartalom bejelentése | jogi kötelezettség, c) | a döntéstől 1 év |
@@ -106,10 +106,10 @@ Ha az alkalmazás árazási oldalán egyedi ajánlatot kér (például 300 járm
 ### 4.6. Felhasználói fiókok és belépés
 
 - **Kinek az adatai:** az ügyfelek felhasználói. Őket általában az ügyfél adminisztrátora hívja meg; ilyenkor a nevüket, e-mail-címüket és szerepkörüket az adminisztrátor adja meg.
-- **Milyen adatok:** név, e-mail-cím, jelszó (visszafejthetetlen lenyomatként), szerepkör és jogosultságok, melyik céghez tartozik a felhasználó, a fiók letiltása, az utolsó belépés ideje; a belépés második lépéséhez e-mailben küldött, egyszer használatos 6 jegyű kód.
+- **Milyen adatok:** név, e-mail-cím, jelszó (visszafejthetetlen lenyomatként), szerepkör és jogosultságok, melyik céghez tartozik a felhasználó, a fiók letiltása, az utolsó belépés ideje, a jelszó utolsó módosításának ideje; a belépés második lépéséhez e-mailben küldött, egyszer használatos 6 jegyű kód; ha a felhasználó új jelszót kér („Elfelejtett jelszó?”), az e-mailben küldött jelszó-visszaállító link (csak visszafejthetetlen lenyomatként tároljuk), valamint a kérés, a lejárat és a felhasználás ideje.
 - **Cél:** hogy csak jogosult személy léphessen be, a hozzáférés és a jogosultságok kezelése, a fiókok és az ügyfelek adatainak védelme.
 - **Jogalap:** a szerződő félnél a szerződés teljesítése (b); az ügyfél munkatársainál jogos érdekünk és az ügyfél érdeke a szolgáltatás biztonságos nyújtásához (f).
-- **Meddig:** a fiók fennállásáig; a cég törlésekor a 4.4. pont szerint. Ha az ügyfél adminisztrátora töröl egy felhasználót, a nevét és elérhetőségeit töröljük, a változásnaplóban a művelet ténye megmarad. A belépési kód 10 percig érvényes, legfeljebb 5-ször lehet próbálkozni vele, és a lejárata után egy nappal töröljük.
+- **Meddig:** a fiók fennállásáig; a cég törlésekor a 4.4. pont szerint. Ha az ügyfél adminisztrátora töröl egy felhasználót, a nevét és elérhetőségeit töröljük, a változásnaplóban a művelet ténye megmarad. A belépési kód 10 percig érvényes, legfeljebb 5-ször lehet próbálkozni vele, és a lejárata után egy nappal töröljük. A jelszó-visszaállító link 60 percig érvényes és egyszer használható; ha újat kérnek, a korábbi érvényét veszti. A lejárata után egy nappal töröljük.
 
 ### 4.7. Belépési napló
 
@@ -137,12 +137,12 @@ Ha az alkalmazás árazási oldalán egyedi ajánlatot kér (például 300 járm
 
 ### 4.10. Értesítések e-mailben
 
-A saját nevünkben küldjük: a belépési kódot; a meghívót új felhasználónak; a próbaidő vége előtti emlékeztetőt; a díjbekérőt és a számlát; a türelmi időről, a csak olvasható állapotról és a törlés előtti figyelmeztetésekről szóló levelet; a támogatási betekintésről szóló értesítést; az ÁSZF és az alfeldolgozók változásáról szóló értesítést.
+A saját nevünkben küldjük: a belépési kódot; a jelszó-visszaállító linket; a meghívót új felhasználónak; a próbaidő vége előtti emlékeztetőt; a díjbekérőt és a számlát; a türelmi időről, a csak olvasható állapotról és a törlés előtti figyelmeztetésekről szóló levelet; a támogatási betekintésről szóló értesítést; az ÁSZF és az alfeldolgozók változásáról szóló értesítést.
 
-- **Milyen adatok:** név, e-mail-cím, az üzenet tartalma, a küldés időpontja és eredménye.
-- **Cél:** a szolgáltatás nyújtása és tájékoztatás a szerződéssel kapcsolatos tudnivalókról.
-- **Jogalap:** a szerződés teljesítése (b), illetve az ügyfél munkatársainál jogos érdekünk a szerződés teljesítéséhez (f).
-- **Meddig:** a küldés naplója 90 napig (4.8. pont).
+- **Milyen adatok:** név, e-mail-cím, az üzenet tartalma, a küldés időpontja és eredménye. Ha a fogadó levelezőszerver egy levelet átmenetileg nem vesz át, a teljes levelet titkosítva tároljuk, amíg újra el nem küldjük. A letiltólistán azok az e-mail-címek szerepelnek, amelyeket a fogadó szerver véglegesen elutasított, vagy amelyek tulajdonosa leiratkozott az értesítő levelekről, a tiltás okával és idejével.
+- **Cél:** a szolgáltatás nyújtása és tájékoztatás a szerződéssel kapcsolatos tudnivalókról; az átmenetileg kézbesíthetetlen levelek újraküldése; hogy a leiratkozást tiszteletben tartsuk, és ne küldjünk levelet nem létező címre.
+- **Jogalap:** a szerződés teljesítése (b), illetve az ügyfél munkatársainál jogos érdekünk a szerződés teljesítéséhez (f); a letiltólistánál jogos érdekünk, hogy a leiratkozást tiszteletben tartsuk, és levelezésünk megbízható maradjon (f).
+- **Meddig:** a küldés naplója 90 napig (4.8. pont); az újraküldésre váró levelet az elküldéséig, legfeljebb 24 óráig; a letiltólistán szereplő címet a tiltás feloldásáig: a leiratkozott címzett bármikor visszairatkozhat, és kérésre töröljük a címet a listáról.
 
 Ezek nem reklámlevelek. Nem ide tartoznak az ügyfél által beállított értesítések (például dokumentumlejárat, munkafolyamat): ezeket az ügyfél megbízásából küldjük (3. pont).
 
