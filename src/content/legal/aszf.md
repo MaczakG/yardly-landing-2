@@ -275,7 +275,7 @@ A Szolgáltató a nyilatkozatot a változatszámmal, az időponttal, a Felhaszn�
 
 17.2. Önkiszolgáló export. Az Adminisztrátor a Beállítások → Cég lapon a „Teljes adatexport letöltése (.zip)” gombbal bármikor letöltheti a Fiók összes adatát egy ZIP-fájlban: minden táblát JSON- és CSV-fájlban (UTF-8, a CSV-ben pontosvessző elválasztóval), a feltöltött fájlokat eredeti formátumban, a tartalom leírását (manifest.json) és egy magyar nyelvű leírást. Az export minden Csomagban, a Próbaidő alatt és Csak olvasható állapotban is elérhető, díjmentes; minden letöltést a Szolgáltató naplóz.
 
-17.3. Biztonsági okból nem kerülnek az exportba a titkok (jelszólenyomatok, belépési kódok, meghívó- és egyéb linkek tokenjei, a tárolt külső hozzáférési adatok, például a DKV-hozzáférés, a kártyás fizetés azonosítói), és nem kerülnek bele a Szolgáltató saját nyilvántartásai (belépési napló, rendszernapló, háttérfeladatok naplója, belső ügyfélkapcsolati jegyzetek).
+17.3. Biztonsági okból nem kerülnek az exportba a titkok (jelszólenyomatok, belépési kódok, meghívó- és egyéb linkek tokenjei, a tárolt külső hozzáférési adatok, például a DKV-hozzáférés), és nem kerülnek bele a Szolgáltató saját nyilvántartásai (belépési napló, rendszernapló, háttérfeladatok naplója, belső ügyfélkapcsolati jegyzetek).
 
 17.4. Kérésre a Szolgáltató az Ügyfél teljes adatállományát és a feltöltött fájlokat legkésőbb 30 napon belül, titkosítva, díjmentesen átadja.
 

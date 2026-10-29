@@ -94,7 +94,7 @@ Ha az alkalmazás árazási oldalán egyedi ajánlatot kér (például 300 járm
 - **Milyen adatok:** a regisztráló vezeték- és keresztneve, e-mail-címe és jelszava (csak visszafejthetetlen lenyomatként tárolva), a cég neve és adószáma, a nyilatkozat arról, hogy a regisztráló cégként vagy egyéni vállalkozóként, nem magánszemélyként regisztrál, valamint később a számlázási cím.
 - **Cél:** a cégfiók létrehozása, a szerződés megkötése és teljesítése, és annak ellenőrzése, hogy vállalkozás regisztrál.
 - **Jogalap:** ha a regisztráló maga a szerződő fél (egyéni vállalkozó), a szerződés megkötése és teljesítése (b); ha egy cég nevében regisztrál, jogos érdekünk és a cég érdeke a szerződés megkötéséhez és teljesítéséhez (f).
-- **Meddig:** a fiók fennállásáig. Ha a szerződés megszűnik, a próbaidő folytatás nélkül ér véget, a bankkártyát nem adják meg, vagy a díjat nem fizetik meg, a fiók 90 napig csak olvasható; a törlés előtt 30 és 7 nappal e-mailben értesítjük a cég adminisztrátorait, utána a cég adatait véglegesen töröljük. A cég nevét, adószámát, számlázási címét és előfizetési adatait a számlákkal együtt a 4.9. pont szerint tovább őrizzük.
+- **Meddig:** a fiók fennállásáig. Ha a szerződés megszűnik vagy a próbaidő folytatás nélkül ér véget, a fiók 90 napig csak olvasható; ha a díjat nem fizetik meg, a fiók a türelmi idő után 90 napig zárolt. A törlés előtt 30 és 7 nappal e-mailben értesítjük a cég adminisztrátorait, utána a cég adatait véglegesen töröljük. A cég nevét, adószámát, számlázási címét és előfizetési adatait a számlákkal együtt a 4.9. pont szerint tovább őrizzük.
 
 ### 4.5. A szerződési feltételek elfogadásának naplója
 
