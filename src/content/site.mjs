@@ -79,7 +79,6 @@ export const footer = {
   imprint: "Impresszum",
   illegalContent: "Jogsértő tartalom bejelentése",
   security: "Biztonság",
-  payment: "Kártyás fizetés a Barionnal: Barion, Mastercard, Visa, Google Pay",
   cookies: "Süti-beállítások",
   rights: "© 2026 Yardly. Minden jog fenntartva.",
   madeIn: "Magyarországon fejlesztve.",

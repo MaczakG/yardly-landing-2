@@ -1615,28 +1615,8 @@ fieldset.field legend {
   margin-top: 12px;
 }
 
-/* Barion's payment banner: the official file, unmodified, at its own aspect ratio, with room around it. */
-.pay-banner {
-  margin-top: 24px;
-  padding: 8px 0;
-}
 
-.pay-banner img {
-  display: block;
-  width: 100%;
-  max-width: 247px;
-  height: auto;
-}
-
-#fizetes .pay-banner {
-  margin-top: 32px;
-}
-
-#fizetes .pay-banner img {
-  max-width: 296px;
-}
-
-/* Under the banner: transfer, invoices, the bank statement and Apple Pay (not for recurring payments). */
+/* Under the payment steps: invoices, Billingo and what happens when a payment request goes unpaid. */
 .pay-note {
   max-width: 720px;
   margin-top: 8px;

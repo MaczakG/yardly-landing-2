@@ -31,6 +31,9 @@ const noticeForm = "https://app.yardly.hu/jogserto-tartalom.html";
 const text = (file) => markdown(readFileSync(new URL(`./legal/${file}`, import.meta.url), "utf8"));
 const TERMS = text("aszf.md");
 const DPA = text("adatfeldolgozas.md");
+// Earlier versions stay readable at their own address (ÁSZF 5.3).
+const TERMS_30 = text("aszf-3.0.md");
+const DPA_30 = text("adatfeldolgozas-3.0.md");
 const PRIVACY = text("adatkezeles.md");
 const SUBPROCESSORS = text("alfeldolgozok.md");
 
@@ -68,7 +71,15 @@ export const terms = {
   intro: "A Yardly-előfizetés feltételei vállalkozások és más szervezetek számára. A regisztrációkor kell elfogadni; az adatfeldolgozási feltételek az 1. melléklete.",
   body: `${TERMS.html}
 <h2>Változatok</h2>
-${table(["Változat", "Hatályos", "Szöveg"], [["3.0", "2026. október 28-tól", "ezen az oldalon"]])}`,
+${table(["Változat", "Hatályos", "Szöveg"], [["3.1", "2026. október 29-től", "ezen az oldalon"], ["3.0", "2026. október 28.", `<a href="${route("termsV30")}">a 3.0 változat</a>`]])}`,
+};
+
+export const termsV30 = {
+  title: "ÁSZF 3.0 (korábbi változat) | Yardly",
+  description: "A Yardly Általános Szerződési Feltételeinek korábbi, 3.0 változata (hatályos volt: 2026. október 28.).",
+  heading: TERMS_30.title,
+  intro: `Ez az ÁSZF korábbi, 3.0 változata, amely 2026. október 28-án volt hatályos. A hatályos változat az <a href="${route("terms")}">ÁSZF</a> oldalon olvasható.`,
+  body: TERMS_30.html,
 };
 
 export const dpa = {
@@ -76,7 +87,17 @@ export const dpa = {
   description: "Hogyan kezeli a Yardly az ügyfelek által felvitt személyes adatokat: az ÁSZF 1. melléklete, a GDPR 28. cikke szerinti adatfeldolgozási szerződés.",
   heading: DPA.title,
   intro: `Az <a href="${route("terms")}">ÁSZF</a> 1. melléklete: az adatfeldolgozási szerződés a GDPR 28. cikke szerint.`,
-  body: DPA.html,
+  body: `${DPA.html}
+<h2>Változatok</h2>
+${table(["Változat", "Hatályos", "Szöveg"], [["3.1", "2026. október 29-től", "ezen az oldalon"], ["3.0", "2026. október 28.", `<a href="${route("dpaV30")}">a 3.0 változat</a>`]])}`,
+};
+
+export const dpaV30 = {
+  title: "Adatfeldolgozási feltételek 3.0 (korábbi változat) | Yardly",
+  description: "A Yardly adatfeldolgozási feltételeinek korábbi, 3.0 változata (hatályos volt: 2026. október 28.).",
+  heading: DPA_30.title,
+  intro: `Ez az adatfeldolgozási feltételek korábbi, 3.0 változata, amely 2026. október 28-án volt hatályos. A hatályos változat az <a href="${route("dpa")}">Adatfeldolgozási feltételek</a> oldalon olvasható.`,
+  body: DPA_30.html,
 };
 
 export const privacy = {

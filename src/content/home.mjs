@@ -150,7 +150,7 @@ export const home = {
     eyebrow: "Hogyan kezdjen bele",
     title: "Három lépés az első éles folyamatig",
     items: [
-      { title: "Regisztrál.", text: `Két perc, a cégadatokkal és egy bankkártyával. ${TRIAL_DAYS} napig minden funkciót kipróbálhat, a próbaidő alatt nem terhelünk semmit (a kártya ellenőrzéséhez levont 100 Ft-ot visszatérítjük).` },
+      { title: "Regisztrál.", text: `Két perc, a cégadatokkal; bankkártya nem kell. ${TRIAL_DAYS} napig minden funkciót kipróbálhat, a próbaidő alatt semmit nem számlázunk.` },
       { title: "Áthozza a meglévő adatokat.", text: "Letölti az Excel-sablont, bemásolja a listáját, és feltölti. A hiányzó telephelyek, típusok és kategóriák maguktól létrejönnek." },
       { title: "Meghívja a kollégákat, és élesít egy folyamatot.", text: `Mindenki a saját szerepkörével lép be: a sofőr csak a saját autóját látja, a pénzügy a költségeket. A ${TEMPLATES} kész sablon közül kiválasztja az elsőt, átnézi és élesíti.` },
     ],
@@ -191,7 +191,7 @@ export const home = {
       { q: "Kell telepíteni valamit?", a: "Nem. A Yardly böngészőben fut, számítógépen és telefonon is." },
       { q: "Miben más, mint egy flottakezelő program?", a: "A Yardly a nyilvántartás mellett a hozzá tartozó folyamatokat is kezeli: egy bejegyzésből a cég szabályai szerint jóváhagyás, értesítés, PDF és e-mail lesz. Ugyanebben a rendszerben a flotta mellett az eszközpark és a leltár is kezelhető." },
       { q: "Hogyan kerülnek be a meglévő adataink?", a: "Excel-sablonnal, egyszerre. A rendszer soronként jelzi, ha valamit javítani kell." },
-      { q: "Mi történik a próbaidő végén?", a: "A regisztrációkor választott csomag díját terheljük a bankkártyára, havonta vagy évente. Előtte 7, 3 és 1 nappal e-mailben jelezzük az összeget és az időpontot. A próbaidő végéig a csomag módosítható, vagy a folytatás lemondható: ekkor a fiók csak olvasható lesz, az adatokat 90 napig megőrizzük és letölthetők, utána véglegesen töröljük." },
+      { q: "Mi történik a próbaidő végén?", a: "A választott csomag első időszakáról díjbekérőt küldünk, havi vagy éves díjjal; átutalással fizet, és a befizetés után a számlát automatikusan megkapja. Előtte 7, 3 és 1 nappal e-mailben jelezzük az összeget. A próbaidő végéig a csomag módosítható, vagy a folytatás lemondható: ekkor a fiók csak olvasható lesz, az adatokat 90 napig megőrizzük és letölthetők, utána véglegesen töröljük." },
       { q: "Milyen más programokkal cserél adatot?", a: "A DKV-kártyás tankolásokat a Yardly maga hívja le, ha a Beállításokban megadja a DKV-hozzáférést. Más programokkal Excel- és CSV-fájlokon keresztül cserél adatot. A folyamatok PDF-eket küldenek e-mailben, akár külső címre. Egyedi rendszerösszekötést nem készítünk." },
       { q: "Csak a flottához vagy csak az eszközökhöz is használható?", a: "Igen. Minden csomagban mindkét modul benne van; azt használja, amelyikre szüksége van." },
       { q: "Hol tárolódnak az adataink?", a: "Az Amazon Web Services frankfurti adatközpontjában, az EU-ban. Titkosított kapcsolaton érhetők el, és minden cég csak a saját adatait látja." },

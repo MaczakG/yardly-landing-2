@@ -1,6 +1,6 @@
 # Yardly – Adatkezelési tájékoztató
 
-**Verzió:** 3.0 · **Hatályos:** 2026. október 28-tól
+**Verzió:** 3.1 · **Hatályos:** 2026. október 29-től
 
 Ez a tájékoztató azt írja le, milyen személyes adatokat kezelünk saját célra, adatkezelőként, amikor Ön a yardly.hu weboldalt látogatja, megkeres minket, regisztrál, belép az alkalmazásba (app.yardly.hu), előfizet, fizet, támogatást kér, vagy tőlünk értesítést kap. Az ügyfeleink által a Yardlyba felvitt adatokról (például a sofőrök adatairól) a 3. pont szól.
 
@@ -25,8 +25,8 @@ Adatvédelmi tisztviselő kijelölésére nem vagyunk kötelesek. Adatvédelmi k
 - Adatkezelők vagyunk a weboldal, a megkeresések, a regisztráció és a felhasználói fiókok, a belépés, az előfizetés és a számlázás, a támogatás, a naplók és a tőlünk küldött értesítések adatainál. Ezekről szól ez a tájékoztató.
 - Adatfeldolgozók vagyunk azoknál az adatoknál, amelyeket ügyfeleink visznek fel a Yardlyba. Ezekről az ügyfél, vagyis a munkáltató vagy megbízó tájékoztatja Önt (3. pont).
 - Az adatokat az Európai Unióban, az Amazon Web Services frankfurti adatközpontjában tároljuk.
-- Látogatottságmérést és hirdetési követést nem használunk. Az alkalmazás nem használ sütit; a weboldalon csak a Barion csalásmegelőzési kódja (Barion Pixel) helyez el sütit (6. pont).
-- Bankkártyaadatot nem kezelünk: azt a Barion Payment Zrt. kezeli.
+- A weboldal és az alkalmazás nem használ sütit és látogatottságmérést, és nem tölt be tartalmat harmadik féltől (6. pont).
+- Bankkártyaadatot nem kezelünk: a díjakat díjbekérő alapján, átutalással kell megfizetni.
 - Hírlevelet és reklámlevelet nem küldünk.
 
 ## 3. Ha Ön ügyfelünk munkatársa, sofőrje vagy kapcsolattartója
@@ -94,7 +94,7 @@ Ha az alkalmazás árazási oldalán egyedi ajánlatot kér (például 300 járm
 - **Milyen adatok:** a regisztráló vezeték- és keresztneve, e-mail-címe és jelszava (csak visszafejthetetlen lenyomatként tárolva), a cég neve és adószáma, a nyilatkozat arról, hogy a regisztráló cégként vagy egyéni vállalkozóként, nem magánszemélyként regisztrál, valamint később a számlázási cím.
 - **Cél:** a cégfiók létrehozása, a szerződés megkötése és teljesítése, és annak ellenőrzése, hogy vállalkozás regisztrál.
 - **Jogalap:** ha a regisztráló maga a szerződő fél (egyéni vállalkozó), a szerződés megkötése és teljesítése (b); ha egy cég nevében regisztrál, jogos érdekünk és a cég érdeke a szerződés megkötéséhez és teljesítéséhez (f).
-- **Meddig:** a fiók fennállásáig. Ha a szerződés megszűnik, a próbaidő folytatás nélkül ér véget, a bankkártyát nem adják meg, vagy a díjat nem fizetik meg, a fiók 90 napig csak olvasható; a törlés előtt 30 és 7 nappal e-mailben értesítjük a cég adminisztrátorait, utána a cég adatait véglegesen töröljük. A cég nevét, adószámát, számlázási címét és előfizetési adatait a számlákkal együtt a 4.9. pont szerint tovább őrizzük.
+- **Meddig:** a fiók fennállásáig. Ha a szerződés megszűnik vagy a próbaidő folytatás nélkül ér véget, a fiók 90 napig csak olvasható; ha a díjat nem fizetik meg, a fiók a türelmi idő után 90 napig zárolt. A törlés előtt 30 és 7 nappal e-mailben értesítjük a cég adminisztrátorait, utána a cég adatait véglegesen töröljük. A cég nevét, adószámát, számlázási címét és előfizetési adatait a számlákkal együtt a 4.9. pont szerint tovább őrizzük.
 
 ### 4.5. A szerződési feltételek elfogadásának naplója
 
@@ -128,11 +128,10 @@ Ha az alkalmazás árazási oldalán egyedi ajánlatot kér (például 300 járm
 ### 4.9. Előfizetés, fizetés és számlázás
 
 - **Kinek az adatai:** az ügyfél adminisztrátorai és kapcsolattartói; ha az ügyfél egyéni vállalkozó, magáé a vállalkozóé.
-- **Milyen adatok:** a cég neve, adószáma és számlázási címe, a választott csomag és kiegészítők, a fizetés gyakorisága és módja, a számlázási időszakok, a díjbekérők és a számlák adatai (tételek, összeg, fizetési határidő, a befizetés ténye és ideje), a díjbekérőt és a számlát kapó adminisztrátor e-mail-címe; kártyás fizetésnél a Barion tranzakcióazonosítója és a tárolt kártya azonosítója (tokenje), a kártya adatai nélkül.
-- **Bankkártyás fizetés:** a kártyát Ön a Barion Payment Zrt. fizetési oldalán adja meg; a kártyaadatokat (kártyaszám, lejárat, kártyabirtokos neve, biztonsági kód) a Barion kezeli, mi nem látjuk és nem tároljuk őket. A fizetéshez a Barionnak átadjuk a fizető e-mail-címét, a fizetendő összeget, a fizetés tárgyát (a csomag és az időszak megnevezése) és a tranzakció azonosítóját. A Barion ezeket önálló adatkezelőként, a saját adatkezelési tájékoztatója szerint kezeli. Az adattovábbításról szóló nyilatkozatot a fizetési oldalon is közöljük.
-- **Átutalás:** a befizetést a bankszámlakivonat alapján azonosítjuk; ezen a befizető neve, bankszámlaszáma és a közlemény szerepel.
+- **Milyen adatok:** a cég neve, adószáma és számlázási címe, a választott csomag és kiegészítők, a fizetés gyakorisága és módja, a számlázási időszakok, a díjbekérők és a számlák adatai (tételek, összeg, fizetési határidő, a befizetés ténye és ideje), a díjbekérőt és a számlát kapó adminisztrátor e-mail-címe.
+- **Átutalás:** a befizetést a bankszámlakivonat alapján azonosítjuk, és a Billingo rendszerében rögzítjük a díjbekérőnél; a kivonaton a befizető neve, bankszámlaszáma és a közlemény szerepel. A rögzített befizetés alapján a számlát a rendszer automatikusan kiállítja.
 - **Számlázás:** a díjbekérőket és a számlákat a Billingo Technologies Zrt. számlázó rendszere állítja ki, a nevünkben, adatfeldolgozóként; a számlák adatai a jogszabály szerint a Nemzeti Adó- és Vámhivatal Online Számla rendszerébe kerülnek.
-- **Cél:** az előfizetés nyilvántartása, a díjak terhelése és számlázása, a befizetések követése, a csomagváltás, a többletjármű-díj és a nemfizetés következményeinek kezelése, valamint az adó- és számviteli kötelezettségek teljesítése.
+- **Cél:** az előfizetés nyilvántartása, a díjak számlázása, a befizetések követése, a csomagváltás, a többletjármű-díj és a nemfizetés következményeinek kezelése, valamint az adó- és számviteli kötelezettségek teljesítése.
 - **Jogalap:** az előfizetési és fizetési adatoknál a szerződés teljesítése (b), illetve az ügyfél munkatársainál jogos érdekünk a szerződés teljesítéséhez (f); a számla kiállításánál és megőrzésénél jogi kötelezettség (c): az általános forgalmi adóról szóló 2007. évi CXXVII. törvény és az adózás rendjéről szóló 2017. évi CL. törvény.
 - **Meddig:** az előfizetési adatokat a cég adataival együtt (4.4. pont); a számlákat és a díjbekérőket a kiállítás évének végétől számított 8 évig, akkor is, ha a cég többi adatát közben töröltük. A 8 év letelte után automatikusan töröljük őket.
 
@@ -194,25 +193,14 @@ Hírlevelet és reklámlevelet nem küldünk. Ha a jövőben küldenénk, csak a
 
 - **Öntől:** a megkereséskor, a regisztrációkor, a belépéskor, a fizetéskor és a támogatási kérésben megadott adatok.
 - **Az ügyfél adminisztrátorától:** ha meghívták, a nevét, az e-mail-címét és a szerepkörét a munkáltatója vagy megbízója adminisztrátora adta meg.
-- **A Bariontól:** a kártyás fizetés eredménye és azonosítói.
 - **A rendszertől:** a belépési és rendszernaplók a használat közben keletkeznek.
 
 Név, e-mail-cím és jelszó nélkül nem hozható létre fiók, és a kétlépcsős belépés minden belépésnél kötelező. Adószám és vállalkozói nyilatkozat nélkül nem lehet regisztrálni, mert fogyasztó nem köthet szerződést. A számlázási adatok megadását jogszabály írja elő; nélkülük nem tudunk díjbekérőt és számlát kiállítani.
 
 ## 6. Sütik és a böngészőben tárolt adatok
 
-- **A weboldal (yardly.hu)** nem mér látogatottságot, és nem használ hirdetési vagy marketingcélú követőkódot. Egyetlen külső szkriptet tölt be: a Barion Payment Zrt. csalásmegelőzési kódjának alap változatát (Barion Pixel); erről lent olvashat.
+- **A weboldal (yardly.hu)** nem helyez el sütit, nem mér látogatottságot, nem használ követőkódot, és nem tölt be betűtípust, szkriptet vagy más tartalmat harmadik féltől.
 - **Az alkalmazás (app.yardly.hu)** nem használ sütit és látogatottságmérést, és nem tölt be tartalmat harmadik féltől. A belépés után a bejelentkezési azonosítót (tokent) az Ön böngészője tárolja, a helyi tárolóban (localStorage); a munkamenet idejére (sessionStorage) néhány felületi beállítást is tárolunk, például hogy melyik csomagot választotta. Ezek a szolgáltatás nyújtásához feltétlenül szükségesek, ezért hozzájárulást nem kérünk hozzájuk (az elektronikus hírközlésről szóló 2003. évi C. törvény 155. § (4) bekezdése). A bejelentkezési azonosító kijelentkezéskor törlődik.
-- **A Barion fizetési oldala** a Barion Payment Zrt. weboldala; az ott használt sütikről a Barion cookie-tájékoztatója szól.
-
-**A Barion Pixel a weboldalon.** A Barion minden kártyás fizetést elfogadó kereskedő weboldalán megköveteli csalásmegelőzési kódjának alap változatát.
-
-- **Mit gyűjt:** a kód a pixel.barion.com címről töltődik be, és a látogatásáról (a megnyitott oldalak, a kattintások, az IP-cím, a böngésző és az eszköz jellemzői, valamint az ezekből képzett eszköz-ujjlenyomat) közvetlenül a Barionnak küld adatot. Mi ezeket az adatokat nem kapjuk meg és nem tároljuk.
-- **Sütik:** a Barion ba_vid és ba_vid.xxx nevű sütije az utolsó látogatástól számított 1,5 évig, a ba_sid és ba_sid.xxx nevű 30 percig marad az eszközén.
-- **Cél és jogalap:** a bankkártyás visszaélések megelőzése, a Barion jogos érdeke alapján (f). A kód beágyazásáért és az adatok Barionhoz továbbításáért mi felelünk, a további adatkezelésért a Barion mint önálló adatkezelő. A Barion ezeket a sütiket a működéshez szükséges sütik közé sorolja, ezért elhelyezésükhöz nem kérünk hozzájárulást.
-- **Marketing:** a Barion Pixel marketingcélú, teljes változatát nem használjuk.
-- **Részletek:** a Barion cookie-tájékoztatója (secure.barion.com/Contract/GetDocument?key=cookiepolicy) és adatkezelési tájékoztatójának 5.4. pontja (secure.barion.com/Contract/GetDocument?key=akt).
-- **Letiltás:** a sütiket a böngészője beállításaiban bármikor törölheti vagy letilthatja; a weboldal enélkül is használható.
 
 ## 7. Kik férnek hozzá az adatokhoz
 
@@ -228,7 +216,6 @@ Munkatársaink csak annyiban férnek hozzá az adatokhoz, amennyire a feladatukh
 
 **Önálló adatkezelőként kapják meg az adatokat:**
 
-- a Barion Payment Zrt. (1117 Budapest, Irinyi József utca 4-20. B épület 2. emelet; cégjegyzékszám: Cg. 01-10-048552): a kártyás fizetéshez (4.9. pont), valamint a weboldalon elhelyezett csalásmegelőzési kódjának (Barion Pixel) adataihoz (6. pont); adatkezelési tájékoztatója: secure.barion.com/Contract/GetDocument?key=akt;
 - a Nemzeti Adó- és Vámhivatal: a számlák adatai, jogszabály alapján;
 - a számlavezető bankunk (GRÁNIT Bank Zrt.): az átutalások teljesítéséhez;
 - hatóságok és bíróságok: kizárólag jogszabályon alapuló, kötelező megkeresés esetén, a megkeresésben megjelölt adatok.

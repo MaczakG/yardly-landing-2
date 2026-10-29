@@ -1,7 +1,7 @@
 // Page templates. Each returns { title, description, body, jsonLd? }; layout.mjs wraps them.
 import { config } from "./config.mjs";
 import { route, solutionRoute, postRoute } from "./routes.mjs";
-import { esc, glue as g, arrow, icon, board, ctaCard, screenshot, phoneShot, paymentBanner } from "./components.mjs";
+import { esc, glue as g, arrow, icon, board, ctaCard, screenshot, phoneShot } from "./components.mjs";
 import { APP, ui, footer } from "./content/site.mjs";
 import { home as h } from "./content/home.mjs";
 import { overview, groups, solutions, solutionBySlug } from "./content/solutions.mjs";
@@ -536,7 +536,6 @@ ${pageHero(pr)}
   <div class="container">
     <div class="section-head section-head--single"><div><p class="eyebrow">${pr.payment.eyebrow}</p><h2 class="h2" id="payment-title">${g(pr.payment.title)}</h2></div></div>
     ${numbered(pr.payment.items)}
-    ${paymentBanner(footer.payment)}
     ${pr.payment.note ? `<p class="pay-note">${esc(pr.payment.note)}</p>` : ""}
   </div>
 </section>
@@ -747,7 +746,9 @@ const legal = (l) => ({
 
 export const legalHub = () => legal(lg.legalHub);
 export const terms = () => legal(lg.terms);
+export const termsV30 = () => legal(lg.termsV30);
 export const dpa = () => legal(lg.dpa);
+export const dpaV30 = () => legal(lg.dpaV30);
 export const privacy = () => legal(lg.privacy);
 export const imprint = () => legal(lg.imprint);
 export const subprocessors = () => legal(lg.subprocessors);
