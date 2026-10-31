@@ -1828,6 +1828,9 @@ a.social__link:hover {
   font-size: 1.0625rem;
   line-height: 1.7;
   color: var(--ink-2);
+  /* Manrope's common ligatures draw "(c)" as "©"; the legal texts cite GDPR points as "(c)" and
+     must read as written. */
+  font-variant-ligatures: no-common-ligatures;
 }
 
 .prose > * + * {
