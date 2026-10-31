@@ -4,7 +4,7 @@
 // text (njt.jog.gov.hu, kormany.hu, nav.gov.hu); figures marked "a cikk írásakor" are dated.
 // Yardly's own prices and limits come from pricing.mjs.
 
-import { plans, huf, num, priceFacts, DKV_ADDON, ANNUAL_FREE_MONTHS, NO_VAT, TRIAL_DAYS, TRIAL_PLAN } from "./pricing.mjs";
+import { plans, huf, num, priceFacts, DKV_ADDON, ANNUAL_FREE_MONTHS, TRIAL_DAYS, TRIAL_PLAN } from "./pricing.mjs";
 
 // "az Alap", "az Üzleti", "a Prémium".
 const the = (name) => (/^[aeiouáéíóöőúüű]/i.test(name) ? "az " : "a ") + name;
@@ -541,7 +541,7 @@ export const guides = [
 <p>Ha a szoftver havidíja ennél kevesebb, az adminisztráció már önmagában kifizeti. A példában nem számoltunk az elkerült hibák árával: egy lejárt műszaki miatt kieső munkanappal, egy elmaradt szerviz utáni drágább javítással, vagy egy olyan számlával, amelyet egy jóváhagyási lépés kiszűrt volna. Ezek nehezebben mérhetők, de gyakran nagyobbak. A saját számításához ezt a képletet használja:</p>
 <p class="formula">havi haszon = (megspórolt órák × óraköltség) + elkerült hibák becsült költsége − a szoftver havidíja</p>
 <h2>A Yardly árai</h2>
-<p>A Yardly sávos csomagokkal dolgozik, nyilvános árral. ${NO_VAT} Éves fizetésnél ${ANNUAL_FREE_MONTHS} hónap ingyenes, ezt mutatja a második sor.</p>
+<p>A Yardly sávos csomagokkal dolgozik, nyilvános árral. Éves fizetésnél ${ANNUAL_FREE_MONTHS} hónap ingyenes, ezt mutatja a második sor.</p>
 <table>
 <thead>
 <tr><th></th>${plans.map((p) => `<th>${p.name}</th>`).join("")}</tr>
