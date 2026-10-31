@@ -3,7 +3,7 @@
 // questions: what is it, where does the time go now, what starts the processes, what is kept on
 // record, how do deadlines and data flow, how do I start, is it for me, what does it cost.
 
-import { ANNUAL_FREE_MONTHS, NO_VAT, TRIAL_DAYS, TRIAL_PLAN } from "./pricing.mjs";
+import { ANNUAL_FREE_MONTHS, TRIAL_DAYS, TRIAL_PLAN } from "./pricing.mjs";
 import { PROCESS_TEMPLATES as TEMPLATES } from "./solutions.mjs";
 
 
@@ -179,7 +179,7 @@ export const home = {
   pricing: {
     eyebrow: "Árak",
     title: "Három csomag, a flotta méretéhez",
-    note: `Éves fizetéssel ${ANNUAL_FREE_MONTHS} hónap ingyen. ${NO_VAT}`,
+    note: `Éves fizetéssel ${ANNUAL_FREE_MONTHS} hónap ingyen.`,
     button: "Összes ár és csomag",
   },
 

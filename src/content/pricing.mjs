@@ -6,7 +6,6 @@
 
 export const TRIAL_DAYS = 14;
 export const ANNUAL_FREE_MONTHS = 2;
-export const NO_VAT = "Alanyi adómentes vállalkozásként áfát nem számítunk fel.";
 
 // "29 990 Ft": thousands grouped with a non-breaking space, so a price never wraps.
 export const num = (n) => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
@@ -153,10 +152,10 @@ export const pricing = {
   annualNote: (total) => `évente ${total} egy összegben`,
   monthlyNote: (annualMonthly) => `éves fizetéssel ${annualMonthly} / hó`,
   recommended: "Ajánlott",
-  trialNote: `${TRIAL_DAYS} nap ingyen, a ${TRIAL_PLAN} csomag minden funkciójával. ${NO_VAT}`,
+  trialNote: `${TRIAL_DAYS} nap ingyen, a ${TRIAL_PLAN} csomag minden funkciójával.`,
   limitsTitle: "Keretek",
   comparisonTitle: "Mi van az egyes csomagokban",
-  comparisonNote: `${NO_VAT} Éves fizetésnél a csomagra és a kiegészítőkre is ${ANNUAL_FREE_MONTHS} hónap ingyenes.`,
+  comparisonNote: `Éves fizetésnél a csomagra és a kiegészítőkre is ${ANNUAL_FREE_MONTHS} hónap ingyenes.`,
   // How paying works, in three steps (sign-up without a card, nothing is billed during the trial,
   // then a payment request for the chosen plan, paid by transfer).
   payment: {
@@ -178,7 +177,7 @@ export const pricing = {
       { q: "Mi történik, ha elérem a csomag keretét?", a: `A keret 80%-ánál figyelmeztetünk. A díjban foglalt járműszám felett minden további aktív jármű havidíjas (${plans.map((p) => `${p.name} ${huf(p.extra)}`).join(", ")}); ezt a jármű felvételekor jóváhagyja. A járműplafon felett, vagy ha elfogy az eszköz-, felhasználó- vagy telephelykeret, nagyobb csomagra válthat; eszközből ${EQUIPMENT_ADDON.size}-es bővítés is vehető. Adat ilyenkor sem törlődik.` },
       { q: "Hogyan számolják el a többletjárműveket?", a: "Utólag, a hónap legmagasabb aktív járműszáma alapján: havi fizetésnél havonta, éves fizetésnél negyedévente. A néhány napig aktív jármű is beszámít, ezért a használaton kívüli járművet érdemes kivontra állítani." },
       { q: "Válthatok csomagot? Lemondhatom?", a: "Nagyobb csomagra azonnal válthat, időarányos elszámolással; kisebbre a következő számlázási időszaktól. Hűségidő nincs: a havi előfizetés a hónap végével, az éves az év végével mondható le. Lemondás után a fiók 90 napig csak olvasható, és minden adat letölthető. Utána véglegesen töröljük, előtte 30 és 7 nappal e-mailben jelezzük." },
-      { q: "Kell áfát fizetni?", a: `Nem. ${NO_VAT} A feltüntetett ár a teljes fizetendő összeg.` },
+      { q: "Kell áfát fizetni?", a: "Nem. A feltüntetett ár a teljes fizetendő összeg." },
       { q: "Hogyan fizethetek?", a: "Díjbekérő alapján, banki átutalással, havonta vagy évente; bankkártyával nem lehet fizetni. A díjbekérőt e-mailben küldjük, és az appban is letölthető; a fizetési határidő 8 nap. A befizetés után a számlát a rendszer automatikusan kiállítja és elküldi; a díjbekérőket és a számlákat a Billingo állítja ki. Csomagot váltani, kiegészítőt venni és számlát letölteni az appban, a Beállítások → Előfizetés & számlázás fülön lehet." },
       { q: "Mi történik, ha késik a fizetés?", a: "A fizetési határidő után még 30 napig minden funkció elérhető, közben e-mailben emlékeztetünk. Ha a díjbekérő a határidő után 30 nappal sincs kifizetve, a fiók zárolódik: csak a ki nem fizetett díjbekérők és a teljes adatexport érhetők el. A befizetés beérkezése után a zárolás magától feloldódik." },
       { q: "Mi a helyzet a próbaidővel?", a: `${TRIAL_DAYS} napig díjmentesen használhatja a ${TRIAL_PLAN} csomag összes funkcióját, bankkártya nélkül. A végén a választott csomag első időszakáról díjbekérőt küldünk; előtte 7, 3 és 1 nappal e-mailben szólunk. A próbaidő végéig a csomag módosítható, vagy a folytatás lemondható: ekkor a fiók csak olvasható lesz, és az adatokat 90 napig megőrizzük.` },
